@@ -1,0 +1,20 @@
+{
+	"pools": [
+		{
+			"name" : "weapons",
+			"rolls": 1,
+            "entries": [
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemstonedagger",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemwooddagger",
+                    "weight": 3
+                }
+			]
+		}
+	]
+}

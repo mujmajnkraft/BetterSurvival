@@ -1,0 +1,33 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/bigshield"
+    },
+    "display": {
+        "thirdperson_righthand": {
+        	"rotation": [ 75, 349, 0 ],
+        	"translation": [ -2.00, 2.50, 1.00 ],
+        	"scale": [ 1.80, 1.80, 1.80 ]
+    	},
+    	"thirdperson_lefthand": {
+        	"rotation": [ 75, 349, 0 ],
+        	"translation": [ -2.00, 2.50, 1.00 ],
+        	"scale": [ 1.80, 1.80, 1.80 ]
+    	},
+    	"firstperson_righthand": {
+        	"rotation": [ 0, 341, 0 ],
+        	"translation": [ 0.00, -3.00, -0.00 ],
+        	"scale": [ 1.40, 1.40, 0.40 ]
+    	},
+    	"firstperson_lefthand": {
+        	"rotation": [ -180, 29, -180 ],
+        	"translation": [ 0.00, -3.00, 0.00 ],
+        	"scale": [ 1.40, 1.40, 1.40 ]
+    	},
+        "gui": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        }
+    }
+}

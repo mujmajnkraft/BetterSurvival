@@ -1,0 +1,72 @@
+---- Minecraft Crash Report ----
+// Don't be sad. I'll do better next time, I promise!
+
+Time: 5/9/17 8:57 PM
+Description: Saving entity NBT
+
+java.lang.NullPointerException: Saving entity NBT
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInStorage.writeNBT(SpearsInStorage.java:20)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInStorage.writeNBT(SpearsInStorage.java:1)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInProvider.serializeNBT(SpearsInProvider.java:32)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInProvider.serializeNBT(SpearsInProvider.java:1)
+	at net.minecraftforge.common.capabilities.CapabilityDispatcher.serializeNBT(CapabilityDispatcher.java:123)
+	at net.minecraft.entity.Entity.writeToNBT(Entity.java:1906)
+	at net.minecraft.server.integrated.IntegratedPlayerList.writePlayerData(IntegratedPlayerList.java:30)
+	at net.minecraft.server.management.PlayerList.saveAllPlayerData(PlayerList.java:959)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:140)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInStorage.writeNBT(SpearsInStorage.java:20)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInStorage.writeNBT(SpearsInStorage.java:1)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInProvider.serializeNBT(SpearsInProvider.java:32)
+	at com.mujmajnkraft.bettersurvival.capabilities.spearsin.SpearsInProvider.serializeNBT(SpearsInProvider.java:1)
+	at net.minecraftforge.common.capabilities.CapabilityDispatcher.serializeNBT(CapabilityDispatcher.java:123)
+
+-- Entity being saved --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 0
+	Entity Name: Player523
+	Entity's Exact location: 238.22, 56.00, -95.07
+	Entity's Block location: World: (238,56,-96), Chunk: (at 14,3,0 in 14,-6; contains blocks 224,0,-96 to 239,255,-81), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.entity.Entity.writeToNBT(Entity.java:1906)
+	at net.minecraft.server.integrated.IntegratedPlayerList.writePlayerData(IntegratedPlayerList.java:30)
+	at net.minecraft.server.management.PlayerList.saveAllPlayerData(PlayerList.java:959)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:140)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 708402256 bytes (675 MB) / 1005584384 bytes (959 MB) up to 1879048192 bytes (1792 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	mujmajnkraftsbettersurvival{1.1} [Better Survival] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player523'/0, l='Testing world', x=238.22, y=56.00, z=-95.07]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

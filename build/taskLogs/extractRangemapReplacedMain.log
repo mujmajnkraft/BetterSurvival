@@ -1,0 +1,322 @@
+Symbol range map extraction starting
+Processing 80 files
+startProcessing "com\mujmajnkraft\bettersurvival\Bettersurvival.java" md5: 19f9885e3dfa0f1871014cafdb591dd8
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\Bettersurvival.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\CrushingRecipe.java" md5: cd5bb929ae1b9256d224475eb473b599
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\CrushingRecipe.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\ICustomWeapon.java" md5: c06f3a2ee3967571c04fe59371ab1a02
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\ICustomWeapon.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\IsConfigEnabled.java" md5: 0a1706490a6cbf27482b9f4f18a3b856
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\IsConfigEnabled.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\MessageExtendedReachAttack.java" md5: ae216cb0d7e099a5cddcd064004f268e
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\MessageExtendedReachAttack.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\Reference.java" md5: a424199c14a3885083a4fae2594ddcac
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\Reference.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\blocks\BlockCustomCauldron.java" md5: 9450ab0fe5ceef7974379af3c8220ab5
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\blocks\BlockCustomCauldron.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeed.java" md5: da40414310d2c81c85477393e08e1cdd
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeed.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeedProvider.java" md5: 878b5627963bc63d22593056490ffb72
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeedProvider.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeedStorage.java" md5: 84a922b65ddba1b103af4f2a242b96a7
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\EntitySpeedStorage.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\IEntitySpeed.java" md5: a7a31c310357d855a7c86496273077e8
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\entityspeed\IEntitySpeed.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowProperties.java" md5: f7103662e842b73a83518eeada38d720
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowProperties.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowPropertiesProvider.java" md5: 2153f1118d4c7039047d418b396ec40c
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowPropertiesProvider.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowPropertiesStorage.java" md5: f0a0ae723728019f883f625dd649b3bd
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\ArrowPropertiesStorage.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\IArrowProperties.java" md5: bd252f63744f26fc5113fe58f8d1854a
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\extendedarrowproperties\IArrowProperties.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\ISpearsIn.java" md5: d517c72bcaeb3aae89663c2c7ad1fbef
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\ISpearsIn.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsIn.java" md5: f63f8b7a04605f0772bfdb895525fa03
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsIn.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsInProvider.java" md5: dbfb2acead6ee6eb3f0d2d385933b28c
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsInProvider.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsInStorage.java" md5: a4e8cd93aeb14868178eb22d7e01bdd2
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\spearsin\SpearsInStorage.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\IWeaponEffect.java" md5: aa25c641190a3ad4282b9e7d3bc4450d
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\IWeaponEffect.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffect.java" md5: 2521ba93719a67e396dcfbb5824f644b
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffect.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffectProvider.java" md5: 5655301881cb257f74078caf552207ef
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffectProvider.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffectStorage.java" md5: 9ac81704dbbc36727b86fb6b596f36eb
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\capabilities\weaponeffect\WeaponEffectStorage.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\client\model\ModelFlyingSpear.java" md5: be54e8cec3a3eeef1c8021553019c745
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\client\model\ModelFlyingSpear.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\client\render\CustomBlockColor.java" md5: 3070484dd77d1cc86428a817e52f5eaa
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\client\render\CustomBlockColor.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\client\render\RenderFlyingSpear.java" md5: 56c02a5f72ee04b93c5ccb720ae80fea
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\client\render\RenderFlyingSpear.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\config\ConfigHandler.java" md5: 7388560d45075dc9f0c302de70bd5b5f
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\config\ConfigHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\config\GuiConfigBettersurvival.java" md5: 333da22ca96c53c9a1dc878209b439a5
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\config\GuiConfigBettersurvival.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\config\GuiFactoryBettersurvival.java" md5: cfe0c3a06c1a947c1491529ef9430965
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\config\GuiFactoryBettersurvival.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentAgility.java" md5: 33556a8746ded6b704bf93ca8f0d2003
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentAgility.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentArrowRecovery.java" md5: 1a7dd2ff9adfe9c32dc423cd4c1b3035
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentArrowRecovery.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentBlast.java" md5: 4007c3d4bacf332b85e6e058facbd9ee
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentBlast.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentBlockPower.java" md5: 8950c0ea96c5484766aef6d1618d16d2
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentBlockPower.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentDiamonds.java" md5: a9136143630842b77fd961bcbd68f759
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentDiamonds.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentEducation.java" md5: d9b4d9b68592c1aa9d7d5074b625195a
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentEducation.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentFling.java" md5: c9255bdbf2d7f8c44cc924c04e8a6791
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentFling.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentHeavy.java" md5: 03485f3e83675080823dcc3f8a1fba1b
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentHeavy.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentHighJump.java" md5: f5c9e205963ae3ca76c3b960b75a95eb
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentHighJump.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentMultishot.java" md5: c5448dfb93eaead57d3818aa0caab214
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentMultishot.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentPenetration.java" md5: 3f2e8dd30a65b76de57babce14e2d025
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentPenetration.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentRange.java" md5: d8fa8f7031b66de3c24eeb2af22799fd
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentRange.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentRapidFire.java" md5: 75728261861e4f51db56fc25985edaba
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentRapidFire.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentReflection.java" md5: d8ff3fc433c6a0f90ee485d55d975bd2
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentReflection.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentSpellShield.java" md5: 9c70dd1591334b0c31827a9c4bd813f7
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentSpellShield.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentTunneling.java" md5: 67826198e0206bb100c6eaf77d7e69d5
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentTunneling.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVampirism.java" md5: 2a090cfe7751bf862fbeaf50b691dfe4
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVampirism.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVersatility.java" md5: 9b4a3b75cd249cfa7cacf4fecc08f084
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVersatility.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVitality.java" md5: bd239f5a6dba72f336d0413ea3423d41
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentVitality.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentWeightless.java" md5: ba67ab03c769404408b6dd7798ec734b
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchantmentWeightless.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchatnmentSmelting.java" md5: 778a02fe9f8032d9330ba7f17aeeb353
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\enchantments\EnchatnmentSmelting.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\entities\EntityFlyingSpear.java" md5: 79387a21d1a49dcf5a242a7c0387d0c4
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\entities\EntityFlyingSpear.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModEnchantmentHandler.java" md5: bd9c9cfeafd15c57c52957faa9b1466e
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModEnchantmentHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModLootHandler.java" md5: b874d60e5d59744850abfa9cbb70e1c6
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModLootHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModShieldHandler.java" md5: 62a51473aaff0a14e5466691109d1689
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModShieldHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModWeaponHandler.java" md5: 0204559427adf784873747884e50449b
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\ModWeaponHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\TickEventHandler.java" md5: 5bdbca1f8a9a0bc3055061f0234ded21
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\eventhandlers\TickEventHandler.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModBlocks.java" md5: 80dafb9aff0d3234cfe732e9cdeb7f5a
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModBlocks.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModCrafting.java" md5: 8f288f7aa6f7006f52c73b0bf9d4adb9
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModCrafting.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModEnchantments.java" md5: 21d059f99df0181b4ad54300b4e83617
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModEnchantments.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModEntities.java" md5: 314d6de906339370e4a8b7019ff05dfc
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModEntities.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModItems.java" md5: f2a5be95bb9cd5c83e5e7525b6e59121
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModItems.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModLootManager.java" md5: 46ef40383110d37b4a1038326ddd2f7e
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModLootManager.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModPotionTypes.java" md5: 3e9fc9b2a4073f1c65e8129466ac8056
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModPotionTypes.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\init\ModPotions.java" md5: a3ab827a9d59bf587a48561fcf083473
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\init\ModPotions.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemBattleAxe.java" md5: 750ef92cdac892089fa681f21ab1a5ea
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemBattleAxe.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemCrossbow.java" md5: 62491d4380aab33880d49867ccb39984
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemCrossbow.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemCustomShield.java" md5: 684fa375638f81e7cdfa38ca3eade9d4
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemCustomShield.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemDagger.java" md5: 460ec151878297fe8cd4635309a5a5cb
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemDagger.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemDebug.java" md5: 6aa3d2b9b5b41172ef25e0d8fed4c84e
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemDebug.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemHammer.java" md5: 875adfdac8f9f84ad94fd7dc44838663
+    Compile Error! Pb(645) Lambda expressions are allowed only at source level 1.8 or above
+    Compile Error! Pb(25) Cannot refer to the non-final local variable id defined in an enclosing scope
+    Compile Error! Pb(883) '<>' operator is not allowed for source level below 1.7
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemHammer.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemNunchaku.java" md5: e4ee0078a8be8460a572a54d331731e1
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemNunchaku.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\items\ItemSpear.java" md5: 5d42d3957c2bf370b858ff41c64a2636
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\items\ItemSpear.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\potions\PotionCleanse.java" md5: 505e48fd6cc39145b00dd682de10b986
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\potions\PotionCleanse.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\potions\PotionCustom.java" md5: b5a31889683acdc5cf647216d9bff280
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\potions\PotionCustom.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\potions\PotionMilk.java" md5: 774a0396b32951a5211b9814e1130038
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\potions\PotionMilk.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\potions\PotionWarp.java" md5: 61e55a71e18cb10fb65a46cbe1f49a9a
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\potions\PotionWarp.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\proxy\ClientProxy.java" md5: 972e5c402f5070e1e60367d6e48b65c6
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\proxy\ClientProxy.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\proxy\CommonProxy.java" md5: e46d4491630f5147007bad14995f391c
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\proxy\CommonProxy.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\proxy\ServerProxy.java" md5: b4768beee3ec54b2ed5ef70870c2aba3
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\proxy\ServerProxy.java"
+
+startProcessing "com\mujmajnkraft\bettersurvival\tileentities\TileEntityCustomCauldron.java" md5: 85bd4275f1ca74c41c4dc064826a4945
+Cache Hit!
+endProcessing "com\mujmajnkraft\bettersurvival\tileentities\TileEntityCustomCauldron.java"
+

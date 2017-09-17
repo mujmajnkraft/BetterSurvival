@@ -1,0 +1,163 @@
+{
+	"pools": [
+		{
+			"name" : "weapons",
+			"rolls": {
+                "min": 0,
+                "max": 2
+            },
+			"entries" : [
+				{
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemdiamonddagger",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemdiamondnunchaku",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemdiamondhammer",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemdiamondbattleaxe",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemdiamondspear",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemirondagger",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironnunchaku",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironhammer",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironbattleaxe",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironspear",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "enchant_with_levels",
+                            "treasure": true,
+                            "levels": {
+                                "min": 20,
+                                "max": 39
+                            }
+                        }
+                    ]
+                }
+			]
+		}
+	]
+}

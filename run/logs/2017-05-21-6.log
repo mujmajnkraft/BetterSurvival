@@ -1,0 +1,447 @@
+[19:32:59] [Client thread/INFO]: Setting user: Player638
+[19:33:08] [Client thread/WARN]: Skipping bad option: lastServer:
+[19:33:08] [Client thread/INFO]: LWJGL Version: 2.9.4
+[19:33:10] [Client thread/INFO]: [STDOUT]: ---- Minecraft Crash Report ----
+// I blame Dinnerbone.
+
+Time: 5/21/17 7:33 PM
+Description: Loading screen debug info
+
+This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 407382440 bytes (388 MB) / 751304704 bytes (716 MB) up to 1879048192 bytes (1792 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel' Version: '4.4.0 - Build 21.20.16.4550' Renderer: 'Intel(R) HD Graphics 520'
+[19:33:14] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Better Survival
+[19:33:15] [Client thread/INFO]: [STDOUT]: PreInit
+[19:33:22] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:33:22] [Thread-8/INFO]: Initializing LWJGL OpenAL
+[19:33:22] [Thread-8/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:33:23] [Thread-8/INFO]: OpenAL initialized.
+[19:33:23] [Sound Library Loader/INFO]: Sound engine started
+[19:33:31] [Client thread/INFO]: Created: 16x16 textures-atlas
+[19:33:32] [Client thread/INFO]: [STDOUT]: Init
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingCopper
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingBronze
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingInvar
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingSilver
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingElectrum
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingAluminium
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingSteel
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingSignalum
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingLumium
+[19:33:32] [Client thread/INFO]: [STDOUT]: MissingEnderium
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:33:32] [Client thread/INFO]: [STDOUT]: PostInit
+[19:33:32] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Better Survival
+[19:33:36] [Client thread/INFO]: SoundSystem shutting down...
+[19:33:36] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:33:36] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:33:37] [Thread-10/INFO]: Initializing LWJGL OpenAL
+[19:33:37] [Thread-10/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:33:37] [Thread-10/INFO]: OpenAL initialized.
+[19:33:37] [Sound Library Loader/INFO]: Sound engine started
+[19:33:44] [Client thread/INFO]: Created: 2048x1024 textures-atlas
+[19:33:45] [Client thread/WARN]: Skipping bad option: lastServer:
+[19:33:47] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[19:33:54] [Server thread/INFO]: Starting integrated minecraft server version 1.11.2
+[19:33:54] [Server thread/INFO]: Generating keypair
+[19:33:55] [Server thread/INFO]: Preparing start region for level 0
+[19:33:57] [Server thread/INFO]: Player638[local:E:3ec2cb0c] logged in with entity id 0 at (284.5638358083708, 60.501063619590155, -56.36649528396003)
+[19:33:57] [Server thread/INFO]: Player638 joined the game
+[19:33:58] [Server thread/INFO]: Saving and pausing game...
+[19:33:58] [Server thread/INFO]: [STDOUT]: Hello
+[19:33:58] [Server thread/INFO]: [STDOUT]: Hello
+[19:33:58] [Server thread/INFO]: Saving chunks for level 'Testing world'/Overworld
+[19:33:58] [Server thread/INFO]: Saving chunks for level 'Testing world'/Nether
+[19:33:58] [Server thread/INFO]: Saving chunks for level 'Testing world'/The End
+[19:33:59] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@33f576e0[id=2107fded-a4bd-35bb-abc7-dae190b9909f,name=Player638,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3524) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2317) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2280) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2195) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3934) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3938) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4821) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:4827) [guava-17.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3056) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_101]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_101]
+[19:34:05] [Server thread/INFO]: Player638 has just earned the achievement [Taking Inventory]
+[19:34:05] [Client thread/INFO]: [CHAT] Player638 has just earned the achievement [Taking Inventory]
+[19:34:10] [Client thread/INFO]: [STDOUT]: up
+[19:34:10] [Server thread/INFO]: [STDOUT]: up
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:10] [Server thread/INFO]: [STDOUT]: Detected block
+[19:34:26] [Server thread/INFO]: Saving and pausing game...
+[19:34:26] [Server thread/INFO]: [STDOUT]: Hello
+[19:34:26] [Server thread/INFO]: [STDOUT]: Hello
+[19:34:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/Overworld
+[19:34:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/Nether
+[19:34:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/The End
+[19:35:00] [Client thread/INFO]: [STDOUT]: up
+[19:35:00] [Server thread/INFO]: [STDOUT]: up
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:00] [Server thread/INFO]: [STDOUT]: Detected block
+[19:35:10] [Server thread/INFO]: [STDOUT]: Hello
+[19:35:10] [Server thread/INFO]: [STDOUT]: Hello
+[19:35:12] [Server thread/INFO]: Saving and pausing game...
+[19:35:12] [Server thread/INFO]: [STDOUT]: Hello
+[19:35:12] [Server thread/INFO]: [STDOUT]: Hello
+[19:35:12] [Server thread/INFO]: Saving chunks for level 'Testing world'/Overworld
+[19:35:12] [Server thread/INFO]: Saving chunks for level 'Testing world'/Nether
+[19:35:12] [Server thread/INFO]: Saving chunks for level 'Testing world'/The End
+[19:37:07] [Client thread/INFO]: Stopping!
+[19:37:07] [Se[19:37:12] [Client thread/WARN]: Skipping bad option: lastServer:
+[19:37:12] [Client thread/INFO]: LWJGL Version: 2.9.4
+[19:37:13] [Client thread/INFO]: [STDOUT]: ---- Minecraft Crash Report ----
+// Daisy, daisy...
+
+Time: 5/21/17 7:37 PM
+Description: Loading screen debug info
+
+This is just a prompt for computer specs to be printed. THIS IS NOT A ERROR
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 428758960 bytes (408 MB) / 766509056 bytes (731 MB) up to 1879048192 bytes (1792 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+	GL info: ' Vendor: 'Intel' Version: '4.4.0 - Build 21.20.16.4550' Renderer: 'Intel(R) HD Graphics 520'
+[19:37:16] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Better Survival
+[19:37:16] [Client thread/INFO]: [STDOUT]: PreInit
+[19:37:23] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:37:23] [Thread-7/INFO]: Initializing LWJGL OpenAL
+[19:37:23] [Thread-7/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:37:23] [Thread-7/ERROR]: Error in class 'LibraryLWJGLOpenAL'
+[19:37:23] [Thread-7/ERROR]: Unable to initialize OpenAL.  Probable cause: OpenAL not supported.
+[19:37:23] [Thread-7/WARN]: ERROR MESSAGE:
+[19:37:23] [Thread-7/INFO]: Could not locate OpenAL library.
+[19:37:23] [Thread-7/WARN]: STACK TRACE:
+[19:37:23] [Thread-7/INFO]: org.lwjgl.openal.AL.create(AL.java:156)
+[19:37:23] [Thread-7/INFO]: org.lwjgl.openal.AL.create(AL.java:102)
+[19:37:23] [Thread-7/INFO]: org.lwjgl.openal.AL.create(AL.java:206)
+[19:37:23] [Thread-7/INFO]: paulscode.sound.libraries.LibraryLWJGLOpenAL.init(LibraryLWJGLOpenAL.java:164)
+[19:37:23] [Thread-7/INFO]: paulscode.sound.SoundSystem.CommandNewLibrary(SoundSystem.java:1576)
+[19:37:23] [Thread-7/INFO]: paulscode.sound.SoundSystem.CommandQueue(SoundSystem.java:2572)
+[19:37:23] [Thread-7/INFO]: paulscode.sound.CommandThread.run(CommandThread.java:121)
+[19:37:24] [Sound Library Loader/WARN]: ERROR MESSAGE:
+[19:37:24] [Sound Library Loader/INFO]: Could not locate OpenAL library.
+[19:37:24] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:37:24] [Thread-9/INFO]: Switching to No Sound
+[19:37:24] [Thread-9/INFO]: (Silent Mode)
+[19:37:24] [Sound Library Loader/INFO]: Sound engine started
+[19:37:31] [Client thread/INFO]: Created: 16x16 textures-atlas
+[19:37:31] [Client thread/INFO]: [STDOUT]: Init
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingCopper
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingBronze
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingInvar
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingSilver
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingElectrum
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingAluminium
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingSteel
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingSignalum
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingLumium
+[19:37:31] [Client thread/INFO]: [STDOUT]: MissingEnderium
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: recipe registered
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: Attemped to register recipe
+[19:37:31] [Client thread/INFO]: [STDOUT]: PostInit
+[19:37:31] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Better Survival
+[19:37:36] [Client thread/INFO]: SoundSystem shutting down...
+[19:37:36] [Client thread/WARN]: Author: Paul Lamb, www.paulscode.com
+[19:37:36] [Sound Library Loader/INFO]: Starting up SoundSystem...
+[19:37:36] [Thread-11/INFO]: Initializing LWJGL OpenAL
+[19:37:36] [Thread-11/INFO]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:37:36] [Thread-11/INFO]: OpenAL initialized.
+[19:37:36] [Sound Library Loader/INFO]: Sound engine started
+[19:37:42] [Client thread/INFO]: Created: 2048x1024 textures-atlas
+[19:37:44] [Client thread/WARN]: Skipping bad option: lastServer:
+[19:37:46] [Realms Notification Availability checker #1/INFO]: Could not authorize you against Realms server: Invalid session id
+[19:38:04] [Server thread/INFO]: Starting integrated minecraft server version 1.11.2
+[19:38:04] [Server thread/INFO]: Generating keypair
+[19:38:05] [Server thread/INFO]: Preparing start region for level 0
+[19:38:07] [Server thread/INFO]: Player833[local:E:ba957a69] logged in with entity id 0 at (282.13878412042584, 56.0, -47.517363917584895)
+[19:38:07] [Server thread/INFO]: Player833 joined the game
+[19:38:08] [Server thread/INFO]: Saving and pausing game...
+[19:38:08] [Server thread/INFO]: [STDOUT]: Hello
+[19:38:08] [Server thread/INFO]: [STDOUT]: Hello
+[19:38:08] [Server thread/INFO]: Saving chunks for level 'Testing world'/Overworld
+[19:38:08] [Server thread/INFO]: Saving chunks for level 'Testing world'/Nether
+[19:38:08] [Server thread/INFO]: Saving chunks for level 'Testing world'/The End
+[19:38:08] [pool-2-thread-1/WARN]: Couldn't look up profile properties for com.mojang.authlib.GameProfile@11dc47cb[id=56f01d2a-1301-31e7-9d05-beb3615c471c,name=Player833,properties={},legacy=false]
+com.mojang.authlib.exceptions.AuthenticationException: The client has sent too many requests within a certain amount of time
+	at com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService.makeRequest(YggdrasilAuthenticationService.java:79) ~[YggdrasilAuthenticationService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillGameProfile(YggdrasilMinecraftSessionService.java:180) [YggdrasilMinecraftSessionService.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:60) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService$1.load(YggdrasilMinecraftSessionService.java:57) [YggdrasilMinecraftSessionService$1.class:?]
+	at com.google.common.cache.LocalCache$LoadingValueReference.loadFuture(LocalCache.java:3524) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.loadSync(LocalCache.java:2317) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.lockedGetOrLoad(LocalCache.java:2280) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$Segment.get(LocalCache.java:2195) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.get(LocalCache.java:3934) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache.getOrLoad(LocalCache.java:3938) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.get(LocalCache.java:4821) [guava-17.0.jar:?]
+	at com.google.common.cache.LocalCache$LocalLoadingCache.getUnchecked(LocalCache.java:4827) [guava-17.0.jar:?]
+	at com.mojang.authlib.yggdrasil.YggdrasilMinecraftSessionService.fillProfileProperties(YggdrasilMinecraftSessionService.java:170) [YggdrasilMinecraftSessionService.class:?]
+	at net.minecraft.client.Minecraft.getProfileProperties(Minecraft.java:3056) [Minecraft.class:?]
+	at net.minecraft.client.resources.SkinManager$3.run(SkinManager.java:138) [SkinManager$3.class:?]
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.FutureTask.run(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source) [?:1.8.0_101]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source) [?:1.8.0_101]
+	at java.lang.Thread.run(Unknown Source) [?:1.8.0_101]
+[19:38:10] [Server thread/INFO]: Player833 has just earned the achievement [Taking Inventory]
+[19:38:10] [Client thread/INFO]: [CHAT] Player833 has just earned the achievement [Taking Inventory]
+[19:38:20] [Client thread/INFO]: [STDOUT]: up
+[19:38:20] [Server thread/INFO]: [STDOUT]: up
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:20] [Server thread/INFO]: [STDOUT]: Detected block
+[19:38:26] [Server thread/INFO]: Saving and pausing game...
+[19:38:26] [Server thread/INFO]: [STDOUT]: Hello
+[19:38:26] [Server thread/INFO]: [STDOUT]: Hello
+[19:38:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/Overworld
+[19:38:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/Nether
+[19:38:26] [Server thread/INFO]: Saving chunks for level 'Testing world'/The End

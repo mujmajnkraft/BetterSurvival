@@ -1,0 +1,38 @@
+{
+	"pools": [
+		{
+			"name" : "weapons",
+			"rolls": {
+                "min": 0,
+                "max": 1
+            },
+			"entries" : [
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemirondagger",
+                    "weight": 3
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironnunchaku",
+                    "weight": 3
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironhammer",
+                    "weight": 3
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironbattleaxe",
+                    "weight": 3
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemironspear",
+                    "weight": 3
+                }
+			]
+		}
+	]
+}

@@ -1,0 +1,154 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/diamondspear"
+    },
+    "overrides": [
+    	{
+    		"predicate": {
+    			"throwing": 1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_0"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.05
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_1"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_2"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.15
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_3"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.2
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_4"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.25
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_5"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.3
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_6"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.35
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_7"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.4
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_8"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.45
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_9"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_10"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.5
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_11"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.55
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_12"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.6
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_13"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_14"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.7
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_15"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.75
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_16"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.8
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_17"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.85
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_18"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.9
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_19"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.95
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemdiamondspearthrowing_20"
+    	}
+    ]
+}

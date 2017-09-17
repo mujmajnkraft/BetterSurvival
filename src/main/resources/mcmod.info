@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mujmajnkraftsbettersurvival",
+  "name": "Better Survival",
+  "description": "This mod adds additional weapons and enchantments to minecraft.",
+  "version": "1.3.1",
+  "mcversion": "1.11.2",
+  "url": "http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/2794853-better-survival-1-0",
+  "updateUrl": "",
+  "authorList": ["mujmajnkraft"],
+  "credits": "mujmajnkraft, deadrit",
+  "logoFile": "assets/mujmajnkraftsbettersurvival/images/BetterSurvivalBanner.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

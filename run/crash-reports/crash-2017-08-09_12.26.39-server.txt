@@ -1,0 +1,101 @@
+---- Minecraft Crash Report ----
+// On the bright side, I bought you a teddy bear!
+
+Time: 8/9/17 12:26 PM
+Description: Ticking entity
+
+java.lang.NullPointerException: Ticking entity
+	at com.mujmajnkraft.bettersurvival.ModWeaponHandler.onEvent(ModWeaponHandler.java:135)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_19_ModWeaponHandler_onEvent_LivingUpdateEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.common.ForgeHooks.onLivingUpdate(ForgeHooks.java:524)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2209)
+	at net.minecraft.entity.item.EntityArmorStand.onUpdate(EntityArmorStand.java:754)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2108)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:875)
+	at net.minecraft.world.World.updateEntity(World.java:2075)
+	at net.minecraft.world.World.updateEntities(World.java:1888)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:647)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:794)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:698)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.mujmajnkraft.bettersurvival.ModWeaponHandler.onEvent(ModWeaponHandler.java:135)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_19_ModWeaponHandler_onEvent_LivingUpdateEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.common.ForgeHooks.onLivingUpdate(ForgeHooks.java:524)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2209)
+	at net.minecraft.entity.item.EntityArmorStand.onUpdate(EntityArmorStand.java:754)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2108)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:875)
+	at net.minecraft.world.World.updateEntity(World.java:2075)
+
+-- Entity being ticked --
+Details:
+	Entity Type: minecraft:armor_stand (net.minecraft.entity.item.EntityArmorStand)
+	Entity ID: 7
+	Entity Name: Armor Stand
+	Entity's Exact location: 258.50, 56.00, -76.50
+	Entity's Block location: World: (258,56,-77), Chunk: (at 2,3,3 in 16,-5; contains blocks 256,0,-80 to 271,255,-65), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Entity's Momentum: 0.00, 0.00, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:1888)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:647)
+
+-- Affected level --
+Details:
+	Level name: Testing world
+	All players: 1 total; [EntityPlayerMP['Player397'/5, l='Testing world', x=260.80, y=58.06, z=-79.17]]
+	Chunk stats: ServerChunkCache: 441 Drop: 0
+	Level seed: -6090772800194771413
+	Level generator: ID 01 - flat, ver 0. Features enabled: false
+	Level generator options: 3;minecraft:bedrock,3*minecraft:stone,52*minecraft:sandstone;2;
+	Level spawn location: World: (247,4,-74), Chunk: (at 7,0,6 in 15,-5; contains blocks 240,0,-80 to 255,255,-65), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Level time: 1456881 game time, 1000 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 153999 (now: false), thunder time: 129852 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:794)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:698)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 538114928 bytes (513 MB) / 977272832 bytes (932 MB) up to 1879048192 bytes (1792 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 6 mods loaded, 6 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	mujmajnkraftsbettersurvival{1.2.1} [Better Survival] (bin) 
+	UCHIJAAAA	itemtransformhelper{1.11a} [Item Transform Helper] (itemtransformhelper-1.11.2a.jar) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player397'/5, l='Testing world', x=260.80, y=58.06, z=-79.17]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'
