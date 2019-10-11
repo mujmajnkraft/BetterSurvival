@@ -1,0 +1,28 @@
+{
+    "parent": "item/bow",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/crossbow_pulling_0"
+    },
+    "display": {
+    	"thirdperson_righthand": {
+        	"rotation": [ 0, 0, 324 ],
+        	"translation": [ 0.00, 0.00, 0.00 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	},
+    	"thirdperson_lefthand": {
+        	"rotation": [ 0, 0, 54 ],
+        	"translation": [ 0.00, 0.00, 0.00 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	},
+    	"firstperson_righthand": {
+        	"rotation": [ 284, 352, 326 ],
+        	"translation": [ 2.75, 1.25, -2.25 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	},
+    	"firstperson_lefthand": {
+        	"rotation": [ 282, 352, 52 ],
+        	"translation": [ 0.75, 2.25, -1.00 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	}
+    }
+}

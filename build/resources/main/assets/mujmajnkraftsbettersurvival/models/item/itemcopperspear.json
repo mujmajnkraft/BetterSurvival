@@ -1,0 +1,154 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/copperspear"
+    },
+    "overrides": [
+    	{
+    		"predicate": {
+    			"throwing": 1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_0"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.05
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_1"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_2"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.15
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_3"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.2
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_4"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.25
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_5"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.3
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_6"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.35
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_7"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.4
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_8"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.45
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_9"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_10"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.5
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_11"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.55
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_12"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.6
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_13"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_14"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.7
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_15"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.75
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_16"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.8
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_17"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.85
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_18"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.9
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_19"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.95
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemcopperspearthrowing_20"
+    	}
+    ]
+}

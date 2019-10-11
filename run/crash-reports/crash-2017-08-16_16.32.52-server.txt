@@ -1,0 +1,100 @@
+---- Minecraft Crash Report ----
+// I just don't know what went wrong :(
+
+Time: 8/16/17 4:32 PM
+Description: Ticking player
+
+java.lang.NullPointerException: Ticking player
+	at net.minecraft.enchantment.Enchantment.getEntityEquipment(Enchantment.java:67)
+	at net.minecraft.enchantment.EnchantmentHelper.getMaxEnchantmentLevel(EnchantmentHelper.java:223)
+	at com.mujmajnkraft.bettersurvival.ModEnchantmentHandler.onEvent(ModEnchantmentHandler.java:298)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_35_ModEnchantmentHandler_onEvent_LivingExperienceDropEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(ForgeEventFactory.java:219)
+	at net.minecraft.entity.EntityLivingBase.onDeathUpdate(EntityLivingBase.java:427)
+	at net.minecraft.entity.EntityLivingBase.onEntityUpdate(EntityLivingBase.java:359)
+	at net.minecraft.entity.Entity.onUpdate(Entity.java:449)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2210)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:258)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdateEntity(EntityPlayerMP.java:367)
+	at net.minecraft.network.NetHandlerPlayServer.update(NetHandlerPlayServer.java:176)
+	at net.minecraftforge.fml.common.network.handshake.NetworkDispatcher$1.update(NetworkDispatcher.java:218)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:308)
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:195)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:817)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:698)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.enchantment.Enchantment.getEntityEquipment(Enchantment.java:67)
+	at net.minecraft.enchantment.EnchantmentHelper.getMaxEnchantmentLevel(EnchantmentHelper.java:223)
+	at com.mujmajnkraft.bettersurvival.ModEnchantmentHandler.onEvent(ModEnchantmentHandler.java:298)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler_35_ModEnchantmentHandler_onEvent_LivingExperienceDropEvent.invoke(.dynamic)
+	at net.minecraftforge.fml.common.eventhandler.ASMEventHandler.invoke(ASMEventHandler.java:90)
+	at net.minecraftforge.fml.common.eventhandler.EventBus.post(EventBus.java:185)
+	at net.minecraftforge.event.ForgeEventFactory.getExperienceDrop(ForgeEventFactory.java:219)
+	at net.minecraft.entity.EntityLivingBase.onDeathUpdate(EntityLivingBase.java:427)
+	at net.minecraft.entity.EntityLivingBase.onEntityUpdate(EntityLivingBase.java:359)
+	at net.minecraft.entity.Entity.onUpdate(Entity.java:449)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2210)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:258)
+
+-- Player being ticked --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 4
+	Entity Name: Player119
+	Entity's Exact location: 315.46, 54.00, -49.30
+	Entity's Block location: World: (315,54,-50), Chunk: (at 11,3,14 in 19,-4; contains blocks 304,0,-64 to 319,255,-49), Region: (0,-1; contains chunks 0,-32 to 31,-1, blocks 0,0,-512 to 511,255,-1)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdateEntity(EntityPlayerMP.java:367)
+	at net.minecraft.network.NetHandlerPlayServer.update(NetHandlerPlayServer.java:176)
+	at net.minecraftforge.fml.common.network.handshake.NetworkDispatcher$1.update(NetworkDispatcher.java:218)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:308)
+
+-- Ticking connection --
+Details:
+	Connection: net.minecraft.network.NetworkManager@13e1ff29
+Stacktrace:
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:195)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:817)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:698)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:547)
+	at java.lang.Thread.run(Unknown Source)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 69338448 bytes (66 MB) / 475529216 bytes (453 MB) up to 1879048192 bytes (1792 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 6 mods loaded, 6 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	mujmajnkraftsbettersurvival{1.2.1} [Better Survival] (bin) 
+	UCHIJAAAA	itemtransformhelper{1.11a} [Item Transform Helper] (itemtransformhelper-1.11.2a.jar) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player119'/4, l='Testing world', x=315.46, y=54.00, z=-49.30]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

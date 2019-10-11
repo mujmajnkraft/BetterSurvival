@@ -1,0 +1,154 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/enderiumspear"
+    },
+    "overrides": [
+    	{
+    		"predicate": {
+    			"throwing": 1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_0"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.05
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_1"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.1
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_2"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.15
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_3"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.2
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_4"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.25
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_5"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.3
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_6"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.35
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_7"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.4
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_8"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.45
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_9"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_10"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.5
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_11"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.55
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_12"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.6
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_13"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.65
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_14"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.7
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_15"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.75
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_16"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.8
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_17"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.85
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_18"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.9
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_19"
+    	},
+    	{
+    		"predicate": {
+    			"throwing": 1,
+    			"throw": 0.95
+    		},
+            "model": "mujmajnkraftsbettersurvival:item/itemenderiumspearthrowing_20"
+    	}
+    ]
+}
