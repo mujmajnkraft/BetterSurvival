@@ -1,0 +1,47 @@
+{
+	"pools": [
+		{
+			"name" : "weapons",
+			"rolls": {
+                "min": 0,
+                "max": 2
+            },
+			"entries" : [
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemgolddagger",
+                    "weight": 3
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemgoldnunchaku",
+                    "weight": 2
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemgoldhammer",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemgoldbattleaxe",
+                    "weight": 1
+                },
+                {
+                    "type": "item",
+                    "name": "mujmajnkraftsbettersurvival:itemgoldspear",
+                    "weight": 3,
+                    "functions": [
+                        {
+                            "function": "set_count",
+                            "count": {
+                                "min": 3,
+                           		"max": 6
+                   			}
+                        }
+                    ]
+                }
+			]
+		}
+	]
+}

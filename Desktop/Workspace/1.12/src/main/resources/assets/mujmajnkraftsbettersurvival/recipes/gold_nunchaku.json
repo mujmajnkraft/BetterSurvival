@@ -1,0 +1,18 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" S ",
+		"I I"
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:gold_ingot"
+		},
+		"S": {
+			"item": "minecraft:string"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemgoldnunchaku"
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" II",
+		"SII",
+		" II"
+	],
+	"key": {
+		"I": {
+			"item": "minecraft:cobblestone"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemstonehammer"
+	}
+}

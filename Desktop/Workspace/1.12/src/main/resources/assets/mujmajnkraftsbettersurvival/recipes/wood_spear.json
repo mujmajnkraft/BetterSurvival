@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  I",
+		" S ",
+		"S  "
+	],
+	"key": {
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemwoodspear",
+		"count": 4
+	}
+}

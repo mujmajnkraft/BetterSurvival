@@ -1,0 +1,19 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"I",
+		"S"
+	],
+	"key": {
+		"I": {
+ 			"type": "forge:ore_dict",
+			"ore": "ingotElectrum"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemelectrumdagger"
+	}
+}

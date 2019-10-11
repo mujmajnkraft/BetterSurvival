@@ -1,0 +1,33 @@
+{
+    "parent": "item/generated",
+    "textures": {
+        "layer0": "mujmajnkraftsbettersurvival:items/smallshield"
+    },
+    "display": {
+        "thirdperson_righthand": {
+        	"rotation": [ 85, 355, 358 ],
+        	"translation": [ -2.00, 2.50, 0.50 ],
+        	"scale": [ 1.40, 1.40, 0.99 ]
+    	},
+    	"thirdperson_lefthand": {
+        	"rotation": [ 85, 355, 358 ],
+        	"translation": [ -2.00, 2.50, 0.00 ],
+        	"scale": [ 1.40, 1.40, 1.00 ]
+    	},
+    	"firstperson_righthand": {
+        	"rotation": [ 0, 163, 0 ],
+        	"translation": [ 1.00, 0.00, -0.25 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	},
+    	"firstperson_lefthand": {
+        	"rotation": [ 0, 163, 0 ],
+        	"translation": [ 1.00, 0.00, -0.25 ],
+        	"scale": [ 1.00, 1.00, 1.00 ]
+    	},
+        "gui": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        }
+    }
+}

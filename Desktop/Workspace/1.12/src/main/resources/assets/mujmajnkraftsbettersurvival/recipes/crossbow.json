@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"TIW",
+		" TI",
+		"S T"
+	],
+	"key": {
+ 		"I": {
+			"item": "minecraft:iron_ingot"
+		},
+		"S": {
+			"item": "minecraft:stick"
+		},
+		"T": {
+			"item": "minecraft:string"
+		},
+		"W": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemcrossbow"
+	}
+}
