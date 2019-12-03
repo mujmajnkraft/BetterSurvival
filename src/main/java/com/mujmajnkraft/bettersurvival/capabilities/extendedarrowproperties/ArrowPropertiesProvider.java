@@ -8,13 +8,11 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
 public class ArrowPropertiesProvider implements ICapabilitySerializable<NBTTagCompound>{
 	
-	 @CapabilityInject(IArrowProperties.class)
+	@CapabilityInject(IArrowProperties.class)
 
-	 public static final Capability<IArrowProperties> ARROWPROPERTIES_CAP = null;
-
-
-
-	 private IArrowProperties instance = ARROWPROPERTIES_CAP.getDefaultInstance();
+	public static final Capability<IArrowProperties> ARROWPROPERTIES_CAP = null;
+	 
+	private IArrowProperties instance = ARROWPROPERTIES_CAP.getDefaultInstance();
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {

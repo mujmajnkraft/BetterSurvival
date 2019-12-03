@@ -1,21 +1,27 @@
 package com.mujmajnkraft.bettersurvival.items;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Random;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.CrushingRecipe;
 import com.mujmajnkraft.bettersurvival.ICustomWeapon;
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockGlass;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentSweepingEdge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
@@ -28,15 +34,16 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import net.minecraftforge.oredict.OreDictionary;
 
+@SuppressWarnings("deprecation")
 public class ItemHammer extends ItemSword implements ICustomWeapon{
 	
 	private int stunduration;
@@ -46,7 +53,7 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Hammer");
 		this.setUnlocalizedName(material.name().toLowerCase()+"hammer");
 		mat = material;
-		stunduration = 15 + material.getHarvestLevel()*5;
+		stunduration = 20;
 	}
 	
 	public ToolMaterial getMaterial()
@@ -90,10 +97,12 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 	
 	public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
 	{
-		if(hand == EnumHand.OFF_HAND || playerIn.getHeldItemOffhand() != ItemStack.EMPTY)
+		if(hand == EnumHand.OFF_HAND)
 		{
 			return EnumActionResult.FAIL;
 		}
+		
+		float d = Math.min(this.getAttackDamage(), 9) + 1;
 		
 		double xd = 1;
 		double yd = 1;
@@ -113,24 +122,22 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 			yd += 9;
 		}
 		
-	    for (EntityLivingBase entitylivingbase :playerIn.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).expand(xd, yd, zd).expand(-xd, -yd, -zd)))
+	    for (EntityLivingBase entitylivingbase :playerIn.getEntityWorld().getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(pos).grow(xd, yd, zd)))
 	    {
-	    	if (entitylivingbase != playerIn && !playerIn.isOnSameTeam(entitylivingbase) && entitylivingbase.getDistanceSq(pos) < 20.0D && entitylivingbase.onGround)
+	    	if (entitylivingbase != playerIn && entitylivingbase.getDistanceSq(pos) < 2*d && entitylivingbase.onGround)
             {
                  entitylivingbase.knockBack(playerIn, 0.4F, (double)MathHelper.sin(playerIn.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(playerIn.rotationYaw * 0.017453292F)));
-                 entitylivingbase.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), (float) ((this.getDamageVsEntity()+3.0F)*(1-entitylivingbase.getDistanceSq(pos)/20)));
+                 entitylivingbase.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), (float) ((this.getAttackDamage()+3.0F)*(1-entitylivingbase.getDistanceSq(pos)/20)));
                  PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, (int) (stunduration*(1-entitylivingbase.getDistanceSq(pos)/20)));
                  entitylivingbase.addPotionEffect(potioneffectIn);
             }
         }
 	    
-	    ArrayList<BlockPos> positions = new ArrayList<>();
-	    
 	    for(int x = (int) -5; x < 5 + 1; x++)
 		{
 			if((!(facing == EnumFacing.WEST) && !(facing == EnumFacing.EAST) || x==0) && playerIn.capabilities.allowEdit)
 			{
-				for(int y = (int) -5; y < 5 + 1; y++)
+				for(float y = -d ; y < 5 + 1; y++)
 				{
 					if((!(facing == EnumFacing.UP) && !(facing == EnumFacing.DOWN)) || y==0)
 					{
@@ -138,25 +145,42 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 						{
 							if ((!(facing == EnumFacing.NORTH) && !(facing == EnumFacing.SOUTH)) || z==0)
 							{
-								if (x*x+y*y+z*z <= 20.0F)
+								if (x*x+y*y+z*z <= (float) 2.0f * d)
 								{
+									boolean particles = x*x+y*y+z*z >= (float) 2.0f * (d - 2.0f);
 									BlockPos position = pos.add(x, y, z);
+									
+									if (worldIn.getBlockState(position.offset(facing)).getBlock() instanceof BlockGlass)
+									{
+										worldIn.destroyBlock(position.offset(facing), true);
+									}
+									
+									if (worldIn.getBlockState(position.offset(facing.getOpposite())).getBlock() instanceof BlockGlass)
+									{
+										worldIn.destroyBlock(position.offset(facing.getOpposite()), true);
+									}
+									
+									if (worldIn.getBlockState(position).getBlock() instanceof BlockGlass)
+									{
+										worldIn.destroyBlock(position, true);
+									}
 									
 									if (worldIn.getBlockState(position.offset(facing)).isSideSolid(worldIn, position, EnumFacing.UP))
 									{
-										BlockPos position2 = position.offset(facing);
-										if (!(worldIn.getBlockState(position2.offset(facing)).isSideSolid(worldIn, position2, EnumFacing.UP)))
+										BlockPos pos2 = position.offset(facing);
+										if (!(worldIn.getBlockState(pos2.offset(facing)).isSideSolid(worldIn, pos2, EnumFacing.UP)))
 										{
-											positions.add(position.offset(facing));
+											CrushingRecipe.Crush(playerIn, pos2, particles);
 										}
 									}
 									else if(!worldIn.getBlockState(position).isSideSolid(worldIn, position, EnumFacing.UP))
 									{
-										positions.add(position.offset(facing.getOpposite()));
+										BlockPos pos2 = position.offset(facing.getOpposite());
+										CrushingRecipe.Crush(playerIn, pos2, particles);
 									}
 									else
 									{
-										positions.add(position);
+										CrushingRecipe.Crush(playerIn, position, particles);
 									}
 								}
 							}
@@ -166,34 +190,19 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 			}
 		}
 	    
-	    for (BlockPos position : positions)
-	    {
-	    	IBlockState result = CrushingRecipe.instance().getCrushingResult(worldIn.getBlockState(position));
-	    	if (pos.distanceSq(position.getX(), position.getY(), position.getZ()) > 17)
-	    	{
-	    		if (worldIn instanceof WorldServer)
-                {
-                    WorldServer worldserver = (WorldServer)worldIn;
-                    worldserver.spawnParticle(EnumParticleTypes.CRIT, position.getX(), position.getY()+1.0D, position.getZ(), 1, 0.0D, 0.0D, 0.0D, 0.0D, new int[0]);
-                }
-	    	}
-	    	if (result != null)
-	    	{
-	    		worldIn.setBlockState(position, result);
-	    	}
-	    }
-	    
 	    if (!playerIn.isCreative())
 	    {
 	    	playerIn.getHeldItem(hand).damageItem(10, playerIn);
 	    }
-	    	
-	    worldIn.playSound(null, pos, net.minecraft.init.SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-	    worldIn.spawnParticle(EnumParticleTypes.CRIT, pos.getX(), pos.getY()+1, pos.getZ(), 1, 1, 1, 1);
 	    
-	    for (ItemHammer hammer : ModItems.hammers)
+	    worldIn.playSound(null, pos, net.minecraft.init.SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+	    
+	    if (!playerIn.capabilities.isCreativeMode)
 	    {
-		    playerIn.getCooldownTracker().setCooldown(hammer, 200);
+		    for (ItemHammer hammer : ModItems.hammers)
+		    {
+			    playerIn.getCooldownTracker().setCooldown(hammer, 200);
+		    }
 	    }
 	    return EnumActionResult.SUCCESS;
 	}
@@ -216,11 +225,6 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 	}
 
 	@Override
-	public boolean isTwoHand() {
-		return true;
-	}
-
-	@Override
 	public boolean noSweepAttack() {
 		return false;
 	}
@@ -230,7 +234,8 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 	{
 		if (player.getCooledAttackStrength(0.5F) > 0.9 && entity instanceof EntityLivingBase)
 		{
-			if (new Random().nextInt(10)==0)
+			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
+			if (player.getRNG().nextInt(20)<(2+l) && !entity.getIsInvulnerable())
 			{
 				EntityLivingBase living = (EntityLivingBase) entity;
 				PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, stunduration);
@@ -253,30 +258,75 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
 		target.knockBack(attacker,0.5F, (double)MathHelper.sin(attacker.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(attacker.rotationYaw * 0.017453292F)));
-        stack.damageItem(1, attacker);
-        return true;
+        
+        if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 2);
+            }
+        }
+		else if (this.mat == ModItems.DESERT_CHITIN || this.mat == ModItems.JUNGLE_CHITIN)
+		{
+            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 4);
+            }
+        }
+		return super.hitEntity(stack, target, attacker);
     }
 	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
 	{
-		System.out.println(this.getMaterial());
-		if (this.getMaterial() == ToolMaterial.DIAMOND ||this.getMaterial() == ToolMaterial.GOLD ||this.getMaterial() == ToolMaterial.IRON ||this.getMaterial() == ToolMaterial.STONE||this.getMaterial() == ToolMaterial.WOOD)
-		{
-			return super.getIsRepairable(toRepair, repair);
-		}
-		else if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
+		if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
 		{
 			for (ItemStack stack :OreDictionary.getOres("ingot"+this.getMaterial().name()))
 			{
-				System.out.println(stack);
 				if (net.minecraftforge.oredict.OreDictionary.itemMatches(stack, repair, false))
 				{
 					return true;
 				}
 			}
 		}
-		return false;
+		return super.getIsRepairable(toRepair, repair);
+	}
+	
+	@Override
+	public CreativeTabs getCreativeTab()
+	{
+		if (this.getMaterial() == ToolMaterial.DIAMOND ||this.getMaterial() == ToolMaterial.GOLD ||this.getMaterial() == ToolMaterial.IRON ||this.getMaterial() == ToolMaterial.STONE||this.getMaterial() == ToolMaterial.WOOD)
+		{
+			return super.getCreativeTab();
+		}
+		else if ((this.getMaterial() == ModItems.JUNGLE_CHITIN || this.getMaterial() == ModItems.DESERT_CHITIN || this.getMaterial() == ModItems.DRAGON_BONE) && Bettersurvival.isIafLoaded && ConfigHandler.integration)
+		{
+			return super.getCreativeTab();
+		}
+		else if (ConfigHandler.integration && !OreDictionary.getOres("ingot"+this.getMaterial().name()).isEmpty())
+		{
+			return super.getCreativeTab();
+		}
+		return null;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+			String s = I18n.translateToLocal("silvertools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		else if (this.mat == ModItems.JUNGLE_CHITIN || this.mat == ModItems.DESERT_CHITIN)
+		{
+			String s = I18n.translateToLocal(Reference.MOD_ID + ".chitintools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		super.addInformation(stack, worldIn, tooltip, flagIn);
 	}
 }
 	

@@ -24,5 +24,13 @@
             "translation": [ -0.50, 2.85, 0.80 ],
             "scale": [ 0.68, 0.68, 0.68 ]
         }
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "spinning": 1
+            },
+            "model": "mujmajnkraftsbettersurvival:item/iteminvarnunchakuspinning"
+        }
+    ]
 }

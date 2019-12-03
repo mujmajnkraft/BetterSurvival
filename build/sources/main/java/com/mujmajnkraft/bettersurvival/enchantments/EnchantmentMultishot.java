@@ -1,10 +1,11 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
-import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentMultishot extends Enchantment {
@@ -12,7 +13,7 @@ public class EnchantmentMultishot extends Enchantment {
 	public EnchantmentMultishot() {
 		super(Rarity.UNCOMMON, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("multishot");
-		this.setName("multishot");
+		this.setName(Reference.MOD_ID + ".multishot");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)
@@ -38,7 +39,7 @@ public class EnchantmentMultishot extends Enchantment {
     
     public boolean canApplyTogether(Enchantment ench)
     {
-        return super.canApplyTogether(ench) && ench != Enchantments.PUNCH;
+        return super.canApplyTogether(ench) && ench != ModEnchantments.blast;
     }
     
     public boolean isTreasureEnchantment()

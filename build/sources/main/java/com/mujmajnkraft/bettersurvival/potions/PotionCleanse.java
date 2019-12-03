@@ -6,17 +6,26 @@ import java.util.Iterator;
 
 import javax.annotation.Nullable;
 
+import com.mujmajnkraft.bettersurvival.Reference;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class PotionCleanse extends Potion{
+public class PotionCleanse extends Potion {
+	
+	public static ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/misc/potions.png");
 
-	public PotionCleanse(boolean isBadEffectIn, int liquidColorIn) {
+	public PotionCleanse(boolean isBadEffectIn, int liquidColorIn, int iconIndex) {
 		super(isBadEffectIn, liquidColorIn);
+		this.setIconIndex(iconIndex % 8, iconIndex / 8);
 	}
 	
 	public boolean isInstant()
@@ -76,5 +85,13 @@ public class PotionCleanse extends Potion{
 			entityLiving.removePotionEffect(potion);
 		}
     }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getStatusIconIndex() {
+		Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
+
+		return super.getStatusIconIndex();
+	}
 
 }

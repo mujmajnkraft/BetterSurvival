@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -21,7 +20,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 public class TickEventHandler {
 	
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onEvent(WorldTickEvent event)
+	public void onTick(WorldTickEvent event)
 	{
 		ArrayList<Entity> entities = (ArrayList<Entity>) event.world.loadedEntityList;
 		ArrayList<EntityArrow> arrowstoexplode = new ArrayList<EntityArrow>();
@@ -33,12 +32,6 @@ public class TickEventHandler {
 				if (entity.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null))
 				{
 					IArrowProperties cap = entity.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
-					if (cap.getNoDrag())
-					{
-						entity.motionX*=1.01f;
-						entity.motionY+=0.02f;
-						entity.motionZ*=1.01f;
-					}
 					if (nbttagcompound.getByte("inGround") == 1 && cap.getExplosionPower()>0)
 					{
 						arrowstoexplode.add((EntityArrow) entity);
@@ -52,7 +45,7 @@ public class TickEventHandler {
 			EntityArrow arrow = itr.next();
 			IArrowProperties cap = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
 			
-			arrow.world.newExplosion(arrow.shootingEntity, arrow.posX, arrow.posY, arrow.posZ, cap.getExplosionPower(), arrow.isBurning(), cap.getCanDestroyBlocks());
+			arrow.world.newExplosion(arrow.shootingEntity, arrow.posX, arrow.posY, arrow.posZ, cap.getExplosionPower(), arrow.isBurning(), false);
 			
 			if (arrow instanceof EntityTippedArrow)
 			{

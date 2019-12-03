@@ -1,6 +1,8 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -12,7 +14,7 @@ public class EnchantmentBlast extends Enchantment {
 	public EnchantmentBlast() {
 		super(Rarity.RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("blast");
-		this.setName("blast");
+		this.setName(Reference.MOD_ID + ".blast");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)
@@ -38,7 +40,7 @@ public class EnchantmentBlast extends Enchantment {
     
     public boolean canApplyTogether(Enchantment ench)
     {
-        return super.canApplyTogether(ench) && ench != Enchantments.PUNCH;
+        return super.canApplyTogether(ench) && ench != Enchantments.PUNCH && ench != ModEnchantments.multishot;
     }
     
     public boolean isTreasureEnchantment()

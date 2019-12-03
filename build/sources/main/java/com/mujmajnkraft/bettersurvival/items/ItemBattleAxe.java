@@ -1,30 +1,42 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.ICustomWeapon;
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
+import com.mujmajnkraft.bettersurvival.init.ModItems;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentSweepingEdge;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+@SuppressWarnings("deprecation")
 public class ItemBattleAxe extends ItemSword implements ICustomWeapon{
 	
 	private ToolMaterial mat;
@@ -80,37 +92,36 @@ public class ItemBattleAxe extends ItemSword implements ICustomWeapon{
 	{
 		if (attacker.getCooledAttackStrength(0.5F) > 0.9 && entity instanceof EntityLivingBase)
 		{
-			if(new Random().nextInt(1)==10 && entity instanceof EntityLivingBase)
+			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
+			if (attacker.getRNG().nextInt(20)<(2+l) && !entity.getIsInvulnerable())
 			{
 				EntityLivingBase target = (EntityLivingBase) entity;
 				if (target instanceof EntityPlayer)
 				{
-					EntityPlayer player = (EntityPlayer) target;
-					if(player.getActiveItemStack().getItem() == Items.SHIELD && player.getHeldItemOffhand().getItem() == Items.SHIELD)
+					//EntityPlayer player = (EntityPlayer) target;
+					/*if(player.getHeldItemOffhand().getItem() instanceof ItemShield && player.getActiveHand() == EnumHand.OFF_HAND)
 					{
-						ItemStack item = player.getHeldItemOffhand();
-						player.setHeldItem(EnumHand.OFF_HAND, null);
-						player.entityDropItem(item, 1);
+						ItemStack stack1 = player.getHeldItemOffhand();
+						player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
+						player.entityDropItem(stack1, 1);
 					}
-					else
+					else*/
 					{
-						ItemStack item = target.getHeldItemMainhand();
-						target.setHeldItem(EnumHand.MAIN_HAND, null);
-						target.entityDropItem(item, 1);
+						ItemStack stack1 = target.getHeldItemMainhand();
+						target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+						target.entityDropItem(stack1, 1);
 					}
 				}
 				else
 				{
-					if(target.getHeldItemMainhand() !=null)
+					if(!target.getHeldItemMainhand().isEmpty())
 					{
 						ItemStack item = target.getHeldItemMainhand();
 						NBTTagCompound nbttagcompound = target.writeToNBT(new NBTTagCompound());
-						System.out.println(nbttagcompound.toString());
 						if (nbttagcompound.hasKey("HandDropChances", 9))
 				        {
 				            NBTTagList nbttaglist = nbttagcompound.getTagList("HandDropChances", 5);
 				            float chance = nbttaglist.getFloatAt(0);
-				            System.out.println(chance);
 				            target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
 							int rnd = new Random().nextInt(100);
 							if (chance*100+EnchantmentHelper.getMaxEnchantmentLevel(net.minecraft.init.Enchantments.LOOTING, attacker)>rnd+1)
@@ -148,25 +159,21 @@ public class ItemBattleAxe extends ItemSword implements ICustomWeapon{
     }
 	
 	@Override
-	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+	public CreativeTabs getCreativeTab()
 	{
-		System.out.println(this.getMaterial());
 		if (this.getMaterial() == ToolMaterial.DIAMOND ||this.getMaterial() == ToolMaterial.GOLD ||this.getMaterial() == ToolMaterial.IRON ||this.getMaterial() == ToolMaterial.STONE||this.getMaterial() == ToolMaterial.WOOD)
 		{
-			return super.getIsRepairable(toRepair, repair);
+			return super.getCreativeTab();
 		}
-		else if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
+		else if ((this.getMaterial() == ModItems.JUNGLE_CHITIN || this.getMaterial() == ModItems.DESERT_CHITIN || this.getMaterial() == ModItems.DRAGON_BONE) && Bettersurvival.isIafLoaded && ConfigHandler.integration)
 		{
-			for (ItemStack stack :OreDictionary.getOres("ingot"+this.getMaterial().name()))
-			{
-				System.out.println(stack);
-				if (net.minecraftforge.oredict.OreDictionary.itemMatches(stack, repair, false))
-				{
-					return true;
-				}
-			}
+			return super.getCreativeTab();
 		}
-		return false;
+		else if (ConfigHandler.integration && !OreDictionary.getOres("ingot"+this.getMaterial().name()).isEmpty())
+		{
+			return super.getCreativeTab();
+		}
+		return null;
 	}
 
 	@Override
@@ -175,12 +182,61 @@ public class ItemBattleAxe extends ItemSword implements ICustomWeapon{
 	}
 
 	@Override
-	public boolean isTwoHand() {
-		return true;
-	}
-
-	@Override
 	public boolean noSweepAttack() {
 		return false;
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
+	{
+		if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
+		{
+			for (ItemStack stack :OreDictionary.getOres("ingot"+this.getMaterial().name()))
+			{
+				if (net.minecraftforge.oredict.OreDictionary.itemMatches(stack, repair, false))
+				{
+					return true;
+				}
+			}
+		}
+		return super.getIsRepairable(toRepair, repair);
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+			String s = I18n.translateToLocal("silvertools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		else if (this.mat == ModItems.JUNGLE_CHITIN || this.mat == ModItems.DESERT_CHITIN)
+		{
+			String s = I18n.translateToLocal(Reference.MOD_ID + ".chitintools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	{
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 2);
+            }
+        }
+		else if (this.mat == ModItems.DESERT_CHITIN || this.mat == ModItems.JUNGLE_CHITIN)
+		{
+            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 4);
+            }
+        }
+		return super.hitEntity(stack, target, attacker);
 	}
 }

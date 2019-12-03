@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -12,7 +13,7 @@ public class EnchantmentArrowRecovery extends Enchantment {
 	public EnchantmentArrowRecovery() {
 		super(Rarity.UNCOMMON, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("arrowrecovery");
-		this.setName("arrowrecovery");
+		this.setName(Reference.MOD_ID + ".arrowrecovery");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

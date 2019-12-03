@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -10,7 +11,7 @@ public class EnchantmentVitality extends Enchantment {
 	public EnchantmentVitality() {
 		super(Rarity.RARE, EnumEnchantmentType.ARMOR_CHEST, new EntityEquipmentSlot[]{EntityEquipmentSlot.CHEST});
 		this.setRegistryName("vitality");
-		this.setName("vitality");
+		this.setName(Reference.MOD_ID + ".vitality");
 	}
 	
 	/**

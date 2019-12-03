@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchantmentEducation extends Enchantment {
 	public EnchantmentEducation() {
 		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("education");
-		this.setName("education");
+		this.setName(Reference.MOD_ID + ".education");
 	}
 	/**
      * Returns the minimal value of enchantability needed on the enchantment level passed.

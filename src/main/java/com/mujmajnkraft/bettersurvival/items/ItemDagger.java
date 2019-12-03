@@ -1,14 +1,21 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import com.google.common.collect.Multimap;
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.ICustomWeapon;
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModItems;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.IAttribute;
@@ -16,8 +23,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.text.translation.I18n;
+import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+@SuppressWarnings("deprecation")
 public class ItemDagger extends ItemSword implements ICustomWeapon{
 	
 	private ToolMaterial mat;
@@ -37,10 +49,7 @@ public class ItemDagger extends ItemSword implements ICustomWeapon{
 	public float getReach() {
 		return 0;
 	}
-	@Override
-	public boolean isTwoHand() {
-		return false;
-	}
+	
 	@Override
 	public boolean noSweepAttack() {
 		return false;
@@ -96,26 +105,77 @@ public class ItemDagger extends ItemSword implements ICustomWeapon{
 		}
 		return false;
 	}
-
+	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
 	{
-		System.out.println(this.getMaterial());
-		if (this.getMaterial() == ToolMaterial.DIAMOND ||this.getMaterial() == ToolMaterial.GOLD ||this.getMaterial() == ToolMaterial.IRON ||this.getMaterial() == ToolMaterial.STONE||this.getMaterial() == ToolMaterial.WOOD)
-		{
-			return super.getIsRepairable(toRepair, repair);
-		}
-		else if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
+		if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot"+this.getMaterial().name()))
 		{
 			for (ItemStack stack :OreDictionary.getOres("ingot"+this.getMaterial().name()))
 			{
-				System.out.println(stack);
 				if (net.minecraftforge.oredict.OreDictionary.itemMatches(stack, repair, false))
 				{
 					return true;
 				}
 			}
 		}
-		return false;
+		return super.getIsRepairable(toRepair, repair);
 	}
+	
+	@Override
+	public CreativeTabs getCreativeTab()
+	{
+		if (this.getMaterial() == ToolMaterial.DIAMOND ||this.getMaterial() == ToolMaterial.GOLD ||this.getMaterial() == ToolMaterial.IRON ||this.getMaterial() == ToolMaterial.STONE||this.getMaterial() == ToolMaterial.WOOD)
+		{
+			return super.getCreativeTab();
+		}
+		else if ((this.getMaterial() == ModItems.JUNGLE_CHITIN || this.getMaterial() == ModItems.DESERT_CHITIN || this.getMaterial() == ModItems.DRAGON_BONE) && Bettersurvival.isIafLoaded && ConfigHandler.integration)
+		{
+			return super.getCreativeTab();
+		}
+		else if (ConfigHandler.integration && !OreDictionary.getOres("ingot"+this.getMaterial().name()).isEmpty())
+		{
+			return super.getCreativeTab();
+		}
+		return null;
+	}
+	
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
+	{
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+			String s = I18n.translateToLocal("silvertools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		else if (this.mat == ModItems.JUNGLE_CHITIN || this.mat == ModItems.DESERT_CHITIN)
+		{
+			String s = I18n.translateToLocal(Reference.MOD_ID + ".chitintools.hurt");
+			tooltip.add(TextFormatting.GREEN + s);
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
+	{
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		{
+            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 2);
+            }
+        }
+		else if (this.mat == ModItems.DESERT_CHITIN || this.mat == ModItems.JUNGLE_CHITIN)
+		{
+            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
+            {
+                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, 4);
+            }
+        }
+		return super.hitEntity(stack, target, attacker);
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchantmentTunneling extends Enchantment {
 	public EnchantmentTunneling() {
 		super(Rarity.RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("tunneling");
-		this.setName("tunneling");
+		this.setName(Reference.MOD_ID + ".tunneling");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

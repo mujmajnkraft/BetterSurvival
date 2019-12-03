@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchantmentVersatility extends Enchantment {
 	public EnchantmentVersatility() {
 		super(Rarity.UNCOMMON, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("versatility");
-		this.setName("versatility");
+		this.setName(Reference.MOD_ID + ".versatility");
 	}
 	/**
      * Returns the minimal value of enchantability needed on the enchantment level passed.

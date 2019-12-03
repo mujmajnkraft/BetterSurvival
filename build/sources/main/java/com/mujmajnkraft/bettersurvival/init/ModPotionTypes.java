@@ -3,7 +3,8 @@ package com.mujmajnkraft.bettersurvival.init;
 import net.minecraft.init.MobEffects;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionType;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModPotionTypes {
 	
@@ -18,9 +19,10 @@ public class ModPotionTypes {
 	public static PotionType longantiwarp;
 	public static PotionType milk;
 	public static PotionType cure;
-	public static PotionType dispell;
+	public static PotionType dispel;
 	
-	public static void init()
+	@SubscribeEvent
+	public void registerPotions(RegistryEvent.Register<PotionType> event)
 	{
 		blindness = new PotionType(new PotionEffect[] {new PotionEffect(MobEffects.BLINDNESS, 300)});
 		longblindness = new PotionType("blindness", new PotionEffect[] {new PotionEffect(MobEffects.BLINDNESS, 800)});
@@ -33,7 +35,7 @@ public class ModPotionTypes {
 		longantiwarp = new PotionType("antiwarp", new PotionEffect[] {new PotionEffect(ModPotions.antiwarp, 4800)});
 		milk = new PotionType("milk", new PotionEffect [] {new PotionEffect(ModPotions.milk, 1)});
 		cure = new PotionType("cure", new PotionEffect [] {new PotionEffect(ModPotions.cure, 1)});
-		dispell = new PotionType("dispell", new PotionEffect [] {new PotionEffect(ModPotions.dispell, 1)});
+		dispel = new PotionType("dispel", new PotionEffect [] {new PotionEffect(ModPotions.dispel, 1)});
 		
 		blindness.setRegistryName("blindness");
 		longblindness.setRegistryName("long_blindness");
@@ -46,23 +48,20 @@ public class ModPotionTypes {
 		longantiwarp.setRegistryName("long_antiwarp");
 		milk.setRegistryName("milk");
 		cure.setRegistryName("cure");
-		dispell.setRegistryName("dispell");
-	}
-	
-	public static void register()
-	{
-		GameRegistry.register(blindness);
-		GameRegistry.register(longblindness);
-		GameRegistry.register(decay);
-		GameRegistry.register(longdecay);
-		GameRegistry.register(strongdecay);
-		GameRegistry.register(warp);
-		GameRegistry.register(strongwarp);
-		GameRegistry.register(antiwarp);
-		GameRegistry.register(longantiwarp);
-		GameRegistry.register(milk);
-		GameRegistry.register(cure);
-		GameRegistry.register(dispell);
+		dispel.setRegistryName("dispel");
+		
+		event.getRegistry().register(blindness);
+		event.getRegistry().register(longblindness);
+		event.getRegistry().register(decay);
+		event.getRegistry().register(longdecay);
+		event.getRegistry().register(strongdecay);
+		event.getRegistry().register(warp);
+		event.getRegistry().register(strongwarp);
+		event.getRegistry().register(antiwarp);
+		event.getRegistry().register(longantiwarp);
+		event.getRegistry().register(milk);
+		event.getRegistry().register(cure);
+		event.getRegistry().register(dispel);
 	}
 
 }

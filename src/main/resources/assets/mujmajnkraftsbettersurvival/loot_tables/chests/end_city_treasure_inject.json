@@ -73,12 +73,11 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "enchant_with_levels",
-                            "treasure": true,
-                            "levels": {
-                                "min": 20,
-                                "max": 39
-                            }
+                            "function": "set_count",
+                            "count": {
+                                "min": 10,
+                           		"max": 16
+                   			}
                         }
                     ]
                 },
@@ -148,12 +147,11 @@
                     "weight": 3,
                     "functions": [
                         {
-                            "function": "enchant_with_levels",
-                            "treasure": true,
-                            "levels": {
-                                "min": 20,
-                                "max": 39
-                            }
+                            "function": "set_count",
+                            "count": {
+                                "min": 10,
+                           		"max": 16
+                   			}
                         }
                     ]
                 }

@@ -1,13 +1,13 @@
-This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril.This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril.
+This mapping 'snapshot_20171003' was designed for MC 1.12! Use at your own peril.This mapping 'snapshot_20171003' was designed for MC 1.12! Use at your own peril.
 
 #################################################
-         ForgeGradle 2.2-SNAPSHOT-d13a6c8        
+         ForgeGradle 2.3-SNAPSHOT-6084129e        
   https://github.com/MinecraftForge/ForgeGradle  
 #################################################
-               Powered by MCP unknown               
+                 Powered by MCP                  
              http://modcoderpack.com             
-         by: Searge, ProfMobius, Fesh0r,         
-         R4wk, ZeuX, IngisKahn, bspkrs           
+     by: Searge, ProfMobius, R4wk, ZeuX          
+     Fesh0r, IngisKahn, bspkrs, LexManos         
 #################################################
 :deobfCompileDummyTask
 :deobfProvidedDummyTask
@@ -19,7 +19,7 @@ This mapping 'snapshot_20161220' was designed for MC 1.11! Use at your own peril
 :compileJavaNote: Some input files use or override a deprecated API.
 Note: Recompile with -Xlint:deprecation for details.
 
-:processResources UP-TO-DATE
+:processResources
 :classes
 :jar
 :sourceTestJava UP-TO-DATE
@@ -33,8 +33,9 @@ Note: Recompile with -Xlint:deprecation for details.
 :extractUserdev UP-TO-DATE
 :genSrgs SKIPPED
 :reobfJar
+:extractAnnotationsJar
 :extractRangemapReplacedMain
-C:\Users\Petr Myslík\Desktop\Workspace\1.11\build\sources\main\java
+C:\Users\Petr Myslík\Desktop\Workspace\1.12\build\sources\main\java
 :retromapReplacedMain
 remapping source...
 :sourceJar
@@ -44,4 +45,4 @@ remapping source...
 
 BUILD SUCCESSFUL
 
-Total time: 26.552 secs
+Total time: 7 mins 48.034 secs

@@ -2,17 +2,18 @@ package com.mujmajnkraft.bettersurvival.eventhandlers;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.UUID;
-
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentAgility;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
+import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockOre;
+import net.minecraft.block.BlockRedstoneOre;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
@@ -28,6 +29,7 @@ import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBow;
@@ -51,7 +53,6 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
@@ -73,25 +74,28 @@ public class ModEnchantmentHandler {
 		}
 	}
 	
+	//Increases jump height for player with high jump enchantment
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onEvent(LivingJumpEvent event)
+	public void onJump(LivingJumpEvent event)
 	{
 	    if (event.getEntity() instanceof EntityPlayer)
 	    {
 	        EntityPlayer entity = (EntityPlayer) event.getEntity();
 		    if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity) !=0)
 		    {
-		    	entity.motionY = entity.motionY + (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity)/10D);
+		    	entity.motionY += EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity) / 10.0D;
 		    }
 	    }
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 	public void onEvent(HarvestDropsEvent event)
 	{
 		if (event.getHarvester() instanceof EntityPlayer)
 		{
 			EntityPlayer player = (EntityPlayer) event.getHarvester();
+			
+			//Smelts drops from blocks
 			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.smelting, player) !=0)
 			{
 				java.util.List<ItemStack> drops = event.getDrops();
@@ -111,6 +115,8 @@ public class ModEnchantmentHandler {
 							drops.add(drop);
 					}
 			}
+			
+			//Gives player a chance to get diamond from every ore
 			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.diamonds, player) !=0)
 			{
 				Block block = (Block) event.getState().getBlock();
@@ -124,7 +130,7 @@ public class ModEnchantmentHandler {
 					}
 				}
 				Item drop = Item.getItemFromBlock(block);
-				if (block instanceof BlockOre && !itemdrops.contains(drop))
+				if ((block instanceof BlockOre || block instanceof BlockRedstoneOre) && !itemdrops.contains(drop))
 				{
 					if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.diamonds, player) > new Random().nextInt(50))
 					{
@@ -150,6 +156,7 @@ public class ModEnchantmentHandler {
 		}
 	}*/
 	
+	//Saves information about player facing while is he mining a block
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(LeftClickBlock event)
 	{
@@ -162,27 +169,30 @@ public class ModEnchantmentHandler {
 		}
 	}
 	
-	
+	//Attaches additional info to arrow
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(EntityJoinWorldEvent event)
 	{
-		if (event.getEntity() instanceof EntityArrow)
+		if (event.getEntity() instanceof EntityArrow && !event.getWorld().isRemote)
 		{
 			EntityArrow arrow = (EntityArrow) event.getEntity();
-			EntityLivingBase shooter = (EntityLivingBase) arrow.shootingEntity;
-			if (arrow.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null))
+			if (arrow.shootingEntity instanceof EntityLivingBase)
 			{
-				IArrowProperties properties = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
-				try 
+				EntityLivingBase shooter = (EntityLivingBase) arrow.shootingEntity;
+				if (arrow.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null))
 				{
+					IArrowProperties properties = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
+					//allows arrow recovery
 					if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.arrowrecovery, shooter) !=0)
 					{
 						int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.arrowrecovery, shooter);
-						if (new Random().nextInt(4)<l)
+						if (new Random().nextInt(4) < l)
 						{
 							properties.setCanRecover(true);
 						}
 					}
+					
+					//Makes arrow explode
 					if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.blast, shooter) !=0)
 					{
 						if (arrow.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null))
@@ -200,31 +210,21 @@ public class ModEnchantmentHandler {
 							properties.setExplosion(power, canDestroyBlocks);
 						}
 					};
+					
+					//Allows arrow to fly further
 					if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.range, shooter) !=0)
 					{
-					properties.setNoDrag(true);
-					}/*
-				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.multishot, shooter) !=0)
-				{
-					NBTTagCompound nbt = new NBTTagCompound();
-					NBTTagCompound compound = arrow.writeToNBT(nbt);
-					int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.multishot, shooter);
-					for (int x=0; x<l; x++)
-					{
-						ItemArrow itemarrow = (ItemArrow) Items.ARROW;
-						Entity entityarrow = itemarrow.createArrow(event.getWorld(), new ItemStack(itemarrow), shooter);
-						arrow.world.spawnEntity(newarrow);
+						arrow.motionX *= 2;
+						arrow.motionY *= 2;
+						arrow.motionZ *= 2;
 					}
-				}*/
+				
 				}
-				catch (Exception e)
-				{
-				}
-			
 			}
 		}
 	}
 	
+	//Allows tools with tunneling ench to break multiple blocks at once
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(BreakEvent event)
 	{
@@ -292,6 +292,7 @@ public class ModEnchantmentHandler {
 		}
 	}
 	
+	//Makes entities killed with weapons with education ench drop more XP
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(LivingExperienceDropEvent event)
 	{
@@ -310,12 +311,23 @@ public class ModEnchantmentHandler {
 	public void onEvent(LivingUpdateEvent event)
 	{
 		EntityLivingBase entity = event.getEntityLiving();
-		entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a27"));
-		entity.getEntityAttribute(SharedMonsterAttributes.ARMOR).removeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a28"));
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity) !=0)
+		double d = 0.01*EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity);
+		AttributeModifier modifier = new AttributeModifier(EnchantmentAgility.speedModifier, "agility", d, 0);
+		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity) > 0)
 		{
-			AttributeModifier modifier = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a27"), "agility", 0.01*EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity), 0);
-			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(modifier);
+			if (!entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(modifier))
+			{
+				entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(modifier);
+			}
+			else if (entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(EnchantmentAgility.speedModifier).getAmount() != d)
+			{
+				entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
+				entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).applyModifier(modifier);
+			}
+		}
+		else
+		{
+			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
 		}
 		
 		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, entity) !=0 && entity instanceof EntityPlayer)
@@ -360,26 +372,19 @@ public class ModEnchantmentHandler {
 	public void onEvent(BreakSpeed event)
 	{
 		EntityPlayer player = event.getEntityPlayer();
-		IBlockState state = event.getState();
-		Block block  = event.getState().getBlock();
-		ItemStack stack = player.getHeldItemMainhand();
-		boolean canBeMined = false;
+		event.getState();
+		event.getState().getBlock();
+		player.getHeldItemMainhand();
 		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.versatility, player) !=0)
 		{
-			for (String type:stack.getItem().getToolClasses(player.getHeldItemMainhand()))
-			{
-				if (block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(stack, type, player, state))
-				{
-					canBeMined = true;
-				}
-			}
-			if (!canBeMined)
+			if (player.inventory.getDestroySpeed(event.getState()) <= 1.0F)
 			{
 				Item item = player.getHeldItemMainhand().getItem();
 				if(item instanceof ItemTool)
 				{
 					ItemTool tool =(ItemTool) item;
-					event.setNewSpeed(event.getOriginalSpeed()*(tool.getToolMaterial().getEfficiencyOnProperMaterial()/2));
+					ToolMaterial material = ToolMaterial.valueOf(tool.getToolMaterialName());
+					event.setNewSpeed(event.getOriginalSpeed()*(material.getEfficiency()/2));
 				}
 			}
 		}
@@ -389,82 +394,90 @@ public class ModEnchantmentHandler {
 	public void onEvent(LivingAttackEvent event)
 	{
 		EntityLivingBase living = event.getEntityLiving();
-		if (event.getSource().getSourceOfDamage()!=null)
+		if (event.getSource().getImmediateSource()!=null)
 		{
-			if (event.getSource().isProjectile())
+			if (event.getSource().getImmediateSource() instanceof EntityArrow)
 			{
-				if (event.getSource().getSourceOfDamage() instanceof EntityArrow)
+				EntityArrow arrow = (EntityArrow) event.getSource().getImmediateSource();
+				if (arrow.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null));
 				{
-					EntityArrow arrow = (EntityArrow) event.getSource().getSourceOfDamage();
-					if (arrow.hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null));
+					IArrowProperties cap = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
+					
+					if (cap.getCanRecover() && arrow.shootingEntity != null && arrow.pickupStatus == PickupStatus.ALLOWED)
 					{
-						IArrowProperties cap = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
-						
-						if (cap.getCanRecover() && arrow.shootingEntity != null && arrow.pickupStatus == PickupStatus.ALLOWED)
+						if (!arrow.shootingEntity.isDead && arrow.shootingEntity instanceof EntityPlayer)
 						{
-							if (!arrow.shootingEntity.isDead && arrow.shootingEntity instanceof EntityPlayer)
+							EntityPlayer shooter = (EntityPlayer) arrow.shootingEntity;
+							ItemStack stack = new ItemStack(Items.ARROW);
+							boolean flag = shooter.inventory.addItemStackToInventory(stack);
+							if (flag)
 							{
-								EntityPlayer shooter = (EntityPlayer) arrow.shootingEntity;
-								ItemStack stack = new ItemStack(Items.ARROW);
-								boolean flag = shooter.inventory.addItemStackToInventory(stack);
-								if (flag)
-								{
-									shooter.inventoryContainer.detectAndSendChanges();
-								}
-								else
-								{
-									EntityItem entityitem = shooter.dropItem(stack, false);
-									entityitem.setNoPickupDelay();
-				                    entityitem.setOwner(shooter.getName());
-								}
+								shooter.inventoryContainer.detectAndSendChanges();
+							}
+							else
+							{
+								EntityItem entityitem = shooter.dropItem(stack, false);
+								entityitem.setNoPickupDelay();
+			                    entityitem.setOwner(shooter.getName());
 							}
 						}
+					}
+					
+					if (cap.getExplosionPower() > 0)
+					{
+						arrow.world.newExplosion(arrow.shootingEntity, arrow.posX, arrow.posY, arrow.posZ, cap.getExplosionPower(), arrow.isBurning(), false);
+						arrow.setDead();
 						
-						if (cap.getExplosionPower() > 0)
+						if (arrow instanceof EntityTippedArrow)
 						{
-							arrow.world.newExplosion(arrow.shootingEntity, arrow.posX, arrow.posY, arrow.posZ, cap.getExplosionPower(), arrow.isBurning(), cap.getCanDestroyBlocks());
-							arrow.setDead();
+							NBTTagCompound compound =  arrow.writeToNBT(new NBTTagCompound());
+							ArrayList<PotionEffect> effects = new ArrayList<>();
+							if (compound.hasKey("Potion", 8))
+					        {
+					            PotionType potion = PotionUtils.getPotionTypeFromNBT(compound);
+					            for(PotionEffect potioneffect : potion.getEffects())
+					            {
+					            	effects.add(new PotionEffect(potioneffect.getPotion(), potioneffect.getDuration()/8, potioneffect.getAmplifier(), potioneffect.getIsAmbient(), potioneffect.doesShowParticles()));
+					            }
+					        }
+							for (PotionEffect potioneffect : PotionUtils.getFullEffectsFromTag(compound))
+					        {
+					            effects.add(potioneffect);
+					        }
 							
-							if (arrow instanceof EntityTippedArrow)
-							{
-								NBTTagCompound compound =  arrow.writeToNBT(new NBTTagCompound());
-								ArrayList<PotionEffect> effects = new ArrayList<>();
-								if (compound.hasKey("Potion", 8))
-						        {
-						            PotionType potion = PotionUtils.getPotionTypeFromNBT(compound);
-						            for(PotionEffect potioneffect : potion.getEffects())
-						            {
-						            	effects.add(new PotionEffect(potioneffect.getPotion(), potioneffect.getDuration()/8, potioneffect.getAmplifier(), potioneffect.getIsAmbient(), potioneffect.doesShowParticles()));
-						            }
-						        }
-								for (PotionEffect potioneffect : PotionUtils.getFullEffectsFromTag(compound))
-						        {
-						            effects.add(potioneffect);
-						        }
-								
-								if (!effects.isEmpty())
-						        {
-						            EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(arrow.world, arrow.posX, arrow.posY, arrow.posZ);
-						            entityareaeffectcloud.setRadius(2.5f*cap.getExplosionPower());
-						            entityareaeffectcloud.setRadiusOnUse(-0.5F);
-						            entityareaeffectcloud.setWaitTime(10);
-						            entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration() / 2);
-						            entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float)entityareaeffectcloud.getDuration());
+							if (!effects.isEmpty())
+					        {
+					            EntityAreaEffectCloud entityareaeffectcloud = new EntityAreaEffectCloud(arrow.world, arrow.posX, arrow.posY, arrow.posZ);
+					            entityareaeffectcloud.setRadius(2.5f*cap.getExplosionPower());
+					            entityareaeffectcloud.setRadiusOnUse(-0.5F);
+					            entityareaeffectcloud.setWaitTime(10);
+					            entityareaeffectcloud.setDuration(entityareaeffectcloud.getDuration() / 2);
+					            entityareaeffectcloud.setRadiusPerTick(-entityareaeffectcloud.getRadius() / (float)entityareaeffectcloud.getDuration());
 
-						            for (PotionEffect potioneffect : effects)
-						            {
-						                entityareaeffectcloud.addEffect(new PotionEffect(potioneffect));
-						            }
+					            for (PotionEffect potioneffect : effects)
+					            {
+					                entityareaeffectcloud.addEffect(new PotionEffect(potioneffect));
+					            }
 
-						            arrow.world.spawnEntity(entityareaeffectcloud);
-						        }
-							}
+					            arrow.world.spawnEntity(entityareaeffectcloud);
+					        }
 						}
 					}
 				}
 			}
-			Entity source = event.getSource().getSourceOfDamage();
-			if (living.isActiveItemStackBlocking())
+			Entity source = event.getSource().getImmediateSource();
+			
+			if (source instanceof EntityLivingBase && !source.world.isRemote)
+			{
+				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) source) > 0 && !event.getSource().isMagicDamage())
+				{
+					int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) source);
+					float min = event.getAmount() * Math.min(((l + 2) / 10.0f), 1);
+					event.getEntityLiving().attackEntityFrom(DamageSource.causeIndirectMagicDamage(source, source), min);
+				}
+			}
+			
+			if (living.getActiveItemStack().getItem() instanceof ItemCustomShield)
 			{
 				ItemStack stack = living.getActiveItemStack();
 				if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.reflection, stack)!=0)
@@ -480,21 +493,7 @@ public class ModEnchantmentHandler {
 		}
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
-	public void onEvent(LivingHurtEvent event)
-	{
-		Entity entitysource = event.getSource().getSourceOfDamage();
-		if (entitysource instanceof EntityLivingBase)
-		{
-			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) entitysource) !=0)
-			{
-				int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) entitysource);
-				AttributeModifier armordebuff = new AttributeModifier(UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a28"), "armordebuff", -2*l, 0);
-				event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.ARMOR).applyModifier(armordebuff);
-			}
-		}
-	}
-	
+	//Causes bow with multishot ench to fire multiple arrows at once
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 	public void onEvent(ArrowLooseEvent event)
 	{
@@ -526,13 +525,11 @@ public class ModEnchantmentHandler {
 	                float f = ItemBow.getArrowVelocity(event.getCharge());
 	                if ((double)f >= 0.1D)
 	                {
-	                    boolean flag1 = entityplayer.capabilities.isCreativeMode || (ammo.getItem() instanceof ItemArrow && ((ItemArrow) ammo.getItem()).isInfinite(ammo, stack, entityplayer));
-
 	                    if (!worldIn.isRemote)
 	                    {
 	                    	ItemArrow itemarrow = (ItemArrow)((ItemArrow)(ammo.getItem() instanceof ItemArrow ? ammo.getItem() : Items.ARROW));
 	                    	EntityArrow entityarrow = itemarrow.createArrow(worldIn, ammo, entityplayer);
-	                    	entityarrow.setAim(entityplayer, entityplayer.rotationPitch + Pitch, entityplayer.rotationYaw + Yaw, 0.0F, f * 3.0F, 1.0F);
+	                    	entityarrow.shoot(entityplayer, entityplayer.rotationPitch + Pitch, entityplayer.rotationYaw + Yaw, 0.0F, f * 3.0F, 1.0F);
 
 	                    	if (f == 1.0F)
 	                    	{
@@ -560,10 +557,7 @@ public class ModEnchantmentHandler {
 
 	                    	stack.damageItem(1, entityplayer);
 
-	                    	if (flag1 || entityplayer.capabilities.isCreativeMode && (ammo.getItem() == Items.SPECTRAL_ARROW || ammo.getItem() == Items.TIPPED_ARROW))
-	                    	{
-	                    		entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
-	                    	}
+	                    	entityarrow.pickupStatus = EntityArrow.PickupStatus.CREATIVE_ONLY;
 
 	                    	worldIn.spawnEntity(entityarrow);
 	                    }

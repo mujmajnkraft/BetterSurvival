@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchantmentPenetration extends Enchantment {
 	public EnchantmentPenetration() {
 		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("penetration");
-		this.setName("penetration");
+		this.setName(Reference.MOD_ID + ".penetration");
 	}
 	
 	/**

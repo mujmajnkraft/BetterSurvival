@@ -36,7 +36,7 @@ public class ItemCrossbow extends ItemBow {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                return entityIn == null ? 0.0F : (entityIn.getActiveItemStack().getItem() != ModItems.crossbow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 30.0F);
+                return entityIn == null ? 0.0F : (entityIn.getActiveItemStack().getItem() != ModItems.crossbow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 40.0F);
             }
         });
         this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
@@ -98,7 +98,7 @@ public class ItemCrossbow extends ItemBow {
 		else return null;
 	}
 	
-	private ItemStack findAmmo(EntityPlayer player)
+	protected ItemStack findAmmo(EntityPlayer player)
     {
         if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND)))
         {
@@ -207,8 +207,8 @@ public class ItemCrossbow extends ItemBow {
         	if (!worldIn.isRemote)
         	{
         		ItemArrow itemarrow = (ItemArrow) this.loadedAmmo(itemstack).getItem();
-        		EntityArrow entityarrow = itemarrow.createArrow(worldIn, itemstack, playerIn);
-        		entityarrow.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 6.0F, 1.0F);
+        		EntityArrow entityarrow = itemarrow.createArrow(worldIn, this.loadedAmmo(itemstack), playerIn);
+        		entityarrow.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 6.0F, 1.0F);
 
         		int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, itemstack);
 

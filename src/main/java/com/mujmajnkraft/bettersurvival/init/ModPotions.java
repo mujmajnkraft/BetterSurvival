@@ -1,13 +1,14 @@
 package com.mujmajnkraft.bettersurvival.init;
 
-import com.mujmajnkraft.bettersurvival.potions.PotionCustom;
+import com.mujmajnkraft.bettersurvival.potions.PotionStun;
 import com.mujmajnkraft.bettersurvival.potions.PotionMilk;
 import com.mujmajnkraft.bettersurvival.potions.PotionWarp;
 import com.mujmajnkraft.bettersurvival.potions.PotionCleanse;
 
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModPotions {
 	public static Potion stun;
@@ -15,16 +16,16 @@ public class ModPotions {
 	public static Potion antiwarp;
 	public static Potion milk;
 	public static Potion cure;
-	public static Potion dispell;
+	public static Potion dispel;
 	
 	public static void init()
 	{
-		stun = new PotionCustom(false, 16774925);
-		warp = new PotionWarp(false, 9838591);
-		antiwarp = new PotionCustom(false, 14378216);
-		milk = new PotionMilk(true, 16777215);
-		cure = new PotionCleanse(false, 16774925);
-		dispell = new PotionCleanse(true, 11921919);
+		stun = new PotionStun(false, 16774925, 0);
+		warp = new PotionWarp(false, 9838591, 1);
+		antiwarp = new PotionStun(false, 14378216, 2);
+		milk = new PotionMilk(true, 16777215, 3);
+		cure = new PotionCleanse(false, 16774925, 4);
+		dispel = new PotionCleanse(true, 11921919, 5);
 		
 		stun.setRegistryName("Stun");
 		stun.setPotionName("effect.stun");
@@ -35,18 +36,20 @@ public class ModPotions {
 		milk.setPotionName("effect.milk");
 		cure.setRegistryName("Cure");
 		cure.setPotionName("effect.cure");
-		dispell.setRegistryName("Dispell");
-		dispell.setPotionName("effect.dispell");
+		dispel.setRegistryName("dispel");
+		dispel.setPotionName("effect.dispel");
 	}
 	
-	public static void register()
+	@SubscribeEvent
+	public void registerPotions(RegistryEvent.Register<Potion> event)
 	{
-		GameRegistry.register(stun).registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-3368-940E-514C1F160890", -10, 2);
+		event.getRegistry().register(stun);
+		stun.registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-3368-940E-514C1F160890", -10, 2);
 		stun.registerPotionAttributeModifier(SharedMonsterAttributes.FOLLOW_RANGE, "26107045-134f-4c54-a645-75c3ae5c7a27", -2048, 0);
-		GameRegistry.register(warp);
-		GameRegistry.register(antiwarp);
-		GameRegistry.register(milk);
-		GameRegistry.register(cure);
-		GameRegistry.register(dispell);
+		event.getRegistry().register(warp);
+		event.getRegistry().register(antiwarp);
+		event.getRegistry().register(milk);
+		event.getRegistry().register(cure);
+		event.getRegistry().register(dispel);
 	}
 }

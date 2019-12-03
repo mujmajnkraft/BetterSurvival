@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import java.util.Random;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -15,7 +16,7 @@ public class EnchantmentVampirism extends Enchantment {
 	public EnchantmentVampirism() {
 		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("vampirism");
-		this.setName("vampirism");
+		this.setName(Reference.MOD_ID + ".vampirism");
 	}
 	
 	@Override

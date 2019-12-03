@@ -2,8 +2,7 @@ package com.mujmajnkraft.bettersurvival.client.render;
 
 import javax.annotation.Nonnull;
 
-import com.mujmajnkraft.bettersurvival.entities.EntityFlyingSpear;
-import com.mujmajnkraft.bettersurvival.init.ModItems;
+import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,13 +10,12 @@ import net.minecraft.client.renderer.block.model.ItemCameraTransforms.TransformT
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class RenderFlyingSpear extends Render<EntityFlyingSpear>
 {
+	private ItemStack spear;
 	
 	public RenderFlyingSpear(RenderManager renderManager) 
 	{
@@ -27,19 +25,17 @@ public class RenderFlyingSpear extends Render<EntityFlyingSpear>
 	@Override
 	public void doRender(@Nonnull EntityFlyingSpear entity, double x, double y, double z, float entityYaw, float partialTicks)
 	{
-		//EntityItem spear = new EntityItem(Minecraft.getMinecraft().world, 0, 0, 0, new ItemStack(Items.STICK));
-		
-		//spear.hoverStart = 0F;
+		spear = entity.getSpear();
 		
 		GlStateManager.pushMatrix();
 		{
 			GlStateManager.translate(x-0*Math.sin(entity.rotationYaw), y-0*Math.sin(entity.rotationYaw), z-0*Math.cos(entity.rotationYaw));
-			GlStateManager.scale(2, 2, 2);
+			GlStateManager.scale(1, 1, 1);
 			GlStateManager.rotate(entity.rotationYaw, 0, 1, 0);
 			GlStateManager.rotate(-entity.rotationPitch, 1, 0, 0);
 			GlStateManager.rotate(-90, 0, 1, 0);
 			GlStateManager.rotate(-45, 0, 0, 1);
-			Minecraft.getMinecraft().getRenderItem().renderItem(new ItemStack(ModItems.debug), TransformType.NONE);
+			Minecraft.getMinecraft().getRenderItem().renderItem(spear, TransformType.NONE);
 		}
 		GlStateManager.popMatrix();
 	}

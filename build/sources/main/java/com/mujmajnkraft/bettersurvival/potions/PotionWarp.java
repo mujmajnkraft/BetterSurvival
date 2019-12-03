@@ -2,19 +2,28 @@ package com.mujmajnkraft.bettersurvival.potions;
 
 import javax.annotation.Nullable;
 
+import com.mujmajnkraft.bettersurvival.Reference;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.potion.Potion;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class PotionWarp extends Potion {
+	
+	public static ResourceLocation TEXTURE = new ResourceLocation(Reference.MOD_ID + ":textures/misc/potions.png");
 
-	public PotionWarp(boolean isBadEffectIn, int liquidColorIn) {
+	public PotionWarp(boolean isBadEffectIn, int liquidColorIn, int iconIndex) {
 		super(isBadEffectIn, liquidColorIn);
+		this.setIconIndex(iconIndex % 8, iconIndex / 8);
 		this.setRegistryName("Warp");
 	}
 	
@@ -31,7 +40,6 @@ public class PotionWarp extends Potion {
 	@Override
 	public void performEffect(EntityLivingBase entityLiving, int p_76394_2_)
     {
-		System.out.println("Performing effect");
 		double TPdistance = 16.0D * (p_76394_2_+1);
 		World worldIn = entityLiving.world;
 		if (!worldIn.isRemote)
@@ -92,5 +100,13 @@ public class PotionWarp extends Potion {
             }
         }
     }
+	
+	@Override
+	@SideOnly(Side.CLIENT)
+	public int getStatusIconIndex() {
+		Minecraft.getMinecraft().renderEngine.bindTexture(TEXTURE);
+
+		return super.getStatusIconIndex();
+	}
 
 }

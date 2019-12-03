@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -10,7 +11,7 @@ public class EnchantmentRapidFire extends Enchantment {
 	public EnchantmentRapidFire() {
 		super(Rarity.RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("rapidfire");
-		this.setName("rapidfire");
+		this.setName(Reference.MOD_ID + ".rapidfire");
 	}
 	
 	/**

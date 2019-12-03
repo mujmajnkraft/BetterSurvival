@@ -1,42 +1,50 @@
 package com.mujmajnkraft.bettersurvival.init;
 
 import com.mujmajnkraft.bettersurvival.blocks.BlockCustomCauldron;
+import com.mujmajnkraft.bettersurvival.blocks.BlockWorkshop;
+
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModBlocks {
 	
 	public static Block customcauldron;
+	//public static Block workshop;
 	
-	public static void init()
+	@SubscribeEvent
+	public void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		customcauldron = new BlockCustomCauldron();
+		//workshop = new BlockWorkshop();
 		
 		customcauldron.setRegistryName("customcauldron");
 		customcauldron.setUnlocalizedName("Cauldron");
+		event.getRegistry().register(customcauldron);
+		/*
+		workshop.setRegistryName("Workshop");
+		workshop.setUnlocalizedName("workshop");
+		event.getRegistry().register(workshop);
 	}
 	
-	public static void register()
+	@SubscribeEvent
+	public void registerBlockItems(RegistryEvent.Register<Item> event)
 	{
-		registerBlock(customcauldron);
-	}
-	
-	private static void registerBlock(Block block)
-	{
-		GameRegistry.register(block);
-		ItemBlock item = new ItemBlock(customcauldron);
-		item.setRegistryName(block.getRegistryName());
-		item.setUnlocalizedName(block.getUnlocalizedName());
-		GameRegistry.register(item);
+		ItemBlock itemworkshop = new ItemBlock(workshop);
+		itemworkshop.setRegistryName(workshop.getRegistryName());
+		itemworkshop.setUnlocalizedName(workshop.getUnlocalizedName());
+		itemworkshop.setCreativeTab(ModItems.siegeweapons);
+		event.getRegistry().register(itemworkshop);*/
 	}
 	
 	public static void registerRenders()
 	{
 		registerRender(customcauldron);
+		//registerRender(workshop);
 	}
 	
 	private static void registerRender(Block block)

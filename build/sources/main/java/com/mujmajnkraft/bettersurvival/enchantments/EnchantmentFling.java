@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -13,7 +14,7 @@ public class EnchantmentFling extends Enchantment {
 	public EnchantmentFling () {
 	super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 	this.setRegistryName("fling");
-	this.setName("fling");
+	this.setName(Reference.MOD_ID + ".fling");
 	}
 	
 	/**

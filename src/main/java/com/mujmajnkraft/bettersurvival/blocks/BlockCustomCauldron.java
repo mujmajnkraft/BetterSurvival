@@ -2,8 +2,6 @@ package com.mujmajnkraft.bettersurvival.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.IWeaponEffect;
-import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
 import com.mujmajnkraft.bettersurvival.init.ModPotionTypes;
 import com.mujmajnkraft.bettersurvival.tileentities.TileEntityCustomCauldron;
 
@@ -35,7 +33,7 @@ import net.minecraft.world.WorldServer;
 public class BlockCustomCauldron extends BlockCauldron implements ITileEntityProvider{
 	
 	public BlockCustomCauldron() {
-		this.isBlockContainer = true;
+		//this.isBlockContainer = true;
 	}
 
 	@Override
@@ -174,7 +172,7 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
                 {
                 	if (i > 0 && !worldIn.isRemote)
                     {
-                		IWeaponEffect poison = itemstack.getCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null);
+                		//IWeaponEffect poison = itemstack.getCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null);
                 		
                 		if (itemstack.hasTagCompound())
                 		{
@@ -183,7 +181,7 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
                 		
                 		PotionUtils.addPotionToItemStack(itemstack, cauldron.type);
                 		PotionUtils.appendEffects(itemstack, cauldron.effects);
-                		poison.setHitsRemaining(64);
+                		itemstack.getTagCompound().setInteger("remainingHits", 64);
                 		
                 		if(!playerIn.capabilities.isCreativeMode)
                 		{
@@ -213,6 +211,27 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
             			
             			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
             			this.setWaterLevel(worldIn, pos, state, 3);
+                	}
+                	
+                	worldIn.markBlockRangeForRenderUpdate(pos, pos);
+                	return true;
+                }
+                else if (item == Items.BUCKET)
+                {
+                	if (i == 3 && !worldIn.isRemote && cauldron.type == ModPotionTypes.milk)
+                	{
+                		if (!playerIn.capabilities.isCreativeMode)
+                        {
+                			playerIn.addStat(StatList.CAULDRON_USED);
+                			playerIn.setHeldItem(hand, new ItemStack(Items.MILK_BUCKET));
+                			if (playerIn instanceof EntityPlayerMP)
+                            {
+                                ((EntityPlayerMP)playerIn).sendContainerToPlayer(playerIn.inventoryContainer);
+                            }
+                        }
+            			
+            			worldIn.playSound((EntityPlayer)null, pos, SoundEvents.ITEM_BUCKET_EMPTY, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            			this.setWaterLevel(worldIn, pos, state, 0);
                 	}
                 	
                 	worldIn.markBlockRangeForRenderUpdate(pos, pos);

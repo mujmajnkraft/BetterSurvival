@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -14,7 +15,7 @@ public class EnchantmentDiamonds extends Enchantment {
 	public EnchantmentDiamonds() {
 		super(Rarity.RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("diamonds");
-		this.setName("diamonds");
+		this.setName(Reference.MOD_ID + ".diamonds");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchatnmentSmelting extends Enchantment {
 	public EnchatnmentSmelting() {
 		super(Rarity.VERY_RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("smelting");
-		this.setName("smelting");
+		this.setName(Reference.MOD_ID + ".smelting");
 	}
 	
 	/**

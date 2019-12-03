@@ -1,19 +1,20 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
+import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 
 public class EnchantmentWeightless extends Enchantment {
 	public EnchantmentWeightless () {
 		super(Rarity.UNCOMMON, EnumEnchantmentType.BREAKABLE, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND,EntityEquipmentSlot.OFFHAND});
 		this.setRegistryName("weightless");
-		this.setName("weightless");
+		this.setName(Reference.MOD_ID + ".weightless");
 	}
 	
 	/**
@@ -60,7 +61,7 @@ public class EnchantmentWeightless extends Enchantment {
     public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
     	
-    	if (stack.getItem() instanceof ItemShield)
+    	if (stack.getItem() instanceof ItemCustomShield)
 		{
 			return true;
 		}

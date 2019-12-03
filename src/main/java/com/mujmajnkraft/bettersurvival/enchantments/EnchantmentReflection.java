@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import java.util.Random;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
@@ -15,7 +16,7 @@ public class EnchantmentReflection extends Enchantment {
 	public EnchantmentReflection() {
 		super(Rarity.RARE, EnumEnchantmentType.BREAKABLE, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND,EntityEquipmentSlot.OFFHAND});
 		this.setRegistryName("reflection");
-		this.setName("reflection");
+		this.setName(Reference.MOD_ID + ".reflection");
 	}
 	
 	/**

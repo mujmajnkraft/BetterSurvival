@@ -1,5 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
@@ -11,7 +12,7 @@ public class EnchantmentRange extends Enchantment {
 	public EnchantmentRange() {
 		super(Rarity.RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("range");
-		this.setName("range");
+		this.setName(Reference.MOD_ID + ".range");
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)
