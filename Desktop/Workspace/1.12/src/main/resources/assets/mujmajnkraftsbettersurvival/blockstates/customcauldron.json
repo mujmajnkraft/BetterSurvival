@@ -1,8 +1,0 @@
-{
-    "variants": {
-        "level=0": { "model": "mujmajnkraftsbettersurvival:customcauldron_empty" },
-        "level=1": { "model": "mujmajnkraftsbettersurvival:customcauldron_level1" },
-        "level=2": { "model": "mujmajnkraftsbettersurvival:customcauldron_level2" },
-        "level=3": { "model": "mujmajnkraftsbettersurvival:customcauldron_level3" }
-    }
-}

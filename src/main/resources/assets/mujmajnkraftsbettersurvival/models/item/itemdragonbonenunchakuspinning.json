@@ -1,0 +1,28 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "mujmajnkraftsbettersurvival:items/dragonbonenunchakuspinning"
+  },
+  "display": {
+        "thirdperson_righthand": {
+        "rotation": [ 75, 90, 0 ],
+        "translation": [ 0.00, 9.5, 8.75 ],
+        "scale": [ 3.40, 3.40, 0.85 ]
+    },
+    "thirdperson_lefthand": {
+        "rotation": [ 75, -90, 0 ],
+        "translation": [ 0.00, 9.5, 8.75 ],
+        "scale": [ 3.40, 3.40, 0.85 ]
+    },
+    "firstperson_righthand": {
+        "rotation": [ 15, 90, 0 ],
+        "translation": [ 0.00, 9.35, -2.20 ],
+        "scale": [ 2.72, 2.72, 0.68 ]
+    },
+    "firstperson_lefthand": {
+        "rotation": [ 15, -90, 0 ],
+        "translation": [ 0.00, 9.35, -2.20 ],
+  	    "scale": [ 2.72, 2.72, 0.68 ]
+    	}
+    }
+}

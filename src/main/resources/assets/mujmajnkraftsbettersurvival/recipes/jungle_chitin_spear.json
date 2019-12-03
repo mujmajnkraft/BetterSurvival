@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  I",
+		" S ",
+		"S  "
+	],
+	"key": {
+		"I": {
+			"item": "iceandfire:myrmex_jungle_chitin"
+		},
+		"S": {
+			"item": "iceandfire:witherbone"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemjunglechitinspear",
+		"count": 4
+	},
+	"conditions":[
+		{
+  			"type": "mujmajnkraftsbettersurvival:mod_loaded",
+  			"mod_id": "iceandfire"
+		}
+	]
+}

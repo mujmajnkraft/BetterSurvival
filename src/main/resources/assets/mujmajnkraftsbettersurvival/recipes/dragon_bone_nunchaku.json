@@ -1,0 +1,24 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		" S ",
+		"I I"
+	],
+	"key": {
+		"I": {
+			"item": "iceandfire:dragonbone"
+		},
+		"S": {
+			"item": "iceandfire:chain"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemdragonbonenunchaku"
+	},
+	"conditions":[
+		{
+  			"type": "mujmajnkraftsbettersurvival:mod_loaded",
+  			"mod_id": "iceandfire"
+		}
+	]
+}
