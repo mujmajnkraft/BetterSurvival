@@ -1,5 +1,5 @@
 package com.mujmajnkraft.bettersurvival;
-
+/*
 import com.mujmajnkraft.bettersurvival.client.GUIWorkshop;
 import com.mujmajnkraft.bettersurvival.tileentities.TileEntityWorkshop;
 
@@ -31,3 +31,4 @@ public class ModGUIHandler implements IGuiHandler{
 	}
 
 }
+*/

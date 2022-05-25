@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival;
+package com.mujmajnkraft.bettersurvival;/*
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -76,4 +76,4 @@ public class WorkshopRecipe {
 		}
 		return list;
 	}
-}
+}*/

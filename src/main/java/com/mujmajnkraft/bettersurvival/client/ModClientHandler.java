@@ -10,9 +10,7 @@ import com.mujmajnkraft.bettersurvival.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.ICustomWeapon;
 import com.mujmajnkraft.bettersurvival.MessageExtendedReachAttack;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
-import com.mujmajnkraft.bettersurvival.MessageUseWeapon;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
-import com.mujmajnkraft.bettersurvival.entities.siegeweapons.EntitySiegeWeapon;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -71,20 +69,6 @@ public class ModClientHandler {
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (player != null)
 		{
-			if (Minecraft.getMinecraft().player.getRidingEntity() instanceof EntitySiegeWeapon)
-			{
-				boolean l = GS.keyBindLeft.isKeyDown();
-				boolean r = GS.keyBindRight.isKeyDown();
-				boolean f = GS.keyBindForward.isKeyDown();
-				boolean b = GS.keyBindBack.isKeyDown();
-				boolean u = GS.keyBindJump.isKeyDown();
-				boolean d = GS.keyBindSprint.isKeyDown();
-				((EntitySiegeWeapon)Minecraft.getMinecraft().player.getRidingEntity()).updateInputs(l, r, f, b, u, d);
-				if (u)
-				{
-					 BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageUseWeapon());
-				}
-			}
 			
 			if (player.getHeldItemMainhand().getItem() instanceof ItemNunchaku)
 			{

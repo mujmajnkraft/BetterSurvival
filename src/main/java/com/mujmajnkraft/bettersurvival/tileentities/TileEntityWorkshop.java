@@ -1,5 +1,5 @@
 package com.mujmajnkraft.bettersurvival.tileentities;
-
+/*
 import java.util.List;
 
 import com.mujmajnkraft.bettersurvival.Reference;
@@ -50,38 +50,38 @@ public class TileEntityWorkshop extends TileEntityLockable implements ITickable{
 	public ItemStack decrStackSize(int index, int count)
     {
         return ItemStackHelper.getAndSplit(this.workshopItemStacks, index, count);
-    }
+    }*/
 
     /**
      * Removes a stack from the given slot and returns it.
-     */
+     *//*
     public ItemStack removeStackFromSlot(int index)
     {
         return ItemStackHelper.getAndRemove(this.workshopItemStacks, index);
-    }
+    }*/
 
     /**
      * Sets the given item stack to the specified slot in the inventory (can be crafting or armor sections).
-     */
+     *//*
     public void setInventorySlotContents(int index, ItemStack stack)
     {
         if (index >= 0 && index < this.workshopItemStacks.size())
         {
             this.workshopItemStacks.set(index, stack);
         }
-    }
+    }*/
 
     /**
      * Returns the maximum stack size for a inventory slot. Seems to always be 64, possibly will be extended.
-     */
+     *//*
     public int getInventoryStackLimit()
     {
         return 64;
-    }
+    }*/
 
     /**
      * Don't rename this method to canInteractWith due to conflicts with Container
-     */
+     *//*
     public boolean isUsableByPlayer(EntityPlayer player)
     {
         if (this.world.getTileEntity(this.pos) != this)
@@ -100,12 +100,12 @@ public class TileEntityWorkshop extends TileEntityLockable implements ITickable{
 
     public void closeInventory(EntityPlayer player)
     {
-    }
+    }*/
 
     /**
      * Returns true if automation is allowed to insert the given stack (ignoring stack size) into the given slot. For
      * guis use Slot.isItemValid
-     */
+     *//*
     public boolean isItemValidForSlot(int index, ItemStack stack)
     {
         return true;
@@ -247,4 +247,4 @@ public class TileEntityWorkshop extends TileEntityLockable implements ITickable{
 	
 	
 
-}
+}*/

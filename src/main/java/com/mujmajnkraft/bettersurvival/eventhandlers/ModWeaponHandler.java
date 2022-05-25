@@ -12,8 +12,6 @@ import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.IWeaponEffect;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
-import com.mujmajnkraft.bettersurvival.entities.siegeweapons.EntityPotionThrower;
-import com.mujmajnkraft.bettersurvival.entities.siegeweapons.EntitySiegeWeapon;
 import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
@@ -29,7 +27,6 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -41,7 +38,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.EnderTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -49,9 +45,7 @@ import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickItem;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -60,46 +54,6 @@ public class ModWeaponHandler {
 	public static final ResourceLocation SPEARSIN_CAP = new ResourceLocation(Reference.MOD_ID, "spearsin");
 	public static final ResourceLocation WEAPONEWWECT_CAP = new ResourceLocation(Reference.MOD_ID, "weaponeff");
 	public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Reference.MOD_ID, "nunchakucombo");
-	
-	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onEvent(RightClickItem event)
-	{
-		if (event.getEntityPlayer().getRidingEntity() instanceof EntityPotionThrower)
-		{
-			EntityPotionThrower thrower = (EntityPotionThrower) event.getEntityPlayer().getRidingEntity();
-			if (event.getItemStack().getItem() == Items.SPLASH_POTION || event.getItemStack().getItem() == Items.LINGERING_POTION)
-			{
-				if (thrower.load(event.getItemStack()))
-				{
-					//event.getItemStack().shrink(1);
-					//event.setCanceled(true);
-				}
-			}
-		}
-	}
-	
-	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onEvent(PlayerInteractEvent.EntityInteract event)
-	{
-		if (event.getItemStack().getItem() == Items.LEAD && event.getTarget() instanceof EntitySiegeWeapon)
-		{
-			EntitySiegeWeapon entity = (EntitySiegeWeapon) event.getTarget();
-			if (entity.isPullable)
-			{
-		        double i = entity.posX;
-		        double j = entity.posY;
-		        double k = entity.posZ;
-				for (EntityLiving entityliving : event.getWorld().getEntitiesWithinAABB(EntityLiving.class, new AxisAlignedBB((double)i - 7.0D, (double)j - 7.0D, (double)k - 7.0D, (double)i + 7.0D, (double)j + 7.0D, (double)k + 7.0D)))
-		        {
-		            if (entityliving.getLeashed() && entityliving.getLeashHolder() == event.getEntityPlayer() && entityliving instanceof EntityHorse)
-		            {
-		                entityliving.clearLeashed(true, false);
-		                entityliving.setLeashHolder(entity, true);
-		            }
-		        }
-			}
-		}
-	}
 	
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 	public void onEvent(LivingUpdateEvent event)
