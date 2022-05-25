@@ -45,11 +45,11 @@ public class PotionCleanse extends Potion {
 		ArrayList<PotionEffect> effectstoremove = new ArrayList<PotionEffect>();
 		for (PotionEffect effect : activeeffects)
 		{
-			if (effect.getPotion().isBeneficial() && this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
+			if (!effect.getPotion().isBadEffect() && this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
 			{
 				effectstoremove.add(effect);
 			}
-			else if (!effect.getPotion().isBeneficial() && !this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
+			else if (effect.getPotion().isBadEffect() && !this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
 			{
 				effectstoremove.add(effect);
 			}
@@ -69,11 +69,11 @@ public class PotionCleanse extends Potion {
 		ArrayList<PotionEffect> effectstoremove = new ArrayList<PotionEffect>();
 		for (PotionEffect effect : activeeffects)
 		{
-			if (effect.getPotion().isBeneficial() && this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
+			if (!effect.getPotion().isBadEffect() && this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
 			{
 				effectstoremove.add(effect);
 			}
-			else if (!effect.getPotion().isBeneficial() && !this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
+			else if (effect.getPotion().isBadEffect() && !this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
 			{
 				effectstoremove.add(effect);
 			}
