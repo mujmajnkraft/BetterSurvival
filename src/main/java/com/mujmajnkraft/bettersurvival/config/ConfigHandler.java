@@ -194,7 +194,7 @@ public class ConfigHandler {
 		Property enS = config.get(MATERIAL_STATS, Reference.MOD_ID + ".configgui.enderium_stats", new double[]{3, 1000, 10.0f, 4.0f, 20}, "Set enderium gear base stats (harvest level, durability, efficiency, damage, enchantability)");
 		enS.setRequiresMcRestart(true);
 		
-		Property fov = config.get(OTHER, Reference.MOD_ID + ".configgui.fov", true, "When set to true, your movement speed won't effect your field of view.");
+		Property fov = config.get(OTHER, Reference.MOD_ID + ".configgui.fov", true, "When set to true, prevents custom shields from messing up your FoV. This will cause problems with other mods that change FoV.");
 		Property cmi = config.get(OTHER, Reference.MOD_ID + ".configgui.integration", true, "When set to true, you can craft weapons from materials from other mods");
 		cmi.setRequiresMcRestart(true);
 		Property avs = config.get(OTHER, Reference.MOD_ID + ".configgui.allow_vanilla_shields", true, "When set flase, vanilla shield recipe is disabled forcing player to use this mod's shields");
