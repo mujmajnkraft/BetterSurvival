@@ -5,7 +5,6 @@ import java.util.Random;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentAgility;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
@@ -45,7 +44,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -592,13 +590,4 @@ public class ModEnchantmentHandler {
             return ItemStack.EMPTY;
         }
     }
-    
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
-	public void onEvent(FOVUpdateEvent event)
-	{
-		if (ConfigHandler.FOV)
-		{
-			event.setNewfov(1);
-		}
-	}
 }

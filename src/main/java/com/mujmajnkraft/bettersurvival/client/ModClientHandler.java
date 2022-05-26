@@ -11,13 +11,20 @@ import com.mujmajnkraft.bettersurvival.ICustomWeapon;
 import com.mujmajnkraft.bettersurvival.MessageExtendedReachAttack;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
+import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.GameSettings;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -33,6 +40,7 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.translation.I18n;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -281,6 +289,57 @@ public class ModClientHandler {
 					event.getToolTip().add(h + " hits remaining");
 				}
 			}
+		}
+	}
+	
+	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	public void onEvent(FOVUpdateEvent event)
+	{
+		if (ConfigHandler.FOV)
+		{
+			//Replicates vanilla behaviour (net.minecraft.client.entity.AbstractClientPlayer.getFovModifier())
+			float f = 1.0F;
+			
+			AbstractClientPlayer player = Minecraft.getMinecraft().player;
+	
+			if (player.capabilities.isFlying)
+			{
+				f *= 1.1F;
+			}
+	
+			double speed = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue();
+			//FoV change caused by shield + weightlessness is ignored, it's ugly
+			if (player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(ItemCustomShield.weightModifierUUID) != null)
+			{
+				double multiplyer = player.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(ItemCustomShield.weightModifierUUID).getAmount() + 1;
+				speed = (double) speed/multiplyer;
+			}
+			
+			f = (float)((double)f * ((speed / (double)player.capabilities.getWalkSpeed() + 1.0D) / 2.0D));
+	
+			if (player.capabilities.getWalkSpeed() == 0.0F || Float.isNaN(f) || Float.isInfinite(f))
+			{
+				f = 1.0F;
+			}
+	
+			if (player.isHandActive() && player.getActiveItemStack().getItem() instanceof net.minecraft.item.ItemBow)
+			{
+				int i = player.getItemInUseMaxCount();
+				float f1 = (float)i / 20.0F;
+	
+				if (f1 > 1.0F)
+	            {
+	                f1 = 1.0F;
+	            }
+	            else
+	            {
+	                f1 = f1 * f1;
+	            }
+	
+	            f *= 1.0F - f1 * 0.15F;
+	        }
+	        
+			event.setNewfov(f);
 		}
 	}
 }
