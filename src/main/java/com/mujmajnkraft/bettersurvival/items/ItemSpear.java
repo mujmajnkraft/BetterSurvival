@@ -172,16 +172,14 @@ public class ItemSpear extends Item implements ICustomWeapon{
 		{
             if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
             {
-                target.attackEntityFrom(DamageSource.MAGIC, 2);
-                target.hurtResistantTime = 0;
+                target.attackEntityFrom(DamageSource.MAGIC, ((3.0F + mat.getAttackDamage() + 6.0F) * 0.75F));
             }
         }
 		else if (this.mat == ModItems.DESERT_CHITIN || this.mat == ModItems.JUNGLE_CHITIN)
 		{
             if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
             {
-                target.hurtResistantTime = 0;
-                target.attackEntityFrom(DamageSource.MAGIC, 4);
+                target.attackEntityFrom(DamageSource.GENERIC, ((3.0F + mat.getAttackDamage() + 6.0F) * 0.75F));
             }
         }
 		return super.hitEntity(stack, target, attacker);

@@ -85,16 +85,14 @@ public class EntityFlyingSpear extends EntityArrow {
 						{
 				            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
 				            {
-				                target.attackEntityFrom(DamageSource.MAGIC, 2);
-				                target.hurtResistantTime = 0;
+				                target.attackEntityFrom(DamageSource.MAGIC, ((3.0F + spear.getMaterial().getAttackDamage() + 6.0F) * 0.75F));
 				            }
 				        }
 						else if (spear.getMaterial() == ModItems.DESERT_CHITIN || spear.getMaterial() == ModItems.JUNGLE_CHITIN)
 						{
 				            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
 				            {
-				                target.attackEntityFrom(DamageSource.MAGIC, 4);
-				                target.hurtResistantTime = 0;
+				                target.attackEntityFrom(DamageSource.GENERIC, ((3.0F + spear.getMaterial().getAttackDamage() + 6.0F) * 0.75F));
 				            }
 				        }
 					}

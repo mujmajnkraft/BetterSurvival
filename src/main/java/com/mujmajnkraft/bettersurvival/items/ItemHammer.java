@@ -259,20 +259,18 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
     {
 		target.knockBack(attacker,0.5F, (double)MathHelper.sin(attacker.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(attacker.rotationYaw * 0.017453292F)));
         
-        if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
+		if (this.mat == ModItems.SILVER && Bettersurvival.isIafLoaded)
 		{
             if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
             {
-                target.hurtResistantTime = 0;
-                target.attackEntityFrom(DamageSource.MAGIC, 2);
+                target.attackEntityFrom(DamageSource.MAGIC, ((3.0F + mat.getAttackDamage() + 6.0F) * 1.2F));
             }
         }
 		else if (this.mat == ModItems.DESERT_CHITIN || this.mat == ModItems.JUNGLE_CHITIN)
 		{
             if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
             {
-                target.hurtResistantTime = 0;
-                target.attackEntityFrom(DamageSource.MAGIC, 4);
+                target.attackEntityFrom(DamageSource.GENERIC, ((3.0F + mat.getAttackDamage() + 6.0F) * 1.2F));
             }
         }
 		return super.hitEntity(stack, target, attacker);
