@@ -2,6 +2,8 @@ package com.mujmajnkraft.bettersurvival.eventhandlers;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
+
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
@@ -22,6 +24,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
@@ -228,62 +231,44 @@ public class ModEnchantmentHandler {
 	{
 		EntityPlayer player = event.getPlayer();
 		World world = event.getWorld();
-		Block block = event.getState().getBlock();
-		Item tool = player.getHeldItemMainhand().getItem();
 		IBlockState state = event.getState();
-		boolean canBeMined = false;
 		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.tunneling, player) !=0)
 		{
-			for (String type:tool.getToolClasses(player.getHeldItemMainhand()))
-			{
-				if (block.isToolEffective(type, state) && block.getHarvestLevel(state) <= tool.getHarvestLevel(player.getHeldItemMainhand(), type, player, state))
-				{
-					canBeMined = true;
-				}
-			}
-			if (canBeMined)
+			Set<String> t = player.getTags();
+			int dir = 0;
+			if (t.contains("west")) {dir = 1; t.remove("west");}
+			else if (t.contains("east")) {dir = 2; t.remove("east");}
+			else if (t.contains("down")) {dir = 3; t.remove("down");}
+			else if (t.contains("up")) {dir = 4; t.remove("up");}
+			else if (t.contains("south")) {dir = 5; t.remove("south");}
+			else if (t.contains("north")) {dir = 6; t.remove("north");}
+			if (dir != 0 && canMineEffectively(player, state))
 			{
 				int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.tunneling, player);
-				java.util.List<BlockPos> blocks = new ArrayList<>();
 				for(int x = (int) -l; x < l + 1; x++)
 				{
-					if((!player.getTags().contains("west") && !player.getTags().contains("east")) || x==0)
+					if((dir !=1 && dir !=2) || x==0)
 					{
 						for(int y = (int) -l; y < l + 1; y++)
 						{
-							if((!player.getTags().contains("up") && !player.getTags().contains("down")) || y==0)
+							if((dir != 3 && dir != 4) || y==0)
 							{
 								for(int z = (int) -l; z < l + 1; z++)
 								{
-									if ((!player.getTags().contains("north") && !player.getTags().contains("south")) || z==0)
+									if ((dir != 5 && dir != 6) || z==0)
 									{
 										if (Math.sqrt(x*x+y*y+z*z)<=(l+1.0F)/2.0F && !(x==0 && y==0 && z==0))
 										{
 											BlockPos pos = event.getPos().add(x, y, z);
-											blocks.add(pos);
+											if (canMineEffectively(player, world.getBlockState(pos)))
+											{
+												((EntityPlayerMP)player).interactionManager.tryHarvestBlock(pos);
+											}
 										}
 									}
 								}
 							}
 						}
-					}
-				}
-				for (BlockPos blockpos : blocks)
-				{
-					IBlockState block1 = world.getBlockState(blockpos);
-					boolean canBeMined1 = false;
-					for (String type:tool.getToolClasses(player.getHeldItemMainhand()))
-					{
-						if (block1.getBlock().isToolEffective(type, block1) && block1.getBlock().getHarvestLevel(block1) <= tool.getHarvestLevel(player.getHeldItemMainhand(), type, player, block1))
-						{
-							canBeMined1 = true;
-						}
-					}
-					if (canBeMined1)
-					{
-						block1.getBlock().harvestBlock(event.getWorld(), player, blockpos, block1, null, player.getHeldItemMainhand());
-						world.destroyBlock(blockpos, false);
-						player.getHeldItemMainhand().damageItem(1, player);
 					}
 				}
 			}
@@ -590,4 +575,18 @@ public class ModEnchantmentHandler {
             return ItemStack.EMPTY;
         }
     }
+	
+	boolean canMineEffectively(EntityPlayer player, IBlockState state)
+	{
+		ItemStack stack = player.getHeldItemMainhand();
+		Block block = state.getBlock();
+		for (String type:stack.getItem().getToolClasses(player.getHeldItemMainhand()))
+		{
+			if (block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state))
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 }
