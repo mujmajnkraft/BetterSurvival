@@ -218,6 +218,8 @@ public class ModEnchantmentHandler {
 						arrow.motionX *= 2;
 						arrow.motionY *= 2;
 						arrow.motionZ *= 2;
+						//Reduces damage to compensate for increased speed
+						arrow.setDamage(arrow.getDamage()/2.0D);
 					}
 				
 				}

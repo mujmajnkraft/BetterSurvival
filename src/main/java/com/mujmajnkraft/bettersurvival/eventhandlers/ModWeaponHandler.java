@@ -223,7 +223,7 @@ public class ModWeaponHandler {
 					if (Math.abs(Math.sin(attackerYaw)-Math.sin(targetYaw))< 0.5D && Math.abs(Math.cos(attackerYaw)-Math.cos(targetYaw))< 0.5D)
 					{
 						int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.assassinate, living.getHeldItemMainhand());
-						float newdamage = (float) (event.getAmount()*(2+l/3));
+						float newdamage = event.getAmount()*(2+l/3.0f);
 						event.setAmount(newdamage);
 					}
 				}
