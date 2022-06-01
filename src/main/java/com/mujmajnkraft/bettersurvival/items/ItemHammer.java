@@ -53,7 +53,7 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Hammer");
 		this.setUnlocalizedName(material.name().toLowerCase()+"hammer");
 		mat = material;
-		stunduration = 20;
+		stunduration = 50;
 	}
 	
 	public ToolMaterial getMaterial()
@@ -127,8 +127,8 @@ public class ItemHammer extends ItemSword implements ICustomWeapon{
 	    	if (entitylivingbase != playerIn && entitylivingbase.getDistanceSq(pos) < 2*d && entitylivingbase.onGround)
             {
                  entitylivingbase.knockBack(playerIn, 0.4F, (double)MathHelper.sin(playerIn.rotationYaw * 0.017453292F), (double)(-MathHelper.cos(playerIn.rotationYaw * 0.017453292F)));
-                 entitylivingbase.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), (float) ((this.getAttackDamage()+3.0F)*(1-entitylivingbase.getDistanceSq(pos)/20)));
-                 PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, (int) (stunduration*(1-entitylivingbase.getDistanceSq(pos)/20)));
+                 entitylivingbase.attackEntityFrom(DamageSource.causePlayerDamage(playerIn), (float) ((this.getAttackDamage()/2.0F + 1.5F)*(1-entitylivingbase.getDistanceSq(pos)/20.0F)));
+                 PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, stunduration);
                  entitylivingbase.addPotionEffect(potioneffectIn);
             }
         }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 
+import com.mujmajnkraft.bettersurvival.EntityAIDoNothing;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
@@ -19,6 +20,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityAreaEffectCloud;
+import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -174,6 +176,11 @@ public class ModEnchantmentHandler {
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(EntityJoinWorldEvent event)
 	{
+		if (event.getEntity() instanceof EntityLiving)
+		{
+			EntityLiving living = (EntityLiving) event.getEntity();
+			living.tasks.addTask(0, new EntityAIDoNothing(living));
+		}
 		if (event.getEntity() instanceof EntityArrow && !event.getWorld().isRemote)
 		{
 			EntityArrow arrow = (EntityArrow) event.getEntity();
