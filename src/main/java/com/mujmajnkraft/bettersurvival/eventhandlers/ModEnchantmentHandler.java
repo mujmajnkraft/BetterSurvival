@@ -6,8 +6,10 @@ import java.util.Set;
 
 import com.mujmajnkraft.bettersurvival.EntityAIDoNothing;
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.SwitchBowCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
+import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentAgility;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
@@ -65,6 +67,8 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModEnchantmentHandler {
+	
+	ResourceLocation switchBow = new ResourceLocation("switchbow", "SwitchBow");
 	
 	public static final ResourceLocation ARROWPROPERTIES_CAP = new ResourceLocation(Reference.MOD_ID, "ArrowProperties");
 	
@@ -506,7 +510,11 @@ public class ModEnchantmentHandler {
 					ItemCrossbow crossbow = (ItemCrossbow) stack.getItem();
 					ammo = crossbow.loadedAmmo(stack);
 				}
-				ammo = this.findAmmo(entityplayer);
+				if (stack.getItem().getRegistryName().equals(switchBow) && ConfigHandler.integration)
+				{
+					ammo = SwitchBowCompat.findAmmo(entityplayer, event.getBow());
+				}
+				else ammo = this.findAmmo(entityplayer);
 				if (!ammo.isEmpty() || flag)
 	            {
 	                if (ammo.isEmpty())
