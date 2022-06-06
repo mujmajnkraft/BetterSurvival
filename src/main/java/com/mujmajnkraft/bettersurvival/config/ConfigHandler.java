@@ -84,7 +84,8 @@ public class ConfigHandler {
 	public static ArrayList<Double> enderiumStats = new ArrayList<Double>();
 	
 	public static boolean allowvanillashields;
-	public static boolean FOV;
+	public static boolean FoVshields;
+	public static boolean FoVany;
 	public static boolean integration;
 	
 	public static void init(File file)
@@ -194,7 +195,8 @@ public class ConfigHandler {
 		Property enS = config.get(MATERIAL_STATS, Reference.MOD_ID + ".configgui.enderium_stats", new double[]{3, 1000, 10.0f, 4.0f, 20}, "Set enderium gear base stats (harvest level, durability, efficiency, damage, enchantability)");
 		enS.setRequiresMcRestart(true);
 		
-		Property fov = config.get(OTHER, Reference.MOD_ID + ".configgui.fov", true, "When set to true, prevents custom shields from messing up your FoV. This will cause problems with other mods that change FoV.");
+		Property fovshields = config.get(OTHER, Reference.MOD_ID + ".configgui.fovshields", true, "When set to true, prevents custom shields from messing up your FoV. This will cause problems with other mods that change FoV.");
+		Property fov = config.get(OTHER, Reference.MOD_ID + ".configgui.fov", false, "When set to true, prevents FoV changes completely.");
 		Property cmi = config.get(OTHER, Reference.MOD_ID + ".configgui.integration", true, "When set to true, you can craft weapons from materials from other mods");
 		cmi.setRequiresMcRestart(true);
 		Property avs = config.get(OTHER, Reference.MOD_ID + ".configgui.allow_vanilla_shields", true, "When set flase, vanilla shield recipe is disabled forcing player to use this mod's shields");
@@ -265,7 +267,8 @@ public class ConfigHandler {
 			lumiumStats = (ArrayList<Double>) Arrays.stream(luS.getDoubleList()).boxed().collect(Collectors.toList());
 			enderiumStats = (ArrayList<Double>) Arrays.stream(enS.getDoubleList()).boxed().collect(Collectors.toList());
 			
-			FOV = fov.getBoolean();
+			FoVshields = fovshields.getBoolean();
+			FoVany = fov.getBoolean();
 			integration = cmi.getBoolean();
 			allowvanillashields = avs.getBoolean();
 		}

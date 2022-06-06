@@ -173,7 +173,8 @@ mujmajnkraftsbettersurvival.configgui.signalum_stats=Signalum
 mujmajnkraftsbettersurvival.configgui.lumium_stats=Lumium
 mujmajnkraftsbettersurvival.configgui.enderium_stats=Enderium
 
-mujmajnkraftsbettersurvival.configgui.fov=Allow FOV changes
+mujmajnkraftsbettersurvival.configgui.fov=Disable any FoV changes
+mujmajnkraftsbettersurvival.configgui.fovshields=Disable shield induced FoV changes
 mujmajnkraftsbettersurvival.configgui.integration=Allow crossmod integration
 mujmajnkraftsbettersurvival.configgui.allow_vanilla_shields=Allow vanilla shields
 

@@ -12,19 +12,16 @@ import com.mujmajnkraft.bettersurvival.MessageExtendedReachAttack;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
-import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.item.EntityItemFrame;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
@@ -295,7 +292,8 @@ public class ModClientHandler {
 	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
 	public void onEvent(FOVUpdateEvent event)
 	{
-		if (ConfigHandler.FOV)
+		if (ConfigHandler.FoVany) event.setNewfov(1.0F);
+		else if (ConfigHandler.FoVshields)
 		{
 			//Replicates vanilla behaviour (net.minecraft.client.entity.AbstractClientPlayer.getFovModifier())
 			float f = 1.0F;
