@@ -33,16 +33,6 @@ public class ClientProxy implements CommonProxy{
 		FMLCommonHandler.instance().bus().register(new ModClientHandler());
 		
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
-		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingSpear.class, new RenderFlyingSpear(manager));/*
-		RenderingRegistry.registerEntityRenderingHandler(EntityBallista.class, new RenderBallista(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBallistaBolt.class, new RenderBallistaBolt(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityZeppelin.class, new RenderZeppelin(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityPotionThrower.class, new RenderPotionThrower(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, new RenderCannon(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityCannonball.class, new RenderCannonball(manager));*/
-
-		
-		/*Bettersurvival.network.registerMessage(MessageUseWeapon.Handler.class, MessageUseWeapon.class, packetId++, Side.SERVER);
-		Bettersurvival.network.registerMessage(MessageButtonPressed.Handler.class, MessageButtonPressed.class, packetId++, Side.SERVER);*/
+		RenderingRegistry.registerEntityRenderingHandler(EntityFlyingSpear.class, new RenderFlyingSpear(manager));
 	}
 }

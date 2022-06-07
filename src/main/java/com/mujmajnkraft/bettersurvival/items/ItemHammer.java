@@ -1,6 +1,5 @@
 package com.mujmajnkraft.bettersurvival.items;
 
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.CrushingRecipe;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
@@ -10,7 +9,6 @@ import net.minecraft.block.BlockGlass;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -27,7 +25,6 @@ import net.minecraft.world.World;
 public class ItemHammer extends ItemCustomWeapon{
 	
 	private int stunduration;
-	private ToolMaterial mat;
 	public ItemHammer(ToolMaterial material) {
 		super(material, 1.2F, 1.35F);
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Hammer");
@@ -170,5 +167,3 @@ public class ItemHammer extends ItemCustomWeapon{
         return super.hitEntity(stack, target, attacker);
     }
 }
-	
-
