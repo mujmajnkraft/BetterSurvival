@@ -9,7 +9,6 @@ import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
-import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.IWeaponEffect;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
 import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
@@ -118,7 +117,6 @@ public class ModWeaponHandler {
 				}
 				if (attacker.getHeldItemMainhand().getItem() instanceof ItemSword && !attacker.world.isRemote)
 				{
-					IWeaponEffect poison = attacker.getHeldItemMainhand().getCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null);
 					int h = 0;
 					if (attacker.getHeldItemMainhand().hasTagCompound())
 					{

@@ -17,7 +17,6 @@ import com.mujmajnkraft.bettersurvival.init.ModCrafting;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModEntities;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
-import com.mujmajnkraft.bettersurvival.init.ModLootManager;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import com.mujmajnkraft.bettersurvival.init.ModPotionTypes;
 import com.mujmajnkraft.bettersurvival.proxy.CommonProxy;
@@ -66,7 +65,6 @@ public class Bettersurvival {
 		config = new File(event.getModConfigurationDirectory() + "/" + Reference.MOD_ID);
 		config.mkdirs();
 		ConfigHandler.init(new File(config.getPath(), Reference.MOD_ID + ".cfg"));
-		ModLootManager.register();
 		
 		ModPotions.init();
 		
