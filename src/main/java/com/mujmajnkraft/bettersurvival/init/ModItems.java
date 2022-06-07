@@ -33,32 +33,6 @@ public class ModItems {
 	public static Item smallshield;
 	public static Item bigshield;
 	
-	public static Item ballistabolt;
-	public static Item cannonball;
-	public static Item cannonballexplosive;
-	public static Item cannonballburning;
-	public static Item ballistaplacer;
-	public static Item throwerplacer;
-	public static Item cannonplacer;
-	public static Item zeppelinplacer;
-	public static Item blueprint;
-	/*
-	public static final CreativeTabs siegeweapons = new CreativeTabs(Reference.MOD_ID+"siegeweapons") {
-		
-		@Override
-		public ItemStack getTabIconItem() {
-			return new ItemStack(ballistaplacer);
-		}
-		
-		@Override
-		public void displayAllRelevantItems(NonNullList<ItemStack> p_78018_1_)
-		{
-			List<ItemStack> list = WorkshopRecipe.instance().getBlueprints();
-			p_78018_1_.addAll(list);
-			super.displayAllRelevantItems(p_78018_1_);
-		}
-	};*/
-	
 	public static ToolMaterial COPPER = EnumHelper.addToolMaterial("Copper", ConfigHandler.copperStats.get(0).intValue(), ConfigHandler.copperStats.get(1).intValue(), ConfigHandler.copperStats.get(2).floatValue(), ConfigHandler.copperStats.get(3).floatValue(), ConfigHandler.copperStats.get(4).intValue());
 	public static ToolMaterial BRONZE = EnumHelper.addToolMaterial("Bronze", ConfigHandler.bronzeStats.get(0).intValue(), ConfigHandler.bronzeStats.get(1).intValue(), ConfigHandler.bronzeStats.get(2).floatValue(), ConfigHandler.bronzeStats.get(3).floatValue(), ConfigHandler.bronzeStats.get(4).intValue());
 	public static ToolMaterial INVAR = EnumHelper.addToolMaterial("Invar", ConfigHandler.invarStats.get(0).intValue(), ConfigHandler.invarStats.get(1).intValue(), ConfigHandler.invarStats.get(2).floatValue(), ConfigHandler.invarStats.get(3).floatValue(), ConfigHandler.invarStats.get(4).intValue());
@@ -109,24 +83,7 @@ public class ModItems {
 		smallshield.setUnlocalizedName("smallshield");
 		bigshield = new ItemCustomShield(0.8F, 3);
 		bigshield.setRegistryName("ItemBigShield");
-		bigshield.setUnlocalizedName("bigshield");/*
-		ballistabolt = new ItemAmmo(1);
-		ballistabolt.setRegistryName("Cannonball");
-		ballistabolt.setUnlocalizedName("cannonball");
-		cannonball = new ItemAmmo(2);
-		cannonball.setRegistryName("Cannonball_Explosive");
-		cannonball.setUnlocalizedName("cannonballexplosive");
-		cannonballexplosive = new ItemAmmo(3);
-		cannonballexplosive.setRegistryName("Cannonball_Burning");
-		cannonballexplosive.setUnlocalizedName("cannonballburning");
-		cannonballburning = new ItemAmmo(4);
-		cannonballburning.setRegistryName("ItemBallistaBolt");
-		cannonballburning.setUnlocalizedName("ballistabolt");
-		ballistaplacer = new ItemWeaponPlacer(EnumWeaponType.BALLISTA);
-		throwerplacer = new ItemWeaponPlacer(EnumWeaponType.POTION_THROWER);
-		cannonplacer = new ItemWeaponPlacer(EnumWeaponType.CANNON);
-		zeppelinplacer = new ItemWeaponPlacer(EnumWeaponType.ZEPPELIN);
-		blueprint = new ItemBlueprint();*/
+		bigshield.setUnlocalizedName("bigshield");
 		
 		for (ToolMaterial material:materials)
 		{
@@ -144,16 +101,7 @@ public class ModItems {
 		
 		event.getRegistry().register(smallshield);
 		event.getRegistry().register(crossbow);
-		event.getRegistry().register(bigshield);/*
-		event.getRegistry().register(ballistabolt);
-		event.getRegistry().register(ballistaplacer);
-		event.getRegistry().register(throwerplacer);
-		event.getRegistry().register(cannonball);
-		event.getRegistry().register(cannonballexplosive);
-		event.getRegistry().register(cannonballburning);
-		event.getRegistry().register(cannonplacer);
-		event.getRegistry().register(zeppelinplacer);
-		event.getRegistry().register(blueprint);*/
+		event.getRegistry().register(bigshield);
 		
 		for (Item item : hammers)
 		{
@@ -180,16 +128,7 @@ public class ModItems {
 	public static void registerRenders() {
 		registerRender(bigshield);
 		registerRender(smallshield);
-		registerRender(crossbow);/*
-		registerRender(ballistabolt);
-		registerRender(ballistaplacer);
-		registerRender(throwerplacer);
-		registerRender(cannonball);
-		registerRender(cannonballexplosive);
-		registerRender(cannonballburning);
-		registerRender(cannonplacer);
-		registerRender(zeppelinplacer);
-		registerRender(blueprint);*/
+		registerRender(crossbow);
 		
 		for (Item item : hammers)
 		{
