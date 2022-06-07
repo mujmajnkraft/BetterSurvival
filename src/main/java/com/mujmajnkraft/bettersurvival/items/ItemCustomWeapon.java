@@ -22,7 +22,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -112,12 +111,12 @@ public class ItemCustomWeapon extends Item{
 	{
 		if (this.material == ModItems.SILVER && Bettersurvival.isIafLoaded)
 		{
-			String s = I18n.translateToLocal("silvertools.hurt");
+			String s = net.minecraft.client.resources.I18n.format("silvertools.hurt");
 			tooltip.add(TextFormatting.GREEN + s);
 		}
 		else if (this.material == ModItems.JUNGLE_CHITIN || this.material == ModItems.DESERT_CHITIN)
 		{
-			String s = I18n.translateToLocal(Reference.MOD_ID + ".chitintools.hurt");
+			String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".chitintools.hurt");
 			tooltip.add(TextFormatting.GREEN + s);
 		}
 	}

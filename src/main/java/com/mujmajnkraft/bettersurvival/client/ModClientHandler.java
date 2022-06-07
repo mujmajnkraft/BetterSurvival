@@ -18,6 +18,7 @@ import com.mujmajnkraft.bettersurvival.items.ItemSpear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.entity.Entity;
@@ -37,7 +38,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.text.TextFormatting;
-import net.minecraft.util.text.translation.I18n;
 import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -260,12 +260,12 @@ public class ModClientHandler {
 					
 					for (PotionEffect potioneffect : list)
 		            {
-		                String s1 = I18n.translateToLocal(potioneffect.getEffectName()).trim();
+		                String s1 = I18n.format(potioneffect.getEffectName()).trim();
 		                Potion potion = potioneffect.getPotion();
 
 		                if (potioneffect.getAmplifier() > 0)
 		                {
-		                    s1 = s1 + " " + I18n.translateToLocal("potion.potency." + potioneffect.getAmplifier()).trim();
+		                    s1 = s1 + " " + I18n.format("potion.potency." + potioneffect.getAmplifier()).trim();
 		                }
 
 		                if (potioneffect.getDuration() > 20)
