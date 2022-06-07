@@ -1,5 +1,7 @@
 package com.mujmajnkraft.bettersurvival;
 
+import com.mujmajnkraft.bettersurvival.items.ItemSpear;
+
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -52,10 +54,10 @@ public class MessageExtendedReachAttack implements IMessage{
                       {
                           Entity theEntity = thePlayer.getEntityWorld().getEntityByID(message.entityId);
                           
-                          if (thePlayer.getHeldItemMainhand().getItem() instanceof ICustomWeapon)
+                          if (thePlayer.getHeldItemMainhand().getItem() instanceof ItemSpear)
                           {
-                              ICustomWeapon theExtendedReachWeapon = (ICustomWeapon)thePlayer.getHeldItemMainhand().getItem();
-                              double reachSq = theExtendedReachWeapon.getReach()* theExtendedReachWeapon.getReach();
+                              float reach = ((ItemSpear)thePlayer.getHeldItemMainhand().getItem()).reach;
+                              double reachSq = reach * reach;
                               if (!thePlayer.canEntityBeSeen(theEntity))
                               {
                             	  reachSq /= 4.0d;

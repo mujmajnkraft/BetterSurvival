@@ -7,13 +7,14 @@ import javax.annotation.Nullable;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.mujmajnkraft.bettersurvival.BetterSurvivalPacketHandler;
-import com.mujmajnkraft.bettersurvival.ICustomWeapon;
 import com.mujmajnkraft.bettersurvival.MessageExtendedReachAttack;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
+import com.mujmajnkraft.bettersurvival.items.ItemSpear;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -53,9 +54,9 @@ public class ModClientHandler {
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (player != null)
 		{
-			if (player.getHeldItemMainhand().getItem() instanceof ICustomWeapon)
+			if (player.getHeldItemMainhand().getItem() instanceof ItemSpear)
 			{
-				if (((ICustomWeapon)player.getHeldItemMainhand().getItem()).getReach() > 5.0f)
+				if (((ItemSpear)player.getHeldItemMainhand().getItem()).reach > 5.0f)
 				{
 					GameSettings GS = Minecraft.getMinecraft().gameSettings;
 					if (GS.keyBindAttack.isPressed())
@@ -200,10 +201,9 @@ public class ModClientHandler {
         if (!thePlayer.isRowingBoat())
         {
         	ItemStack itemstack = thePlayer.getHeldItemMainhand();
-            if (itemstack.getItem() instanceof ICustomWeapon)
+            if (itemstack.getItem() instanceof ItemSpear)
             {
-            	ICustomWeapon ieri = (ICustomWeapon) itemstack.getItem();
-                float reach = ieri.getReach();
+                float reach = ((ItemSpear)itemstack.getItem()).reach;
                 getMouseOverExtended(reach);
                 if (Minecraft.getMinecraft().objectMouseOver != null)
                 {

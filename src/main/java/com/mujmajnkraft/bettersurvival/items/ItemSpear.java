@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.ICustomWeapon;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
@@ -35,9 +34,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
 @SuppressWarnings("deprecation")
-public class ItemSpear extends Item implements ICustomWeapon{
+public class ItemSpear extends Item{
 
     private final float attackDamage;
+    public final float reach;
 	private ToolMaterial mat;
 	
 	public ItemSpear(ToolMaterial material) {
@@ -46,6 +46,7 @@ public class ItemSpear extends Item implements ICustomWeapon{
 		this.maxStackSize = 16;
 		this.attackDamage = (float) (0.75 * (3.0F + material.getAttackDamage()));
 		this.setCreativeTab(CreativeTabs.COMBAT);
+		this.reach = 7.0F;
 		mat = material;
 	}
 	
@@ -110,16 +111,6 @@ public class ItemSpear extends Item implements ICustomWeapon{
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
     }
-	
-	@Override
-	public float getReach() {
-		return 7.0F;
-	}
-
-	@Override
-	public boolean noSweepAttack() {
-		return false;
-	}
 	
 	public EnumAction getItemUseAction(ItemStack stack)
     {

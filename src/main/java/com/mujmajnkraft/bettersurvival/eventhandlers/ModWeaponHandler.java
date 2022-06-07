@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-import com.mujmajnkraft.bettersurvival.ICustomWeapon;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
@@ -157,20 +156,6 @@ public class ModWeaponHandler {
 								compound.removeTag("CustomPotionEffects");
 							}
 						}
-					}
-				}
-			}
-			
-			//Prevents sweep attack for some weapons
-			if (event.getSource().getImmediateSource() instanceof EntityPlayer)
-			{
-				EntityPlayer player = (EntityPlayer) event.getSource().getImmediateSource();
-				if (player.getHeldItemMainhand().getItem() instanceof ICustomWeapon)
-				{
-					ICustomWeapon weapon = (ICustomWeapon) player.getHeldItemMainhand().getItem();
-					if (event.getAmount() == 1 && weapon.noSweepAttack())
-					{
-						event.setCanceled(true);
 					}
 				}
 			}
