@@ -82,7 +82,8 @@ public class CrushingRecipe {
 		addCrushingRecipe(Blocks.STONEBRICK.getStateFromMeta(2), Blocks.COBBLESTONE.getDefaultState());
 		addCrushingRecipe(Blocks.MOSSY_COBBLESTONE.getDefaultState(), Blocks.GRAVEL.getDefaultState());
 		addCrushingRecipe(Blocks.COBBLESTONE.getDefaultState(), Blocks.GRAVEL.getDefaultState());
-		addCrushingRecipe(Blocks.MONSTER_EGG.getStateFromMeta(1), Blocks.COBBLESTONE.getDefaultState());
+		addCrushingRecipe(Blocks.MONSTER_EGG.getDefaultState(), Blocks.COBBLESTONE.getDefaultState());
+		addCrushingRecipe(Blocks.MONSTER_EGG.getStateFromMeta(1), Blocks.GRAVEL.getDefaultState());
 		addCrushingRecipe(Blocks.MONSTER_EGG.getStateFromMeta(2), Blocks.STONEBRICK.getStateFromMeta(2));
 		addCrushingRecipe(Blocks.MONSTER_EGG.getStateFromMeta(3), Blocks.STONEBRICK.getStateFromMeta(2));
 		addCrushingRecipe(Blocks.MONSTER_EGG.getStateFromMeta(4), Blocks.COBBLESTONE.getDefaultState());

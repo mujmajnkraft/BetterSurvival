@@ -74,7 +74,7 @@ public class ItemHammer extends ItemCustomWeapon{
 		{
 			if((!(facing == EnumFacing.WEST) && !(facing == EnumFacing.EAST) || x==0) && playerIn.capabilities.allowEdit)
 			{
-				for(float y = -d ; y < 5 + 1; y++)
+				for(float y = -5 ; y < 5 + 1; y++)
 				{
 					if((!(facing == EnumFacing.UP) && !(facing == EnumFacing.DOWN)) || y==0)
 					{

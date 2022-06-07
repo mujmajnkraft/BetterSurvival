@@ -36,8 +36,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, 
 	version = Reference.MOD_VERSION, 
-	acceptedMinecraftVersions = Reference.MC_VERSION,
-	guiFactory = "com.mujmajnkraft.bettersurvival.client.GuiFactoryBetterSurvival")
+	acceptedMinecraftVersions = Reference.MC_VERSION)
 public class Bettersurvival {
 	
 	@Instance
