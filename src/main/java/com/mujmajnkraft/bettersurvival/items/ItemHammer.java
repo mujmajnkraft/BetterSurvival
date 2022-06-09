@@ -136,10 +136,23 @@ public class ItemHammer extends ItemCustomWeapon{
 	    
 	    if (!playerIn.capabilities.isCreativeMode)
 	    {
-		    for (ItemHammer hammer : ModItems.hammers)
-		    {
-			    playerIn.getCooldownTracker().setCooldown(hammer, 200);
-		    }
+			playerIn.getCooldownTracker().setCooldown(ModItems.aluminiumhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.bronzehammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.copperhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.desertchitinhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.diamondhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.dragonbonehammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.enderiumhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.goldenhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.ironhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.invarhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.junglechitinhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.lumiumhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.signalumhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.silverhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.steelhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.stonehammer, 200);
+			playerIn.getCooldownTracker().setCooldown(ModItems.woodenhammer, 200);
 	    }
 	    return EnumActionResult.SUCCESS;
 	}
