@@ -75,23 +75,19 @@ public class ModClientHandler {
 		EntityPlayerSP player = Minecraft.getMinecraft().player;
 		if (player != null)
 		{
-			
-			if (player.getHeldItemMainhand().getItem() instanceof ItemNunchaku)
+			if (player.getHeldItemMainhand().getItem() instanceof ItemNunchaku && !player.isRowingBoat() && player.getActiveItemStack() == ItemStack.EMPTY && GS.keyBindAttack.isKeyDown())
 			{
-				if (GS.keyBindAttack.isKeyDown() && Minecraft.getMinecraft().objectMouseOver != null)
+				BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
+				player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(true);
+				if (Minecraft.getMinecraft().objectMouseOver.typeOfHit == Type.ENTITY && player.getCooledAttackStrength(0) == 1.0f)
 				{
-					BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
-					player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(true);
-					if (Minecraft.getMinecraft().objectMouseOver.typeOfHit == Type.ENTITY && player.getCooledAttackStrength(0) == 1.0f)
-					{
-						Minecraft.getMinecraft().playerController.attackEntity(player, Minecraft.getMinecraft().objectMouseOver.entityHit);
-					}
+					Minecraft.getMinecraft().playerController.attackEntity(player, Minecraft.getMinecraft().objectMouseOver.entityHit);
 				}
-				else
-				{
-					BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(false));
-					player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(false);
-				}
+			}
+			else if (player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).isSpinning())
+			{
+				BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(false));
+				player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(false);
 			}
 		}
 	}
