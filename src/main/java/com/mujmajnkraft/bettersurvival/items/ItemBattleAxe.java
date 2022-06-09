@@ -1,14 +1,10 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import java.util.Random;
-import java.util.UUID;
-
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -69,16 +65,6 @@ public class ItemBattleAxe extends ItemCustomWeapon{
 					}
 				}
 			}
-			
-			attacker.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
-			AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c04-a645-75c3ae5c7a27"), "compensation", 4, 2);
-			
-			if (!attacker.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).hasModifier(modifier))
-			{
-				attacker.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(modifier);
-			}
-			attacker.resetCooldown();
-			
 		}
 		return false;
 	}
