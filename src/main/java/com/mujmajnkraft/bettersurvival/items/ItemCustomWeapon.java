@@ -8,6 +8,7 @@ import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
@@ -21,6 +22,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -48,7 +50,8 @@ public class ItemCustomWeapon extends Item{
 		return material;
 	}
 	
-	public float getAttackDamage() {
+	public float getAttackDamage()
+	{
 		return attackDamage;
 	}
 	
@@ -69,6 +72,16 @@ public class ItemCustomWeapon extends Item{
 	public String getToolMaterialName()
 	{
 		return this.material.toString();
+	}
+	
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
+	{
+		if ((double)state.getBlockHardness(worldIn, pos) != 0.0D)
+		{
+		    stack.damageItem(2, entityLiving);
+		}
+		
+		return true;
 	}
 	
 	@Override
