@@ -54,12 +54,12 @@ jar
     {
         attribute
         ([
-            "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
-            "Specification-Version": "1",
+            "Specification-Title": "Better Survival",
+            "Specification-Vendor": "Block Vader",
+            "Specification-Version": "1.4.2-BETA3",
             "Implementation-Title": project.name,
-            "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Version": "1.4.2-BETA3",
+            "Implementation-Vendor" :"Block Vader",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
