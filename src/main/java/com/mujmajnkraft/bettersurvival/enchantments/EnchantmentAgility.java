@@ -37,25 +37,11 @@ public class EnchantmentAgility extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.agility)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.agility;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.agilitylevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.agilitylevel != 0;
     }
 }

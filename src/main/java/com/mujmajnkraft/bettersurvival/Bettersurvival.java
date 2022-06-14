@@ -70,7 +70,6 @@ public class Bettersurvival {
 		MinecraftForge.EVENT_BUS.register(new ModItems());
 		
 		MinecraftForge.EVENT_BUS.register(new ModBlocks());
-		//MinecraftForge.EVENT_BUS.register(new ConfigEventHandler());
 		MinecraftForge.EVENT_BUS.register(new ModPotionTypes());
 		MinecraftForge.EVENT_BUS.register(new ModPotions());
 		
@@ -95,9 +94,6 @@ public class Bettersurvival {
 		FMLCommonHandler.instance().bus().register(new TickEventHandler());	
 		
 		GameRegistry.registerTileEntity(TileEntityCustomCauldron.class, Reference.MOD_ID + ":customcauldron");
-		//GameRegistry.registerTileEntity(TileEntityWorkshop.class, Reference.MOD_ID + "workshop");
-		
-		//NetworkRegistry.INSTANCE.registerGuiHandler(Bettersurvival.instance, new ModGUIHandler());
 		
 		ModCrafting.register();
 	}

@@ -31,19 +31,9 @@ public class ItemBattleAxe extends ItemCustomWeapon{
 				EntityLivingBase target = (EntityLivingBase) entity;
 				if (target instanceof EntityPlayer)
 				{
-					//EntityPlayer player = (EntityPlayer) target;
-					/*if(player.getHeldItemOffhand().getItem() instanceof ItemShield && player.getActiveHand() == EnumHand.OFF_HAND)
-					{
-						ItemStack stack1 = player.getHeldItemOffhand();
-						player.setHeldItem(EnumHand.OFF_HAND, ItemStack.EMPTY);
-						player.entityDropItem(stack1, 1);
-					}
-					else*/
-					{
-						ItemStack stack1 = target.getHeldItemMainhand();
-						target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-						target.entityDropItem(stack1, 1);
-					}
+					ItemStack stack1 = target.getHeldItemMainhand();
+					target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+					target.entityDropItem(stack1, 1);
 				}
 				else
 				{

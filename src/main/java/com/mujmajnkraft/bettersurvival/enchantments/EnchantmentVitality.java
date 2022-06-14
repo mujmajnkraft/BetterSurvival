@@ -14,25 +14,16 @@ public class EnchantmentVitality extends Enchantment {
 		this.setName(Reference.MOD_ID + ".vitality");
 	}
 	
-	/**
-     * Returns the minimal value of enchantability needed on the enchantment level passed.
-     */
-    public int getMinEnchantability(int enchantmentLevel)
+	public int getMinEnchantability(int enchantmentLevel)
     {
         return 20 + 15 * (enchantmentLevel - 1);
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return this.getMinEnchantability(enchantmentLevel) + 40;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.vitalitylevel;
@@ -40,25 +31,11 @@ public class EnchantmentVitality extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.vitality)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.vitality;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.vitalitylevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.vitalitylevel != 0;
     }
 }

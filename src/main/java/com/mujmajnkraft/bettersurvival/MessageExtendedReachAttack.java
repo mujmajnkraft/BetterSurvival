@@ -67,7 +67,6 @@ public class MessageExtendedReachAttack implements IMessage{
                             	  if (theEntity instanceof EntityItem || theEntity instanceof EntityXPOrb || theEntity instanceof EntityArrow || theEntity == thePlayer)
                                   {
                                       thePlayer.connection.disconnect(new TextComponentTranslation("multiplayer.disconnect.invalid_entity_attacked", new Object[0]));
-                                      //this.serverController.logWarning("Player " + thePlayer.getName() + " tried to attack an invalid entity");
                                       return;
                                   }
 

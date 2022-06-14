@@ -21,17 +21,11 @@ public class EnchantmentArrowRecovery extends Enchantment {
         return 10 + (enchantmentLevel - 1) * 9;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.arrowrecoverylevel;
@@ -44,26 +38,11 @@ public class EnchantmentArrowRecovery extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.arrowrecovery)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.arrowrecovery;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.arrowrecoverylevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.arrowrecoverylevel != 0;
     }
-
 }

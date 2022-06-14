@@ -17,25 +17,16 @@ public class EnchantmentFling extends Enchantment {
 	this.setName(Reference.MOD_ID + ".fling");
 	}
 	
-	/**
-     * Returns the minimal value of enchantability needed on the enchantment level passed.
-     */
-    public int getMinEnchantability(int enchantmentLevel)
+	public int getMinEnchantability(int enchantmentLevel)
     {
         return 5 + 20 * (enchantmentLevel - 1);
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return super.getMinEnchantability(enchantmentLevel) + 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.flinglevel;
@@ -53,25 +44,11 @@ public class EnchantmentFling extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.fling)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.fling;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.flinglevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.flinglevel != 0;
     }
 }

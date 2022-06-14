@@ -17,14 +17,12 @@ public class EntityAIDoNothing extends EntityAIBase {
 	@Override
 	public boolean shouldExecute()
 	{
-		if (entity.getActivePotionEffect(ModPotions.stun) != null) System.out.println("Stun activated");
 		return entity.getActivePotionEffect(ModPotions.stun) != null;
 	}
 	
 	@Override
 	public boolean shouldContinueExecuting()
 	{
-		if (entity.getActivePotionEffect(ModPotions.stun) != null) System.out.println("Stun continues");
 		return entity.getActivePotionEffect(ModPotions.stun) != null;
 	}
 	

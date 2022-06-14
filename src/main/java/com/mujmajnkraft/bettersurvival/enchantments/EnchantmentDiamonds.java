@@ -23,25 +23,16 @@ public class EnchantmentDiamonds extends Enchantment {
         return 15 + (enchantmentLevel - 1) * 9;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return super.getMinEnchantability(enchantmentLevel) + 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.diamondslevel;
     }
 
-    /**
-     * Determines if the enchantment passed can be applyied together with this enchantment.
-     */
     public boolean canApplyTogether(Enchantment ench)
     {
         return super.canApplyTogether(ench) && ench != Enchantments.SILK_TOUCH && ench != Enchantments.FORTUNE;
@@ -62,25 +53,11 @@ public class EnchantmentDiamonds extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.diamonds)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.diamonds;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.diamondslevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.diamondslevel != 0;
     }
 }

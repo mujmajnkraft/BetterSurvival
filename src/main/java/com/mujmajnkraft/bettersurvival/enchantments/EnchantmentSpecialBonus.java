@@ -19,25 +19,16 @@ public class EnchantmentSpecialBonus extends Enchantment {
 		this.weapon = class1;
 	}
 	
-	/**
-     * Returns the minimal value of enchantability needed on the enchantment level passed.
-     */
-    public int getMinEnchantability(int enchantmentLevel)
+	public int getMinEnchantability(int enchantmentLevel)
     {
         return 5 + (enchantmentLevel - 1) * 9;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
-    public int getMaxEnchantability(int enchantmentLevel)
+	public int getMaxEnchantability(int enchantmentLevel)
     {
         return this.getMinEnchantability(enchantmentLevel) + 15;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
     	switch(this.weapon)

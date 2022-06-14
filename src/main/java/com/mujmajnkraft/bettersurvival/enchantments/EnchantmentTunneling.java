@@ -20,17 +20,11 @@ public class EnchantmentTunneling extends Enchantment {
         return 25 + (enchantmentLevel - 1) * 15;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return super.getMinEnchantability(enchantmentLevel) + 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.tunnelinglevel;
@@ -38,25 +32,11 @@ public class EnchantmentTunneling extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.tunneling)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.tunneling;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.tunnelinglevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.tunnelinglevel != 0;
     }
 }

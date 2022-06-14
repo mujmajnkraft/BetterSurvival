@@ -44,26 +44,11 @@ public class EnchantmentMultishot extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.multishot)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.multishot;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.multishotlevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.multishotlevel != 0;
     }
-
 }

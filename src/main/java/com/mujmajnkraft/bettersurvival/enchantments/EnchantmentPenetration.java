@@ -15,25 +15,16 @@ public class EnchantmentPenetration extends Enchantment {
 		this.setName(Reference.MOD_ID + ".penetration");
 	}
 	
-	/**
-     * Returns the minimal value of enchantability needed on the enchantment level passed.
-     */
-    public int getMinEnchantability(int enchantmentLevel)
+	public int getMinEnchantability(int enchantmentLevel)
     {
         return 3 + 3 * (enchantmentLevel - 1);
     }
 
-    /**
-     * Returns the maximum value of enchantability needed on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return super.getMinEnchantability(enchantmentLevel) + 20;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.penetrationlevel;
@@ -46,25 +37,11 @@ public class EnchantmentPenetration extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.penetration)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.penetration;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.penetrationlevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.penetrationlevel != 0;
     }
 }

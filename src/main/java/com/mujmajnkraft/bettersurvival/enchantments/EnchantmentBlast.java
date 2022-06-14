@@ -22,17 +22,11 @@ public class EnchantmentBlast extends Enchantment {
         return 15 + (enchantmentLevel - 1) * 20;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.blastlevel;
@@ -45,26 +39,11 @@ public class EnchantmentBlast extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.blast)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.blast;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.blastlevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.blastlevel != 0;
     }
-
 }

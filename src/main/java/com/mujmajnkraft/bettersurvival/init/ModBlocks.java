@@ -14,37 +14,20 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ModBlocks {
 	
 	public static Block customcauldron;
-	//public static Block workshop;
 	
 	@SubscribeEvent
 	public void registerBlocks(RegistryEvent.Register<Block> event)
 	{
 		customcauldron = new BlockCustomCauldron();
-		//workshop = new BlockWorkshop();
 		
 		customcauldron.setRegistryName("customcauldron");
 		customcauldron.setUnlocalizedName("Cauldron");
 		event.getRegistry().register(customcauldron);
-		/*
-		workshop.setRegistryName("Workshop");
-		workshop.setUnlocalizedName("workshop");
-		event.getRegistry().register(workshop);
-	}
-	
-	@SubscribeEvent
-	public void registerBlockItems(RegistryEvent.Register<Item> event)
-	{
-		ItemBlock itemworkshop = new ItemBlock(workshop);
-		itemworkshop.setRegistryName(workshop.getRegistryName());
-		itemworkshop.setUnlocalizedName(workshop.getUnlocalizedName());
-		itemworkshop.setCreativeTab(ModItems.siegeweapons);
-		event.getRegistry().register(itemworkshop);*/
 	}
 	
 	public static void registerRenders()
 	{
 		registerRender(customcauldron);
-		//registerRender(workshop);
 	}
 	
 	private static void registerRender(Block block)

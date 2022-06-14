@@ -33,7 +33,6 @@ import net.minecraft.world.WorldServer;
 public class BlockCustomCauldron extends BlockCauldron implements ITileEntityProvider{
 	
 	public BlockCustomCauldron() {
-		//this.isBlockContainer = true;
 	}
 
 	@Override
@@ -172,8 +171,6 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
                 {
                 	if (i > 0 && !worldIn.isRemote)
                     {
-                		//IWeaponEffect poison = itemstack.getCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null);
-                		
                 		if (itemstack.hasTagCompound())
                 		{
                 			itemstack.getTagCompound().removeTag("CustomPotionEffects");

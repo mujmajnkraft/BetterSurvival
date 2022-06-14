@@ -53,25 +53,11 @@ public class EnchantmentVampirism extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.vampirism)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.vampirism;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.vampirismlevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.vampirismlevel != 0;
     }
 }

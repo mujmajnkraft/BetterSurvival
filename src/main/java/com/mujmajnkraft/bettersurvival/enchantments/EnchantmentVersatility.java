@@ -14,25 +14,17 @@ public class EnchantmentVersatility extends Enchantment {
 		this.setRegistryName("versatility");
 		this.setName(Reference.MOD_ID + ".versatility");
 	}
-	/**
-     * Returns the minimal value of enchantability needed on the enchantment level passed.
-     */
-    public int getMinEnchantability(int enchantmentLevel)
+	
+	public int getMinEnchantability(int enchantmentLevel)
     {
         return enchantmentLevel * 15;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return this.getMinEnchantability(enchantmentLevel) + 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.versatilitylevel;
@@ -40,25 +32,11 @@ public class EnchantmentVersatility extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.versatility)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.versatility;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.versatilitylevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.versatilitylevel != 0;
     }
 }

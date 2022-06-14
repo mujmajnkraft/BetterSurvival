@@ -33,25 +33,11 @@ public class EnchantmentHighJump extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.highjump)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.highjump;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.highjumplevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.highjumplevel != 0;
     }
 }

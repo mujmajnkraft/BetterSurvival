@@ -20,17 +20,11 @@ public class EnchantmentRange extends Enchantment {
         return 20;
     }
 
-    /**
-     * Returns the maximum value of enchantability nedded on the enchantment level passed.
-     */
     public int getMaxEnchantability(int enchantmentLevel)
     {
         return 50;
     }
 
-    /**
-     * Returns the maximum level that the enchantment can have.
-     */
     public int getMaxLevel()
     {
         return ConfigHandler.rangelevel;
@@ -38,26 +32,11 @@ public class EnchantmentRange extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	if (ConfigHandler.range)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return false;
-    	}
+    	return ConfigHandler.range;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		if (ConfigHandler.rangelevel == 0)
-    	{
-    		return false;
-    	}
-    	else
-    	{
-    		return true;
-    	}
+		return ConfigHandler.rangelevel != 0;
     }
-
 }
