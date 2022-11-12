@@ -17,6 +17,10 @@ public class EnchantmentBlockPower extends Enchantment {
 		this.setName(Reference.MOD_ID + ".blockpower");
 	}
 	
+	/*
+	 * This enchantment alters blocking power of custom shields at ItemCustomShield.getDamageBlocked
+	 */
+	
 	public int getMinEnchantability(int enchantmentLevel)
     {
         return 10 + 20 * (enchantmentLevel - 1);

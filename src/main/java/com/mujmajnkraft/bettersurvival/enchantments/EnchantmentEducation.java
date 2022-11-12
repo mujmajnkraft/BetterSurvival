@@ -2,9 +2,13 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
@@ -13,6 +17,17 @@ public class EnchantmentEducation extends Enchantment {
 		super(Rarity.RARE, EnumEnchantmentType.WEAPON, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("education");
 		this.setName(Reference.MOD_ID + ".education");
+	}
+	
+	// Called during LivingExperienceDropEvent if enemy is killed by an attacker with enchanted weapon
+	public static float getExpMultiplyer(EntityPlayer killer, EntityLivingBase killed)
+	{
+		if (killed.isNonBoss())
+		{
+			int lvl = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.education, killer);
+			return lvl / 2.0F + 1.0F;
+		}
+		return 1.0F;
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

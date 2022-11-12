@@ -1,18 +1,39 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
+import java.util.List;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 
 public class EnchatnmentSmelting extends Enchantment {
 	public EnchatnmentSmelting() {
 		super(Rarity.VERY_RARE, EnumEnchantmentType.DIGGER, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("smelting");
 		this.setName(Reference.MOD_ID + ".smelting");
+	}
+	
+	//Called during HarvestDropsEvent if an ore is mined by an enchanted tool
+	public static void smeltDrops(List<ItemStack> drops, int fortuneLevel, EntityPlayer player)
+	{
+		for (int i = 0; i < drops.size(); i++)
+		{
+			ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(drops.get(i)).copy();
+			if (smeltingResult != ItemStack.EMPTY)
+			{
+				smeltingResult.setCount(drops.get(i).getCount());
+				if (!(smeltingResult.getItem() instanceof ItemBlock))
+					smeltingResult.setCount(player.getRNG().nextInt(fortuneLevel + 1) + smeltingResult.getCount());
+				drops.set(i, smeltingResult);
+			}
+		}
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

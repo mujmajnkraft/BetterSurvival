@@ -1,11 +1,16 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
@@ -15,6 +20,22 @@ public class EnchantmentBlast extends Enchantment {
 		super(Rarity.RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 		this.setRegistryName("blast");
 		this.setName(Reference.MOD_ID + ".blast");
+	}
+	
+	//Called during EntityJoinWorldEvent if an arrow is fired from an enchanted bow
+	public static void modifyArrow(EntityArrow arrow, EntityLivingBase shooter)
+	{
+		float power = (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.blast, shooter)+1)/4.0F;
+		boolean canDestroyBlocks = false;
+		if (shooter instanceof EntityPlayer)
+		{
+			canDestroyBlocks = ((EntityPlayer)shooter).capabilities.allowEdit;
+		}
+		else
+		{
+			canDestroyBlocks = shooter.getEntityWorld().getGameRules().getBoolean("mobGriefing");
+		}
+		arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null).setExplosion(power, canDestroyBlocks);
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

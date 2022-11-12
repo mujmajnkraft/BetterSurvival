@@ -32,6 +32,7 @@ public class EnchantmentFling extends Enchantment {
         return ConfigHandler.flinglevel;
     }
     
+    //Enchantment effect takes place here
     public void onEntityDamaged(EntityLivingBase user, Entity target, int level)
     {
     	target.motionY += 0.15D*level;

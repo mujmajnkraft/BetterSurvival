@@ -2,9 +2,13 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import javax.annotation.Nullable;
 
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
+
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -39,6 +43,13 @@ public class ItemNunchaku extends ItemCustomWeapon{
     {
 		int i = EnchantmentHelper.getKnockbackModifier(attacker) + 1;
 		target.knockBack(attacker, -(float)i * 0.1F, (double)MathHelper.sin(attacker.rotationYaw * (float)i * 0.017453292F), (double)(-MathHelper.cos(attacker.rotationYaw * (float)i * 0.017453292F)));
+		if (attacker instanceof EntityPlayer)
+		{
+			EntityPlayer player = (EntityPlayer) attacker;
+			INunchakuCombo combo = player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null);
+			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.combo, stack);
+			combo.setComboPower(combo.getComboPower() + 0.1F + l/20F);
+		}
 		return super.hitEntity(stack, target, attacker);
     }
 	

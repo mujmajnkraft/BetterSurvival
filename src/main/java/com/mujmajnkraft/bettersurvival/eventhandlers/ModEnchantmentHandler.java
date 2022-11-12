@@ -83,7 +83,7 @@ public class ModEnchantmentHandler {
 	
 	//Increases jump height for player with high jump enchantment
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onJump(LivingJumpEvent event)
+	public void onJump(LivingJumpEvent event) 
 	{
 	    if (event.getEntity() instanceof EntityPlayer)
 	    {

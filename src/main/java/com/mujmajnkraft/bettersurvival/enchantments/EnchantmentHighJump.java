@@ -2,9 +2,12 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 
 public class EnchantmentHighJump extends Enchantment {
@@ -13,6 +16,12 @@ public class EnchantmentHighJump extends Enchantment {
 		super(Rarity.RARE, EnumEnchantmentType.ARMOR_FEET, new EntityEquipmentSlot[]{EntityEquipmentSlot.FEET});
 		this.setRegistryName("highjump");
 		this.setName(Reference.MOD_ID + ".highjump");
+	}
+	
+	//Called during LivingJumpEvent if the jumper has enchanted boots
+	public static void boostJump(EntityLivingBase jumper)
+	{
+		jumper.motionY += EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, jumper) / 10.0D;
 	}
 	
 	@Override

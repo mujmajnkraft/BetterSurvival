@@ -17,6 +17,10 @@ public class EnchantmentHeavy extends Enchantment {
 		this.setName(Reference.MOD_ID + ".heavy");
 	}
 	
+	/*
+	 * This enchantment alters weight of custom shields at ItemCustomShield.applyModifiers
+	 */
+	
 	public int getMinEnchantability(int enchantmentLevel)
     {
         return 10 + 20 * (enchantmentLevel - 1);

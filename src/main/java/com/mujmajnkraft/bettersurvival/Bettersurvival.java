@@ -7,10 +7,7 @@ import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffect;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
-import com.mujmajnkraft.bettersurvival.eventhandlers.ModEnchantmentHandler;
-import com.mujmajnkraft.bettersurvival.eventhandlers.ModLootHandler;
-import com.mujmajnkraft.bettersurvival.eventhandlers.ModShieldHandler;
-import com.mujmajnkraft.bettersurvival.eventhandlers.ModWeaponHandler;
+import com.mujmajnkraft.bettersurvival.eventhandlers.CommonEventHandler;
 import com.mujmajnkraft.bettersurvival.eventhandlers.TickEventHandler;
 import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.init.ModCrafting;
@@ -87,10 +84,11 @@ public class Bettersurvival {
 		
 		ModItems.setRepairMaterials();
 		
-		MinecraftForge.EVENT_BUS.register(new ModWeaponHandler());
-		MinecraftForge.EVENT_BUS.register(new ModEnchantmentHandler());
-		MinecraftForge.EVENT_BUS.register(new ModLootHandler());
-		MinecraftForge.EVENT_BUS.register(new ModShieldHandler());
+		//MinecraftForge.EVENT_BUS.register(new ModWeaponHandler());
+		//MinecraftForge.EVENT_BUS.register(new ModEnchantmentHandler());
+		//MinecraftForge.EVENT_BUS.register(new ModLootHandler());
+		//MinecraftForge.EVENT_BUS.register(new ModShieldHandler());
+		MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
 		FMLCommonHandler.instance().bus().register(new TickEventHandler());	
 		
 		GameRegistry.registerTileEntity(TileEntityCustomCauldron.class, Reference.MOD_ID + ":customcauldron");

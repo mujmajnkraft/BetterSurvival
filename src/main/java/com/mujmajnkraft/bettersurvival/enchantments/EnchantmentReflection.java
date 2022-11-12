@@ -4,12 +4,17 @@ import java.util.Random;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 
 public class EnchantmentReflection extends Enchantment {
 	
@@ -18,6 +23,16 @@ public class EnchantmentReflection extends Enchantment {
 		this.setRegistryName("reflection");
 		this.setName(Reference.MOD_ID + ".reflection");
 	}
+	
+	public static void reflectDamage(Entity attacker, EntityLivingBase defender)
+	{
+		int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.reflection, defender.getActiveItemStack());
+		if(defender.getRNG().nextFloat() < 0.15F * (float)level)
+		{
+			attacker.attackEntityFrom(DamageSource.causeThornsDamage(defender), level > 10 ? level - 10 : 1 + defender.getRNG().nextInt(4));
+			defender.getActiveItemStack().damageItem(1, defender);
+		}
+	};
 	
 	public int getMinEnchantability(int enchantmentLevel)
     {
