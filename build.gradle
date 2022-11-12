@@ -15,7 +15,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.4.2-BETA3'
+version = '1.4.2-BETA4'
 group = 'com.mujmajnkraft.bettersurvival'
 archivesBaseName = 'better_survival'
 
