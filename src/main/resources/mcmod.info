@@ -1,13 +1,13 @@
 [
 {
-  "modid": "mujmajnkraftsbettersurvival",
-  "name": "Better Survival",
-  "description": "This mod adds additional weapons, enchantments and other stuff to minecraft.",
-  "version": "1.4.2-BETA4",
-  "mcversion": "1.12.2",
+  "modid": "${mod_id}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
   "url": "https://www.curseforge.com/minecraft/mc-mods/better-survival-mod",
   "updateUrl": "",
-  "authorList": ["Block Vader"],
+  "authorList": ${mod_author},
   "credits": "Block Vader, Deadrit, Shivaxi, Giggitybyte",
   "screenshots": [],
   "dependencies": []
