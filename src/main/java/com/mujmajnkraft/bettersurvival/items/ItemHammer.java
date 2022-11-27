@@ -28,7 +28,6 @@ public class ItemHammer extends ItemCustomWeapon{
 	public ItemHammer(ToolMaterial material) {
 		super(material, 1.2F, 1.35F);
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Hammer");
-		this.setUnlocalizedName(material.name().toLowerCase()+"hammer");
 		stunduration = 50;
 	}
 	

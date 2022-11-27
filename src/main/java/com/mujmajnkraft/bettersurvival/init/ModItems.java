@@ -168,10 +168,8 @@ public class ModItems {
 	public void regiserItems(RegistryEvent.Register<Item> event)
 	{
 		smallshield.setRegistryName("ItemSmallShield");
-		smallshield.setUnlocalizedName("smallshield");
 		
 		bigshield.setRegistryName("ItemBigShield");
-		bigshield.setUnlocalizedName("bigshield");
 		
 		event.getRegistry().registerAll(
 				smallshield,

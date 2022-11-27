@@ -73,7 +73,6 @@ import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentTunneling;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVersatility;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVitality;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchatnmentSmelting;
-import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
@@ -399,7 +398,8 @@ public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Re
 			}
 		}
 	}
-	
+
+	/*
 	@SubscribeEvent
 	public void onEvent(RightClickBlock event)
 	{
@@ -419,6 +419,7 @@ public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Re
 			}
 		}
 	}
+	 */
 	
 	//Insert weapons from my mod into dungeon loot
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)

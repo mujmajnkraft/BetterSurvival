@@ -10,7 +10,6 @@ import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboP
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
-import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import com.mujmajnkraft.bettersurvival.items.ItemDagger;
@@ -252,7 +251,8 @@ public class ModWeaponHandler {
 			event.setCanceled(true);
 		}
 	}
-	
+
+	/*
 	//Allows player to put potion or milk into cauldron
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled = true)
 	public void onEvent(RightClickBlock event)
@@ -273,7 +273,7 @@ public class ModWeaponHandler {
 			}
 		}
 	}
-	
+	*/
 	
 
 }

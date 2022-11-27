@@ -42,7 +42,6 @@ public class ItemSpear extends Item{
 	
 	public ItemSpear(ToolMaterial material) {
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Spear");
-		this.setUnlocalizedName(material.name().toLowerCase()+"spear");
 		this.maxStackSize = 16;
 		this.attackDamage = (float) (0.75 * (3.0F + material.getAttackDamage()));
 		this.setCreativeTab(CreativeTabs.COMBAT);

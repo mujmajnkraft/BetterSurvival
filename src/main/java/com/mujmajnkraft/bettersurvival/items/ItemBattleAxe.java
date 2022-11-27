@@ -17,7 +17,6 @@ public class ItemBattleAxe extends ItemCustomWeapon{
 	{
 		super(material, 1.6f, 1.25f);
 		this.setRegistryName("Item"+material.name().toLowerCase()+"BattleAxe");
-		this.setUnlocalizedName(material.name().toLowerCase()+"battleaxe");
 	}
 	
 	@Override

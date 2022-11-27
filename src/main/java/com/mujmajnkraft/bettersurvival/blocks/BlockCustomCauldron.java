@@ -1,5 +1,5 @@
 package com.mujmajnkraft.bettersurvival.blocks;
-
+/*
 import java.util.ArrayList;
 import java.util.List;
 import com.mujmajnkraft.bettersurvival.init.ModPotionTypes;
@@ -320,3 +320,4 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
 	}
 
 }
+*/

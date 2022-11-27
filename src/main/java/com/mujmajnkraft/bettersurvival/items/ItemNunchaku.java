@@ -22,7 +22,6 @@ public class ItemNunchaku extends ItemCustomWeapon{
 	public ItemNunchaku(ToolMaterial material) {
 		super(material, 0.5F, 0.1F);
 		this.setRegistryName("Item"+material.name().toLowerCase()+"Nunchaku");
-		this.setUnlocalizedName(material.name().toLowerCase()+"nunchaku");
 		
 		this.addPropertyOverride(new ResourceLocation("spinning"), new IItemPropertyGetter()
         {

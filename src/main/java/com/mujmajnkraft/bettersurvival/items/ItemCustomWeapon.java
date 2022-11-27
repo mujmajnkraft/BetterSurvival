@@ -119,7 +119,7 @@ public class ItemCustomWeapon extends Item{
 	}
 	
 	@Override
-	@SideOnly((Side.CLIENT))
+	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		if (this.material == ModItems.SILVER && Bettersurvival.isIafLoaded)

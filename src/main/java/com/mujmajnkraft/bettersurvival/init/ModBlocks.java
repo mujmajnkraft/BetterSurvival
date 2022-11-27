@@ -1,5 +1,5 @@
 package com.mujmajnkraft.bettersurvival.init;
-
+/*
 import com.mujmajnkraft.bettersurvival.blocks.BlockCustomCauldron;
 //import com.mujmajnkraft.bettersurvival.blocks.BlockWorkshop;
 
@@ -36,3 +36,4 @@ public class ModBlocks {
 	}
 
 }
+*/

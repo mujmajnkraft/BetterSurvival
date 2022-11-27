@@ -4,7 +4,7 @@ public class Reference {
 	
 	public static final String MOD_ID = "mujmajnkraftsbettersurvival";
 	public static final String MOD_NAME = "Better Survival";
-	public static final String MOD_VERSION = "1.4.2-BETA4";
+	public static final String MOD_VERSION = "1.4.2-BETA5-FONNY";
 	public static final String MC_VERSION = "[1.12, 1.13)";
 	
 	public static final String CLIENT_PROXY_CLASS = "com.mujmajnkraft.bettersurvival.proxy.ClientProxy";

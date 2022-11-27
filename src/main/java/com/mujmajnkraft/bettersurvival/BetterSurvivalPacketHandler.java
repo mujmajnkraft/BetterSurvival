@@ -11,7 +11,6 @@ public class BetterSurvivalPacketHandler {
 	public static void init()
 	{
 		int id = 0;
-		NETWORK.registerMessage(MessageExtendedReachAttack.Handler.class, MessageExtendedReachAttack.class, id++, Side.SERVER);
 		NETWORK.registerMessage(MessageNunchakuSpinClient.Handler.class, MessageNunchakuSpinClient.class, id++, Side.SERVER);
 		NETWORK.registerMessage(MessageNunchakuSpinServer.Handler.class, MessageNunchakuSpinServer.class, id++, Side.CLIENT);
 	}
