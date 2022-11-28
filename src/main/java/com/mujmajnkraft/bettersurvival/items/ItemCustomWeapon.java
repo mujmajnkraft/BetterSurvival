@@ -5,9 +5,7 @@ import java.util.List;
 import com.google.common.collect.Multimap;
 import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.InFCompat;
-import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
-import com.mujmajnkraft.bettersurvival.init.ModItems;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
