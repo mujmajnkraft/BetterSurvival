@@ -1,6 +1,6 @@
 package com.mujmajnkraft.bettersurvival;
 
-//Retain ICustomWeapon so ReachFix doesn't crash indev
+//Retain ICustomWeapon for ReachFix compat with spears
 public interface ICustomWeapon {
-    default float getReach() { return 0; }
+    float getReach();
 }

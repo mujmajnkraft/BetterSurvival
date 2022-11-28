@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.client;
 
 import com.mujmajnkraft.bettersurvival.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
@@ -41,10 +42,11 @@ public class ModClientHandler {
 		GameSettings GS = mc.gameSettings;
 
 		if(player != null && rvEntity != null) {
+			INunchakuCombo cap = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
 			if(player.getHeldItemMainhand().getItem() instanceof ItemNunchaku && !player.isRowingBoat() && player.getActiveItemStack() == ItemStack.EMPTY && GS.keyBindAttack.isKeyDown()) {
-				if(!player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).isSpinning()) {//Don't spam packets if we're already spinning
+				if(cap != null && !cap.isSpinning()) {//Don't spam packets if we're already spinning
 					BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
-					player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).setSpinning(true);
+					cap.setSpinning(true);
 				}
 				if(player.getCooledAttackStrength(0) == 1.0f) {
 					RayTraceResult mov = EntityRendererHook.pointedObject(rvEntity, player, EnumHand.MAIN_HAND, mc.world, mc.getRenderPartialTicks());
@@ -53,9 +55,9 @@ public class ModClientHandler {
 					}
 				}
 			}
-			else if(player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).isSpinning()) {
+			else if(cap != null && cap.isSpinning()) {
 				BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(false));
-				player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).setSpinning(false);
+				cap.setSpinning(false);
 			}
 		}
 	}

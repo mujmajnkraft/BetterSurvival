@@ -1,13 +1,13 @@
 package com.mujmajnkraft.bettersurvival.items;
 
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.CrushingRecipe;
-import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
-import com.mujmajnkraft.bettersurvival.init.ModItems;
+import com.mujmajnkraft.bettersurvival.InFCompat;
+import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 
 import net.minecraft.block.BlockGlass;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,14 +20,20 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.util.List;
 
 public class ItemHammer extends ItemCustomWeapon{
 	
-	private int stunduration;
+	public final int stunduration;
 	public ItemHammer(ToolMaterial material) {
 		super(material, 1.2F, 1.35F);
-		this.setRegistryName("Item"+material.name().toLowerCase()+"Hammer");
+		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"hammer");
+		this.setTranslationKey(material.name().toLowerCase()+"hammer");
 		stunduration = 50;
 	}
 	
@@ -135,41 +141,18 @@ public class ItemHammer extends ItemCustomWeapon{
 	    
 	    if (!playerIn.capabilities.isCreativeMode)
 	    {
-			playerIn.getCooldownTracker().setCooldown(ModItems.aluminiumhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.bronzehammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.copperhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.desertchitinhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.diamondhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.dragonbonehammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.enderiumhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.goldenhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.ironhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.invarhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.junglechitinhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.lumiumhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.signalumhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.silverhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.steelhammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.stonehammer, 200);
-			playerIn.getCooldownTracker().setCooldown(ModItems.woodenhammer, 200);
+			playerIn.getCooldownTracker().setCooldown(this, 200);
 	    }
 	    return EnumActionResult.SUCCESS;
 	}
-	
+
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		if (player.getCooledAttackStrength(0.5F) > 0.9 && entity instanceof EntityLivingBase)
-		{
-			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
-			if (player.getRNG().nextInt(20)<(2+l) && !entity.getIsInvulnerable())
-			{
-				EntityLivingBase living = (EntityLivingBase) entity;
-				PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, stunduration);
-				living.addPotionEffect(potioneffectIn);
-			}
-		}
-		return false;
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".hammer.desc");
+		tooltip.add(TextFormatting.AQUA + s);
 	}
 	
 	@Override

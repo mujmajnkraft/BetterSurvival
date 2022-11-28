@@ -10,9 +10,8 @@ public class BetterSurvivalPacketHandler {
 	
 	public static void init()
 	{
-		int id = 0;
-		NETWORK.registerMessage(MessageNunchakuSpinClient.Handler.class, MessageNunchakuSpinClient.class, id++, Side.SERVER);
-		NETWORK.registerMessage(MessageNunchakuSpinServer.Handler.class, MessageNunchakuSpinServer.class, id++, Side.CLIENT);
+		NETWORK.registerMessage(MessageNunchakuSpinClient.Handler.class, MessageNunchakuSpinClient.class, 0, Side.SERVER);
+		NETWORK.registerMessage(MessageNunchakuSpinServer.Handler.class, MessageNunchakuSpinServer.class, 1, Side.CLIENT);
 	}
 
 }

@@ -158,7 +158,7 @@ public class ItemCustomShield extends ItemShield {
 		            	//Knocks attackers back like vanilla shield, but also damages them with reflection ench
 		                ((EntityLivingBase) entity).knockBack(wielder, 0.5F, wielder.posX - entity.posX, wielder.posZ - entity.posZ);
 		                if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.reflection, wielder.getActiveItemStack()) > 0)
-						EnchantmentReflection.reflectDamage(entity, wielder);
+							EnchantmentReflection.reflectDamage(entity, wielder);
 		            }
 		        }
 			}
@@ -192,10 +192,7 @@ public class ItemCustomShield extends ItemShield {
 	            Vec3d vec3d2 = vec3d.subtractReverse(new Vec3d(entity.posX, entity.posY, entity.posZ)).normalize();
 	            vec3d2 = new Vec3d(vec3d2.x, 0.0D, vec3d2.z);
 
-	            if (vec3d2.dotProduct(vec3d1) < 0.0D)
-	            {
-	                return true;
-	            }
+				return vec3d2.dotProduct(vec3d1) < 0.0D;
 	        }
 	    }
 			
@@ -255,7 +252,7 @@ public class ItemCustomShield extends ItemShield {
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
 	{
-		return repair.getItem() == Items.IRON_INGOT ? true : false;
+		return repair.getItem() == Items.IRON_INGOT;
 	}
 	
 	public int getWeight()

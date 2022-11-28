@@ -1,22 +1,45 @@
 package com.mujmajnkraft.bettersurvival.eventhandlers;
 
+import bettercombat.mod.capability.CapabilityOffhandCooldown;
 import bettercombat.mod.event.RLCombatModifyDamageEvent;
+import bettercombat.mod.handler.EventHandlers;
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
+import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
-import com.mujmajnkraft.bettersurvival.items.ItemDagger;
-import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
-import com.mujmajnkraft.bettersurvival.items.ItemSpear;
+import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
+import com.mujmajnkraft.bettersurvival.init.ModPotions;
+import com.mujmajnkraft.bettersurvival.items.*;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class RLCombatCompatEventHandler {
+
+    //Handle InF material modifiers
+    @SubscribeEvent
+    public void onDamageModifyPre(RLCombatModifyDamageEvent.Pre event) {
+        EntityPlayer player = event.getEntityPlayer();
+        if(!player.world.isRemote && event.getTarget() instanceof EntityLivingBase) {
+            ItemStack stack = player.getHeldItem(event.getOffhand() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
+            if(stack.getItem() instanceof ItemCustomWeapon) {
+                if(Bettersurvival.isIafLoaded) {
+                    Item.ToolMaterial mat = ((ItemCustomWeapon)stack.getItem()).getMaterial();
+                    event.setDamageModifier(event.getDamageModifier() + InFCompat.getMaterialModifier(mat, (EntityLivingBase)event.getTarget(), player));
+                }
+            }
+        }
+    }
 
     //Handle dagger backstab, nunchuku combo, spear breaking, and potion swords with offhand-sensitive methods
     @SubscribeEvent
@@ -26,21 +49,84 @@ public class RLCombatCompatEventHandler {
             ItemStack stack = player.getHeldItem(event.getOffhand() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
             //Dagger
             if(stack.getItem() instanceof ItemDagger) {
-                float multiplier = ((ItemDagger)stack.getItem()).getBackstabMultiplyer(player, event.getTarget());
+                float multiplier = ((ItemDagger)stack.getItem()).getBackstabMultiplier(player, event.getTarget(), event.getOffhand());
                 float modifier = (multiplier-1) * event.getBaseDamage();
                 event.setDamageModifier(event.getDamageModifier() + modifier);
             }
             //Nunchuku (Mainhand only)
-            if(!event.getOffhand() && stack.getItem() instanceof ItemNunchaku) {
+            else if(!event.getOffhand() && stack.getItem() instanceof ItemNunchaku) {
                 INunchakuCombo combo = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
                 if(combo != null) {
                     event.setDamageModifier(event.getDamageModifier() + (event.getBaseDamage() * combo.getComboPower()));
                 }
             }
             //Spear
-            if(stack.getItem() instanceof ItemSpear) {
+            else if(stack.getItem() instanceof ItemSpear) {
                 if(!player.capabilities.isCreativeMode && ((ItemSpear)stack.getItem()).breakChance() >= player.getRNG().nextFloat()) {
                     stack.shrink(1);
+                }
+            }
+            //Hammer
+            else if(stack.getItem() instanceof ItemHammer && event.getTarget() instanceof EntityLivingBase) {
+                float cooledStrength;
+                if(event.getOffhand()) {
+                    CapabilityOffhandCooldown capability = player.getCapability(EventHandlers.TUTO_CAP, null);
+                    float ohCooldown = 0;
+                    if(capability != null) {
+                        int ohCooldownBeginning = capability.getOffhandBeginningCooldown();
+                        if(ohCooldownBeginning > 0) ohCooldown = capability.getOffhandCooldown()/(float)ohCooldownBeginning;
+                    }
+                    cooledStrength = Math.abs(1.0F - ohCooldown);
+                }
+                else {
+                    cooledStrength = player.getCooledAttackStrength(0.5F);
+                }
+                if(cooledStrength > 0.9) {
+                    int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
+                    if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
+                        PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer)stack.getItem()).stunduration);
+                        ((EntityLivingBase)event.getTarget()).addPotionEffect(potioneffectIn);
+                    }
+                }
+            }
+            //BattleAxe
+            else if(stack.getItem() instanceof ItemBattleAxe && event.getTarget() instanceof EntityLivingBase) {
+                float cooledStrength;
+                if(event.getOffhand()) {
+                    CapabilityOffhandCooldown capability = player.getCapability(EventHandlers.TUTO_CAP, null);
+                    float ohCooldown = 0;
+                    if(capability != null) {
+                        int ohCooldownBeginning = capability.getOffhandBeginningCooldown();
+                        if(ohCooldownBeginning > 0) ohCooldown = capability.getOffhandCooldown()/(float)ohCooldownBeginning;
+                    }
+                    cooledStrength = Math.abs(1.0F - ohCooldown);
+                }
+                else {
+                    cooledStrength = player.getCooledAttackStrength(0.5F);
+                }
+                if(cooledStrength > 0.9) {
+                    int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
+                    if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
+                        if(event.getTarget() instanceof EntityPlayer) {
+                            EntityItem drop = ((EntityPlayer)event.getTarget()).dropItem(((EntityPlayer)event.getTarget()).inventory.decrStackSize(((EntityPlayer)event.getTarget()).inventory.currentItem, 1), false);
+                            if(drop != null) drop.setPickupDelay(40);
+                        }
+                        else {
+                            if(!((EntityLivingBase)event.getTarget()).getHeldItemMainhand().isEmpty()) {
+                                ItemStack item = ((EntityLivingBase)event.getTarget()).getHeldItemMainhand();
+                                NBTTagCompound nbttagcompound = event.getTarget().writeToNBT(new NBTTagCompound());
+                                if(nbttagcompound.hasKey("HandDropChances", 9)) {
+                                    NBTTagList nbttaglist = nbttagcompound.getTagList("HandDropChances", 5);
+                                    float chance = nbttaglist.getFloatAt(0);
+                                    ((EntityLivingBase)event.getTarget()).setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+                                    int rnd = event.getTarget().world.rand.nextInt(100);
+                                    if(chance*100+EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.LOOTING, stack)>rnd+1) {
+                                        ((EntityLivingBase)event.getTarget()).entityDropItem(item, 1);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             //Potions on swords, only apply when actually doing damage

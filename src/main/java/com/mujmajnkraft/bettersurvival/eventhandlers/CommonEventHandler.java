@@ -1,15 +1,14 @@
 package com.mujmajnkraft.bettersurvival.eventhandlers;
 
 import com.mujmajnkraft.bettersurvival.Bettersurvival;
+import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
-import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
+import com.mujmajnkraft.bettersurvival.items.*;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.MobEffects;
@@ -18,8 +17,10 @@ import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.LootEntry;
 import net.minecraft.world.storage.loot.LootEntryTable;
@@ -54,7 +55,6 @@ import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.Arro
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
-import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentAgility;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentArrowRecovery;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentBlast;
@@ -71,15 +71,11 @@ import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVitality;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchatnmentSmelting;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
-import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
-import com.mujmajnkraft.bettersurvival.items.ItemDagger;
-import com.mujmajnkraft.bettersurvival.items.ItemSpear;
 
 public class CommonEventHandler {
 
 	public static final ResourceLocation ARROWPROPERTIES_CAP = new ResourceLocation(Reference.MOD_ID, "ArrowProperties");
 	public static final ResourceLocation SPEARSIN_CAP = new ResourceLocation(Reference.MOD_ID, "spearsin");
-	public static final ResourceLocation WEAPONEFFECT_CAP = new ResourceLocation(Reference.MOD_ID, "weaponeff");
 	public static final ResourceLocation NUNCHAKU_CAP = new ResourceLocation(Reference.MOD_ID, "nunchakucombo");
 
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
@@ -94,9 +90,6 @@ public class CommonEventHandler {
 			}
 			if(!event.getObject().hasCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null)) {
 				event.addCapability(NUNCHAKU_CAP, new NunchakuComboProvider());
-			}
-			if(!event.getObject().hasCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null)) {
-				event.addCapability(WEAPONEFFECT_CAP, new WeaponEffectProvider());
 			}
 		}
 	}
@@ -227,17 +220,58 @@ public class CommonEventHandler {
 		if(target.getActiveItemStack().getItem() instanceof ItemCustomShield)
 			event.setAmount(((ItemCustomShield)target.getActiveItemStack().getItem()).getDamageBlocked(target, event.getSource(), event.getAmount()));
 		
-		//Applies backstab and nunchuku multiplier (Handle in RLCombatCompatEventHandler if RLCombat is loaded)
+		//Applies backstab/combo/bash/disarm and silver/myrmex bonuses (Handle in RLCombatCompatEventHandler if RLCombat is loaded)
 		Entity entitysource = event.getSource().getImmediateSource();
 		if(!Bettersurvival.isRLCombatLoaded && entitysource instanceof EntityPlayer && !entitysource.world.isRemote) {
 			EntityPlayer player = (EntityPlayer)entitysource;
 			if(player.getHeldItemMainhand().getItem() instanceof ItemDagger) {
-				event.setAmount(event.getAmount() * ((ItemDagger)player.getHeldItemMainhand().getItem()).getBackstabMultiplyer(player, target));
+				event.setAmount(event.getAmount() * ((ItemDagger)player.getHeldItemMainhand().getItem()).getBackstabMultiplier(player, target, false));
 			}
-			if(player.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
+			else if(player.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
 				INunchakuCombo combo = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
 				if(combo != null) {
 					event.setAmount(event.getAmount() * (combo.getComboPower() + 1.0F));
+				}
+			}
+			else if(player.getHeldItemMainhand().getItem() instanceof ItemHammer) {
+				if(player.getCooledAttackStrength(0.5F) > 0.9) {
+					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, player.getHeldItemMainhand());
+					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+						PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer) player.getHeldItemMainhand().getItem()).stunduration);
+						target.addPotionEffect(potioneffectIn);
+					}
+				}
+			}
+			else if(player.getHeldItemMainhand().getItem() instanceof ItemBattleAxe) {
+				if(player.getCooledAttackStrength(0.5F) > 0.9) {
+					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, player.getHeldItemMainhand());
+					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+						if(target instanceof EntityPlayer) {
+							EntityItem drop = ((EntityPlayer)target).dropItem(((EntityPlayer)target).inventory.decrStackSize(((EntityPlayer)target).inventory.currentItem, 1), false);
+							if(drop != null) drop.setPickupDelay(40);
+						}
+						else {
+							if(!target.getHeldItemMainhand().isEmpty()) {
+								ItemStack item = target.getHeldItemMainhand();
+								NBTTagCompound nbttagcompound = target.writeToNBT(new NBTTagCompound());
+								if(nbttagcompound.hasKey("HandDropChances", 9)) {
+									NBTTagList nbttaglist = nbttagcompound.getTagList("HandDropChances", 5);
+									float chance = nbttaglist.getFloatAt(0);
+									target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
+									int rnd = target.world.rand.nextInt(100);
+									if (chance*100+EnchantmentHelper.getEnchantmentLevel(net.minecraft.init.Enchantments.LOOTING, player.getHeldItemMainhand())>rnd+1) {
+										target.entityDropItem(item, 1);
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			if(player.getHeldItemMainhand().getItem() instanceof ItemCustomWeapon) {
+				if(Bettersurvival.isIafLoaded) {
+					Item.ToolMaterial mat = ((ItemCustomWeapon)player.getHeldItemMainhand().getItem()).getMaterial();
+					event.setAmount(event.getAmount() + InFCompat.getMaterialModifier(mat, target, player));
 				}
 			}
 		}

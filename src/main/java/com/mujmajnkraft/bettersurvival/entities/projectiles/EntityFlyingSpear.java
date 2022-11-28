@@ -1,14 +1,13 @@
 package com.mujmajnkraft.bettersurvival.entities.projectiles;
 
 import com.mujmajnkraft.bettersurvival.Bettersurvival;
+import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
-import com.mujmajnkraft.bettersurvival.init.ModItems;
 import com.mujmajnkraft.bettersurvival.items.ItemSpear;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -23,31 +22,24 @@ import net.minecraft.world.World;
 
 public class EntityFlyingSpear extends EntityArrow {
 
-	public ItemStack spear;
+	private ItemStack spear;
+
 	private static DataParameter<ItemStack> SPEAR = EntityDataManager.createKey(EntityFlyingSpear.class, DataSerializers.ITEM_STACK);
-	
+
 	public EntityFlyingSpear(World worldIn) {
 		super(worldIn);
 	}
-	
 	public EntityFlyingSpear(World worldIn, EntityLivingBase shooter)
     {
         super(worldIn, shooter.posX, shooter.posY + (double)shooter.getEyeHeight() - 0.10000000149011612D, shooter.posZ);
         this.shootingEntity = shooter;
 
-        if (shooter instanceof EntityPlayer)
-        {
+        if(shooter instanceof EntityPlayer) {
             this.pickupStatus = EntityArrow.PickupStatus.ALLOWED;
         }
     }
-	
-	public boolean isInGround()
-	{
-		return super.inGround;
-	}
-	
-	public void setSpear(ItemStack spear)
-	{
+
+	public void setSpear(ItemStack spear) {
 		this.spear = spear;
 		dataManager.set(SPEAR, spear);
 	}
@@ -69,39 +61,24 @@ public class EntityFlyingSpear extends EntityArrow {
 		if (entity != null)
 		{
 			boolean flag = true;
-			if (entity instanceof EntityPlayer)
-			{
+			if(entity instanceof EntityPlayer) {
 				flag = !((EntityPlayer)entity).capabilities.isCreativeMode;
 			}
-			if (entity instanceof EntityLivingBase && !entity.getIsInvulnerable() && flag)
-			{
-				if (!(entity instanceof EntityEnderman))
-				{
+			if(entity instanceof EntityLivingBase && !entity.getIsInvulnerable() && flag) {
+				if(!(entity instanceof EntityEnderman)) {
 					EntityLivingBase target = (EntityLivingBase) entity;
-					if (this.getSpear().getItem() instanceof ItemSpear)
+					if(this.getSpear().getItem() instanceof ItemSpear)
 					{
-						ItemSpear spear = (ItemSpear) this.getSpear().getItem();
-						if (spear.getMaterial() == ModItems.SILVER && Bettersurvival.isIafLoaded)
-						{
-				            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-				            {
-				                target.attackEntityFrom(DamageSource.MAGIC, ((3.0F + spear.getMaterial().getAttackDamage() + 6.0F) * 0.75F));
-				            }
-				        }
-						else if (spear.getMaterial() == ModItems.DESERT_CHITIN || spear.getMaterial() == ModItems.JUNGLE_CHITIN)
-						{
-				            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
-				            {
-				                target.attackEntityFrom(DamageSource.GENERIC, ((3.0F + spear.getMaterial().getAttackDamage() + 6.0F) * 0.75F));
-				            }
-				        }
+						float matModifier = 0;
+						if(Bettersurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(((ItemSpear) this.getSpear().getItem()).getMaterial(), (EntityLivingBase)entity, null);
+						target.attackEntityFrom(DamageSource.GENERIC, ((ItemSpear) this.getSpear().getItem()).getAttackDamage() + matModifier);
 					}
-					if (!world.isRemote && this.pickupStatus == PickupStatus.ALLOWED && this.spear.getItem() instanceof ItemSpear)
+					if(!world.isRemote && this.pickupStatus == PickupStatus.ALLOWED && this.spear.getItem() instanceof ItemSpear)
 					{
 						if (((ItemSpear)this.spear.getItem()).breakChance() < this.rand.nextFloat())
 						{
 							ISpearsIn spearsin = entity.getCapability(SpearsInProvider.SPEARSIN_CAP, null);
-							spearsin.addSpear(this.spear);
+							if(spearsin != null) spearsin.addSpear(this.spear);
 						}
 					}
 				}

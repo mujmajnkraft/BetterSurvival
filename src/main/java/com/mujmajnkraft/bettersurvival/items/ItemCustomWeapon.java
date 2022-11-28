@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Multimap;
 import com.mujmajnkraft.bettersurvival.Bettersurvival;
+import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
@@ -29,9 +30,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemCustomWeapon extends Item {
 	
-	final float attackDamage;
-	final double attackSpeed;
-	final ToolMaterial material;
+	private final float attackDamage;
+	private final double attackSpeed;
+	private final ToolMaterial material;
 
 	public ItemCustomWeapon(ToolMaterial material, float damageModifier, float delayModifier)
 	{
@@ -53,7 +54,6 @@ public class ItemCustomWeapon extends Item {
 		return attackDamage;
 	}
 
-	public float getReachBonus() { return 0; }
 	
 	//Copied from ItemSword
 	@Override
@@ -67,11 +67,6 @@ public class ItemCustomWeapon extends Item {
 	public int getItemEnchantability()
     {
 		return this.material.getEnchantability();
-	}
-    
-	public String getToolMaterialName()
-	{
-		return this.material.toString();
 	}
 
 	@Override
@@ -106,13 +101,25 @@ public class ItemCustomWeapon extends Item {
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
 		if(Bettersurvival.isIafLoaded) {
-			if(this.material == ModItems.SILVER) {
+			if(this.material == InFCompat.SILVER) {
 				String s = net.minecraft.client.resources.I18n.format("silvertools.hurt");
 				tooltip.add(TextFormatting.GREEN + s);
 			}
-			else if(this.material == ModItems.JUNGLE_CHITIN || this.material == ModItems.DESERT_CHITIN) {
-				String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".chitintools.hurt");
+			else if(this.material == InFCompat.JUNGLE_CHITIN || this.material == InFCompat.DESERT_CHITIN) {
+				String s = net.minecraft.client.resources.I18n.format("myrmextools.hurt");
 				tooltip.add(TextFormatting.GREEN + s);
+			}
+			else if(this.material == InFCompat.DRAGON_BONE_ICED) {
+				String s = net.minecraft.client.resources.I18n.format("dragon_sword_ice.hurt1");
+				tooltip.add(TextFormatting.GREEN + s);
+				s = net.minecraft.client.resources.I18n.format("dragon_sword_ice.hurt2");
+				tooltip.add(TextFormatting.RED + s);
+			}
+			else if(this.material == InFCompat.DRAGON_BONE_FLAMED) {
+				String s = net.minecraft.client.resources.I18n.format("dragon_sword_fire.hurt1");
+				tooltip.add(TextFormatting.GREEN + s);
+				s = net.minecraft.client.resources.I18n.format("dragon_sword_fire.hurt2");
+				tooltip.add(TextFormatting.RED + s);
 			}
 		}
 	}

@@ -30,7 +30,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, 
 	version = Reference.MOD_VERSION, 
-	acceptedMinecraftVersions = Reference.MC_VERSION, dependencies = "after-required:reachfix;after:bettercombat")
+	acceptedMinecraftVersions = Reference.MC_VERSION, dependencies = "after-required:reachfix;after:bettercombat;after:iceandfire")
 public class Bettersurvival {
 	
 	@Instance

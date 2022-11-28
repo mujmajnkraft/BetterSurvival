@@ -29,7 +29,6 @@ public class ItemCrossbow extends ItemBow {
 	public ItemCrossbow()
 	{
 		this.setMaxDamage(768);
-		this.setRegistryName("ItemCrossbow");
 		this.addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter()
         {
             @SideOnly(Side.CLIENT)
