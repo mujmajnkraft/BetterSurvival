@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
+import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
@@ -22,12 +23,11 @@ public class EnchantmentArrowRecovery extends Enchantment {
 	}
 	
 	//Called during EntityJoinWorldEvent if an arrow is fired from an enchanted bow
-	public static void modifyArrow(EntityLivingBase shooter, EntityArrow arrow)
-	{
-		int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.arrowrecovery, shooter);
-		if (shooter.getRNG().nextInt(4) < l)
-		{
-			arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null).setCanRecover(true);
+	public static void modifyArrow(EntityLivingBase shooter, EntityArrow arrow) {
+		int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.arrowrecovery, shooter.getHeldItemMainhand());
+		if(shooter.getRNG().nextInt(4) < l) {
+            IArrowProperties cap = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
+			if(cap != null) cap.setCanRecover(true);
 		}
 	}
 	

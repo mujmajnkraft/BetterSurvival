@@ -6,8 +6,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 
-public class NunchakuComboProwider implements ICapabilitySerializable<NBTTagCompound>{
-	
+public class NunchakuComboProvider implements ICapabilitySerializable<NBTTagCompound>{
 	@CapabilityInject(INunchakuCombo.class)
 
 	 public static final Capability<INunchakuCombo> NUNCHAKUCOMBO_CAP = null;
@@ -33,5 +32,4 @@ public class NunchakuComboProwider implements ICapabilitySerializable<NBTTagComp
 	public void deserializeNBT(NBTTagCompound nbt) {
 		NUNCHAKUCOMBO_CAP.getStorage().readNBT(NUNCHAKUCOMBO_CAP, this.instance, null, nbt);
 	}
-
 }

@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival;
 
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
-import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -42,17 +42,12 @@ public class MessageNunchakuSpinClient implements IMessage {
 	    // Know it will be on the server so make it thread-safe
 	    final EntityPlayerMP thePlayer = (EntityPlayerMP) ctx.getServerHandler().player;
 	    thePlayer.getServer().addScheduledTask(
-	          new Runnable()
-	          {
-	              @Override
-	              public void run() 
-	              {
-	                	INunchakuCombo cap = thePlayer.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null);
-	                	cap.setSpinning(message.isSpinning);
-	                	if (!message.isSpinning) cap.setComboTime(0); //Stops combo if nunchaku stops spinning
-	                	BetterSurvivalPacketHandler.NETWORK.sendToAllTracking(new MessageNunchakuSpinServer(message.isSpinning, thePlayer.getEntityId()), thePlayer);
-	              }
-	          });
+				() -> {
+					  INunchakuCombo cap = thePlayer.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+					  cap.setSpinning(message.isSpinning);
+					  if (!message.isSpinning) cap.setComboTime(0); //Stops combo if nunchaku stops spinning
+					  BetterSurvivalPacketHandler.NETWORK.sendToAllTracking(new MessageNunchakuSpinServer(message.isSpinning, thePlayer.getEntityId()), thePlayer);
+				});
 		return null;
 		}
 	}

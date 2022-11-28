@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
+import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
@@ -25,17 +26,16 @@ public class EnchantmentBlast extends Enchantment {
 	//Called during EntityJoinWorldEvent if an arrow is fired from an enchanted bow
 	public static void modifyArrow(EntityArrow arrow, EntityLivingBase shooter)
 	{
-		float power = (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.blast, shooter)+1)/4.0F;
-		boolean canDestroyBlocks = false;
-		if (shooter instanceof EntityPlayer)
-		{
+		float power = (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.blast, shooter.getHeldItemMainhand())+1)/4.0F;
+		boolean canDestroyBlocks;
+		if(shooter instanceof EntityPlayer) {
 			canDestroyBlocks = ((EntityPlayer)shooter).capabilities.allowEdit;
 		}
-		else
-		{
+		else {
 			canDestroyBlocks = shooter.getEntityWorld().getGameRules().getBoolean("mobGriefing");
 		}
-		arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null).setExplosion(power, canDestroyBlocks);
+		IArrowProperties cap = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
+		if(cap != null) cap.setExplosion(power, canDestroyBlocks);
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

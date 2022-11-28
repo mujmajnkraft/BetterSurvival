@@ -1,7 +1,9 @@
 package com.mujmajnkraft.bettersurvival.eventhandlers;
 
-import net.minecraft.block.BlockCauldron;
-import net.minecraft.block.state.IBlockState;
+import com.mujmajnkraft.bettersurvival.Bettersurvival;
+import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
+import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
@@ -10,10 +12,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -41,8 +40,6 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.LeftClickBlock;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent.RightClickBlock;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
@@ -52,10 +49,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
-import com.mujmajnkraft.bettersurvival.EntityAIDoNothing;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
-import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.weaponeffect.WeaponEffectProvider;
@@ -80,45 +76,28 @@ import com.mujmajnkraft.bettersurvival.items.ItemDagger;
 import com.mujmajnkraft.bettersurvival.items.ItemSpear;
 
 public class CommonEventHandler {
-	
-public static final ResourceLocation ARROWPROPERTIES_CAP = new ResourceLocation(Reference.MOD_ID, "ArrowProperties");
-public static final ResourceLocation SPEARSIN_CAP = new ResourceLocation(Reference.MOD_ID, "spearsin");
-public static final ResourceLocation WEAPONEWWECT_CAP = new ResourceLocation(Reference.MOD_ID, "weaponeff");
-public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Reference.MOD_ID, "nunchakucombo");
-	
+
+	public static final ResourceLocation ARROWPROPERTIES_CAP = new ResourceLocation(Reference.MOD_ID, "ArrowProperties");
+	public static final ResourceLocation SPEARSIN_CAP = new ResourceLocation(Reference.MOD_ID, "spearsin");
+	public static final ResourceLocation WEAPONEFFECT_CAP = new ResourceLocation(Reference.MOD_ID, "weaponeff");
+	public static final ResourceLocation NUNCHAKU_CAP = new ResourceLocation(Reference.MOD_ID, "nunchakucombo");
+
 	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
 	public void onEvent(AttachCapabilitiesEvent<Entity> event)
 	{
-		if (!event.getObject().hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null)&& event.getObject() instanceof EntityArrow)
-		{
+		if(event.getObject() instanceof EntityArrow && !event.getObject().hasCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null)) {
 			event.addCapability(ARROWPROPERTIES_CAP, new ArrowPropertiesProvider());
 		}
-		if ((!event.getObject().hasCapability(SpearsInProvider.SPEARSIN_CAP, null))&&(event.getObject() instanceof EntityLivingBase))
-		{
-			event.addCapability(SPEARSIN_CAP, new SpearsInProvider());
-		}
-		
-		if ((!event.getObject().hasCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null))&&(event.getObject() instanceof EntityLivingBase))
-		{
-			event.addCapability(NUNCHAKUCOMBO_CAP, new NunchakuComboProwider());
-		}
-		
-		if ((!event.getObject().hasCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null))&&(event.getObject() instanceof EntityLivingBase))
-		{
-			event.addCapability(WEAPONEWWECT_CAP, new WeaponEffectProvider());
-		}
-	}
-	
-	//Stores on which side of a block the player clicked when they started mining, so tunneling can pick it up
-	@SubscribeEvent
-	public void onEvent(LeftClickBlock event)
-	{
-		EntityPlayer player = event.getEntityPlayer();
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.tunneling, player) !=0)
-		{
-			String facing = event.getFace().toString();
-			player.removeTag("north");player.removeTag("south");player.removeTag("east");player.removeTag("west");player.removeTag("up");player.removeTag("down");
-			player.addTag(facing);
+		if(event.getObject() instanceof EntityLivingBase) {
+			if(!event.getObject().hasCapability(SpearsInProvider.SPEARSIN_CAP, null)) {
+				event.addCapability(SPEARSIN_CAP, new SpearsInProvider());
+			}
+			if(!event.getObject().hasCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null)) {
+				event.addCapability(NUNCHAKU_CAP, new NunchakuComboProvider());
+			}
+			if(!event.getObject().hasCapability(WeaponEffectProvider.WEAPONEFFECT_CAP, null)) {
+				event.addCapability(WEAPONEFFECT_CAP, new WeaponEffectProvider());
+			}
 		}
 	}
 	
@@ -126,140 +105,114 @@ public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Re
 	public void onArrowLoose(ArrowLooseEvent event)
 	{
 		//Resolves multishot enchantment
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.multishot, event.getEntityPlayer()) !=0)
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.multishot, event.getBow()) !=0)
 			EnchantmentMultishot.shootMoreArrows(event.getEntity().getEntityWorld(), event.getEntityPlayer(), event.getBow(), event.getCharge());
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.LOW)
 	public void onBlockBreak(BreakEvent event)
 	{
-		//Resolves tunneling enchantment
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.tunneling, event.getPlayer()) !=0)
+		//Resolves tunneling enchantment, don't recursively tunnel
+		if(event.getPlayer().getHeldItemMainhand().hasTagCompound() && event.getPlayer().getHeldItemMainhand().getTagCompound().getBoolean("tunnelCooldown")) return;
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.tunneling, event.getPlayer().getHeldItemMainhand()) !=0)
 			EnchantmentTunneling.mineManyBlocks(event.getPlayer(), event.getState(), event.getPos());
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGH)
 	public void onBreakingStart(BreakSpeed event)
 	{
 		//Resolves versatility enchantment
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.versatility, event.getEntityPlayer()) !=0)
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.versatility, event.getEntityPlayer().getHeldItemMainhand()) !=0)
 			event.setNewSpeed(event.getOriginalSpeed() * EnchantmentVersatility.getSpeedModifier(event.getEntityPlayer(), event.getState()));
 	}
 	
 	//Prevents teleportation for entities with antiwarp effect
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onEvent(EnderTeleportEvent event)
 	{
-		if (event.getEntityLiving().getActivePotionEffect(ModPotions.antiwarp)!=null)
-		{
+		if(event.getEntityLiving().getActivePotionEffect(ModPotions.antiwarp) != null) {
 			event.setCanceled(true);
 		}
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGH)
 	public void onEntityJoin(EntityJoinWorldEvent event)
 	{
-		//EntityAIDoNothing takes over entity when it is stunned
-		if (event.getEntity() instanceof EntityLiving)
-			((EntityLiving) event.getEntity()).tasks.addTask(0, new EntityAIDoNothing((EntityLiving) event.getEntity()));
-		
-		if (event.getEntity() instanceof EntityArrow && !event.getWorld().isRemote)
-		{
-			EntityArrow arrow = (EntityArrow) event.getEntity();
-			if (arrow.shootingEntity instanceof EntityLivingBase)
-			{
-				EntityLivingBase shooter = (EntityLivingBase) arrow.shootingEntity;
+		if(event.getEntity() instanceof EntityArrow && !event.getWorld().isRemote) {
+			EntityArrow arrow = (EntityArrow)event.getEntity();
+			if(arrow.shootingEntity instanceof EntityLivingBase) {
+				EntityLivingBase shooter = (EntityLivingBase)arrow.shootingEntity;
 				//Resolves arrow recovery enchantment
-				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.arrowrecovery, shooter) > 0)
+				if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.arrowrecovery, shooter.getHeldItemMainhand()) > 0)
 					EnchantmentArrowRecovery.modifyArrow(shooter, arrow);
 				
 				//Resolves blast enchantment
-				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.blast, shooter) > 0)
+				if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.blast, shooter.getHeldItemMainhand()) > 0)
 					EnchantmentBlast.modifyArrow(arrow, shooter);
 				
 				//Resolves range enchantment
-				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.range, shooter) > 0)
+				if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.range, shooter.getHeldItemMainhand()) > 0)
 					EnchantmentRange.modifyArrow(arrow);
 			}
 		}
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGH)
 	public void onAttack(LivingAttackEvent event)
 	{
 		Entity source = event.getSource().getImmediateSource();
 		EntityLivingBase target = event.getEntityLiving();
 		
-		if (source instanceof EntityArrow)
-		{
+		if(source instanceof EntityArrow) {
 			//Makes custom shields block arrows
-			if (target.getActiveItemStack().getItem() instanceof ItemCustomShield) 
-			{
-				if (ItemCustomShield.blockArrow(event.getSource(), target)) {event.setCanceled(true); return;}
+			if(target.getActiveItemStack().getItem() instanceof ItemCustomShield && ItemCustomShield.blockArrow(event.getSource(), target)) {
+				event.setCanceled(true);
+				return;
 			}
-			
 			//Makes custom arrow effects happen 
-			source.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null).hitEntity((EntityArrow) source);
+			IArrowProperties cap = source.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
+			if(cap != null) cap.hitEntity((EntityArrow) source);
 		}
 		
 		//Resolves penetration
-		if (source instanceof EntityLivingBase && !source.world.isRemote)
-		{
-			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) source) > 0 && !event.getSource().isMagicDamage())
+		if(source instanceof EntityLivingBase && !source.world.isRemote) {
+			if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.penetration, (EntityLivingBase) source) > 0 && !event.getSource().isMagicDamage())
 				EnchantmentPenetration.dealPiercingDamage((EntityLivingBase)source, target, event.getAmount());
 		}
 		
-		//Applies weapon venom
-		if (event.getSource().getImmediateSource() !=null)
-		{
-			if (event.getSource().getImmediateSource() instanceof EntityLivingBase)
-			{
-				EntityLivingBase attacker = (EntityLivingBase) event.getSource().getImmediateSource();
-				if (attacker.getHeldItemMainhand().getItem() instanceof ItemSpear && attacker instanceof EntityPlayer)
-				{
-					if (!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.getRNG().nextFloat())
-					{
-						attacker.getHeldItemMainhand().shrink(1);
-					}
+		//Applies weapon venom and spear break chance (Handled in RLCombatCompatEventHandler if RLCombat is loaded and a player)
+		if(!(Bettersurvival.isRLCombatLoaded && event.getSource().getImmediateSource() instanceof EntityPlayer) && event.getSource().getImmediateSource() instanceof EntityLivingBase) {
+			EntityLivingBase attacker = (EntityLivingBase)event.getSource().getImmediateSource();
+			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSpear && attacker instanceof EntityPlayer) {
+				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.getRNG().nextFloat()) {
+					attacker.getHeldItemMainhand().shrink(1);
 				}
-				if (attacker.getHeldItemMainhand().getItem() instanceof ItemSword && !attacker.world.isRemote)
-				{
-					int h = 0;
-					if (attacker.getHeldItemMainhand().hasTagCompound())
-					{
-						NBTTagCompound compound = attacker.getHeldItemMainhand().getTagCompound();
-						if (compound.hasKey("remainingHits"));
-						{
-							h = compound.getInteger("remainingHits");
+			}
+			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSword && !attacker.world.isRemote) {
+				if(attacker.getHeldItemMainhand().hasTagCompound()) {
+					NBTTagCompound compound = attacker.getHeldItemMainhand().getTagCompound();
+					int h = compound.getInteger("remainingHits");
+
+					if(h > 0 && event.getEntityLiving().hurtResistantTime<10) {
+						for(PotionEffect effect : PotionUtils.getEffectsFromStack(attacker.getHeldItemMainhand())) {
+							if(effect.getPotion().isInstant()) {
+								effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
+								event.getEntityLiving().hurtResistantTime = 0;
+							}
+							else {
+								event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()/8, effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+							}
 						}
-						
-						if (h > 0 && event.getEntityLiving().hurtResistantTime<10)
+
+						if(attacker instanceof EntityPlayer) {
+							if(!((EntityPlayer)attacker).capabilities.isCreativeMode) {
+								compound.setInteger("remainingHits", h-1);
+							}
+						}
+						if(h-1 <= 0)
 						{
-							for (PotionEffect effect : PotionUtils.getEffectsFromStack(attacker.getHeldItemMainhand()))
-							{
-								if (effect.getPotion().isInstant())
-								{
-									effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
-									event.getEntityLiving().hurtResistantTime = 0;
-								}
-								else
-								{
-									event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()/8, effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
-								}
-							}
-							
-							if (attacker instanceof EntityPlayer)
-							{
-								if (!((EntityPlayer) attacker).capabilities.isCreativeMode)
-								{
-									compound.setInteger("remainingHits", h-1);
-								}
-							}
-							if (h-1 <= 0)
-							{
-								compound.removeTag("Potion");
-								compound.removeTag("CustomPotionEffects");
-							}
+							compound.removeTag("Potion");
+							compound.removeTag("CustomPotionEffects");
 						}
 					}
 				}
@@ -268,131 +221,147 @@ public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Re
 	}
 	
 	@SubscribeEvent
-	public void onDamage(LivingHurtEvent event)
-	{
+	public void onDamage(LivingHurtEvent event) {
 		//Makes custom shields block direct attacks
 		EntityLivingBase target = event.getEntityLiving();
-		if (target.getActiveItemStack().getItem() instanceof ItemCustomShield)
+		if(target.getActiveItemStack().getItem() instanceof ItemCustomShield)
 			event.setAmount(((ItemCustomShield)target.getActiveItemStack().getItem()).getDamageBlocked(target, event.getSource(), event.getAmount()));
 		
-		//Applies backstab damage multiplier
+		//Applies backstab and nunchuku multiplier (Handle in RLCombatCompatEventHandler if RLCombat is loaded)
 		Entity entitysource = event.getSource().getImmediateSource();
-		if (entitysource instanceof EntityLivingBase && !entitysource.world.isRemote)
-		{
-			EntityLivingBase living = (EntityLivingBase) entitysource;
-			if (living.getHeldItemMainhand().getItem() instanceof ItemDagger)
-			{
-				event.setAmount(event.getAmount() * ((ItemDagger)living.getHeldItemMainhand().getItem()).getBackstabMultiplyer(living, target));
+		if(!Bettersurvival.isRLCombatLoaded && entitysource instanceof EntityPlayer && !entitysource.world.isRemote) {
+			EntityPlayer player = (EntityPlayer)entitysource;
+			if(player.getHeldItemMainhand().getItem() instanceof ItemDagger) {
+				event.setAmount(event.getAmount() * ((ItemDagger)player.getHeldItemMainhand().getItem()).getBackstabMultiplyer(player, target));
+			}
+			if(player.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
+				INunchakuCombo combo = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+				if(combo != null) {
+					event.setAmount(event.getAmount() * (combo.getComboPower() + 1.0F));
+				}
 			}
 		}
 	}
-	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+
+	//Drops spears stuck in an entity on death
+	@SubscribeEvent(priority=EventPriority.LOWEST)
 	public void onDeath(LivingDeathEvent event)
 	{
-		//Drops spears stuck in an entity on death
 		ISpearsIn spearsIn = event.getEntity().getCapability(SpearsInProvider.SPEARSIN_CAP, null);
-		ArrayList<ItemStack> spears = spearsIn.getSpearsIn();
-		if (!spears.isEmpty())
-		{
-			for (ItemStack spear : spears)
-			{
-				event.getEntity().entityDropItem(spear, 0);
+		if(spearsIn != null) {
+			ArrayList<ItemStack> spears = spearsIn.getSpearsIn();
+			if(!spears.isEmpty()) {
+				for(ItemStack spear : spears) {
+					event.getEntity().entityDropItem(spear, 0);
+				}
 			}
 		}
 	}
-	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
-	public void onExpReward(LivingExperienceDropEvent event)
-	{
+
+	//Processes education enchantment
+	@SubscribeEvent(priority=EventPriority.HIGH)
+	public void onExpReward(LivingExperienceDropEvent event) {
 		EntityPlayer player = event.getAttackingPlayer();
-		if (player != null)
-		{
-			//Processes education enchantment
-			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.education, player) > 0)
-				event.setDroppedExperience((int) (event.getDroppedExperience() * EnchantmentEducation.getExpMultiplyer(player, event.getEntityLiving())));
+		if(player != null) {
+			if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.education, player) > 0)
+				event.setDroppedExperience((int)(((float)event.getDroppedExperience()) * EnchantmentEducation.getExpMultiplyer(player, event.getEntityLiving())));
 		}
 	}
 	
-	//Increases jump height for player with high jump enchantment
-	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
-	public void onJump(LivingJumpEvent event)
-	{
+	//Increases jump height for player with high jump enchantment, and handle stun
+	@SubscribeEvent(priority=EventPriority.HIGH)
+	public void onJump(LivingJumpEvent event) {
 		//Processes high jump enchantment
 		EntityLivingBase entity = event.getEntityLiving();
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity) > 0)
-			EnchantmentHighJump.boostJump(entity);
+		int j = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity);
+		if(j > 0) EnchantmentHighJump.boostJump(entity, j);
 		
-		//Stops player from jumping when stunned
-		if (entity instanceof EntityPlayer && event.getEntityLiving().getActivePotionEffect(ModPotions.stun)!=null)
-			event.getEntityLiving().motionY=0;
+		//Stops entity from jumping when stunned
+		if(entity.getActivePotionEffect(ModPotions.stun)!=null) {
+			if(entity.motionY > 0) entity.motionY = 0;
+			event.setCanceled(true);
+		}
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGH)
 	public void onItemUsing(Tick event) 
 	{
 		EntityLivingBase entity = event.getEntityLiving();
 		Item item = event.getItem().getItem();
 		
 		//Processes rapid fire enchantment
-		if (item instanceof ItemBow && EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.rapidfire, entity) > 0)
+		if(item instanceof ItemBow && EnchantmentHelper.getEnchantmentLevel(ModEnchantments.rapidfire, entity.getHeldItemMainhand()) > 0)
 			event.setDuration(event.getDuration() - EnchantmentRapidFire.getChargeTimeReduction(entity, event.getDuration()));
 	}
 	
 	@SubscribeEvent
 	public void onEvent(HarvestDropsEvent event)
 	{
-		if (event.getHarvester() instanceof EntityPlayer && !event.getDrops().isEmpty())
-		{
-			EntityPlayer player = (EntityPlayer) event.getHarvester();
+		if(event.getHarvester() != null && !event.getDrops().isEmpty()) {
+			EntityPlayer player = event.getHarvester();
 			
 			//Processes smelting enchantment
-			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.smelting, player) > 0)
+			if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.smelting, player.getHeldItemMainhand()) > 0)
 				EnchatnmentSmelting.smeltDrops(event.getDrops(), event.getFortuneLevel(), player);
 			
 			//Processes diamonds everywhere enchantment
-			if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.diamonds, player) > 0)
+			if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.diamonds, player.getHeldItemMainhand()) > 0)
 				EnchantmentDiamonds.conjureDiamonds(event.getDrops(), event.getState().getBlock(), player);
 		}
 	}
 	
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void onLivingUpdate(LivingUpdateEvent event)
 	{
 		EntityLivingBase entity = event.getEntityLiving();
-		
+
+		//Trigger nunchaku combo countdown
+		if(entity.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
+			INunchakuCombo combo = entity.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+			if(combo != null && combo.getComboTime() > 0) {
+				combo.countDown();
+			}
+		}
+
 		//Processes agility speed modifier
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity) > 0)
+		if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity) > 0) {
 			EnchantmentAgility.applySpeedModifier(entity);
-		else if (entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED).getModifier(EnchantmentAgility.speedModifier) != null)
+		}
+		else {
 			entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
+		}
 		
 		//Processes extra regen from vitality
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, entity) !=0 && entity instanceof EntityPlayer)
+		if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, entity) != 0 && entity instanceof EntityPlayer) {
 			EnchantmentVitality.healPlayer((EntityPlayer) entity);
+		}
 		
 		//Processes custom shield speed modifier
-		if (entity.getActiveItemStack().getItem() instanceof ItemCustomShield)
+		if(entity.getActiveItemStack().getItem() instanceof ItemCustomShield) {
 			((ItemCustomShield)entity.getActiveItemStack().getItem()).applyModifiers(entity);
-		else
-		{
+		}
+		else {
 			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.knockbackModifierUUID);
 			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.weightModifierUUID);
 		}
-		
+
+		//Handle stun effect
+		if(entity.getActivePotionEffect(ModPotions.stun) != null) {
+			entity.motionX = 0;
+			if(entity.motionY > 0) entity.motionY = 0;
+			entity.motionZ = 0;
+		}
+
 		//Makes blindness affect mobs
-		if (event.getEntityLiving() instanceof EntityLiving)
-		{
-			event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
-			if (!event.getEntityLiving().getActivePotionEffects().isEmpty())
-			{
-				Collection<PotionEffect> effects = event.getEntityLiving().getActivePotionEffects();
-				for (PotionEffect effect : effects)
-				{
-					if (effect.getPotion() == MobEffects.BLINDNESS)
-					{
+		if(entity instanceof EntityLiving) {
+			entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
+			if(!entity.getActivePotionEffects().isEmpty()) {
+				Collection<PotionEffect> effects = entity.getActivePotionEffects();
+				for(PotionEffect effect : effects) {
+					if(effect.getPotion() == MobEffects.BLINDNESS) {
 						AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind",-0.8, 1);
-						event.getEntityLiving().getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(modifier);
+						entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(modifier);
+						break;
 					}
 				}
 			}
@@ -422,7 +391,7 @@ public static final ResourceLocation NUNCHAKUCOMBO_CAP = new ResourceLocation(Re
 	 */
 	
 	//Insert weapons from my mod into dungeon loot
-	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.NORMAL)
 	public void onLootLoad(LootTableLoadEvent event)
 	{
 		if (event.getName().toString().equals("minecraft:chests/end_city_treasure"))

@@ -20,13 +20,13 @@ public class EnchantmentRapidFire extends Enchantment {
 	//Called during LivingEntityUseItemEvent.Tick if the item used is an enchanted bow
 	public static int getChargeTimeReduction(EntityLivingBase shooter, int charge)
 	{
-		if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.rapidfire, shooter) < 4)
+		if (EnchantmentHelper.getEnchantmentLevel(ModEnchantments.rapidfire, shooter.getHeldItemMainhand()) < 4)
 		{
-			return (charge%(5-EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.rapidfire, shooter)) == 0) ? 1 : 0;
+			return (charge%(5-EnchantmentHelper.getEnchantmentLevel(ModEnchantments.rapidfire, shooter.getHeldItemMainhand())) == 0) ? 1 : 0;
 		}
 		else
 		{
-			return EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.rapidfire, shooter) - 3;
+			return EnchantmentHelper.getEnchantmentLevel(ModEnchantments.rapidfire, shooter.getHeldItemMainhand()) - 3;
 		}
 	}
 	

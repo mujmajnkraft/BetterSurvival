@@ -15,13 +15,11 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentSweepingEdge;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -29,12 +27,12 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class ItemCustomWeapon extends Item{
+public class ItemCustomWeapon extends Item {
 	
-	float attackDamage;
-	double attackSpeed;
-	ToolMaterial material;
-	
+	final float attackDamage;
+	final double attackSpeed;
+	final ToolMaterial material;
+
 	public ItemCustomWeapon(ToolMaterial material, float damageModifier, float delayModifier)
 	{
 		this.material = material;
@@ -54,6 +52,8 @@ public class ItemCustomWeapon extends Item{
 	{
 		return attackDamage;
 	}
+
+	public float getReachBonus() { return 0; }
 	
 	//Copied from ItemSword
 	@Override
@@ -73,7 +73,8 @@ public class ItemCustomWeapon extends Item{
 	{
 		return this.material.toString();
 	}
-	
+
+	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
 	{
 		if ((double)state.getBlockHardness(worldIn, pos) != 0.0D)
@@ -83,25 +84,7 @@ public class ItemCustomWeapon extends Item{
 		
 		return true;
 	}
-	
-	@Override
-	public CreativeTabs getCreativeTab()
-	{
-		if (material == ToolMaterial.DIAMOND ||material == ToolMaterial.GOLD ||material == ToolMaterial.IRON ||material == ToolMaterial.STONE||material == ToolMaterial.WOOD)
-		{
-			return super.getCreativeTab();
-		}
-		else if ((material == ModItems.JUNGLE_CHITIN || material == ModItems.DESERT_CHITIN || material == ModItems.DRAGON_BONE) && Bettersurvival.isIafLoaded && ConfigHandler.integration)
-		{
-			return super.getCreativeTab();
-		}
-		else if (ConfigHandler.integration && !OreDictionary.getOres("ingot"+material.name()).isEmpty())
-		{
-			return super.getCreativeTab();
-		}
-		return null;
-	}
-	
+
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
 	{
@@ -122,35 +105,21 @@ public class ItemCustomWeapon extends Item{
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		if (this.material == ModItems.SILVER && Bettersurvival.isIafLoaded)
-		{
-			String s = net.minecraft.client.resources.I18n.format("silvertools.hurt");
-			tooltip.add(TextFormatting.GREEN + s);
-		}
-		else if (this.material == ModItems.JUNGLE_CHITIN || this.material == ModItems.DESERT_CHITIN)
-		{
-			String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".chitintools.hurt");
-			tooltip.add(TextFormatting.GREEN + s);
+		if(Bettersurvival.isIafLoaded) {
+			if(this.material == ModItems.SILVER) {
+				String s = net.minecraft.client.resources.I18n.format("silvertools.hurt");
+				tooltip.add(TextFormatting.GREEN + s);
+			}
+			else if(this.material == ModItems.JUNGLE_CHITIN || this.material == ModItems.DESERT_CHITIN) {
+				String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".chitintools.hurt");
+				tooltip.add(TextFormatting.GREEN + s);
+			}
 		}
 	}
 	
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
 	{
-		if (this.material == ModItems.SILVER && Bettersurvival.isIafLoaded)
-		{
-            if (target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD)
-            {
-                target.attackEntityFrom(DamageSource.MAGIC, this.getAttackDamage() + 3);
-            }
-        }
-		else if (this.material == ModItems.DESERT_CHITIN || this.material == ModItems.JUNGLE_CHITIN)
-		{
-            if (target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD)
-            {
-                target.attackEntityFrom(DamageSource.MAGIC, this.getAttackDamage() + 5);
-            }
-        }
 		stack.damageItem(1, attacker);
 		return super.hitEntity(stack, target, attacker);
 	}
@@ -168,7 +137,8 @@ public class ItemCustomWeapon extends Item{
 		return multimap;
 	}
 	
-	//Allows sword enchantments 
+	//Allows sword enchantments
+	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
     {
 		if (enchantment.type == EnumEnchantmentType.WEAPON && !(enchantment instanceof EnchantmentSweepingEdge))

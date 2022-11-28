@@ -2,51 +2,65 @@ package com.mujmajnkraft.bettersurvival.client;
 
 import com.mujmajnkraft.bettersurvival.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
-import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 
+import meldexun.reachfix.hook.client.EntityRendererHook;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
-import net.minecraft.util.math.RayTraceResult.Type;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemSword;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionUtils;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.client.event.FOVUpdateEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
+import java.util.List;
+
 public class ModClientHandler {
 	
 	@SubscribeEvent
-	public void onClientTick(ClientTickEvent event)
-	{
-		GameSettings GS = Minecraft.getMinecraft().gameSettings;
-		EntityPlayerSP player = Minecraft.getMinecraft().player;
-		if (player != null)
-		{
-			if (player.getHeldItemMainhand().getItem() instanceof ItemNunchaku && !player.isRowingBoat() && player.getActiveItemStack() == ItemStack.EMPTY && GS.keyBindAttack.isKeyDown())
-			{
-				BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
-				player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(true);
-				if (Minecraft.getMinecraft().objectMouseOver.typeOfHit == Type.ENTITY && player.getCooledAttackStrength(0) == 1.0f)
-				{
-					Minecraft.getMinecraft().playerController.attackEntity(player, Minecraft.getMinecraft().objectMouseOver.entityHit);
+	public void onClientTick(ClientTickEvent event) {
+		Minecraft mc = Minecraft.getMinecraft();
+		Entity rvEntity = mc.getRenderViewEntity();
+		EntityPlayerSP player = mc.player;
+		GameSettings GS = mc.gameSettings;
+
+		if(player != null && rvEntity != null) {
+			if(player.getHeldItemMainhand().getItem() instanceof ItemNunchaku && !player.isRowingBoat() && player.getActiveItemStack() == ItemStack.EMPTY && GS.keyBindAttack.isKeyDown()) {
+				if(!player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).isSpinning()) {//Don't spam packets if we're already spinning
+					BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
+					player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).setSpinning(true);
+				}
+				if(player.getCooledAttackStrength(0) == 1.0f) {
+					RayTraceResult mov = EntityRendererHook.pointedObject(rvEntity, player, EnumHand.MAIN_HAND, mc.world, mc.getRenderPartialTicks());
+					if(mov != null && mov.entityHit != null && mov.entityHit != player ) {
+						mc.playerController.attackEntity(player, mov.entityHit);
+					}
 				}
 			}
-			else if (player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).isSpinning())
-			{
+			else if(player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).isSpinning()) {
 				BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(false));
-				player.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null).setSpinning(false);
+				player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null).setSpinning(false);
 			}
 		}
 	}
 
-	/*
-	@SubscribeEvent(priority=EventPriority.NORMAL, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.NORMAL)
 	public void onTooltipRender(ItemTooltipEvent event)
 	{
 		if (event.getItemStack().getItem() instanceof ItemSword)
@@ -89,9 +103,8 @@ public class ModClientHandler {
 			}
 		}
 	}
-	*/
 
-	@SubscribeEvent(priority=EventPriority.HIGHEST, receiveCanceled=true)
+	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void onEvent(FOVUpdateEvent event)
 	{
 		if (ConfigHandler.FoVany) event.setNewfov(1.0F);

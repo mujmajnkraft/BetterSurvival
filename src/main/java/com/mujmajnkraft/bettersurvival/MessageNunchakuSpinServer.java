@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival;
 
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
-import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProwider;
+import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -47,21 +47,15 @@ public class MessageNunchakuSpinServer implements IMessage {
 	public IMessage onMessage(final MessageNunchakuSpinServer message, MessageContext ctx) 
 	{
 	    Minecraft.getMinecraft().addScheduledTask(
-	          new Runnable()
-	          {
-	              @Override
-	              public void run() 
-	              {
-	                	Entity entity = Minecraft.getMinecraft().world.getEntityByID(message.entityId);
-	                	if (entity instanceof EntityPlayer)
-	                	{
-	                		INunchakuCombo cap = entity.getCapability(NunchakuComboProwider.NUNCHAKUCOMBO_CAP, null);
-		                	cap.setSpinning(message.isSpinning);
-	                	}
-	              }
-	          });
+				() -> {
+					  Entity entity = Minecraft.getMinecraft().world.getEntityByID(message.entityId);
+					  if (entity instanceof EntityPlayer)
+					  {
+						  INunchakuCombo cap = entity.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+						  cap.setSpinning(message.isSpinning);
+					  }
+				});
 		return null;
 		}
 	}
-
 }

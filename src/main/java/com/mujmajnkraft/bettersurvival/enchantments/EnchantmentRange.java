@@ -18,11 +18,10 @@ public class EnchantmentRange extends Enchantment {
 	
 	public static void modifyArrow(EntityArrow arrow)
 	{
-		arrow.motionX *= 2;
-		arrow.motionY *= 2;
-		arrow.motionZ *= 2;
-		//Reduces damage to compensate for increased speed
-		arrow.setDamage(arrow.getDamage()/2.0D);
+		arrow.motionX *= 1.5;
+		arrow.motionY *= 1.5;
+		arrow.motionZ *= 1.5;
+		//arrow.setDamage(arrow.getDamage()/2.0D);//Don't reduce damage, damage from velocity is not linearly scaled, just reduce multiplier to non-ridiculous amount
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)
