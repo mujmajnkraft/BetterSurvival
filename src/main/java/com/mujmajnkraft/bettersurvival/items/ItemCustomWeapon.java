@@ -7,6 +7,7 @@ import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -81,7 +82,7 @@ public class ItemCustomWeapon extends Item {
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair)
 	{
-		if(ConfigHandler.integration && OreDictionary.doesOreNameExist("ingot" + material.name()))
+		if(ForgeConfigHandler.server.integration && OreDictionary.doesOreNameExist("ingot" + material.name()))
 		{
 			for (ItemStack stack :OreDictionary.getOres("ingot" + material.name()))
 			{

@@ -5,6 +5,7 @@ import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
 
@@ -109,8 +110,8 @@ public class ModClientHandler {
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
 	public void onEvent(FOVUpdateEvent event)
 	{
-		if (ConfigHandler.FoVany) event.setNewfov(1.0F);
-		else if (ConfigHandler.FoVshields)
+		if(ForgeConfigHandler.client.staticFOV) event.setNewfov(1.0F);
+		else if(ForgeConfigHandler.client.fovShields)
 		{
 			//Replicates vanilla behaviour (net.minecraft.client.entity.AbstractClientPlayer.getFovModifier())
 			float f = 1.0F;

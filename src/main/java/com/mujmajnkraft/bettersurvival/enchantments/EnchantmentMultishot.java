@@ -48,7 +48,7 @@ public class EnchantmentMultishot extends Enchantment {
 				ItemCrossbow crossbow = (ItemCrossbow) bow.getItem();
 				ammo = crossbow.loadedAmmo(bow);
 			}
-			if (bow.getItem().getRegistryName().equals(switchBow) && ConfigHandler.integration)
+			if (bow.getItem().getRegistryName().equals(switchBow))
 			{
 				ammo = SwitchBowCompat.findAmmo(shooter, bow);
 			}

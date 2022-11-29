@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.block.Block;
@@ -11,6 +12,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -33,7 +35,7 @@ public class EnchantmentTunneling extends Enchantment {
 		ItemStack stack = miner.getHeldItemMainhand();
 		int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.tunneling, miner.getHeldItemMainhand());
 
-		if(l > 0 && canMineEffectively(miner, state)) {
+		if(l > 0 && canMineEffectively(miner, state, pos)) {
 			EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, miner).getOpposite();
 			int dir;
 			switch(facing.getName()) {
@@ -57,7 +59,7 @@ public class EnchantmentTunneling extends Enchantment {
 									if((dir != 5 && dir != 6) || z==0) {
 										if(Math.sqrt(x*x+y*y+z*z)<=(l+1.0F)/2.0F && !(x==0 && y==0 && z==0)) {
 											BlockPos pos1 = pos.add(x, y, z);
-											if(canMineEffectively(miner, world.getBlockState(pos1))) {
+											if(canMineEffectively(miner, world.getBlockState(pos1), pos1)) {
 												((EntityPlayerMP)miner).interactionManager.tryHarvestBlock(pos1);
 											}
 										}
@@ -72,14 +74,16 @@ public class EnchantmentTunneling extends Enchantment {
 		}
 	}
 	
-	static boolean canMineEffectively(EntityPlayer player, IBlockState state)
+	static boolean canMineEffectively(EntityPlayer player, IBlockState state, BlockPos pos)
 	{
 		ItemStack stack = player.getHeldItemMainhand();
 		Block block = state.getBlock();
-		for (String type:stack.getItem().getToolClasses(player.getHeldItemMainhand()))
-		{
-			if (block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state))
-			{
+
+		if(block == Blocks.AIR) return false;
+		if(ForgeConfigHandler.server.preventTunnelingTileEntities && player.world.getTileEntity(pos) != null) return false;
+
+		for(String type : stack.getItem().getToolClasses(player.getHeldItemMainhand())) {
+			if(block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state)) {
 				return true;
 			}
 		}

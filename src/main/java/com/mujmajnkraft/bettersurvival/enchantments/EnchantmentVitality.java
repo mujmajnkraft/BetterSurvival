@@ -19,11 +19,11 @@ public class EnchantmentVitality extends Enchantment {
 	
 	public static void healPlayer(EntityPlayer player)
 	{
-		if (player.getEntityWorld().getGameRules().getBoolean("naturalRegeneration")
-				&& player.getFoodStats().getFoodLevel() >= 18
-				&& player.getHealth() < player.getMaxHealth()
-				&& player.ticksExisted % (40/EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, player)) == 0)
+		int level = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, player);
+		if(level > 0 && player.getEntityWorld().getGameRules().getBoolean("naturalRegeneration")
+				&& player.getFoodStats().getFoodLevel() >= 18 && player.getHealth() < player.getMaxHealth() && player.ticksExisted % (40/level) == 0) {
 			player.heal(1.0F);
+		}
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

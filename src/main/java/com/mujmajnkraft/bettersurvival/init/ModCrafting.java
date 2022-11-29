@@ -1,11 +1,10 @@
 package com.mujmajnkraft.bettersurvival.init;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,22 +27,17 @@ public class ModCrafting {
 		GameRegistry.addShapedRecipe(new ResourceLocation(Reference.MOD_ID+":smallshield"), new ResourceLocation(Reference.MOD_ID+"other"),new ItemStack(ModItems.smallshield), " W ", "WIW", " W ", 'W', Blocks.PLANKS, 'I', Items.IRON_INGOT);
 		GameRegistry.addShapedRecipe(new ResourceLocation(Reference.MOD_ID+":bigshield"), new ResourceLocation(Reference.MOD_ID+"other"),new ItemStack(ModItems.bigshield), " WI", "SWI", " WI", 'W', Blocks.PLANKS, 'I', Items.IRON_INGOT, 'S', Items.STICK);
 		
-		if (!ConfigHandler.allowvanillashields)
+		if(!ForgeConfigHandler.server.allowVanillaShields)
 		{
 			Set<ResourceLocation> recipes = ForgeRegistries.RECIPES.getKeys();
-			Iterator<ResourceLocation> itr = recipes.iterator();
-	        
-			while (itr.hasNext()) {
-				IRecipe recipe = ForgeRegistries.RECIPES.getValue(itr.next());
+
+			for(ResourceLocation resourceLocation : recipes) {
+				IRecipe recipe = ForgeRegistries.RECIPES.getValue(resourceLocation);
 				ItemStack is = recipe.getRecipeOutput();
-				if (is != null)
-				{
-					if (is.getItem() == Items.SHIELD)
-					{
-						ForgeRegistries.RECIPES.register(new BlankRecipe(recipe));
-					}
+				if(is.getItem() == Items.SHIELD) {
+					ForgeRegistries.RECIPES.register(new BlankRecipe(recipe));
 				}
-			};
+			}
 		}
 		
 		Ingredient ink = Ingredient.fromStacks(new ItemStack(Items.DYE, 1, 0));

@@ -24,18 +24,18 @@ public class ModPotionTypes {
 	@SubscribeEvent
 	public void registerPotions(RegistryEvent.Register<PotionType> event)
 	{
-		blindness = new PotionType(new PotionEffect[] {new PotionEffect(MobEffects.BLINDNESS, 300)});
-		longblindness = new PotionType("blindness", new PotionEffect[] {new PotionEffect(MobEffects.BLINDNESS, 800)});
-		decay = new PotionType(new PotionEffect[] {new PotionEffect(MobEffects.WITHER, 800)});
-		longdecay = new PotionType("decay", new PotionEffect[] {new PotionEffect(MobEffects.WITHER, 2134)});
-		strongdecay = new PotionType("decay", new PotionEffect[] {new PotionEffect(MobEffects.WITHER, 400, 1)});
-		warp = new PotionType(new PotionEffect[] {new PotionEffect(ModPotions.warp, 1)});
-		strongwarp = new PotionType("warp", new PotionEffect[] {new PotionEffect(ModPotions.warp, 1, 1)});
-		antiwarp = new PotionType(new PotionEffect[] {new PotionEffect(ModPotions.antiwarp, 1800)});
-		longantiwarp = new PotionType("antiwarp", new PotionEffect[] {new PotionEffect(ModPotions.antiwarp, 4800)});
-		milk = new PotionType("milk", new PotionEffect [] {new PotionEffect(ModPotions.milk, 1)});
-		cure = new PotionType("cure", new PotionEffect [] {new PotionEffect(ModPotions.cure, 1)});
-		dispel = new PotionType("dispel", new PotionEffect [] {new PotionEffect(ModPotions.dispel, 1)});
+		blindness = new PotionType(new PotionEffect(MobEffects.BLINDNESS, 300));
+		longblindness = new PotionType("blindness", new PotionEffect(MobEffects.BLINDNESS, 800));
+		decay = new PotionType(new PotionEffect(MobEffects.WITHER, 800));
+		longdecay = new PotionType("decay", new PotionEffect(MobEffects.WITHER, 2134));
+		strongdecay = new PotionType("decay", new PotionEffect(MobEffects.WITHER, 400, 1));
+		warp = new PotionType(new PotionEffect(ModPotions.warp, 1));
+		strongwarp = new PotionType("warp", new PotionEffect(ModPotions.warp, 1, 1));
+		antiwarp = new PotionType(new PotionEffect(ModPotions.antiwarp, 1800));
+		longantiwarp = new PotionType("antiwarp", new PotionEffect(ModPotions.antiwarp, 4800));
+		milk = new PotionType("milk", new PotionEffect(ModPotions.milk, 1));
+		cure = new PotionType("cure", new PotionEffect(ModPotions.cure, 1));
+		dispel = new PotionType("dispel", new PotionEffect(ModPotions.dispel, 1));
 		
 		blindness.setRegistryName("blindness");
 		longblindness.setRegistryName("long_blindness");

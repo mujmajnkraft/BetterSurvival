@@ -4,6 +4,7 @@ import com.mujmajnkraft.bettersurvival.Bettersurvival;
 import com.mujmajnkraft.bettersurvival.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
@@ -71,6 +72,8 @@ import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVitality;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchatnmentSmelting;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
+import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class CommonEventHandler {
 
@@ -352,8 +355,10 @@ public class CommonEventHandler {
 		//Trigger nunchaku combo countdown
 		if(entity.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
 			INunchakuCombo combo = entity.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
-			if(combo != null && combo.getComboTime() > 0) {
-				combo.countDown();
+			if(combo != null) {
+				if(combo.getComboTime() > 0 || combo.getComboPower() > 0) {
+					combo.countDown();
+				}
 			}
 		}
 
@@ -389,13 +394,13 @@ public class CommonEventHandler {
 		//Makes blindness affect mobs
 		if(entity instanceof EntityLiving) {
 			entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
-			if(!entity.getActivePotionEffects().isEmpty()) {
-				Collection<PotionEffect> effects = entity.getActivePotionEffects();
-				for(PotionEffect effect : effects) {
-					if(effect.getPotion() == MobEffects.BLINDNESS) {
-						AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind",-0.8, 1);
+			if(entity.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
+				EntityEntry entry = EntityRegistry.getEntry(entity.getClass());
+				if(entry != null && !ForgeConfigHandler.server.blindnessBlacklist.contains(entry.getRegistryName().toString())) {
+					double strength = -0.01D * ForgeConfigHandler.server.blindnessStrength;
+					if(strength < 0) {
+						AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind", strength, 1);
 						entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(modifier);
-						break;
 					}
 				}
 			}

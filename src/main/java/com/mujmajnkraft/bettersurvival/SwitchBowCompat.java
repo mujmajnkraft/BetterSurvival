@@ -6,13 +6,11 @@ import de.Whitedraco.switchbow.helper.ArrowItemStackEqual;
 import de.Whitedraco.switchbow.helper.QuiverArrowHelper;
 import de.Whitedraco.switchbow.helper.SwitchBowHelper;
 
-public class SwitchBowCompat {
+public abstract class SwitchBowCompat {
 	
-	public static ItemStack findAmmo(EntityPlayer player, ItemStack bow)
-	{
-		if (ArrowItemStackEqual.containsArrow(QuiverArrowHelper.getArrowsInInvAndQuiver(player, player.inventory), SwitchBowHelper.getSelectionArrow(bow)))
-			return SwitchBowHelper.getSelectionArrow(bow); 
-	return ItemStack.EMPTY;
+	public static ItemStack findAmmo(EntityPlayer player, ItemStack bow) {
+		if(ArrowItemStackEqual.containsArrow(QuiverArrowHelper.getArrowsInInvAndQuiver(player, player.inventory), SwitchBowHelper.getSelectionArrow(bow)))
+			return SwitchBowHelper.getSelectionArrow(bow);
+		return ItemStack.EMPTY;
 	}
-
 }
