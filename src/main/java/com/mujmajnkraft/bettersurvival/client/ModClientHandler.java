@@ -1,10 +1,9 @@
 package com.mujmajnkraft.bettersurvival.client;
 
-import com.mujmajnkraft.bettersurvival.BetterSurvivalPacketHandler;
-import com.mujmajnkraft.bettersurvival.MessageNunchakuSpinClient;
+import com.mujmajnkraft.bettersurvival.packet.BetterSurvivalPacketHandler;
+import com.mujmajnkraft.bettersurvival.packet.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 import com.mujmajnkraft.bettersurvival.items.ItemNunchaku;
@@ -64,45 +63,34 @@ public class ModClientHandler {
 	}
 
 	@SubscribeEvent(priority=EventPriority.NORMAL)
-	public void onTooltipRender(ItemTooltipEvent event)
-	{
-		if (event.getItemStack().getItem() instanceof ItemSword)
-		{
-			if (event.getItemStack().hasTagCompound())
-			{
-				int h =event.getItemStack().getTagCompound().getInteger("remainingHits");
-				
-				if (!PotionUtils.getEffectsFromStack(event.getItemStack()).isEmpty() && h > 0)
-				{
-					List<PotionEffect> list = PotionUtils.getEffectsFromStack(event.getItemStack());
-					
-					for (PotionEffect potioneffect : list)
-		            {
-		                String s1 = I18n.format(potioneffect.getEffectName()).trim();
-		                Potion potion = potioneffect.getPotion();
+	public void onTooltipRender(ItemTooltipEvent event) {
+		if(event.getItemStack().hasTagCompound()) {
+			int h = event.getItemStack().getTagCompound().getInteger("remainingPotionHits");
 
-		                if (potioneffect.getAmplifier() > 0)
-		                {
-		                    s1 = s1 + " " + I18n.format("potion.potency." + potioneffect.getAmplifier()).trim();
-		                }
+			if(h > 0 && !PotionUtils.getEffectsFromStack(event.getItemStack()).isEmpty()) {
+				List<PotionEffect> list = PotionUtils.getEffectsFromStack(event.getItemStack());
 
-		                if (potioneffect.getDuration() > 20)
-		                {
-		                    s1 = s1 + " (" + Potion.getPotionDurationString(potioneffect, 0.125F) + ")";
-		                }
+				for(PotionEffect potioneffect : list) {
+					String s1 = I18n.format(potioneffect.getEffectName()).trim();
+					Potion potion = potioneffect.getPotion();
 
-		                if (potion.isBadEffect())
-		                {
-		                    event.getToolTip().add(TextFormatting.RED + s1);
-		                }
-		                else
-		                {
-		                	event.getToolTip().add(TextFormatting.BLUE + s1);
-		                }
-		            }
-					
-					event.getToolTip().add(h + " hits remaining");
+					if(potioneffect.getAmplifier() > 0) {
+						s1 = s1 + " " + I18n.format("potion.potency." + potioneffect.getAmplifier()).trim();
+					}
+
+					if(potioneffect.getDuration() > 20) {
+						s1 = s1 + " (" + Potion.getPotionDurationString(potioneffect, 1.0F/(float)ForgeConfigHandler.server.potionDivisor) + ")";
+					}
+
+					if(potion.isBadEffect()) {
+						event.getToolTip().add(TextFormatting.RED + s1);
+					}
+					else {
+						event.getToolTip().add(TextFormatting.BLUE + s1);
+					}
 				}
+
+				event.getToolTip().add(h + " hits remaining");
 			}
 		}
 	}

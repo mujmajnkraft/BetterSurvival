@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.recipe.BlankRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

@@ -1,5 +1,5 @@
 package com.mujmajnkraft.bettersurvival.client.render;
-/*
+
 import com.mujmajnkraft.bettersurvival.init.ModBlocks;
 import com.mujmajnkraft.bettersurvival.tileentities.TileEntityCustomCauldron;
 
@@ -29,4 +29,3 @@ public class CustomBlockColor {
 	}
 
 }
-*/

@@ -1,7 +1,10 @@
 package com.mujmajnkraft.bettersurvival.items;
 
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
@@ -28,5 +31,16 @@ public class ItemBattleAxe extends ItemCustomWeapon {
 		tooltip.add(TextFormatting.AQUA + s);
 	}
 
-	//Everything handled in CommonEventHandler
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
+	{
+		if(BetterSurvival.isSMELoaded && SoManyEnchantmentsCompat.isCombatAxeSMEEnchant(enchantment.type))
+		{
+			return true;
+		}
+		else
+		{
+			return super.canApplyAtEnchantingTable(stack, enchantment);
+		}
+	}
 }

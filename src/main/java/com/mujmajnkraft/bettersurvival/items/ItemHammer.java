@@ -1,8 +1,6 @@
 package com.mujmajnkraft.bettersurvival.items;
 
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.CrushingRecipe;
-import com.mujmajnkraft.bettersurvival.InFCompat;
+import com.mujmajnkraft.bettersurvival.recipe.CrushingRecipe;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 

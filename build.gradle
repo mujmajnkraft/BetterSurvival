@@ -76,6 +76,9 @@ dependencies
     implementation files("libs/RLCombat-1.12.2-2.0.0.jar")
     implementation fg.deobf("curse.maven:llibrary-${llibrary_version}")
     implementation fg.deobf("curse.maven:icenfire-${icenfire_version}")
+    implementation fg.deobf("curse.maven:somanyenchantments-${somanyenchantments_version}")
+    implementation fg.deobf("curse.maven:mantle-${mantle_version}")
+    implementation fg.deobf("curse.maven:inspirations-${inspirations_version}")
 }
 
 processResources {

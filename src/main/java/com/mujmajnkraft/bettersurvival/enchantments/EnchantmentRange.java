@@ -3,6 +3,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -18,9 +19,9 @@ public class EnchantmentRange extends Enchantment {
 	
 	public static void modifyArrow(EntityArrow arrow)
 	{
-		arrow.motionX *= 1.5;
-		arrow.motionY *= 1.5;
-		arrow.motionZ *= 1.5;
+		arrow.motionX *= ForgeConfigHandler.server.rangeVelocity;
+		arrow.motionY *= ForgeConfigHandler.server.rangeVelocity;
+		arrow.motionZ *= ForgeConfigHandler.server.rangeVelocity;
 		//arrow.setDamage(arrow.getDamage()/2.0D);//Don't reduce damage, damage from velocity is not linearly scaled, just reduce multiplier to non-ridiculous amount
 	}
 	

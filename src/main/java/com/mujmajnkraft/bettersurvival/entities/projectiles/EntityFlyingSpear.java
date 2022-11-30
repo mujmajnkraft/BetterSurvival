@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.entities.projectiles;
 
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.InFCompat;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
 import com.mujmajnkraft.bettersurvival.items.ItemSpear;
@@ -70,7 +70,7 @@ public class EntityFlyingSpear extends EntityArrow {
 					if(this.getSpear().getItem() instanceof ItemSpear)
 					{
 						float matModifier = 0;
-						if(Bettersurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(((ItemSpear) this.getSpear().getItem()).getMaterial(), (EntityLivingBase)entity, null);
+						if(BetterSurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(((ItemSpear) this.getSpear().getItem()).getMaterial(), (EntityLivingBase)entity, null);
 						target.attackEntityFrom(DamageSource.GENERIC, ((ItemSpear) this.getSpear().getItem()).getAttackDamage() + matModifier);
 					}
 					if(!world.isRemote && this.pickupStatus == PickupStatus.ALLOWED && this.spear.getItem() instanceof ItemSpear)

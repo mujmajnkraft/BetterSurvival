@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival;
+package com.mujmajnkraft.bettersurvival.packet;
 
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;

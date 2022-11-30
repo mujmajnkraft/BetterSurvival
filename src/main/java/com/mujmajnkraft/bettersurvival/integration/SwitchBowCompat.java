@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival;
+package com.mujmajnkraft.bettersurvival.integration;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

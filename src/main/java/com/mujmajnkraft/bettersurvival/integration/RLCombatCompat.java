@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival;
+package com.mujmajnkraft.bettersurvival.integration;
 
 import bettercombat.mod.util.Reference;
 

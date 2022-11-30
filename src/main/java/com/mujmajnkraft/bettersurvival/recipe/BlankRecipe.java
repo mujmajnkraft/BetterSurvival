@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival.init;
+package com.mujmajnkraft.bettersurvival.recipe;
 
 import javax.annotation.Nullable;
 

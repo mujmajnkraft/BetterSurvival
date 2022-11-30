@@ -97,6 +97,11 @@ public class ItemSpear extends ItemCustomWeapon implements ICustomWeapon {
 	}
 
 	@Override
+	public boolean isDamageable() {
+		return false;
+	}
+
+	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
 	{
 		return enchantment.type.canEnchantItem(stack.getItem());

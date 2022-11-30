@@ -1,4 +1,4 @@
-package com.mujmajnkraft.bettersurvival;
+package com.mujmajnkraft.bettersurvival.recipe;
 
 import java.util.function.BooleanSupplier;
 

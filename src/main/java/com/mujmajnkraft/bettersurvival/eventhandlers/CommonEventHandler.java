@@ -1,22 +1,27 @@
 package com.mujmajnkraft.bettersurvival.eventhandlers;
 
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.InFCompat;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.init.ModBlocks;
+import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.*;
+import net.minecraft.block.BlockCauldron;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
+import net.minecraft.init.PotionTypes;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
@@ -42,13 +47,14 @@ import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.UUID;
 
 import com.mujmajnkraft.bettersurvival.Reference;
@@ -177,39 +183,37 @@ public class CommonEventHandler {
 		}
 		
 		//Applies weapon venom and spear break chance (Handled in RLCombatCompatEventHandler if RLCombat is loaded and a player)
-		if(!(Bettersurvival.isRLCombatLoaded && event.getSource().getImmediateSource() instanceof EntityPlayer) && event.getSource().getImmediateSource() instanceof EntityLivingBase) {
+		if(!(BetterSurvival.isRLCombatLoaded && event.getSource().getImmediateSource() instanceof EntityPlayer) && event.getSource().getImmediateSource() instanceof EntityLivingBase) {
 			EntityLivingBase attacker = (EntityLivingBase)event.getSource().getImmediateSource();
 			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSpear && attacker instanceof EntityPlayer) {
 				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.getRNG().nextFloat()) {
 					attacker.getHeldItemMainhand().shrink(1);
 				}
 			}
-			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSword && !attacker.world.isRemote) {
-				if(attacker.getHeldItemMainhand().hasTagCompound()) {
-					NBTTagCompound compound = attacker.getHeldItemMainhand().getTagCompound();
-					int h = compound.getInteger("remainingHits");
+			if(!attacker.world.isRemote && attacker.getHeldItemMainhand().hasTagCompound()) {
+				NBTTagCompound compound = attacker.getHeldItemMainhand().getTagCompound();
+				int h = compound.getInteger("remainingPotionHits");
 
-					if(h > 0 && event.getEntityLiving().hurtResistantTime<10) {
-						for(PotionEffect effect : PotionUtils.getEffectsFromStack(attacker.getHeldItemMainhand())) {
-							if(effect.getPotion().isInstant()) {
-								effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
-								event.getEntityLiving().hurtResistantTime = 0;
-							}
-							else {
-								event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), effect.getDuration()/8, effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
-							}
+				if(h > 0 && event.getEntityLiving().hurtResistantTime<10) {
+					for(PotionEffect effect : PotionUtils.getEffectsFromStack(attacker.getHeldItemMainhand())) {
+						if(effect.getPotion().isInstant()) {
+							effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
+							event.getEntityLiving().hurtResistantTime = 0;
 						}
+						else {
+							event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+						}
+					}
 
-						if(attacker instanceof EntityPlayer) {
-							if(!((EntityPlayer)attacker).capabilities.isCreativeMode) {
-								compound.setInteger("remainingHits", h-1);
-							}
+					if(attacker instanceof EntityPlayer) {
+						if(!((EntityPlayer)attacker).capabilities.isCreativeMode) {
+							compound.setInteger("remainingPotionHits", h-1);
 						}
-						if(h-1 <= 0)
-						{
-							compound.removeTag("Potion");
-							compound.removeTag("CustomPotionEffects");
-						}
+					}
+					if(h-1 <= 0)
+					{
+						compound.removeTag("Potion");
+						compound.removeTag("CustomPotionEffects");
 					}
 				}
 			}
@@ -225,7 +229,7 @@ public class CommonEventHandler {
 		
 		//Applies backstab/combo/bash/disarm and silver/myrmex bonuses (Handle in RLCombatCompatEventHandler if RLCombat is loaded)
 		Entity entitysource = event.getSource().getImmediateSource();
-		if(!Bettersurvival.isRLCombatLoaded && entitysource instanceof EntityPlayer && !entitysource.world.isRemote) {
+		if(!BetterSurvival.isRLCombatLoaded && entitysource instanceof EntityPlayer && !entitysource.world.isRemote) {
 			EntityPlayer player = (EntityPlayer)entitysource;
 			if(player.getHeldItemMainhand().getItem() instanceof ItemDagger) {
 				event.setAmount(event.getAmount() * ((ItemDagger)player.getHeldItemMainhand().getItem()).getBackstabMultiplier(player, target, false));
@@ -272,7 +276,7 @@ public class CommonEventHandler {
 				}
 			}
 			if(player.getHeldItemMainhand().getItem() instanceof ItemCustomWeapon) {
-				if(Bettersurvival.isIafLoaded) {
+				if(BetterSurvival.isIafLoaded) {
 					Item.ToolMaterial mat = ((ItemCustomWeapon)player.getHeldItemMainhand().getItem()).getMaterial();
 					event.setAmount(event.getAmount() + InFCompat.getMaterialModifier(mat, target, player));
 				}
@@ -396,7 +400,7 @@ public class CommonEventHandler {
 			entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
 			if(entity.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
 				EntityEntry entry = EntityRegistry.getEntry(entity.getClass());
-				if(entry != null && !ForgeConfigHandler.server.blindnessBlacklist.contains(entry.getRegistryName().toString())) {
+				if(entry != null && !Arrays.asList(ForgeConfigHandler.server.blindnessBlacklist).contains(entry.getRegistryName().toString())) {
 					double strength = -0.01D * ForgeConfigHandler.server.blindnessStrength;
 					if(strength < 0) {
 						AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind", strength, 1);
@@ -407,28 +411,22 @@ public class CommonEventHandler {
 		}
 	}
 
-	/*
 	@SubscribeEvent
-	public void onEvent(RightClickBlock event)
-	{
-		if (event.getItemStack() != ItemStack.EMPTY)
-		{
+	public void onEvent(PlayerInteractEvent.RightClickBlock event) {
+		if(BetterSurvival.isInspirationsLoaded) return;
+		if(event.getItemStack() != ItemStack.EMPTY) {
 			Item item = event.getItemStack().getItem();
 			IBlockState state = event.getWorld().getBlockState(event.getPos());
-			if (state.getBlock() == Blocks.CAULDRON && !event.getWorld().isRemote)
-			{
-				if ((Integer)state.getValue(BlockCauldron.LEVEL).intValue() == 0)
-				{
-					if (item == Items.MILK_BUCKET || (item == Items.POTIONITEM && (!PotionUtils.getEffectsFromStack(event.getItemStack()).isEmpty() || PotionUtils.getPotionFromItem(event.getItemStack()) != PotionTypes.WATER)))
-					{
+			if(state.getBlock() == Blocks.CAULDRON && !event.getWorld().isRemote) {
+				if(state.getValue(BlockCauldron.LEVEL) == 0) {
+					if(item == Items.MILK_BUCKET || (item == Items.POTIONITEM && (!PotionUtils.getEffectsFromStack(event.getItemStack()).isEmpty() || PotionUtils.getPotionFromItem(event.getItemStack()) != PotionTypes.WATER))) {
 						event.getWorld().setBlockState(event.getPos(), ModBlocks.customcauldron.getDefaultState());
 					}
 				}
 			}
 		}
 	}
-	 */
-	
+
 	//Insert weapons from my mod into dungeon loot
 	@SubscribeEvent(priority=EventPriority.NORMAL)
 	public void onLootLoad(LootTableLoadEvent event)

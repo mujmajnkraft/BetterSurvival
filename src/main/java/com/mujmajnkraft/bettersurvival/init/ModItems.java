@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.InFCompat;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemBattleAxe;
@@ -48,7 +48,7 @@ public class ModItems {
 	private static List<Item> items = new ArrayList<Item>();
 		
 	public static void setRepairMaterials() {
-		if(Bettersurvival.isIafLoaded) {
+		if(BetterSurvival.isIafLoaded) {
 			if(Item.getByNameOrId("iceandfire:myrmex_desert_chitin") != null) {
 				InFCompat.DESERT_CHITIN.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_desert_chitin")));
 			}
@@ -60,7 +60,7 @@ public class ModItems {
 	
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event) {
-		if(Bettersurvival.isIafLoaded) {
+		if(BetterSurvival.isIafLoaded) {
 			materials.remove(ModItems.SILVER);
 			materials.addAll(Arrays.asList(InFCompat.SILVER, InFCompat.DRAGON_BONE, InFCompat.DRAGON_BONE_FLAMED, InFCompat.DRAGON_BONE_ICED, InFCompat.JUNGLE_CHITIN, InFCompat.DESERT_CHITIN));
 		}

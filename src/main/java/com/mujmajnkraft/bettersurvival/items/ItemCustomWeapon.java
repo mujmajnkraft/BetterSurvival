@@ -3,11 +3,11 @@ package com.mujmajnkraft.bettersurvival.items;
 import java.util.List;
 
 import com.google.common.collect.Multimap;
-import com.mujmajnkraft.bettersurvival.Bettersurvival;
-import com.mujmajnkraft.bettersurvival.InFCompat;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -99,7 +99,7 @@ public class ItemCustomWeapon extends Item {
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		if(Bettersurvival.isIafLoaded) {
+		if(BetterSurvival.isIafLoaded) {
 			if(this.material == InFCompat.SILVER) {
 				String s = net.minecraft.client.resources.I18n.format("silvertools.hurt");
 				tooltip.add(TextFormatting.GREEN + s);
@@ -147,13 +147,14 @@ public class ItemCustomWeapon extends Item {
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
     {
-		if (enchantment.type == EnumEnchantmentType.WEAPON && !(enchantment instanceof EnchantmentSweepingEdge))
+		if(!(enchantment instanceof EnchantmentSweepingEdge) && (enchantment.type == EnumEnchantmentType.WEAPON ||
+				(BetterSurvival.isSMELoaded && SoManyEnchantmentsCompat.isWeaponSMEEnchant(enchantment.type))))
 		{
 			return true;
 		}
 		else
 		{
-			return enchantment.type.canEnchantItem(stack.getItem());
+			return super.canApplyAtEnchantingTable(stack, enchantment);
 		}
     }
 
