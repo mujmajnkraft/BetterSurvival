@@ -146,25 +146,40 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
                 }
                 else if(!Arrays.asList(ForgeConfigHandler.server.paPotionBlacklist).contains(cauldron.type.getRegistryName().toString()) && ForgeConfigHandler.server.isClassInstanceofWhitelistedWeapon(item.getClass())) {
                 	if(i > 0 && !worldIn.isRemote) {
-                		if(itemstack.hasTagCompound()) {
+						if(itemstack.hasTagCompound()) {
+							int h = itemstack.getTagCompound().getInteger("remainingPotionHits");
+							if(h > 0 && PotionUtils.getPotionFromItem(itemstack) == cauldron.type) {//Add doses if its the same potion instead of resetting
+								itemstack.getTagCompound().setInteger("remainingPotionHits", Math.min(ForgeConfigHandler.server.potionHits + h, ForgeConfigHandler.server.maximumPotionHits));
+
+								if(!playerIn.capabilities.isCreativeMode) this.setWaterLevel(worldIn, pos, state, i-1);
+								worldIn.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
+								return true;
+							}
 							itemstack.getTagCompound().removeTag("Potion");
 							itemstack.getTagCompound().removeTag("CustomPotionEffects");
 							itemstack.getTagCompound().removeTag("remainingPotionHits");
-                		}
+						}
                         else {
                             itemstack.setTagCompound(new NBTTagCompound());
                         }
-                		
-                		PotionUtils.addPotionToItemStack(itemstack, cauldron.type);
-                		PotionUtils.appendEffects(itemstack, cauldron.effects);
-                		itemstack.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.server.potionHits);
-                		
+
+						if(!(cauldron.type == PotionTypes.EMPTY ||
+								cauldron.type == PotionTypes.WATER ||
+								cauldron.type == PotionTypes.MUNDANE ||
+								cauldron.type == PotionTypes.THICK ||
+								cauldron.type == PotionTypes.AWKWARD)) {//If its water, just remove the effect and return it, to clean the sword
+							PotionUtils.addPotionToItemStack(itemstack, cauldron.type);
+							PotionUtils.appendEffects(itemstack, cauldron.effects);
+							itemstack.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.server.potionHits);
+						}
+
                 		if(!playerIn.capabilities.isCreativeMode) {
                 			this.setWaterLevel(worldIn, pos, state, i-1);
                 		}
-                		
+
                 		worldIn.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
-                		
+
                     }
                 	return true;
                 }

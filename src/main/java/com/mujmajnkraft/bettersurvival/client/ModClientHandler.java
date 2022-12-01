@@ -1,5 +1,7 @@
 package com.mujmajnkraft.bettersurvival.client;
 
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.integration.RLCombatCompat;
 import com.mujmajnkraft.bettersurvival.packet.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.packet.MessageNunchakuSpinClient;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
@@ -15,7 +17,6 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.ItemSword;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
@@ -30,6 +31,7 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ModClientHandler {
@@ -51,7 +53,10 @@ public class ModClientHandler {
 				if(player.getCooledAttackStrength(0) == 1.0f) {
 					RayTraceResult mov = EntityRendererHook.pointedObject(rvEntity, player, EnumHand.MAIN_HAND, mc.world, mc.getRenderPartialTicks());
 					if(mov != null && mov.entityHit != null && mov.entityHit != player ) {
-						mc.playerController.attackEntity(player, mov.entityHit);
+						if(mov.entityHit.hurtResistantTime<10) {
+							if(BetterSurvival.isRLCombatLoaded) RLCombatCompat.attackEntityFromClient(mov, player);
+							else mc.playerController.attackEntity(player, mov.entityHit);
+						}
 					}
 				}
 			}
@@ -69,9 +74,13 @@ public class ModClientHandler {
 
 			if(h > 0 && !PotionUtils.getEffectsFromStack(event.getItemStack()).isEmpty()) {
 				List<PotionEffect> list = PotionUtils.getEffectsFromStack(event.getItemStack());
-
+				List<String> processed = new ArrayList<>();
 				for(PotionEffect potioneffect : list) {
+					if(processed.contains(potioneffect.getEffectName())) continue;//Don't double display both potion and effect
+					processed.add(potioneffect.getEffectName());
+
 					String s1 = I18n.format(potioneffect.getEffectName()).trim();
+
 					Potion potion = potioneffect.getPotion();
 
 					if(potioneffect.getAmplifier() > 0) {
@@ -90,7 +99,7 @@ public class ModClientHandler {
 					}
 				}
 
-				event.getToolTip().add(h + " hits remaining");
+				event.getToolTip().add(h + "/" + ForgeConfigHandler.server.maximumPotionHits + " hits remaining");
 			}
 		}
 	}

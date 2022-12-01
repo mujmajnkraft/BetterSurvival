@@ -35,7 +35,7 @@ import org.apache.logging.log4j.Logger;
 	version = Reference.MOD_VERSION, 
 	acceptedMinecraftVersions = Reference.MC_VERSION,
 		dependencies = "after-required:reachfix;" +
-				"after:bettercombat;" +
+				"after:bettercombatmod;" +
 				"after:iceandfire;" +
 				"after:somanyenchantments;" +
 				"after:inspirations")
@@ -60,7 +60,7 @@ public class BetterSurvival {
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		isIafLoaded = Loader.isModLoaded("iceandfire");
-		isRLCombatLoaded = Loader.isModLoaded("bettercombat") && RLCombatCompat.isCorrectVersion();
+		isRLCombatLoaded = Loader.isModLoaded("bettercombatmod") && RLCombatCompat.isCorrectVersion();
 		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
 		

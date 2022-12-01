@@ -63,6 +63,11 @@ public class ForgeConfigHandler {
         @Config.RangeInt(min = 1, max = 256)
         public int potionHits = 64;
 
+        @Config.Comment("Maximum number of hits to apply to a weapon with repeated doses.")
+        @Config.Name("Maximum Potion Hits")
+        @Config.RangeInt(min = 1, max = 512)
+        public int maximumPotionHits = 64;
+
         @Config.Comment("When applying a potion to a weapon, what to divide the potion's time by for a single dose.")
         @Config.Name("Potion Timer Divider")
         @Config.RangeInt(min = 1, max = 256)
