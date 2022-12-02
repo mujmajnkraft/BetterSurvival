@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModClientHandler {
-	
+
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
 		Minecraft mc = Minecraft.getMinecraft();

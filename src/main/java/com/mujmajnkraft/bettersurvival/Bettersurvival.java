@@ -34,7 +34,8 @@ import org.apache.logging.log4j.Logger;
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, 
 	version = Reference.MOD_VERSION, 
 	acceptedMinecraftVersions = Reference.MC_VERSION,
-		dependencies = "after-required:reachfix;" +
+		dependencies =
+				"required-after:reachfix;" +
 				"after:bettercombatmod;" +
 				"after:iceandfire;" +
 				"after:somanyenchantments;" +
@@ -63,7 +64,7 @@ public class BetterSurvival {
 		isRLCombatLoaded = Loader.isModLoaded("bettercombatmod") && RLCombatCompat.isCorrectVersion();
 		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
-		
+
 		proxy.preInit();
 		
 		ArrowProperties.Register();
@@ -103,10 +104,5 @@ public class BetterSurvival {
 		else InspirationsCauldronCompat.initCauldronRecipes();
 
 		ModCrafting.register();
-	}
-	
-	@EventHandler
-	public static void postInit(FMLPostInitializationEvent event)
-	{
 	}
 }

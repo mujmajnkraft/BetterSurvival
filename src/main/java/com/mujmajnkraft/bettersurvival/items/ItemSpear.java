@@ -1,14 +1,16 @@
 package com.mujmajnkraft.bettersurvival.items;
 
-import com.mujmajnkraft.bettersurvival.ICustomWeapon;
+import com.google.common.collect.Multimap;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatBase;
@@ -24,8 +26,11 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
+import java.util.UUID;
 
-public class ItemSpear extends ItemCustomWeapon implements ICustomWeapon {
+public class ItemSpear extends ItemCustomWeapon {
+	private static final UUID REACH_MODIFIER_UUID = UUID.fromString("f14d3a86-ef0c-48a7-a59f-b6650e6132f5");
+	private static final String REACH_MODIFIER_STRING = "bettersurvival:spear_reach";
 	
 	public ItemSpear(ToolMaterial material) {
 		super(material, 0.75F, 1);
@@ -67,6 +72,16 @@ public class ItemSpear extends ItemCustomWeapon implements ICustomWeapon {
         }
         return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
     }
+
+	@Override
+	public Multimap<String, AttributeModifier> getAttributeModifiers(EntityEquipmentSlot slot, ItemStack stack) {
+		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
+
+		if(slot == EntityEquipmentSlot.MAINHAND) {
+			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(REACH_MODIFIER_UUID, REACH_MODIFIER_STRING, 2.0, 0));
+		}
+		return multimap;
+	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos, EntityLivingBase entityLiving)
@@ -114,10 +129,5 @@ public class ItemSpear extends ItemCustomWeapon implements ICustomWeapon {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".spear.desc");
 		tooltip.add(TextFormatting.AQUA + s);
-	}
-
-	@Override
-	public float getReach() {
-		return 7.0F;
 	}
 }

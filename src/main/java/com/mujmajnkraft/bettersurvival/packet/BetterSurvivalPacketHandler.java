@@ -1,7 +1,5 @@
 package com.mujmajnkraft.bettersurvival.packet;
 
-import com.mujmajnkraft.bettersurvival.packet.MessageNunchakuSpinClient;
-import com.mujmajnkraft.bettersurvival.packet.MessageNunchakuSpinServer;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
