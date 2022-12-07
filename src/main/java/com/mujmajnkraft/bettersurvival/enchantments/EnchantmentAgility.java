@@ -26,10 +26,10 @@ public class EnchantmentAgility extends Enchantment {
 	public static final UUID speedModifier = UUID.fromString("e6107045-134f-4c54-a645-75c3ae5c7a27");
 	
 	//Called during LivingUpdateEvent if enchantment is active and modifier not present
-	public static void applySpeedModifier(EntityLivingBase entity)
+	public static void applySpeedModifier(EntityLivingBase entity, int level)
 	{
-		double d = 0.01 * EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity);
-		if(d > 0) {
+		if(level > 0) {
+			double d = 0.01 * level;
 			AttributeModifier modifier = new AttributeModifier(EnchantmentAgility.speedModifier, "agility", d, 0);
 			IAttributeInstance speed = entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED);
 			if(!speed.hasModifier(modifier)) {
@@ -39,9 +39,6 @@ public class EnchantmentAgility extends Enchantment {
 				speed.removeModifier(EnchantmentAgility.speedModifier);
 				speed.applyModifier(modifier);
 			}
-		}
-		else {
-			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
 		}
 	}
 	

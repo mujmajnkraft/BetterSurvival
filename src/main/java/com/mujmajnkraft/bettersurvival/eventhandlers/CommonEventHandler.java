@@ -352,52 +352,51 @@ public class CommonEventHandler {
 	}
 	
 	@SubscribeEvent(priority=EventPriority.HIGHEST)
-	public void onLivingUpdate(LivingUpdateEvent event)
-	{
+	public void onLivingUpdate(LivingUpdateEvent event) {
 		EntityLivingBase entity = event.getEntityLiving();
-
-		//Trigger nunchaku combo countdown
-		if(entity.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
-			INunchakuCombo combo = entity.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
-			if(combo != null) {
-				if(combo.getComboTime() > 0 || combo.getComboPower() > 0) {
-					combo.countDown();
+		if(entity instanceof EntityPlayer) {//Handle player separately for better performance
+			//Trigger nunchaku combo countdown
+			if(entity.getHeldItemMainhand().getItem() instanceof ItemNunchaku) {
+				INunchakuCombo combo = entity.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+				if(combo != null) {
+					if(combo.getComboTime() > 0 || combo.getComboPower() > 0) {
+						combo.countDown();
+					}
 				}
+			}
+			//Processes extra regen from vitality
+			int vitLvl = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, entity);
+			if(vitLvl > 0) EnchantmentVitality.healPlayer((EntityPlayer)entity, vitLvl);
+			//Processes custom shield speed modifier
+			if(entity.getActiveItemStack().getItem() instanceof ItemCustomShield) {
+				((ItemCustomShield)entity.getActiveItemStack().getItem()).applyModifiers(entity);
+			}
+			else if(entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(new AttributeModifier(ItemCustomShield.knockbackModifierUUID, "shield_knockback_adjustment", 0, 0)) ||
+					entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(new AttributeModifier(ItemCustomShield.weightModifierUUID, "shield_speed_adjustment", 0, 0))) {
+				entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.knockbackModifierUUID);
+				entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.weightModifierUUID);
 			}
 		}
 
 		//Processes agility speed modifier
-		if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity) > 0) {
-			EnchantmentAgility.applySpeedModifier(entity);
-		}
-		else {
-			entity.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
-		}
-		
-		//Processes extra regen from vitality
-		if(EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, entity) != 0 && entity instanceof EntityPlayer) {
-			EnchantmentVitality.healPlayer((EntityPlayer) entity);
-		}
-		
-		//Processes custom shield speed modifier
-		if(entity.getActiveItemStack().getItem() instanceof ItemCustomShield) {
-			((ItemCustomShield)entity.getActiveItemStack().getItem()).applyModifiers(entity);
-		}
-		else {
-			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.knockbackModifierUUID);
-			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(ItemCustomShield.weightModifierUUID);
+		int speedLvl = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.agility, entity);
+		if(speedLvl > 0) EnchantmentAgility.applySpeedModifier(entity, speedLvl);
+		else if(entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).hasModifier(new AttributeModifier(EnchantmentAgility.speedModifier, "agility", 0, 0))) {
+			entity.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).removeModifier(EnchantmentAgility.speedModifier);
 		}
 
 		//Handle stun effect
 		if(entity.getActivePotionEffect(ModPotions.stun) != null) {
 			entity.motionX = 0;
-			if(entity.motionY > 0) entity.motionY = 0;
+			if(entity.motionY > 0) entity.motionY = 0;//Don't stop them from falling
 			entity.motionZ = 0;
 		}
 
 		//Makes blindness affect mobs
 		if(entity instanceof EntityLiving) {
-			entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
+			if(entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).hasModifier(new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind", 0, 1))) {
+				entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).removeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"));
+			}
 			if(entity.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
 				EntityEntry entry = EntityRegistry.getEntry(entity.getClass());
 				if(entry != null && !Arrays.asList(ForgeConfigHandler.server.blindnessBlacklist).contains(entry.getRegistryName().toString())) {

@@ -22,6 +22,7 @@ public class TickEventHandler {
 	public void onTick(WorldTickEvent event) {
 		ArrayList<Entity> entities = (ArrayList<Entity>) event.world.loadedEntityList;
 		ArrayList<EntityArrow> arrowstoexplode = new ArrayList<EntityArrow>();
+
 		for(Entity entity : entities) {
 			if(entity instanceof EntityArrow) {
 				NBTTagCompound nbttagcompound = entity.writeToNBT(new NBTTagCompound());
