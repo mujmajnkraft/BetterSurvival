@@ -14,7 +14,6 @@ import com.mujmajnkraft.bettersurvival.eventhandlers.TickEventHandler;
 import com.mujmajnkraft.bettersurvival.integration.RLCombatCompat;
 import com.mujmajnkraft.bettersurvival.packet.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.proxy.CommonProxy;
-
 import com.mujmajnkraft.bettersurvival.tileentities.TileEntityCustomCauldron;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +24,6 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.LogManager;

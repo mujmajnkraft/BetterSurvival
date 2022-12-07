@@ -117,12 +117,6 @@ public class ItemSpear extends ItemCustomWeapon {
 	}
 
 	@Override
-	public boolean canApplyAtEnchantingTable(ItemStack stack, net.minecraft.enchantment.Enchantment enchantment)
-	{
-		return enchantment.type.canEnchantItem(stack.getItem());
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
