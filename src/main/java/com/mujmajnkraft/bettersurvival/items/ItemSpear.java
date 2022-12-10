@@ -1,10 +1,15 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import com.google.common.collect.Multimap;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
+import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentSweepingEdge;
+import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -52,6 +57,7 @@ public class ItemSpear extends ItemCustomWeapon {
                 ItemStack itemstack1 = itemstack.copy();
                 itemstack1.setCount(1);
                 entityspear.setSpear(itemstack1);
+				entityspear.setShooter(playerIn);
                 entityspear.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, f * 2.0F, 1.0F);
                 
                 ItemSpear spear = (ItemSpear)itemstack.getItem();
@@ -123,5 +129,11 @@ public class ItemSpear extends ItemCustomWeapon {
 		super.addInformation(stack, worldIn, tooltip, flagIn);
 		String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".spear.desc");
 		tooltip.add(TextFormatting.AQUA + s);
+	}
+
+	//Its stackable, don't enchant
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
+		return false;
 	}
 }

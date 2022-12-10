@@ -1,9 +1,6 @@
 package com.mujmajnkraft.bettersurvival.integration;
 
-import com.github.alexthe666.iceandfire.entity.EntityDeathWorm;
-import com.github.alexthe666.iceandfire.entity.EntityFireDragon;
-import com.github.alexthe666.iceandfire.entity.EntityIceDragon;
-import com.github.alexthe666.iceandfire.entity.FrozenEntityProperties;
+import com.github.alexthe666.iceandfire.entity.*;
 import net.ilexiconn.llibrary.server.entity.EntityPropertiesHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -38,6 +35,10 @@ public abstract class InFCompat {
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEnchantability());
 
     public static float getMaterialModifier(Item.ToolMaterial mat, EntityLivingBase target, @Nullable EntityPlayer player) {
+        return getMaterialModifier(mat, target, player, true);
+    }
+
+    public static float getMaterialModifier(Item.ToolMaterial mat, EntityLivingBase target, @Nullable EntityPlayer player, boolean effect) {
         if(mat == InFCompat.SILVER) {
             if(target.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
                 return 2.0F;
@@ -52,18 +53,22 @@ public abstract class InFCompat {
             }
         }
         else if(mat == InFCompat.DRAGON_BONE_ICED) {
-            FrozenEntityProperties frozenProps = EntityPropertiesHandler.INSTANCE.getProperties(target, FrozenEntityProperties.class);
-            frozenProps.setFrozenFor(200);
-            target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
-            target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 2));
-            if(player != null) target.knockBack(target, 1F, player.posX - target.posX, player.posZ - target.posZ);
+            if(effect) {
+                FrozenEntityProperties frozenProps = EntityPropertiesHandler.INSTANCE.getProperties(target, FrozenEntityProperties.class);
+                frozenProps.setFrozenFor(200);
+                target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
+                target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 2));
+                if(player != null) target.knockBack(target, 1F, player.posX - target.posX, player.posZ - target.posZ);
+            }
             if(InFCompat.isFireDragon(target)) {
                 return 8.0F;
             }
         }
         else if(mat == InFCompat.DRAGON_BONE_FLAMED) {
-            target.setFire(5);
-            if(player != null) target.knockBack(target, 1F, player.posX - target.posX, player.posZ - target.posZ);
+            if(effect) {
+                target.setFire(5);
+                if(player != null) target.knockBack(target, 1F, player.posX - target.posX, player.posZ - target.posZ);
+            }
             if(InFCompat.isIceDragon(target)) {
                 return 8.0F;
             }
@@ -81,5 +86,10 @@ public abstract class InFCompat {
 
     public static boolean isIceDragon(Entity entity) {
         return entity instanceof EntityIceDragon;
+    }
+
+    public static boolean isStoned(EntityLivingBase entity) {
+        StoneEntityProperties properties = (StoneEntityProperties) EntityPropertiesHandler.INSTANCE.getProperties(entity, StoneEntityProperties.class);
+        return (properties != null && properties.isStone);
     }
 }
