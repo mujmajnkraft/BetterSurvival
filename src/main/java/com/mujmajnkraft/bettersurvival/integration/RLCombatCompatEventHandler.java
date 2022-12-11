@@ -1,11 +1,8 @@
 package com.mujmajnkraft.bettersurvival.integration;
 
-import bettercombat.mod.capability.CapabilityOffhandCooldown;
 import bettercombat.mod.event.RLCombatModifyDamageEvent;
-import bettercombat.mod.handler.EventHandlers;
 import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
-import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
@@ -14,11 +11,9 @@ import com.mujmajnkraft.bettersurvival.items.*;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.potion.PotionEffect;
@@ -26,8 +21,6 @@ import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Level;
-
-import java.util.Arrays;
 
 public class RLCombatCompatEventHandler {
 
@@ -52,41 +45,29 @@ public class RLCombatCompatEventHandler {
         EntityPlayer player = event.getEntityPlayer();
         if(!player.world.isRemote) {
             ItemStack stack = player.getHeldItem(event.getOffhand() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
-            //Dagger
+
             if(stack.getItem() instanceof ItemDagger) {
+                //Dagger
                 float multiplier = ((ItemDagger)stack.getItem()).getBackstabMultiplier(player, event.getTarget(), event.getOffhand());
                 float modifier = (multiplier-1) * event.getBaseDamage();
                 event.setDamageModifier(event.getDamageModifier() + modifier);
             }
-            //Nunchuku (Mainhand only)
             else if(!event.getOffhand() && stack.getItem() instanceof ItemNunchaku) {
+                //Nunchuku (Mainhand only)
                 INunchakuCombo combo = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
                 if(combo != null) {
                     event.setDamageModifier(event.getDamageModifier() + (event.getBaseDamage() * combo.getComboPower()));
                 }
             }
-            //Spear
             else if(stack.getItem() instanceof ItemSpear) {
+                //Spear
                 if(!player.capabilities.isCreativeMode && ((ItemSpear)stack.getItem()).breakChance() >= player.getRNG().nextFloat()) {
                     stack.shrink(1);
                 }
             }
-            //Hammer
             else if(stack.getItem() instanceof ItemHammer && event.getTarget() instanceof EntityLivingBase) {
-                float cooledStrength;
-                if(event.getOffhand()) {
-                    CapabilityOffhandCooldown capability = player.getCapability(EventHandlers.TUTO_CAP, null);
-                    float ohCooldown = 0;
-                    if(capability != null) {
-                        int ohCooldownBeginning = capability.getOffhandBeginningCooldown();
-                        if(ohCooldownBeginning > 0) ohCooldown = capability.getOffhandCooldown()/(float)ohCooldownBeginning;
-                    }
-                    cooledStrength = Math.abs(1.0F - ohCooldown);
-                }
-                else {
-                    cooledStrength = player.getCooledAttackStrength(0.5F);
-                }
-                if(cooledStrength > 0.9) {
+                //Hammer
+                if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
                     if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
                         PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer)stack.getItem()).stunduration);
@@ -94,22 +75,9 @@ public class RLCombatCompatEventHandler {
                     }
                 }
             }
-            //BattleAxe
             else if(stack.getItem() instanceof ItemBattleAxe && event.getTarget() instanceof EntityLivingBase) {
-                float cooledStrength;
-                if(event.getOffhand()) {
-                    CapabilityOffhandCooldown capability = player.getCapability(EventHandlers.TUTO_CAP, null);
-                    float ohCooldown = 0;
-                    if(capability != null) {
-                        int ohCooldownBeginning = capability.getOffhandBeginningCooldown();
-                        if(ohCooldownBeginning > 0) ohCooldown = capability.getOffhandCooldown()/(float)ohCooldownBeginning;
-                    }
-                    cooledStrength = Math.abs(1.0F - ohCooldown);
-                }
-                else {
-                    cooledStrength = player.getCooledAttackStrength(0.5F);
-                }
-                if(cooledStrength > 0.9) {
+                //BattleAxe
+                if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
                     if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
                         if(event.getTarget() instanceof EntityPlayer) {
@@ -140,13 +108,14 @@ public class RLCombatCompatEventHandler {
                     NBTTagCompound compound = stack.getTagCompound();
                     int h = compound.getInteger("remainingPotionHits");
 
-                    if(h > 0) {
+                    if(h > 0 && event.getTarget().hurtResistantTime<10) {
                         for(PotionEffect effect : PotionUtils.getEffectsFromStack(stack)) {
                             if(effect.getPotion().isInstant()) {
+                                event.getTarget().hurtResistantTime = 0;
                                 effect.getPotion().affectEntity(null, player, (EntityLivingBase)event.getTarget(), effect.getAmplifier(), 1/6D);
                             }
                             else {
-                                event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+                                ((EntityLivingBase)event.getTarget()).addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
                             }
                         }
                         if(!player.capabilities.isCreativeMode) {

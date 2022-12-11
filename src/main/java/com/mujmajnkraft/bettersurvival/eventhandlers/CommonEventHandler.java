@@ -197,8 +197,8 @@ public class CommonEventHandler {
 				if(h > 0 && event.getEntityLiving().hurtResistantTime<10) {
 					for(PotionEffect effect : PotionUtils.getEffectsFromStack(attacker.getHeldItemMainhand())) {
 						if(effect.getPotion().isInstant()) {
-							effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
 							event.getEntityLiving().hurtResistantTime = 0;
+							effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
 						}
 						else {
 							event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
