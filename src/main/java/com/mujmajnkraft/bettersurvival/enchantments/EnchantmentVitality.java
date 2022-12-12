@@ -2,10 +2,8 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
-import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -17,13 +15,12 @@ public class EnchantmentVitality extends Enchantment {
 		this.setName(Reference.MOD_ID + ".vitality");
 	}
 	
-	public static void healPlayer(EntityPlayer player)
+	public static void healPlayer(EntityPlayer player, int level)
 	{
-		if (player.getEntityWorld().getGameRules().getBoolean("naturalRegeneration")
-				&& player.getFoodStats().getFoodLevel() >= 18
-				&& player.getHealth() < player.getMaxHealth()
-				&& player.ticksExisted % (40/EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.vitality, player)) == 0)
+		if(level > 0 && player.getEntityWorld().getGameRules().getBoolean("naturalRegeneration")
+				&& player.getFoodStats().getFoodLevel() >= 18 && player.getHealth() < player.getMaxHealth() && player.ticksExisted % (40/level) == 0) {
 			player.heal(1.0F);
+		}
 	}
 	
 	public int getMinEnchantability(int enchantmentLevel)

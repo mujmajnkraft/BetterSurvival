@@ -18,7 +18,6 @@ public class ConfigHandler {
 	public static final String MAX_LEVEL = "max_level";
 	public static final String IS_TREASURE = "is_treasure";
 	public static final String MATERIAL_STATS = "material_stats";
-	public static final String OTHER = "other";
 	
 	public static int assassinatelevel;
 	public static int agilitylevel;
@@ -82,11 +81,6 @@ public class ConfigHandler {
 	public static ArrayList<Double> signalumStats = new ArrayList<Double>();
 	public static ArrayList<Double> lumiumStats = new ArrayList<Double>();
 	public static ArrayList<Double> enderiumStats = new ArrayList<Double>();
-	
-	public static boolean allowvanillashields;
-	public static boolean FoVshields;
-	public static boolean FoVany;
-	public static boolean integration;
 	
 	public static void init(File file)
 	{
@@ -195,13 +189,6 @@ public class ConfigHandler {
 		Property enS = config.get(MATERIAL_STATS, Reference.MOD_ID + ".configgui.enderium_stats", new double[]{3, 1000, 10.0f, 4.0f, 20}, "Set enderium gear base stats (harvest level, durability, efficiency, damage, enchantability)");
 		enS.setRequiresMcRestart(true);
 		
-		Property fovshields = config.get(OTHER, Reference.MOD_ID + ".configgui.fovshields", true, "When set to true, prevents custom shields from messing up your FoV. This will cause problems with other mods that change FoV.");
-		Property fov = config.get(OTHER, Reference.MOD_ID + ".configgui.fov", false, "When set to true, prevents FoV changes completely.");
-		Property cmi = config.get(OTHER, Reference.MOD_ID + ".configgui.integration", true, "When set to true, you can craft weapons from materials from other mods");
-		cmi.setRequiresMcRestart(true);
-		Property avs = config.get(OTHER, Reference.MOD_ID + ".configgui.allow_vanilla_shields", true, "When set flase, vanilla shield recipe is disabled forcing player to use this mod's shields");
-		avs.setRequiresMcRestart(true);
-		
 		if (readFields)
 		{
 			assassinatelevel = asL.getInt();
@@ -266,11 +253,6 @@ public class ConfigHandler {
 			signalumStats = (ArrayList<Double>) Arrays.stream(sgS.getDoubleList()).boxed().collect(Collectors.toList());
 			lumiumStats = (ArrayList<Double>) Arrays.stream(luS.getDoubleList()).boxed().collect(Collectors.toList());
 			enderiumStats = (ArrayList<Double>) Arrays.stream(enS.getDoubleList()).boxed().collect(Collectors.toList());
-			
-			FoVshields = fovshields.getBoolean();
-			FoVany = fov.getBoolean();
-			integration = cmi.getBoolean();
-			allowvanillashields = avs.getBoolean();
 		}
 		
 		if (config.hasChanged())

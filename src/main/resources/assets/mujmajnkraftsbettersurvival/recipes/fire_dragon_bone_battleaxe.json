@@ -1,0 +1,21 @@
+{
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "mujmajnkraftsbettersurvival:itemdragonbonebattleaxe"
+		},
+		{
+			"item": "iceandfire:fire_dragon_blood"
+		}
+		
+	],
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemfiredragonbonebattleaxe"
+	},
+	"conditions":[
+		{
+  			"type": "mujmajnkraftsbettersurvival:mod_loaded",
+  			"mod_id": "iceandfire"
+		}
+	]
+}

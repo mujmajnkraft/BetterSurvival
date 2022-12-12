@@ -36,7 +36,7 @@ public class NunchakuCombo implements INunchakuCombo{
 
 	@Override
 	public void countDown() {
-		this.comboTime --;
+		this.comboTime--;
 		if (this.comboTime <= 0)
 		{
 			this.comboTime = 0;

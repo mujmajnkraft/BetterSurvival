@@ -1,33 +1,47 @@
 buildscript
 {
-    repositories
-    {
-        maven { url = 'https://maven.minecraftforge.net/' }
+    repositories {
+        maven {
+            url = 'https://maven.minecraftforge.net/'
+        }
+        maven {
+            url = 'https://maven.gofancy.wtf/releases'
+        }
         mavenCentral()
     }
-    dependencies
-    {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath group: 'wtf.gofancy.fancygradle', name: 'wtf.gofancy.fancygradle.gradle.plugin', version: '1.1.2-3'
     }
 }
         
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
+apply plugin: 'wtf.gofancy.fancygradle'
 
-version = '1.4.2-BETA4'
+fancyGradle {
+    patches {
+        resources
+        coremods
+        codeChickenLib
+        asm
+        mergetool
+    }
+}
+
+version = "${mod_version}"
 group = 'com.mujmajnkraft.bettersurvival'
 archivesBaseName = 'better_survival'
 
-sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
 minecraft
 {
-    mappings channel: 'snapshot', version: '20171003-1.12'    
+    mappings channel: mappings_channel, version: mappings_version 
     runs
     {
         client
         {
+		    args "--username=Dev"
             workingDirectory project.file('run')
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
 			property 'forge.logging.console.level', 'debug'
@@ -40,46 +54,59 @@ minecraft
     }
 }
 
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    maven {
+        url = "https://www.cursemaven.com"
+    }
+    flatDir {
+        dirs 'libs\\'
+    }
+}
+
 dependencies
 {
-    minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2859'
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    compile files('libs/switchbow-1.6.8.jar')
+    implementation fg.deobf("curse.maven:switchbow-${switchbow_version}")
+	//implementation fg.deobf("curse.maven:reachfix-${reachfix_version}")
+	implementation files("libs/ReachFix-1.12.2-1.0.7-rc2.jar")
+	//implementation fg.deobf("curse.maven:rlcombat-${rlcombat_version}")
+    implementation files("libs/RLCombat-1.12.2-2.0.3.jar")
+    implementation fg.deobf("curse.maven:llibrary-${llibrary_version}")
+    implementation fg.deobf("curse.maven:icenfire-${icenfire_version}")
+    implementation fg.deobf("curse.maven:somanyenchantments-${somanyenchantments_version}")
+    implementation fg.deobf("curse.maven:mantle-${mantle_version}")
+    implementation fg.deobf("curse.maven:inspirations-${inspirations_version}")
+}
 
+processResources {
+    inputs.property "version", project.version
+    inputs.property "mcversion", minecraft_version
+
+    filesMatching('mcmod.info') {
+        expand 'mod_id': mod_id, 'mod_name': mod_name, 'version': project.version,
+                'mcversion': minecraft_version, 'mod_description': mod_description,
+                'mod_author': mod_author
+    }
 }
 
 jar
 {
     manifest
     {
-        attribute
+        attributes
         ([
-            "Specification-Title": "Better Survival",
-            "Specification-Vendor": "Block Vader",
-            "Specification-Version": "1.4.2-BETA3",
-            "Implementation-Title": project.name,
-            "Implementation-Version": "1.4.2-BETA3",
-            "Implementation-Vendor" :"Block Vader",
-            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+            "Specification-Title"		: mod_name,
+            "Specification-Version"		: "1",
+            "Specification-Vendor"		: "Block Vader",
+            "Implementation-Title"		: mod_name,
+            "Implementation-Version"	: mod_version,
+            "Implementation-Vendor" 	: "Block Vader",
+            "Implementation-Timestamp"	: new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
 }
 
 jar.finalizedBy('reobfJar')
-
-publishing {
-    publications
-    {
-        mavenJava(MavenPublication)
-        {
-            artifact jar
-        }
-    }
-    repositories
-    {
-        maven
-        {
-            url "file:///${project.projectDir}/mcmodsrepo"
-        }
-    }
-}

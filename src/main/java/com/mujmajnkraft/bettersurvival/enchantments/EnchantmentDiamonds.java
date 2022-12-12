@@ -30,17 +30,16 @@ public class EnchantmentDiamonds extends Enchantment {
 	//Called during HarvestDropsEvent if an ore is mined by an enchanted tool
 	public static void conjureDiamonds(List<ItemStack> drops, Block blockMined, EntityPlayer miner)
 	{
-		for (ItemStack drop : drops)
-		{
-			Item blockitem = Item.getItemFromBlock(blockMined);
-			if ((blockMined instanceof BlockOre || blockMined instanceof BlockRedstoneOre) && drop.getItem() != blockitem)
-			{
-				if (EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.diamonds, miner) > miner.getRNG().nextInt(50))
-				{
-					ItemStack itemStackToDrop = new ItemStack(Items.DIAMOND, 1);
-					drops.add(itemStackToDrop);
+		Item blockitem = Item.getItemFromBlock(blockMined);
+		if(blockMined instanceof BlockOre || blockMined instanceof BlockRedstoneOre) {
+			for(ItemStack drop : drops) {
+				if(drop != ItemStack.EMPTY && drop.getItem() != Items.AIR && drop.getItem() != blockitem) {
+					if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.diamonds, miner.getHeldItemMainhand()) > miner.getRNG().nextInt(50)) {
+						ItemStack itemStackToDrop = new ItemStack(Items.DIAMOND, 1);
+						drops.add(itemStackToDrop);
+						return;
+					}
 				}
-				return;
 			}
 		}
 	}
@@ -67,15 +66,7 @@ public class EnchantmentDiamonds extends Enchantment {
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
 	{
-    	
-    	if (stack.getItem() instanceof ItemPickaxe)
-		{
-			return true;
-		}
-   		else
-   		{
-   			return false;
-   		}
+    	return stack.getItem() instanceof ItemPickaxe;
 	}
     
     public boolean isTreasureEnchantment()

@@ -1,61 +1,46 @@
 package com.mujmajnkraft.bettersurvival.items;
 
-import java.util.Random;
-import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
+import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemBattleAxe extends ItemCustomWeapon{
+import java.util.List;
+
+public class ItemBattleAxe extends ItemCustomWeapon {
 	
 	public ItemBattleAxe(ToolMaterial material)
 	{
 		super(material, 1.6f, 1.25f);
-		this.setRegistryName("Item"+material.name().toLowerCase()+"BattleAxe");
-		this.setUnlocalizedName(material.name().toLowerCase()+"battleaxe");
+		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"battleaxe");
+		this.setTranslationKey(material.name().toLowerCase()+"battleaxe");
 	}
-	
+
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer attacker, Entity entity)
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn)
 	{
-		if (attacker.getCooledAttackStrength(0.5F) > 0.9 && entity instanceof EntityLivingBase)
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+		String s = net.minecraft.client.resources.I18n.format(Reference.MOD_ID + ".battleaxe.desc");
+		tooltip.add(TextFormatting.AQUA + s);
+	}
+
+	@Override
+	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
+	{
+		if(BetterSurvival.isSMELoaded && SoManyEnchantmentsCompat.isCombatAxeSMEEnchant(enchantment.type))
 		{
-			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
-			if (attacker.getRNG().nextInt(20)<(2+l) && !entity.getIsInvulnerable())
-			{
-				EntityLivingBase target = (EntityLivingBase) entity;
-				if (target instanceof EntityPlayer)
-				{
-					ItemStack stack1 = target.getHeldItemMainhand();
-					target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-					target.entityDropItem(stack1, 1);
-				}
-				else
-				{
-					if(!target.getHeldItemMainhand().isEmpty())
-					{
-						ItemStack item = target.getHeldItemMainhand();
-						NBTTagCompound nbttagcompound = target.writeToNBT(new NBTTagCompound());
-						if (nbttagcompound.hasKey("HandDropChances", 9))
-				        {
-				            NBTTagList nbttaglist = nbttagcompound.getTagList("HandDropChances", 5);
-				            float chance = nbttaglist.getFloatAt(0);
-				            target.setHeldItem(EnumHand.MAIN_HAND, ItemStack.EMPTY);
-							int rnd = new Random().nextInt(100);
-							if (chance*100+EnchantmentHelper.getMaxEnchantmentLevel(net.minecraft.init.Enchantments.LOOTING, attacker)>rnd+1)
-							{
-								target.entityDropItem(item, 1);
-							}
-						}
-					}
-				}
-			}
+			return true;
 		}
-		return false;
+		else
+		{
+			return super.canApplyAtEnchantingTable(stack, enchantment);
+		}
 	}
 }

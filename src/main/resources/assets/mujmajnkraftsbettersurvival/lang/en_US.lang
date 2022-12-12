@@ -85,18 +85,36 @@ item.dragonbonespear.name=Dragon Bone Spear
 item.dragonbonebattleaxe.name=Dragon Bone Battle Axe
 item.dragonbonedagger.name=Dragon Bone Dagger
 item.dragonbonenunchaku.name=Dragon Bone Nunchaku
+
+item.icedragonbonehammer.name=Iced Dragon Bone Hammer
+item.icedragonbonespear.name=Iced Dragon Bone Spear
+item.icedragonbonebattleaxe.name=Iced Dragon Bone Battle Axe
+item.icedragonbonedagger.name=Iced Dragon Bone Dagger
+item.icedragonbonenunchaku.name=Iced Dragon Bone Nunchaku
+
+item.firedragonbonehammer.name=Flamed Dragon Bone Hammer
+item.firedragonbonespear.name=Flamed Dragon Bone Spear
+item.firedragonbonebattleaxe.name=Flamed Dragon Bone Battle Axe
+item.firedragonbonedagger.name=Flamed Dragon Bone Dagger
+item.firedragonbonenunchaku.name=Flamed Dragon Bone Nunchaku
+
 item.desertchitinhammer.name=Desert Myrmex Chitin Hammer
 item.desertchitinspear.name=Desert Myrmex Chitin Spear
 item.desertchitinbattleaxe.name=Desert Myrmex Chitin Battle Axe
 item.desertchitindagger.name=Desert Myrmex Chitin Dagger
 item.desertchitinnunchaku.name=Desert Myrmex Chitin Nunchaku
+
 item.junglechitinhammer.name=Jungle Myrmex Chitin Hammer
 item.junglechitinspear.name=Jungle Myrmex Chitin Spear
 item.junglechitinbattleaxe.name=Jungle Myrmex Chitin Battle Axe
 item.junglechitindagger.name=Jungle Myrmex Chitin Dagger
 item.junglechitinnunchaku.name=Jungle Myrmex Chitin Nunchaku
 
-mujmajnkraftsbettersurvival.chitintools.hurt=+4 damage against non-arthropods
+mujmajnkraftsbettersurvival.hammer.desc=Can stun enemies when hit, and can slam the ground with Right-Click
+mujmajnkraftsbettersurvival.dagger.desc=Deals large amounts of damage when attacking from behind
+mujmajnkraftsbettersurvival.battleaxe.desc=Can disarm enemies when hit
+mujmajnkraftsbettersurvival.nunchaku.desc=Hold Left-Click to spin, continuing to land hits will increase damage
+mujmajnkraftsbettersurvival.spear.desc=Can attack with increased reach, or thrown with Right-Click
 
 enchantment.mujmajnkraftsbettersurvival.vampirism=Vampirism
 enchantment.mujmajnkraftsbettersurvival.agility=Agility
@@ -181,9 +199,9 @@ mujmajnkraftsbettersurvival.configgui.allow_vanilla_shields=Allow vanilla shield
 effect.stun=Stun
 effect.milk=Milk
 effect.cure=Cure
-effect.dispell=Dispell
+effect.dispel=Dispel
 effect.warp=Ender Warp
-effect.Antiwarp=Antiwarp
+effect.antiwarp=Anti-Warp
 
 potion.effect.blindness=Potion of Blindness
 potion.effect.decay=Potion of Decay
@@ -195,31 +213,24 @@ potion.effect.dispel=Potion of Dispel
 
 splash_potion.effect.blindness=Splash Potion of Blindness
 splash_potion.effect.decay=Splash Potion of Decay
-splash_potion.effect.warp=Splash Potion of Eder Warp
-splash_potion.effect.antiwarp=Splash Potion of Antiwarp
+splash_potion.effect.warp=Splash Potion of Ender Warp
+splash_potion.effect.antiwarp=Splash Potion of Anti-Warp
 splash_potion.effect.milk=Splash Milky Potion
 splash_potion.effect.cure=Splash Potion of Cure
 splash_potion.effect.dispel=Splash Potion of Dispel
 
 lingering_potion.effect.blindness=Lingering Potion of Blindness
 lingering_potion.effect.decay=Lingering Potion of Decay
-lingering_potion.effect.warp=Lingering Potion of Eder Warp
-lingering_potion.effect.antiwarp=Lingering Potion of Antiwarp
+lingering_potion.effect.warp=Lingering Potion of Ender Warp
+lingering_potion.effect.antiwarp=Lingering Potion of Anti-Warp
 lingering_potion.effect.milk=Lingering Milky Potion
 lingering_potion.effect.cure=Lingering Potion of Cure
 lingering_potion.effect.dispel=Lingering Potion of Dispel
 
-tipped_arrow.effect.blindness=of Blindness
+tipped_arrow.effect.blindness=Arrow of Blindness
 tipped_arrow.effect.decay=Arrow of Decay
-tipped_arrow.effect.warp=Arrow of Eder Warp
-tipped_arrow.effect.antiwarp=Arrow of Antiwarp
+tipped_arrow.effect.warp=Arrow of Ender Warp
+tipped_arrow.effect.antiwarp=Arrow of Anti-Warp
 tipped_arrow.effect.milk=Milky Arrow
 tipped_arrow.effect.cure=Arrow of Cure
 tipped_arrow.effect.dispel=Arrow of Dispel
-
-effect.stun=Stun
-effect.warp=Ender Warp
-effect.antiwarp=Antiwarp
-effect.milk=Milk
-effect.cure=Cure
-effect.dispel=Dispel

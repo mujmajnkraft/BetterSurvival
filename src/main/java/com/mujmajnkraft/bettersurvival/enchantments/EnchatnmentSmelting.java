@@ -8,6 +8,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -25,12 +26,11 @@ public class EnchatnmentSmelting extends Enchantment {
 	{
 		for (int i = 0; i < drops.size(); i++)
 		{
+			if(drops.get(i) == ItemStack.EMPTY || drops.get(i).getItem() == Items.AIR) continue; //Don't try to smelt air or empty when they randomly get added to the drops
 			ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(drops.get(i)).copy();
-			if (smeltingResult != ItemStack.EMPTY)
-			{
+			if(smeltingResult != ItemStack.EMPTY) {
 				smeltingResult.setCount(drops.get(i).getCount());
-				if (!(smeltingResult.getItem() instanceof ItemBlock))
-					smeltingResult.setCount(player.getRNG().nextInt(fortuneLevel + 1) + smeltingResult.getCount());
+				if(!(smeltingResult.getItem() instanceof ItemBlock)) smeltingResult.setCount(player.getRNG().nextInt(fortuneLevel + 1) + smeltingResult.getCount());
 				drops.set(i, smeltingResult);
 			}
 		}

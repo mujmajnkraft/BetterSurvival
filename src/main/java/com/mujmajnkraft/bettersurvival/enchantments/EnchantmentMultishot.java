@@ -3,7 +3,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import java.util.Random;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.SwitchBowCompat;
+import com.mujmajnkraft.bettersurvival.integration.SwitchBowCompat;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
@@ -48,7 +48,7 @@ public class EnchantmentMultishot extends Enchantment {
 				ItemCrossbow crossbow = (ItemCrossbow) bow.getItem();
 				ammo = crossbow.loadedAmmo(bow);
 			}
-			if (bow.getItem().getRegistryName().equals(switchBow) && ConfigHandler.integration)
+			if (bow.getItem().getRegistryName().equals(switchBow))
 			{
 				ammo = SwitchBowCompat.findAmmo(shooter, bow);
 			}

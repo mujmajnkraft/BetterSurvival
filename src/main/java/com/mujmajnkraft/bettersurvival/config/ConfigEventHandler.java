@@ -10,10 +10,8 @@ public class ConfigEventHandler {
 	@SubscribeEvent
 	public void OnConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event)
 	{
-		if (event.getModID()==Reference.MOD_ID)
-		{
+		if(event.getModID().equals(Reference.MOD_ID)) {
 			ConfigHandler.syncFromGui();
 		}
 	}
-
 }

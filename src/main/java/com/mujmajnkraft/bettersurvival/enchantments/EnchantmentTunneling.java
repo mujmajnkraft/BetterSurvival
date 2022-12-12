@@ -1,9 +1,8 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
-import java.util.Set;
-
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.block.Block;
@@ -13,8 +12,11 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,37 +31,37 @@ public class EnchantmentTunneling extends Enchantment {
 	//Called during BreakEvent
 	public static void mineManyBlocks(EntityPlayer miner, IBlockState state, BlockPos pos)
 	{
-		System.out.println("Calling the tunneling enchantment");
 		World world = miner.getEntityWorld();
-		Set<String> t = miner.getTags();
-		int dir = 0;
-		if (t.contains("west")) {dir = 1; t.remove("west");}
-		else if (t.contains("east")) {dir = 2; t.remove("east");}
-		else if (t.contains("down")) {dir = 3; t.remove("down");}
-		else if (t.contains("up")) {dir = 4; t.remove("up");}
-		else if (t.contains("south")) {dir = 5; t.remove("south");}
-		else if (t.contains("north")) {dir = 6; t.remove("north");}
-		if (dir != 0 && canMineEffectively(miner, state))
-		{
-			int l = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.tunneling, miner);
-			for(int x = (int) -l; x < l + 1; x++)
-			{
-				if((dir !=1 && dir !=2) || x==0)
-				{
-					for(int y = (int) -l; y < l + 1; y++)
-					{
-						if((dir != 3 && dir != 4) || y==0)
-						{
-							for(int z = (int) -l; z < l + 1; z++)
-							{
-								if ((dir != 5 && dir != 6) || z==0)
-								{
-									if (Math.sqrt(x*x+y*y+z*z)<=(l+1.0F)/2.0F && !(x==0 && y==0 && z==0))
-									{
-										BlockPos pos1 = pos.add(x, y, z);
-										if (canMineEffectively(miner, world.getBlockState(pos1)))
-										{
-											((EntityPlayerMP)miner).interactionManager.tryHarvestBlock(pos1);
+		ItemStack stack = miner.getHeldItemMainhand();
+		int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.tunneling, miner.getHeldItemMainhand());
+
+		if(l > 0 && canMineEffectively(miner, state, pos)) {
+			EnumFacing facing = EnumFacing.getDirectionFromEntityLiving(pos, miner).getOpposite();
+			int dir;
+			switch(facing.getName()) {
+				case "west"	: dir = 1; break;
+				case "east"	: dir = 2; break;
+				case "down"	: dir = 3; break;
+				case "up"	: dir = 4; break;
+				case "south": dir = 5; break;
+				case "north": dir = 6; break;
+				default     : dir = 0; break;
+			}
+			if(dir != 0) {
+				if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
+				stack.getTagCompound().setBoolean("tunnelCooldown", true);
+
+				for(int x = (int) -l; x < l + 1; x++) {
+					if((dir !=1 && dir !=2) || x==0) {
+						for(int y = (int) -l; y < l + 1; y++) {
+							if((dir != 3 && dir != 4) || y==0) {
+								for(int z = (int) -l; z < l + 1; z++) {
+									if((dir != 5 && dir != 6) || z==0) {
+										if(Math.sqrt(x*x+y*y+z*z)<=(l+1.0F)/2.0F && !(x==0 && y==0 && z==0)) {
+											BlockPos pos1 = pos.add(x, y, z);
+											if(canMineEffectively(miner, world.getBlockState(pos1), pos1)) {
+												((EntityPlayerMP)miner).interactionManager.tryHarvestBlock(pos1);
+											}
 										}
 									}
 								}
@@ -67,18 +69,21 @@ public class EnchantmentTunneling extends Enchantment {
 						}
 					}
 				}
+				stack.getTagCompound().setBoolean("tunnelCooldown", false);
 			}
 		}
 	}
 	
-	static boolean canMineEffectively(EntityPlayer player, IBlockState state)
+	static boolean canMineEffectively(EntityPlayer player, IBlockState state, BlockPos pos)
 	{
 		ItemStack stack = player.getHeldItemMainhand();
 		Block block = state.getBlock();
-		for (String type:stack.getItem().getToolClasses(player.getHeldItemMainhand()))
-		{
-			if (block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state))
-			{
+
+		if(block == Blocks.AIR) return false;
+		if(ForgeConfigHandler.server.preventTunnelingTileEntities && player.world.getTileEntity(pos) != null) return false;
+
+		for(String type : stack.getItem().getToolClasses(player.getHeldItemMainhand())) {
+			if(block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state)) {
 				return true;
 			}
 		}

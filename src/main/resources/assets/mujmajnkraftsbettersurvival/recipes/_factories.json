@@ -1,5 +1,5 @@
 {
 	"conditions": {
-        "mod_loaded": "com.mujmajnkraft.bettersurvival.RecipeCondition"
+        "mod_loaded": "com.mujmajnkraft.bettersurvival.recipe.RecipeCondition"
     }
 }

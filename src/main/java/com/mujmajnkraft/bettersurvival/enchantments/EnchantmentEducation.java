@@ -22,10 +22,9 @@ public class EnchantmentEducation extends Enchantment {
 	// Called during LivingExperienceDropEvent if enemy is killed by an attacker with enchanted weapon
 	public static float getExpMultiplyer(EntityPlayer killer, EntityLivingBase killed)
 	{
-		if (killed.isNonBoss())
-		{
-			int lvl = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.education, killer);
-			return lvl / 2.0F + 1.0F;
+		if(killed.isNonBoss()) {
+			float lvl = (float)EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.education, killer);
+			return (lvl / 2.0F) + 1.0F;
 		}
 		return 1.0F;
 	}
