@@ -320,7 +320,6 @@ public class CommonEventHandler {
 		//Stops entity from jumping when stunned
 		if(entity.getActivePotionEffect(ModPotions.stun)!=null) {
 			if(entity.motionY > 0) entity.motionY = 0;
-			event.setCanceled(true);
 		}
 	}
 	
