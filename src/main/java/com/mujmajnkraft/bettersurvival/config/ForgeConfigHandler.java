@@ -81,6 +81,22 @@ public class ForgeConfigHandler {
         @Config.Name("Potion-Applying Potion Blacklist")
         public String[] paPotionBlacklist = new String[]{""};
 
+        @Config.Comment("Chance per full-strength hit that Stun procs.")
+        @Config.Name("Stun Base Chance")
+        public float stunBaseChance = 0.1F;
+
+        @Config.Comment("Increased Stun chance per level of Bash")
+        @Config.Name("Bash Stun Modifier")
+        public float bashModifier = 0.05F;
+
+        @Config.Comment("Chance per full-strength hit that Disarm procs.")
+        @Config.Name("Disarm Base Chance")
+        public float disarmBaseChance = 0.1F;
+
+        @Config.Comment("Increased Disarm chance per level of Disarm")
+        @Config.Name("Bash Stun Modifier")
+        public float disarmModifier = 0.05F;
+
         public boolean isClassInstanceofWhitelistedWeapon(Class<?> clazz) {
             return ForgeConfigHandler.server.getWeaponWhitelistClasses().stream().anyMatch(w -> w.isAssignableFrom(clazz));
         }

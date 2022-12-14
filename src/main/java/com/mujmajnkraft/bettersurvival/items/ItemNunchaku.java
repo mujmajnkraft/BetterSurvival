@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import javax.annotation.Nullable;
 
+import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
@@ -9,6 +10,7 @@ import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemPropertyGetter;
@@ -19,13 +21,14 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.logging.log4j.Level;
 
 import java.util.List;
 
 public class ItemNunchaku extends ItemCustomWeapon {
 
 	public ItemNunchaku(ToolMaterial material) {
-		super(material, 0.5F, 0.1F);
+		super(material, 0.5F, 0.3F);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"nunchaku");
 		this.setTranslationKey(material.name().toLowerCase()+"nunchaku");
 		
@@ -70,5 +73,15 @@ public class ItemNunchaku extends ItemCustomWeapon {
 	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
 	{
 		return true;
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		INunchakuCombo cap = player.getCapability(NunchakuComboProvider.NUNCHAKUCOMBO_CAP, null);
+		if(cap != null && !cap.isSpinning()) {
+			player.isSwingInProgress = false;
+			return true;
+		}
+		return false;
 	}
 }

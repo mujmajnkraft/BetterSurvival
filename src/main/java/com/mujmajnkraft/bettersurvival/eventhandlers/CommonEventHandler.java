@@ -34,6 +34,7 @@ import net.minecraft.world.storage.loot.LootPool;
 import net.minecraft.world.storage.loot.RandomValueRange;
 import net.minecraft.world.storage.loot.conditions.LootCondition;
 import net.minecraft.world.storage.loot.conditions.RandomChance;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -46,6 +47,7 @@ import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent.Tick;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ArrowLooseEvent;
+import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.BreakSpeed;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.world.BlockEvent.BreakEvent;
@@ -80,6 +82,7 @@ import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import org.apache.logging.log4j.Level;
 
 public class CommonEventHandler {
 
@@ -186,7 +189,7 @@ public class CommonEventHandler {
 		if(!(BetterSurvival.isRLCombatLoaded && event.getSource().getImmediateSource() instanceof EntityPlayer) && event.getSource().getImmediateSource() instanceof EntityLivingBase) {
 			EntityLivingBase attacker = (EntityLivingBase)event.getSource().getImmediateSource();
 			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSpear && attacker instanceof EntityPlayer) {
-				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.getRNG().nextFloat()) {
+				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.world.rand.nextFloat()) {
 					attacker.getHeldItemMainhand().shrink(1);
 				}
 			}
@@ -243,7 +246,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemHammer) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, player.getHeldItemMainhand());
-					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.stunBaseChance + l*ForgeConfigHandler.server.bashModifier) && !target.getIsInvulnerable()) {
 						PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer) player.getHeldItemMainhand().getItem()).stunduration);
 						target.addPotionEffect(potioneffectIn);
 					}
@@ -252,7 +255,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemBattleAxe) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, player.getHeldItemMainhand());
-					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.disarmBaseChance + l*ForgeConfigHandler.server.disarmModifier) && !target.getIsInvulnerable()) {
 						if(target instanceof EntityPlayer) {
 							EntityItem drop = ((EntityPlayer)target).dropItem(((EntityPlayer)target).inventory.decrStackSize(((EntityPlayer)target).inventory.currentItem, 1), false);
 							if(drop != null) drop.setPickupDelay(40);
@@ -309,18 +312,22 @@ public class CommonEventHandler {
 		}
 	}
 	
-	//Increases jump height for player with high jump enchantment, and handle stun
+	//Increases jump height for player with high jump enchantment
 	@SubscribeEvent(priority=EventPriority.HIGH)
-	public void onJump(LivingJumpEvent event) {
-		//Processes high jump enchantment
+	public void onJumpHigh(LivingJumpEvent event) {
 		EntityLivingBase entity = event.getEntityLiving();
+		if(entity == null) return;
 		int j = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity);
 		if(j > 0) EnchantmentHighJump.boostJump(entity, j);
-		
-		//Stops entity from jumping when stunned
-		if(entity.getActivePotionEffect(ModPotions.stun)!=null) {
+	}
+
+	//Handle stun effect on jump
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onJumpLowest(LivingJumpEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if(entity == null) return;
+		if(entity.getActivePotionEffect(ModPotions.stun) != null) {
 			if(entity.motionY > 0) entity.motionY = 0;
-			event.setCanceled(true);
 		}
 	}
 	
