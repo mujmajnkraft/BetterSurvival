@@ -1,7 +1,5 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
-import java.util.Random;
-
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 
@@ -37,17 +35,10 @@ public class EnchantmentVampirism extends Enchantment {
 	
 	public void onEntityDamaged(EntityLivingBase user, Entity target, int level)
     {
-		if (level <=5)
-		{
-			int rnd = new Random().nextInt(5);
-			if (rnd < level)
-			{
-				user.heal(1.0F);
+		if(user != null && target != null && !user.world.isRemote) {
+			if(user.world.rand.nextFloat() < (float)level * 0.2F) {
+				user.heal(Math.max(1.0F, (float)level * 0.2F));
 			}
-		}
-		else
-		{
-			user.heal(1.0F+0.2F*level);
 		}
     }
 	
