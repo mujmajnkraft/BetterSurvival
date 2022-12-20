@@ -5,6 +5,8 @@ import com.mujmajnkraft.bettersurvival.potions.PotionMilk;
 import com.mujmajnkraft.bettersurvival.potions.PotionWarp;
 import com.mujmajnkraft.bettersurvival.potions.PotionCleanse;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;
 import net.minecraftforge.event.RegistryEvent;
@@ -20,10 +22,10 @@ public class ModPotions {
 	
 	public static void init()
 	{
-		stun = new PotionStun(false, 16774925, 0);
+		stun = new PotionStun(true, 16774925, 0);
 		warp = new PotionWarp(false, 9838591, 1);
-		antiwarp = new PotionStun(false, 14378216, 2);
-		milk = new PotionMilk(true, 16777215, 3);
+		antiwarp = new PotionStun(true, 14378216, 2);
+		milk = new PotionMilk(false, 16777215, 3);
 		cure = new PotionCleanse(false, 16774925, 4);
 		dispel = new PotionCleanse(true, 11921919, 5);
 		
@@ -45,6 +47,8 @@ public class ModPotions {
 	{
 		event.getRegistry().register(stun);
 		stun.registerPotionAttributeModifier(SharedMonsterAttributes.MOVEMENT_SPEED, "7107DE5E-7CE8-3368-940E-514C1F160890", -10, 2);
+		stun.registerPotionAttributeModifier(SharedMonsterAttributes.FLYING_SPEED, "40742692-9fbe-46d4-ba21-040511dd6abb", -10, 2);
+		stun.registerPotionAttributeModifier(EntityLivingBase.SWIM_SPEED, "d09de986-585a-4e63-9982-ec0208bb8152", -10, 2);
 		stun.registerPotionAttributeModifier(SharedMonsterAttributes.FOLLOW_RANGE, "26107045-134f-4c54-a645-75c3ae5c7a27", -2048, 0);
 		event.getRegistry().register(warp);
 		event.getRegistry().register(antiwarp);

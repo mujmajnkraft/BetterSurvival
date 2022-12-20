@@ -129,7 +129,7 @@ public class CommonEventHandler {
 			event.setNewSpeed(event.getOriginalSpeed() * EnchantmentVersatility.getSpeedModifier(event.getEntityPlayer(), event.getState()));
 	}
 	
-	//Prevents teleportation for entities with antiwarp effect
+	//Prevents teleportation for Endermen with antiwarp, rest is handled in EntityLivingBaseMixin
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onEvent(EnderTeleportEvent event)
 	{

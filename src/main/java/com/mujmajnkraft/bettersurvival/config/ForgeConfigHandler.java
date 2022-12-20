@@ -97,6 +97,10 @@ public class ForgeConfigHandler {
         @Config.Name("Bash Stun Modifier")
         public float disarmModifier = 0.05F;
 
+        @Config.Comment("Use Mixin to enforce the effects of Antiwarp (Can cause unforeseen issues depending on mod's handling of teleporting, disable if a problem.)")
+        @Config.Name("Antiwarp Mixin")
+        public boolean antiWarpMixin = true;
+
         public boolean isClassInstanceofWhitelistedWeapon(Class<?> clazz) {
             return ForgeConfigHandler.server.getWeaponWhitelistClasses().stream().anyMatch(w -> w.isAssignableFrom(clazz));
         }
