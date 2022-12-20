@@ -61,7 +61,7 @@ public class RLCombatCompatEventHandler {
             }
             else if(stack.getItem() instanceof ItemSpear) {
                 //Spear
-                if(!player.capabilities.isCreativeMode && ((ItemSpear)stack.getItem()).breakChance() >= player.getRNG().nextFloat()) {
+                if(!player.capabilities.isCreativeMode && ((ItemSpear)stack.getItem()).breakChance() >= player.world.rand.nextFloat()) {
                     stack.shrink(1);
                 }
             }
@@ -69,7 +69,7 @@ public class RLCombatCompatEventHandler {
                 //Hammer
                 if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
-                    if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
+                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.stunBaseChance + l*ForgeConfigHandler.server.bashModifier) && !event.getTarget().getIsInvulnerable()) {
                         PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer)stack.getItem()).stunduration);
                         ((EntityLivingBase)event.getTarget()).addPotionEffect(potioneffectIn);
                     }
@@ -79,7 +79,7 @@ public class RLCombatCompatEventHandler {
                 //BattleAxe
                 if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
-                    if(player.getRNG().nextInt(20)<(2+l) && !event.getTarget().getIsInvulnerable()) {
+                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.disarmBaseChance + l*ForgeConfigHandler.server.disarmModifier) && !event.getTarget().getIsInvulnerable()) {
                         if(event.getTarget() instanceof EntityPlayer) {
                             EntityItem drop = ((EntityPlayer)event.getTarget()).dropItem(((EntityPlayer)event.getTarget()).inventory.decrStackSize(((EntityPlayer)event.getTarget()).inventory.currentItem, 1), false);
                             if(drop != null) drop.setPickupDelay(40);

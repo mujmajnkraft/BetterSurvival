@@ -30,6 +30,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
+import org.apache.logging.log4j.Level;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,13 +51,11 @@ public class ModClientHandler {
 					BetterSurvivalPacketHandler.NETWORK.sendToServer(new MessageNunchakuSpinClient(true));
 					cap.setSpinning(true);
 				}
-				if(player.getCooledAttackStrength(0) == 1.0f) {
+				if(player.getCooledAttackStrength(0.5F) >= 1.0f) {
 					RayTraceResult mov = EntityRendererHook.pointedObject(rvEntity, player, EnumHand.MAIN_HAND, mc.world, mc.getRenderPartialTicks());
 					if(mov != null && mov.entityHit != null && mov.entityHit != player ) {
-						if(mov.entityHit.hurtResistantTime<10) {
-							if(BetterSurvival.isRLCombatLoaded) RLCombatCompat.attackEntityFromClient(mov, player);
-							else mc.playerController.attackEntity(player, mov.entityHit);
-						}
+						if(BetterSurvival.isRLCombatLoaded) RLCombatCompat.attackEntityFromClient(mov, player);
+						else mc.playerController.attackEntity(player, mov.entityHit);
 					}
 				}
 			}

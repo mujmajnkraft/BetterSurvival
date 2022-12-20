@@ -13,6 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
@@ -80,6 +81,7 @@ import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
+import org.apache.logging.log4j.Level;
 
 public class CommonEventHandler {
 
@@ -128,7 +130,7 @@ public class CommonEventHandler {
 			event.setNewSpeed(event.getOriginalSpeed() * EnchantmentVersatility.getSpeedModifier(event.getEntityPlayer(), event.getState()));
 	}
 	
-	//Prevents teleportation for entities with antiwarp effect
+	//Prevents teleportation for Endermen with antiwarp, rest is handled in EntityLivingBaseMixin
 	@SubscribeEvent(priority = EventPriority.HIGHEST)
 	public void onEvent(EnderTeleportEvent event)
 	{
@@ -186,7 +188,7 @@ public class CommonEventHandler {
 		if(!(BetterSurvival.isRLCombatLoaded && event.getSource().getImmediateSource() instanceof EntityPlayer) && event.getSource().getImmediateSource() instanceof EntityLivingBase) {
 			EntityLivingBase attacker = (EntityLivingBase)event.getSource().getImmediateSource();
 			if(attacker.getHeldItemMainhand().getItem() instanceof ItemSpear && attacker instanceof EntityPlayer) {
-				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.getRNG().nextFloat()) {
+				if(!((EntityPlayer)attacker).capabilities.isCreativeMode && ((ItemSpear)attacker.getHeldItemMainhand().getItem()).breakChance() >= attacker.world.rand.nextFloat()) {
 					attacker.getHeldItemMainhand().shrink(1);
 				}
 			}
@@ -243,7 +245,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemHammer) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, player.getHeldItemMainhand());
-					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.stunBaseChance + l*ForgeConfigHandler.server.bashModifier) && !target.getIsInvulnerable()) {
 						PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer) player.getHeldItemMainhand().getItem()).stunduration);
 						target.addPotionEffect(potioneffectIn);
 					}
@@ -252,7 +254,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemBattleAxe) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, player.getHeldItemMainhand());
-					if(player.getRNG().nextInt(20)<(2+l) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.disarmBaseChance + l*ForgeConfigHandler.server.disarmModifier) && !target.getIsInvulnerable()) {
 						if(target instanceof EntityPlayer) {
 							EntityItem drop = ((EntityPlayer)target).dropItem(((EntityPlayer)target).inventory.decrStackSize(((EntityPlayer)target).inventory.currentItem, 1), false);
 							if(drop != null) drop.setPickupDelay(40);
@@ -309,18 +311,22 @@ public class CommonEventHandler {
 		}
 	}
 	
-	//Increases jump height for player with high jump enchantment, and handle stun
+	//Increases jump height for player with high jump enchantment
 	@SubscribeEvent(priority=EventPriority.HIGH)
-	public void onJump(LivingJumpEvent event) {
-		//Processes high jump enchantment
+	public void onJumpHigh(LivingJumpEvent event) {
 		EntityLivingBase entity = event.getEntityLiving();
+		if(entity == null) return;
 		int j = EnchantmentHelper.getMaxEnchantmentLevel(ModEnchantments.highjump, entity);
 		if(j > 0) EnchantmentHighJump.boostJump(entity, j);
-		
-		//Stops entity from jumping when stunned
-		if(entity.getActivePotionEffect(ModPotions.stun)!=null) {
+	}
+
+	//Handle stun effect on jump
+	@SubscribeEvent(priority = EventPriority.LOWEST)
+	public void onJumpLowest(LivingJumpEvent event) {
+		EntityLivingBase entity = event.getEntityLiving();
+		if(entity == null) return;
+		if(entity.getActivePotionEffect(ModPotions.stun) != null) {
 			if(entity.motionY > 0) entity.motionY = 0;
-			event.setCanceled(true);
 		}
 	}
 	
@@ -390,6 +396,10 @@ public class CommonEventHandler {
 			entity.motionX = 0;
 			if(entity.motionY > 0) entity.motionY = 0;//Don't stop them from falling
 			entity.motionZ = 0;
+
+			if(entity instanceof EntityCreeper) {
+				((EntityCreeper)entity).setCreeperState(-1);
+			}
 		}
 
 		//Makes blindness affect mobs
