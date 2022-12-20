@@ -43,21 +43,18 @@ public class PotionCleanse extends Potion {
     {
 		Collection<PotionEffect> activeeffects = entityLiving.getActivePotionEffects();
 		ArrayList<PotionEffect> effectstoremove = new ArrayList<PotionEffect>();
-		for (PotionEffect effect : activeeffects)
-		{
-			if (!effect.getPotion().isBadEffect() && this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
-			{
-				effectstoremove.add(effect);
-			}
-			else if (effect.getPotion().isBadEffect() && !this.isBadEffect() && effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET)))
-			{
-				effectstoremove.add(effect);
+		for(PotionEffect effect : activeeffects) {
+			if(effect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+				if(this.isBadEffect() && !effect.getPotion().isBadEffect()) {
+					effectstoremove.add(effect);
+				}
+				else if(!this.isBadEffect() && effect.getPotion().isBadEffect()) {
+					effectstoremove.add(effect);
+				}
 			}
 		}
-		Iterator<PotionEffect> itr= effectstoremove.iterator();
-		while (itr.hasNext())
-		{
-			Potion potion = itr.next().getPotion();
+		for(PotionEffect potionEffect : effectstoremove) {
+			Potion potion = potionEffect.getPotion();
 			entityLiving.removePotionEffect(potion);
 		}
     }
