@@ -13,6 +13,7 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
@@ -395,6 +396,10 @@ public class CommonEventHandler {
 			entity.motionX = 0;
 			if(entity.motionY > 0) entity.motionY = 0;//Don't stop them from falling
 			entity.motionZ = 0;
+
+			if(entity instanceof EntityCreeper) {
+				((EntityCreeper)entity).setCreeperState(-1);
+			}
 		}
 
 		//Makes blindness affect mobs
