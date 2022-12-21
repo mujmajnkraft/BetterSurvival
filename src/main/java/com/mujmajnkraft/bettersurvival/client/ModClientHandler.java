@@ -30,8 +30,6 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
-import org.apache.logging.log4j.Level;
-
 import java.util.ArrayList;
 import java.util.List;
 

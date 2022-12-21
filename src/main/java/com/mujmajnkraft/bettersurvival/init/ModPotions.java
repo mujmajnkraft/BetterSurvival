@@ -5,7 +5,6 @@ import com.mujmajnkraft.bettersurvival.potions.PotionMilk;
 import com.mujmajnkraft.bettersurvival.potions.PotionWarp;
 import com.mujmajnkraft.bettersurvival.potions.PotionCleanse;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.potion.Potion;

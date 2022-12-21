@@ -2,8 +2,6 @@ package com.mujmajnkraft.bettersurvival.config;
 
 import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -11,9 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.Level;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Config(modid = Reference.MOD_ID)

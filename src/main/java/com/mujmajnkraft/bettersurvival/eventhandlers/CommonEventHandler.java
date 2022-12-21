@@ -81,7 +81,6 @@ import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import org.apache.logging.log4j.Level;
 
 public class CommonEventHandler {
 

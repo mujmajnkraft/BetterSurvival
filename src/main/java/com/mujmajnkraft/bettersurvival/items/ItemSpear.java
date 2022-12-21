@@ -1,15 +1,11 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import com.google.common.collect.Multimap;
-import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
-import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentSweepingEdge;
-import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;

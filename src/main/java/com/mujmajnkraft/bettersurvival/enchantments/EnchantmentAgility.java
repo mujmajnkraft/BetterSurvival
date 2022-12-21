@@ -4,10 +4,7 @@ import java.util.UUID;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
-import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
-
 import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;

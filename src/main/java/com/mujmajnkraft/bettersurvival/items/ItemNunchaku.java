@@ -2,7 +2,6 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import javax.annotation.Nullable;
 
-import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
@@ -21,8 +20,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.apache.logging.log4j.Level;
-
 import java.util.List;
 
 public class ItemNunchaku extends ItemCustomWeapon {

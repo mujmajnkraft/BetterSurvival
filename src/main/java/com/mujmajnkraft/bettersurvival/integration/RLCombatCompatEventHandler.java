@@ -20,7 +20,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.EnumHand;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import org.apache.logging.log4j.Level;
 
 public class RLCombatCompatEventHandler {
 
