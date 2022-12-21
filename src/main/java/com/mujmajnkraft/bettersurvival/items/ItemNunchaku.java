@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuComboProvider;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -25,7 +26,7 @@ import java.util.List;
 public class ItemNunchaku extends ItemCustomWeapon {
 
 	public ItemNunchaku(ToolMaterial material) {
-		super(material, 0.5F, 0.3F);
+		super(material, ForgeConfigHandler.weapons.nunchakuDmgMod, ForgeConfigHandler.weapons.nunchakuSpd);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"nunchaku");
 		this.setTranslationKey(material.name().toLowerCase()+"nunchaku");
 		

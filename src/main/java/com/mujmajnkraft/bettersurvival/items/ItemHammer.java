@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import com.mujmajnkraft.bettersurvival.recipe.CrushingRecipe;
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 
 import net.minecraft.block.BlockGlass;
@@ -29,7 +30,7 @@ public class ItemHammer extends ItemCustomWeapon{
 	
 	public final int stunduration;
 	public ItemHammer(ToolMaterial material) {
-		super(material, 1.2F, 1.35F);
+		super(material, ForgeConfigHandler.weapons.hammerDmgMod, ForgeConfigHandler.weapons.hammerSpd);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"hammer");
 		this.setTranslationKey(material.name().toLowerCase()+"hammer");
 		stunduration = 50;

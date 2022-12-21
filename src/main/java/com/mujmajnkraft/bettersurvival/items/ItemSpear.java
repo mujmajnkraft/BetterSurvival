@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import com.google.common.collect.Multimap;
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.entities.projectiles.EntityFlyingSpear;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -32,13 +33,15 @@ import java.util.UUID;
 public class ItemSpear extends ItemCustomWeapon {
 	private static final UUID REACH_MODIFIER_UUID = UUID.fromString("f14d3a86-ef0c-48a7-a59f-b6650e6132f5");
 	private static final String REACH_MODIFIER_STRING = "bettersurvival:spear_reach";
+	private final float reach;
 	
 	public ItemSpear(ToolMaterial material) {
-		super(material, 0.75F, 1);
+		super(material, ForgeConfigHandler.weapons.spearDmgMod, ForgeConfigHandler.weapons.spearSpd);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"spear");
 		this.setTranslationKey(material.name().toLowerCase()+"spear");
 		this.maxStackSize = 16;
 		this.setMaxDamage(0);
+		this.reach = ForgeConfigHandler.weapons.spearReachBonus;
 	}
 	
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
@@ -80,7 +83,7 @@ public class ItemSpear extends ItemCustomWeapon {
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
 
 		if(slot == EntityEquipmentSlot.MAINHAND) {
-			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(REACH_MODIFIER_UUID, REACH_MODIFIER_STRING, 2.0, 0));
+			multimap.put(EntityPlayer.REACH_DISTANCE.getName(), new AttributeModifier(REACH_MODIFIER_UUID, REACH_MODIFIER_STRING, this.reach, 0));
 		}
 		return multimap;
 	}

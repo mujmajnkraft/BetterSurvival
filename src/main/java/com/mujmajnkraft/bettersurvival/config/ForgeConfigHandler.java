@@ -358,8 +358,16 @@ public class ForgeConfigHandler {
     }    
 
     public static class WeaponConfig {
+    	
+    	final String damageModifierDesc = "Set damage stat modifere for the weapon";
+    	final String speedModifierDesc = "Set speed stat modifere for the weapon";
         
         //Weapon stats
+    	@Config.Comment("Extra attack reach given to spears.")
+        @Config.Name("Extra reach base")
+    	@Config.RequiresMcRestart
+        public float spearReachBonus = 2.0F;
+    	
         @Config.Comment("Chance per full-strength hammer hit that Stun procs.")
         @Config.Name("Stun Base Chance")
         public float stunBaseChance = 0.1F;
@@ -372,9 +380,67 @@ public class ForgeConfigHandler {
         @Config.Name("Disarm Base Chance")
         public float disarmBaseChance = 0.1F;
 
-        @Config.Comment("Increased Disarm chance per level of Disarm")
-        @Config.Name("Disarming disarm Modifier")
+        @Config.Comment("Increased Disarm chance per level of Disarming")
+        @Config.Name("Disarming chance Modifier")
         public float disarmModifier = 0.05F;
+        
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Battle Axe damage modifier")
+        @Config.RequiresMcRestart
+        public float battleAxeDmgMod = 1.6f;
+
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Nunchaku damage modifier")
+        @Config.RequiresMcRestart
+        public float nunchakuDmgMod = 0.5F;
+
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Hammer damage modifier")
+        @Config.RequiresMcRestart
+        public float hammerDmgMod = 1.2F;
+
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Dagger damage modifier")
+        @Config.RequiresMcRestart
+        public float daggerDmgMod = 0.7F;
+
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Spear damage")
+        @Config.RequiresMcRestart
+        public float spearDmgMod = 0.75F;
+
+        @Config.Comment(damageModifierDesc)
+        @Config.Name("Crossbow damage")
+        public float crossbowDmgMod = 2.0F;
+        
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Battle Axe attack delay")
+        @Config.RequiresMcRestart
+        public float battleAxeSpd = 1.25F;
+
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Nunchaku attack delay")
+        @Config.RequiresMcRestart
+        public float nunchakuSpd = 0.3F;
+
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Hammer attack delay")
+        @Config.RequiresMcRestart
+        public float hammerSpd = 1.35F;
+
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Dagger attack delay")
+        @Config.RequiresMcRestart
+        public float daggerSpd = 0.8F;
+
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Spear attack delay")
+        @Config.RequiresMcRestart
+        public float spearSpd = 1.0F;
+
+        @Config.Comment(speedModifierDesc)
+        @Config.Name("Crossbow realoding time")
+        public int crossbowSpd = 40;
 
         @Config.Comment("When set to false, disable Vanilla shield recipe, forcing player to use this mod's shields.")
         @Config.Name("Allow Vanilla Shields")

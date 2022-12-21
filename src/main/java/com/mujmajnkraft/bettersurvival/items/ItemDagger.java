@@ -1,6 +1,7 @@
 package com.mujmajnkraft.bettersurvival.items;
 
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ItemDagger extends ItemCustomWeapon{
 	
 	public ItemDagger(ToolMaterial material) {
-		super(material, 0.7F, 0.8F);
+		super(material, ForgeConfigHandler.weapons.daggerDmgMod, ForgeConfigHandler.weapons.daggerSpd);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"dagger");
 		this.setTranslationKey(material.name().toLowerCase()+"dagger");
 	}

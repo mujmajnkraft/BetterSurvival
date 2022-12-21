@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import javax.annotation.Nullable;
 
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModItems;
 
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -26,6 +27,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemCrossbow extends ItemBow {
+	
 	public ItemCrossbow()
 	{
 		this.setMaxDamage(768);
@@ -160,7 +162,7 @@ public class ItemCrossbow extends ItemBow {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
     {
-		if (entityLiving instanceof EntityPlayer && (this.getMaxItemUseDuration(stack)-timeLeft > 40))
+		if (entityLiving instanceof EntityPlayer && (this.getMaxItemUseDuration(stack)-timeLeft > ForgeConfigHandler.weapons.crossbowSpd))
         {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
@@ -206,7 +208,7 @@ public class ItemCrossbow extends ItemBow {
         	{
         		ItemArrow itemarrow = (ItemArrow) this.loadedAmmo(itemstack).getItem();
         		EntityArrow entityarrow = itemarrow.createArrow(worldIn, this.loadedAmmo(itemstack), playerIn);
-        		entityarrow.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 6.0F, 1.0F);
+        		entityarrow.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 3.0F * ForgeConfigHandler.weapons.crossbowDmgMod, 1.0F);
 
         		int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, itemstack);
 

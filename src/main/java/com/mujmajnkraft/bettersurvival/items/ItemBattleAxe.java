@@ -2,6 +2,7 @@ package com.mujmajnkraft.bettersurvival.items;
 
 import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.Reference;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
@@ -17,7 +18,7 @@ public class ItemBattleAxe extends ItemCustomWeapon {
 	
 	public ItemBattleAxe(ToolMaterial material)
 	{
-		super(material, 1.6f, 1.25f);
+		super(material, ForgeConfigHandler.weapons.battleAxeDmgMod, ForgeConfigHandler.weapons.battleAxeSpd);
 		this.setRegistryName(Reference.MOD_ID,"item"+material.name().toLowerCase()+"battleaxe");
 		this.setTranslationKey(material.name().toLowerCase()+"battleaxe");
 	}
