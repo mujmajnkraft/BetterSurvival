@@ -1,0 +1,21 @@
+{
+	"pools": [
+		{
+			"name": "mujmajnkraftsbettersurvival:extra_diamond",
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:diamond",
+					"weight": 0,
+					"quality": 1
+				},
+				{
+					"type": "empty",
+					"weight": 50,
+					"quality": -1
+				}
+			]
+		}
+	]
+}

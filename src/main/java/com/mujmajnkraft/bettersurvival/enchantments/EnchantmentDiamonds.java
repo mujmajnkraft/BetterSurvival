@@ -13,11 +13,14 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.WorldServer;
+import net.minecraft.world.storage.loot.LootContext;
+import net.minecraft.world.storage.loot.LootTable;
 
 public class EnchantmentDiamonds extends Enchantment {
 	
@@ -27,20 +30,24 @@ public class EnchantmentDiamonds extends Enchantment {
 		this.setName(Reference.MOD_ID + ".diamonds");
 	}
 	
+
+	private static ResourceLocation location = new ResourceLocation(Reference.MOD_ID, "gameplay/diamonds_everywhere");
+	
 	//Called during HarvestDropsEvent if an ore is mined by an enchanted tool
-	public static void conjureDiamonds(List<ItemStack> drops, Block blockMined, EntityPlayer miner)
+	public static void conjureDiamonds(List<ItemStack> drops, Block blockMined, EntityPlayer player)
 	{
 		Item blockitem = Item.getItemFromBlock(blockMined);
-		if(blockMined instanceof BlockOre || blockMined instanceof BlockRedstoneOre) {
+		if((blockMined instanceof BlockOre || blockMined instanceof BlockRedstoneOre)) {
 			for(ItemStack drop : drops) {
-				if(drop != ItemStack.EMPTY && drop.getItem() != Items.AIR && drop.getItem() != blockitem) {
-					if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.diamonds, miner.getHeldItemMainhand()) > miner.getRNG().nextInt(50)) {
-						ItemStack itemStackToDrop = new ItemStack(Items.DIAMOND, 1);
-						drops.add(itemStackToDrop);
-						return;
-					}
+				if(drop.getItem() == blockitem) {
+					return;// Block which drops itself can't also drop diamonds to prevent diamond farming
 				}
 			}
+			// Checking if the effect happens and generating extra loot is handled by a loot table
+			LootTable loottable = player.world.getLootTableManager().getLootTableFromLocation(location);
+			int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.diamonds, player.getHeldItemMainhand());
+			LootContext.Builder context = (new LootContext.Builder((WorldServer)player.world)).withLuck(l);
+			drops.addAll(loottable.generateLootForPools(player.world.rand, context.build()));
 		}
 	}
 	
