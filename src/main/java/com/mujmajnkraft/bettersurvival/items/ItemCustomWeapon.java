@@ -17,6 +17,7 @@ import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -154,6 +155,11 @@ public class ItemCustomWeapon extends Item {
 		{
 			return super.canApplyAtEnchantingTable(stack, enchantment);
 		}
+    }
+	
+	@Override
+	public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+        return false;
     }
 
 }
