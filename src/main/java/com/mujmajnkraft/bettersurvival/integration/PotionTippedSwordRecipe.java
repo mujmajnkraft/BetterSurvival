@@ -14,8 +14,8 @@ public class PotionTippedSwordRecipe implements ICauldronRecipe {
     public boolean matches(ItemStack itemStack, boolean b, int i, CauldronState cauldronState) {
         return cauldronState.getPotion() != null &&
                 i > 0 &&
-                !Arrays.asList(ForgeConfigHandler.server.paPotionBlacklist).contains(cauldronState.getPotion().getRegistryName().toString()) &&
-                ForgeConfigHandler.server.isClassInstanceofWhitelistedWeapon(itemStack.getItem().getClass());
+                !Arrays.asList(ForgeConfigHandler.potions.paPotionBlacklist).contains(cauldronState.getPotion().getRegistryName().toString()) &&
+                ForgeConfigHandler.potions.isClassInstanceofWhitelistedWeapon(itemStack.getItem().getClass());
     }
 
     @Override
@@ -25,7 +25,7 @@ public class PotionTippedSwordRecipe implements ICauldronRecipe {
         if(returnable.hasTagCompound()) {
             int h = returnable.getTagCompound().getInteger("remainingPotionHits");
             if(h > 0 && PotionUtils.getPotionFromItem(returnable) == cauldronState.getPotion()) {
-                returnable.getTagCompound().setInteger("remainingPotionHits", Math.min(ForgeConfigHandler.server.potionHits + h, ForgeConfigHandler.server.maximumPotionHits));
+                returnable.getTagCompound().setInteger("remainingPotionHits", Math.min(ForgeConfigHandler.potions.potionHits + h, ForgeConfigHandler.potions.maximumPotionHits));
                 return returnable;//Add doses if its the same potion instead of resetting
             }
             returnable.getTagCompound().removeTag("Potion");
@@ -42,7 +42,7 @@ public class PotionTippedSwordRecipe implements ICauldronRecipe {
                 cauldronState.getPotion() == PotionTypes.AWKWARD)) {//If its water, just remove the effect and return it, to clean the sword
             PotionUtils.addPotionToItemStack(returnable, cauldronState.getPotion());
             PotionUtils.appendEffects(returnable, cauldronState.getPotion().getEffects());
-            returnable.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.server.potionHits);
+            returnable.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.potions.potionHits);
         }
 
         return returnable;

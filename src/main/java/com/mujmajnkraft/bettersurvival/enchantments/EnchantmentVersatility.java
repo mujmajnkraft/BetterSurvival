@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
@@ -46,16 +46,16 @@ public class EnchantmentVersatility extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.versatilitylevel;
+        return ForgeConfigHandler.enchantments.versatilityLevel;
     }
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.versatility;
+    	return ForgeConfigHandler.enchantments.versatilityTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.versatilitylevel != 0;
+		return ForgeConfigHandler.enchantments.versatilityLevel != 0;
     }
 }

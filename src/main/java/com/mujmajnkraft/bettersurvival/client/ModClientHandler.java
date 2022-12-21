@@ -85,7 +85,7 @@ public class ModClientHandler {
 					}
 
 					if(potioneffect.getDuration() > 20) {
-						s1 = s1 + " (" + Potion.getPotionDurationString(potioneffect, 1.0F/(float)ForgeConfigHandler.server.potionDivisor) + ")";
+						s1 = s1 + " (" + Potion.getPotionDurationString(potioneffect, 1.0F/(float)ForgeConfigHandler.potions.potionDivisor) + ")";
 					}
 
 					if(potion.isBadEffect()) {
@@ -96,7 +96,7 @@ public class ModClientHandler {
 					}
 				}
 
-				event.getToolTip().add(h + "/" + ForgeConfigHandler.server.maximumPotionHits + " hits remaining");
+				event.getToolTip().add(h + "/" + ForgeConfigHandler.potions.maximumPotionHits + " hits remaining");
 			}
 		}
 	}

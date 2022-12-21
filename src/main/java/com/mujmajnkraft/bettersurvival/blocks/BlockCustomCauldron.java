@@ -144,12 +144,12 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
                 	worldIn.markBlockRangeForRenderUpdate(pos, pos);
                 	return true;
                 }
-                else if(!Arrays.asList(ForgeConfigHandler.server.paPotionBlacklist).contains(cauldron.type.getRegistryName().toString()) && ForgeConfigHandler.server.isClassInstanceofWhitelistedWeapon(item.getClass())) {
+                else if(!Arrays.asList(ForgeConfigHandler.potions.paPotionBlacklist).contains(cauldron.type.getRegistryName().toString()) && ForgeConfigHandler.potions.isClassInstanceofWhitelistedWeapon(item.getClass())) {
                 	if(i > 0 && !worldIn.isRemote) {
 						if(itemstack.hasTagCompound()) {
 							int h = itemstack.getTagCompound().getInteger("remainingPotionHits");
 							if(h > 0 && PotionUtils.getPotionFromItem(itemstack) == cauldron.type) {//Add doses if its the same potion instead of resetting
-								itemstack.getTagCompound().setInteger("remainingPotionHits", Math.min(ForgeConfigHandler.server.potionHits + h, ForgeConfigHandler.server.maximumPotionHits));
+								itemstack.getTagCompound().setInteger("remainingPotionHits", Math.min(ForgeConfigHandler.potions.potionHits + h, ForgeConfigHandler.potions.maximumPotionHits));
 
 								if(!playerIn.capabilities.isCreativeMode) this.setWaterLevel(worldIn, pos, state, i-1);
 								worldIn.playSound(null, pos, SoundEvents.ITEM_BOTTLE_FILL, SoundCategory.BLOCKS, 1.0F, 1.0F);
@@ -171,7 +171,7 @@ public class BlockCustomCauldron extends BlockCauldron implements ITileEntityPro
 								cauldron.type == PotionTypes.AWKWARD)) {//If its water, just remove the effect and return it, to clean the sword
 							PotionUtils.addPotionToItemStack(itemstack, cauldron.type);
 							PotionUtils.appendEffects(itemstack, cauldron.effects);
-							itemstack.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.server.potionHits);
+							itemstack.getTagCompound().setInteger("remainingPotionHits", ForgeConfigHandler.potions.potionHits);
 						}
 
                 		if(!playerIn.capabilities.isCreativeMode) {

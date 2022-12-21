@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -20,7 +20,7 @@ public class EnchantmentVampirism extends Enchantment {
 	@Override
 	public int getMaxLevel()
     {
-        return ConfigHandler.vampirismlevel;
+        return ForgeConfigHandler.enchantments.vampirismLevel;
     }
 	
 	public int getMinEnchantability(int enchantmentLevel)
@@ -44,11 +44,11 @@ public class EnchantmentVampirism extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.vampirism;
+    	return ForgeConfigHandler.enchantments.vampirismTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.vampirismlevel != 0;
+		return ForgeConfigHandler.enchantments.vampirismLevel != 0;
     }
 }

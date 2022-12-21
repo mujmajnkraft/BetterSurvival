@@ -1,6 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.items.ItemBattleAxe;
 import com.mujmajnkraft.bettersurvival.items.ItemDagger;
 import com.mujmajnkraft.bettersurvival.items.ItemHammer;
@@ -33,10 +33,10 @@ public class EnchantmentSpecialBonus extends Enchantment {
     {
     	switch(this.weapon)
     	{
-    	case DAGGER: 	return ConfigHandler.assassinatelevel;
-    	case NUNCHAKU: 	return ConfigHandler.combolevel;
-    	case HAMMER: 	return ConfigHandler.bashlevel;
-    	case BATTLEAXE: return ConfigHandler.disarmlevel;
+    	case DAGGER: 	return ForgeConfigHandler.enchantments.assassinteLevel;
+    	case NUNCHAKU: 	return ForgeConfigHandler.enchantments.comboLevel;
+    	case HAMMER: 	return ForgeConfigHandler.enchantments.bashLevel;
+    	case BATTLEAXE: return ForgeConfigHandler.enchantments.disarmLevel;
     	}
     	return 3;
     }
@@ -45,10 +45,10 @@ public class EnchantmentSpecialBonus extends Enchantment {
     public boolean isAllowedOnBooks() {
     	switch(this.weapon)
     	{
-    	case DAGGER: 	return !(ConfigHandler.assassinatelevel == 0);
-    	case NUNCHAKU: 	return !(ConfigHandler.combolevel == 0);
-    	case HAMMER: 	return !(ConfigHandler.bashlevel == 0);
-    	case BATTLEAXE: return !(ConfigHandler.disarmlevel == 0);
+    	case DAGGER: 	return ForgeConfigHandler.enchantments.assassinteLevel !=0;
+    	case NUNCHAKU: 	return ForgeConfigHandler.enchantments.comboLevel !=0;
+    	case HAMMER: 	return ForgeConfigHandler.enchantments.bashLevel !=0;
+    	case BATTLEAXE: return ForgeConfigHandler.enchantments.disarmLevel !=0;
     	}
     	return super.isAllowedOnBooks();
     }
@@ -58,10 +58,10 @@ public class EnchantmentSpecialBonus extends Enchantment {
     {
     	switch(this.weapon)
     	{
-    	case DAGGER: 	return ConfigHandler.assassinate;
-    	case NUNCHAKU: 	return ConfigHandler.combo;
-    	case HAMMER: 	return ConfigHandler.bash;
-    	case BATTLEAXE: return ConfigHandler.disarm;
+    	case DAGGER: 	return ForgeConfigHandler.enchantments.assassinteTreasure;
+    	case NUNCHAKU: 	return ForgeConfigHandler.enchantments.comboTreasure;
+    	case HAMMER: 	return ForgeConfigHandler.enchantments.bashTreasure;
+    	case BATTLEAXE: return ForgeConfigHandler.enchantments.disarmTreasure;
     	}
     	return false;
     }

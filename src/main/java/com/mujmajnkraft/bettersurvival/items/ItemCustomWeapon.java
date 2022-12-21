@@ -84,7 +84,7 @@ public class ItemCustomWeapon extends Item {
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		ItemStack mat = this.material.getRepairItemStack();
 		if(!mat.isEmpty() && net.minecraftforge.oredict.OreDictionary.itemMatches(mat, repair, false)) return true;
-		if(ForgeConfigHandler.server.integration && OreDictionary.doesOreNameExist("ingot" + this.material.name())) {
+		if(ForgeConfigHandler.materials.moddedMaterials && OreDictionary.doesOreNameExist("ingot" + this.material.name())) {
 			for(ItemStack stack :OreDictionary.getOres("ingot" + this.material.name())) {
 				if(net.minecraftforge.oredict.OreDictionary.itemMatches(stack, repair, false)) {
 					return true;

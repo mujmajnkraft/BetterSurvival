@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
@@ -38,12 +38,12 @@ public class EnchantmentBlockPower extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.blockpowerlevel;
+        return ForgeConfigHandler.enchantments.blockingPowerLevel;
     }
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.blockpower;
+    	return ForgeConfigHandler.enchantments.blastTreasure;
     }
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
@@ -54,6 +54,6 @@ public class EnchantmentBlockPower extends Enchantment {
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.blockpowerlevel != 0;
+		return ForgeConfigHandler.enchantments.blockingPowerLevel != 0;
     }
 }

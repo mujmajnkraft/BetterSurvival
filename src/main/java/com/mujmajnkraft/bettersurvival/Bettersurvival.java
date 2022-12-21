@@ -5,7 +5,6 @@ import java.io.File;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuCombo;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsIn;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.eventhandlers.CommonEventHandler;
 import com.mujmajnkraft.bettersurvival.init.*;
 import com.mujmajnkraft.bettersurvival.integration.InspirationsCauldronCompat;
@@ -62,8 +61,6 @@ public class BetterSurvival {
 		isRLCombatLoaded = Loader.isModLoaded("bettercombatmod") && RLCombatCompat.isCorrectVersion();
 		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
-
-		proxy.preInit();
 		
 		ArrowProperties.Register();
 		NunchakuCombo.Register();
@@ -71,7 +68,6 @@ public class BetterSurvival {
 		
 		config = new File(event.getModConfigurationDirectory() + File.separator + Reference.MOD_ID);
 		config.mkdirs();
-		ConfigHandler.init(new File(config.getPath(), Reference.MOD_ID + ".cfg"));
 		
 		ModPotions.init();
 		

@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
@@ -41,7 +41,7 @@ public class EnchantmentEducation extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.educationlevel;
+        return ForgeConfigHandler.enchantments.educationLevel;
     }
 
     public boolean canApplyTogether(Enchantment ench)
@@ -51,11 +51,11 @@ public class EnchantmentEducation extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.education;
+    	return ForgeConfigHandler.enchantments.educationTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.educationlevel != 0;
+		return ForgeConfigHandler.enchantments.educationLevel != 0;
     }
 }

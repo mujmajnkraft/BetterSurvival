@@ -68,7 +68,7 @@ public class RLCombatCompatEventHandler {
                 //Hammer
                 if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, stack);
-                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.stunBaseChance + l*ForgeConfigHandler.server.bashModifier) && !event.getTarget().getIsInvulnerable()) {
+                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.weapons.stunBaseChance + l*ForgeConfigHandler.weapons.bashModifier) && !event.getTarget().getIsInvulnerable()) {
                         PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer)stack.getItem()).stunduration);
                         ((EntityLivingBase)event.getTarget()).addPotionEffect(potioneffectIn);
                     }
@@ -78,7 +78,7 @@ public class RLCombatCompatEventHandler {
                 //BattleAxe
                 if(event.getCooledStrength() > 0.9) {
                     int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, stack);
-                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.disarmBaseChance + l*ForgeConfigHandler.server.disarmModifier) && !event.getTarget().getIsInvulnerable()) {
+                    if(player.world.rand.nextFloat()<(ForgeConfigHandler.weapons.disarmBaseChance + l*ForgeConfigHandler.weapons.disarmModifier) && !event.getTarget().getIsInvulnerable()) {
                         if(event.getTarget() instanceof EntityPlayer) {
                             EntityItem drop = ((EntityPlayer)event.getTarget()).dropItem(((EntityPlayer)event.getTarget()).inventory.decrStackSize(((EntityPlayer)event.getTarget()).inventory.currentItem, 1), false);
                             if(drop != null) drop.setPickupDelay(40);
@@ -114,7 +114,7 @@ public class RLCombatCompatEventHandler {
                                 effect.getPotion().affectEntity(null, player, (EntityLivingBase)event.getTarget(), effect.getAmplifier(), 1/6D);
                             }
                             else {
-                                ((EntityLivingBase)event.getTarget()).addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+                                ((EntityLivingBase)event.getTarget()).addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.potions.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
                             }
                         }
                         if(!player.capabilities.isCreativeMode) {

@@ -15,7 +15,7 @@ public class RecipeCondition implements IConditionFactory{
 	@Override
 	public BooleanSupplier parse(JsonContext context, JsonObject json) {
 		String modID = JsonUtils.getString(json, "mod_id");
-		boolean isModLoaded = Loader.isModLoaded(modID) && ForgeConfigHandler.server.integration;
+		boolean isModLoaded = Loader.isModLoaded(modID) && ForgeConfigHandler.materials.moddedMaterials;
 		return () -> isModLoaded;
 	}
 }

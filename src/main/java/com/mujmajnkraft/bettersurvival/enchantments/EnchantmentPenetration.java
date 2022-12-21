@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
@@ -38,7 +38,7 @@ public class EnchantmentPenetration extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.penetrationlevel;
+        return ForgeConfigHandler.enchantments.penetrationLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -48,11 +48,11 @@ public class EnchantmentPenetration extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.penetration;
+    	return ForgeConfigHandler.enchantments.penetrationTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.penetrationlevel != 0;
+		return ForgeConfigHandler.enchantments.penetrationLevel != 0;
     }
 }

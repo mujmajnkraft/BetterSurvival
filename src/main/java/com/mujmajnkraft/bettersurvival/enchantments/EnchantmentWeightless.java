@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
@@ -29,7 +29,7 @@ public class EnchantmentWeightless extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.weightlesslevel;
+        return ForgeConfigHandler.enchantments.weightlessLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -39,7 +39,7 @@ public class EnchantmentWeightless extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.weightless;
+    	return ForgeConfigHandler.enchantments.weightlessTreasure;
     }
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
@@ -50,6 +50,6 @@ public class EnchantmentWeightless extends Enchantment {
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.weightlesslevel != 0;
+		return ForgeConfigHandler.enchantments.weightlessLevel != 0;
     }
 }

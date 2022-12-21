@@ -3,7 +3,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
@@ -50,7 +50,7 @@ public class EnchantmentBlast extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.blastlevel;
+        return ForgeConfigHandler.enchantments.blastLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -60,11 +60,11 @@ public class EnchantmentBlast extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.blast;
+    	return ForgeConfigHandler.enchantments.bashTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.blastlevel != 0;
+		return ForgeConfigHandler.enchantments.blastLevel != 0;
     }
 }

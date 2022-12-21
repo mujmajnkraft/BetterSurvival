@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
@@ -33,7 +33,7 @@ public class EnchantmentHeavy extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.heavylevel;
+        return ForgeConfigHandler.enchantments.heavyLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -43,7 +43,7 @@ public class EnchantmentHeavy extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.heavy;
+    	return ForgeConfigHandler.enchantments.heavyTreasure;
     }
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
@@ -53,6 +53,6 @@ public class EnchantmentHeavy extends Enchantment {
     
     public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.heavylevel != 0;
+		return ForgeConfigHandler.enchantments.diamondsEverywhereLevel != 0;
     }
 }

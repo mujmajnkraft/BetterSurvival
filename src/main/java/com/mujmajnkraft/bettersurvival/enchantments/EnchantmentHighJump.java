@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -25,7 +25,7 @@ public class EnchantmentHighJump extends Enchantment {
 	@Override
 	public int getMaxLevel()
     {
-        return ConfigHandler.highjumplevel;
+        return ForgeConfigHandler.enchantments.highJumpLevel;
     }
 	
 	public int getMinEnchantability(int enchantmentLevel)
@@ -40,11 +40,11 @@ public class EnchantmentHighJump extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.highjump;
+    	return ForgeConfigHandler.enchantments.highJumpTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.highjumplevel != 0;
+		return ForgeConfigHandler.enchantments.highJumpLevel != 0;
     }
 }

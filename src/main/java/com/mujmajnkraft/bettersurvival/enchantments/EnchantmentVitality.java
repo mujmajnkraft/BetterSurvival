@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -35,16 +35,16 @@ public class EnchantmentVitality extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.vitalitylevel;
+        return ForgeConfigHandler.enchantments.vitalityLevel;
     }
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.vitality;
+    	return ForgeConfigHandler.enchantments.vitalityTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.vitalitylevel != 0;
+		return ForgeConfigHandler.enchantments.vitalityLevel != 0;
     }
 }

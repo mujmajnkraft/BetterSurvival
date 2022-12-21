@@ -28,7 +28,7 @@ public class ModCrafting {
 		GameRegistry.addShapedRecipe(new ResourceLocation(Reference.MOD_ID+":smallshield"), new ResourceLocation(Reference.MOD_ID+"other"),new ItemStack(ModItems.smallshield), " W ", "WIW", " W ", 'W', Blocks.PLANKS, 'I', Items.IRON_INGOT);
 		GameRegistry.addShapedRecipe(new ResourceLocation(Reference.MOD_ID+":bigshield"), new ResourceLocation(Reference.MOD_ID+"other"),new ItemStack(ModItems.bigshield), " WI", "SWI", " WI", 'W', Blocks.PLANKS, 'I', Items.IRON_INGOT, 'S', Items.STICK);
 		
-		if(!ForgeConfigHandler.server.allowVanillaShields)
+		if(!ForgeConfigHandler.weapons.allowVanillaShields)
 		{
 			Set<ResourceLocation> recipes = ForgeRegistries.RECIPES.getKeys();
 

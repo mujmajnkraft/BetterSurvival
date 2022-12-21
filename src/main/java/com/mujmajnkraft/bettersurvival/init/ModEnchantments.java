@@ -23,7 +23,7 @@ import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentRange;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentRapidFire;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentTunneling;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVampirism;
-import com.mujmajnkraft.bettersurvival.enchantments.EnchatnmentSmelting;
+import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentSmelting;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraftforge.event.RegistryEvent;
@@ -76,7 +76,7 @@ public class ModEnchantments {
 		assassinate = new EnchantmentSpecialBonus(EnumWeaponType.DAGGER);
 		tunneling = new EnchantmentTunneling();
 		range = new EnchantmentRange();
-		smelting = new EnchatnmentSmelting();
+		smelting = new EnchantmentSmelting();
 		spellshield = new EnchantmentSpellShield();
 		education = new EnchantmentEducation();
 		multishot = new EnchantmentMultishot();

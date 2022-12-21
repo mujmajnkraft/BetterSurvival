@@ -4,7 +4,7 @@ import java.util.Random;
 
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.integration.SwitchBowCompat;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
 
@@ -141,7 +141,7 @@ public class EnchantmentMultishot extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.multishotlevel;
+        return ForgeConfigHandler.enchantments.multishotLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -151,11 +151,11 @@ public class EnchantmentMultishot extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.multishot;
+    	return ForgeConfigHandler.enchantments.multishotTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.multishotlevel != 0;
+		return ForgeConfigHandler.enchantments.multishotLevel != 0;
     }
 }

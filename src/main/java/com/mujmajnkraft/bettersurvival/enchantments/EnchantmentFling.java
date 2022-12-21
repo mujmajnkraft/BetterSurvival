@@ -1,7 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -29,7 +29,7 @@ public class EnchantmentFling extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.flinglevel;
+        return ForgeConfigHandler.enchantments.flingLevel;
     }
     
     //Enchantment effect takes place here
@@ -45,11 +45,11 @@ public class EnchantmentFling extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.fling;
+    	return ForgeConfigHandler.enchantments.flingTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.flinglevel != 0;
+		return ForgeConfigHandler.enchantments.flingLevel != 0;
     }
 }

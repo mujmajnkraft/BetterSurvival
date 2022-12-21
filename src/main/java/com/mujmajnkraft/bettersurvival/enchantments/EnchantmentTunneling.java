@@ -1,7 +1,6 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
@@ -80,7 +79,7 @@ public class EnchantmentTunneling extends Enchantment {
 		Block block = state.getBlock();
 
 		if(block == Blocks.AIR) return false;
-		if(ForgeConfigHandler.server.preventTunnelingTileEntities && player.world.getTileEntity(pos) != null) return false;
+		if(ForgeConfigHandler.enchantments.preventTunnelingTileEntities && player.world.getTileEntity(pos) != null) return false;
 
 		for(String type : stack.getItem().getToolClasses(player.getHeldItemMainhand())) {
 			if(block.isToolEffective(type, state) && block.getHarvestLevel(state) <= stack.getItem().getHarvestLevel(player.getHeldItemMainhand(), type, player, state)) {
@@ -102,16 +101,16 @@ public class EnchantmentTunneling extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.tunnelinglevel;
+        return ForgeConfigHandler.enchantments.tunnelingLevel;
     }
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.tunneling;
+    	return ForgeConfigHandler.enchantments.tunnelingTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.tunnelinglevel != 0;
+		return ForgeConfigHandler.enchantments.tunnelingLevel != 0;
     }
 }

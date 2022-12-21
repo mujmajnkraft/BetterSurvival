@@ -3,7 +3,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import java.util.Random;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
 
@@ -46,7 +46,7 @@ public class EnchantmentReflection extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.reflectionlevel;
+        return ForgeConfigHandler.enchantments.reflectionLevel;
     }
     
     public static boolean shouldHit(int level, Random rnd)
@@ -61,7 +61,7 @@ public class EnchantmentReflection extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.reflection;
+    	return ForgeConfigHandler.enchantments.reflectionTreasure;
     }
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
@@ -71,6 +71,6 @@ public class EnchantmentReflection extends Enchantment {
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.reflectionlevel != 0;
+		return ForgeConfigHandler.enchantments.reflectionLevel != 0;
     }
 }

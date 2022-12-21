@@ -2,7 +2,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 
 import java.util.List;
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.block.Block;
@@ -56,7 +56,7 @@ public class EnchantmentDiamonds extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.diamondslevel;
+        return ForgeConfigHandler.enchantments.diamondsEverywhereLevel;
     }
 
     public boolean canApplyTogether(Enchantment ench)
@@ -71,11 +71,11 @@ public class EnchantmentDiamonds extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.diamonds;
+    	return ForgeConfigHandler.enchantments.diamondsEverywhereTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.diamondslevel != 0;
+		return ForgeConfigHandler.enchantments.diamondsEverywhereLevel != 0;
     }
 }

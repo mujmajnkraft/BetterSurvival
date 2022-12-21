@@ -3,7 +3,8 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import java.util.UUID;
 
 import com.mujmajnkraft.bettersurvival.Reference;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,7 +43,7 @@ public class EnchantmentAgility extends Enchantment {
 	@Override
 	public int getMaxLevel()
     {
-        return ConfigHandler.agilitylevel;
+        return ForgeConfigHandler.enchantments.agilityLevel;
     }
 	
 	public int getMinEnchantability(int enchantmentLevel)
@@ -57,11 +58,11 @@ public class EnchantmentAgility extends Enchantment {
 	
 	public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.agility;
+    	return ForgeConfigHandler.enchantments.agilityTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.agilitylevel != 0;
+		return ForgeConfigHandler.enchantments.agilityLevel != 0;
     }
 }

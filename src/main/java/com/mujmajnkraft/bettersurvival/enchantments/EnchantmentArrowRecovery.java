@@ -3,7 +3,7 @@ package com.mujmajnkraft.bettersurvival.enchantments;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowPropertiesProvider;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
-import com.mujmajnkraft.bettersurvival.config.ConfigHandler;
+import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 
 import net.minecraft.enchantment.Enchantment;
@@ -43,7 +43,7 @@ public class EnchantmentArrowRecovery extends Enchantment {
 
     public int getMaxLevel()
     {
-        return ConfigHandler.arrowrecoverylevel;
+        return ForgeConfigHandler.enchantments.arrowRecoveryLevel;
     }
     
     public boolean canApplyTogether(Enchantment ench)
@@ -53,11 +53,11 @@ public class EnchantmentArrowRecovery extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ConfigHandler.arrowrecovery;
+    	return ForgeConfigHandler.enchantments.arrowRecoveryTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
     {
-		return ConfigHandler.arrowrecoverylevel != 0;
+		return ForgeConfigHandler.enchantments.arrowRecoveryLevel != 0;
     }
 }

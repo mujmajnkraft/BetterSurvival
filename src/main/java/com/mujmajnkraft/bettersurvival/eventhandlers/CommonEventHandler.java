@@ -76,7 +76,7 @@ import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentRapidFire;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentTunneling;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVersatility;
 import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentVitality;
-import com.mujmajnkraft.bettersurvival.enchantments.EnchatnmentSmelting;
+import com.mujmajnkraft.bettersurvival.enchantments.EnchantmentSmelting;
 import com.mujmajnkraft.bettersurvival.init.ModEnchantments;
 import com.mujmajnkraft.bettersurvival.init.ModPotions;
 import net.minecraftforge.fml.common.registry.EntityEntry;
@@ -202,7 +202,7 @@ public class CommonEventHandler {
 							effect.getPotion().affectEntity(null, event.getSource().getImmediateSource(), event.getEntityLiving(), effect.getAmplifier(), 1/6D);
 						}
 						else {
-							event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.server.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
+							event.getEntityLiving().addPotionEffect(new PotionEffect(effect.getPotion(), Math.max(effect.getDuration()/ForgeConfigHandler.potions.potionDivisor, 1), effect.getAmplifier(), effect.getIsAmbient(), effect.doesShowParticles()));
 						}
 					}
 
@@ -244,7 +244,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemHammer) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.bash, player.getHeldItemMainhand());
-					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.stunBaseChance + l*ForgeConfigHandler.server.bashModifier) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.weapons.stunBaseChance + l*ForgeConfigHandler.weapons.bashModifier) && !target.getIsInvulnerable()) {
 						PotionEffect potioneffectIn = new PotionEffect(ModPotions.stun, ((ItemHammer) player.getHeldItemMainhand().getItem()).stunduration);
 						target.addPotionEffect(potioneffectIn);
 					}
@@ -253,7 +253,7 @@ public class CommonEventHandler {
 			else if(player.getHeldItemMainhand().getItem() instanceof ItemBattleAxe) {
 				if(player.getCooledAttackStrength(0.5F) > 0.9) {
 					int l = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.disarm, player.getHeldItemMainhand());
-					if(player.world.rand.nextFloat()<(ForgeConfigHandler.server.disarmBaseChance + l*ForgeConfigHandler.server.disarmModifier) && !target.getIsInvulnerable()) {
+					if(player.world.rand.nextFloat()<(ForgeConfigHandler.weapons.disarmBaseChance + l*ForgeConfigHandler.weapons.disarmModifier) && !target.getIsInvulnerable()) {
 						if(target instanceof EntityPlayer) {
 							EntityItem drop = ((EntityPlayer)target).dropItem(((EntityPlayer)target).inventory.decrStackSize(((EntityPlayer)target).inventory.currentItem, 1), false);
 							if(drop != null) drop.setPickupDelay(40);
@@ -348,7 +348,7 @@ public class CommonEventHandler {
 			
 			//Processes smelting enchantment
 			if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.smelting, player.getHeldItemMainhand()) > 0)
-				EnchatnmentSmelting.smeltDrops(event.getDrops(), event.getFortuneLevel(), player);
+				EnchantmentSmelting.smeltDrops(event.getDrops(), event.getFortuneLevel(), player);
 			
 			//Processes diamonds everywhere enchantment
 			if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.diamonds, player.getHeldItemMainhand()) > 0)
@@ -408,8 +408,8 @@ public class CommonEventHandler {
 			}
 			if(entity.getActivePotionEffect(MobEffects.BLINDNESS) != null) {
 				EntityEntry entry = EntityRegistry.getEntry(entity.getClass());
-				if(entry != null && !Arrays.asList(ForgeConfigHandler.server.blindnessBlacklist).contains(entry.getRegistryName().toString())) {
-					double strength = -0.01D * ForgeConfigHandler.server.blindnessStrength;
+				if(entry != null && !Arrays.asList(ForgeConfigHandler.potions.blindnessBlacklist).contains(entry.getRegistryName().toString())) {
+					double strength = -0.01D * ForgeConfigHandler.potions.blindnessStrength;
 					if(strength < 0) {
 						AttributeModifier modifier = new AttributeModifier(UUID.fromString("a6107045-134f-4c14-a645-75c3ae5c7a27"), "blind", strength, 1);
 						entity.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).applyModifier(modifier);
