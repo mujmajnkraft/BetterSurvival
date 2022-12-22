@@ -55,7 +55,7 @@ public class EntityFlyingSpear extends EntityArrow {
 
 	@Nullable
 	public Entity getShooter() {
-		UUID id = (UUID)((Optional)this.dataManager.get(SHOOTER)).orNull();
+		UUID id = (UUID)((Optional<?>)this.dataManager.get(SHOOTER)).orNull();
 		this.shootingEntity = id == null ? null : this.world.getPlayerEntityByUUID(id);
 		return this.shootingEntity;
 	}

@@ -168,34 +168,6 @@ enchantment.mujmajnkraftsbettersurvival.versatility.desc=Slightly increases mini
 enchantment.mujmajnkraftsbettersurvival.vitality.desc=Increases natural regeneration rate.
 enchantment.mujmajnkraftsbettersurvival.weightless.desc=Decreases blocking speed reduction.
 
-mujmajnkraftsbettersurvival.configgui.title=Configuration
-
-mujmajnkraftsbettersurvival.configgui.max_level.tooltip=Customize max level of mod enchantments (setting it to 0 will disable the enchantment completely).
-mujmajnkraftsbettersurvival.configgui.is_treasure.tooltip=Set whether mod enchantments are treasure or not .Treasure enchantment cannot be obtained thru enchanting table.
-mujmajnkraftsbettersurvival.configgui.material_stats.tooltip=Configure stats of tools made of common materials (harvest level, durability, efficiency, damage, enchantability).
-mujmajnkraftsbettersurvival.configgui.other.tooltip=Other settings
-
-mujmajnkraftsbettersurvival.configgui.max_level=Enchantment levels
-mujmajnkraftsbettersurvival.configgui.is_treasure=Treasure enchantments
-mujmajnkraftsbettersurvival.configgui.material_stats=Material stats
-mujmajnkraftsbettersurvival.configgui.other=Other settings
-
-mujmajnkraftsbettersurvival.configgui.copper_stats=Copper
-mujmajnkraftsbettersurvival.configgui.bronze_stats=Bronze
-mujmajnkraftsbettersurvival.configgui.invar_stats=Invar
-mujmajnkraftsbettersurvival.configgui.aluminium_stats=Aluminium
-mujmajnkraftsbettersurvival.configgui.electrum_stats=Electrum
-mujmajnkraftsbettersurvival.configgui.silver_stats=Silver
-mujmajnkraftsbettersurvival.configgui.steel_stats=Steel
-mujmajnkraftsbettersurvival.configgui.signalum_stats=Signalum
-mujmajnkraftsbettersurvival.configgui.lumium_stats=Lumium
-mujmajnkraftsbettersurvival.configgui.enderium_stats=Enderium
-
-mujmajnkraftsbettersurvival.configgui.fov=Disable any FoV changes
-mujmajnkraftsbettersurvival.configgui.fovshields=Disable shield induced FoV changes
-mujmajnkraftsbettersurvival.configgui.integration=Allow crossmod integration
-mujmajnkraftsbettersurvival.configgui.allow_vanilla_shields=Allow vanilla shields
-
 effect.stun=Stun
 effect.milk=Milk
 effect.cure=Cure

@@ -36,7 +36,7 @@ public class ItemCrossbow extends ItemBow {
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
             {
-                return entityIn == null ? 0.0F : (entityIn.getActiveItemStack().getItem() != ModItems.crossbow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / 40.0F);
+                return entityIn == null ? 0.0F : (entityIn.getActiveItemStack().getItem() != ModItems.crossbow ? 0.0F : (float)(stack.getMaxItemUseDuration() - entityIn.getItemInUseCount()) / ForgeConfigHandler.weapons.crossbowSpd);
             }
         });
         this.addPropertyOverride(new ResourceLocation("pulling"), new IItemPropertyGetter()
