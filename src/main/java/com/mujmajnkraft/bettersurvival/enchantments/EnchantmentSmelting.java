@@ -1,6 +1,7 @@
 package com.mujmajnkraft.bettersurvival.enchantments;
 
 import java.util.List;
+
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 
@@ -28,7 +29,7 @@ public class EnchantmentSmelting extends Enchantment {
 		{
 			if(drops.get(i) == ItemStack.EMPTY || drops.get(i).getItem() == Items.AIR) continue; //Don't try to smelt air or empty when they randomly get added to the drops
 			ItemStack smeltingResult = FurnaceRecipes.instance().getSmeltingResult(drops.get(i)).copy();
-			if(smeltingResult != ItemStack.EMPTY) {
+			if(smeltingResult != ItemStack.EMPTY && smeltingResult.getItem() != Items.AIR) {
 				smeltingResult.setCount(drops.get(i).getCount());
 				if(!(smeltingResult.getItem() instanceof ItemBlock)) smeltingResult.setCount(player.getRNG().nextInt(fortuneLevel + 1) + smeltingResult.getCount());
 				drops.set(i, smeltingResult);
