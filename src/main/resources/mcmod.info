@@ -9,7 +9,7 @@
   "updateUrl": "",
   "authorList": ${mod_author},
   "credits": "Block Vader, Deadrit, Shivaxi, Giggitybyte, Fonnymunkey, ArtsyDy",
-  "logoFile": "assets/mujmajnkraftsbettersurvival/logo.png",
+  "logoFile": "assets/mujmajnkraftsbettersurvival/textures/logo.png",
   "screenshots": [],
   "dependencies": []
 }
