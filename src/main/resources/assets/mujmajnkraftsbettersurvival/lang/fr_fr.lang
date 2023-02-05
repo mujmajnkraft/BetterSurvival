@@ -1,0 +1,16 @@
+tile.iron_furnace_idle.name=Four en Fer
+tile.iron_furnace_active.name=Four en Fer
+tile.gold_furnace_idle.name=Four en Or
+tile.gold_furnace_active.name=Four en Or
+tile.diamond_furnace_idle.name=Four en Diamant
+tile.diamond_furnace_active.name=Four en Diamant
+tile.glass_furnace_idle.name=Four en Cristal
+tile.glass_furnace_active.name=Four en Cristal
+tile.obsidian_furnace_idle.name=Four en Obsidienne
+tile.obsidian_furnace_active.name=Four en Obsidienne
+
+container.furnace_0=Four en Fer
+container.furnace_1=Four en Or
+container.furnace_2=Four en Diamant
+container.furnace_3=Four en Cristal
+container.furnace_4=Four en Obsidienne
