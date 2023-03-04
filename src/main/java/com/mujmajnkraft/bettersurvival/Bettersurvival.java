@@ -10,10 +10,10 @@ import com.mujmajnkraft.bettersurvival.init.*;
 import com.mujmajnkraft.bettersurvival.integration.InspirationsCauldronCompat;
 import com.mujmajnkraft.bettersurvival.integration.RLCombatCompatEventHandler;
 import com.mujmajnkraft.bettersurvival.eventhandlers.TickEventHandler;
-import com.mujmajnkraft.bettersurvival.integration.RLCombatCompat;
 import com.mujmajnkraft.bettersurvival.packet.BetterSurvivalPacketHandler;
 import com.mujmajnkraft.bettersurvival.proxy.CommonProxy;
 import com.mujmajnkraft.bettersurvival.tileentities.TileEntityCustomCauldron;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -57,8 +57,12 @@ public class BetterSurvival {
 	@EventHandler
 	public static void preInit(FMLPreInitializationEvent event)
 	{
-		isIafLoaded = Loader.isModLoaded("iceandfire");
-		isRLCombatLoaded = Loader.isModLoaded("bettercombatmod") && RLCombatCompat.isCorrectVersion();
+		if (Loader.isModLoaded("iceandfire")) {
+			isIafLoaded = isCorrectVersion(Loader.instance().getIndexedModList().get("iceandfire").getVersion(), 5, 8);
+		}
+		if (Loader.isModLoaded("bettercombatmod")) {
+			isRLCombatLoaded = isCorrectVersion(Loader.instance().getIndexedModList().get("bettercombatmod").getVersion(), 2, 2);
+		}
 		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
 		
@@ -99,4 +103,14 @@ public class BetterSurvival {
 
 		ModCrafting.register();
 	}
+	
+	static boolean isCorrectVersion(String str, int from, int to) {
+		String[] arrOfStr = str.split("\\.");
+        try {
+            int i = Integer.parseInt(String.valueOf(arrOfStr[1]));
+            if(i >= from && i <= to) return true;
+        }
+        catch(Exception ignored) { }
+        return false;
+    }
 }
