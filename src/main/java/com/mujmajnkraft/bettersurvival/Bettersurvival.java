@@ -58,10 +58,10 @@ public class BetterSurvival {
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		if (Loader.isModLoaded("iceandfire")) {
-			isIafLoaded = isCorrectVersion(Loader.instance().getIndexedModList().get("iceandfire").getVersion(), 5, 8);
+			isIafLoaded = iafVersionChecker(Loader.instance().getIndexedModList().get("iceandfire").getVersion());
 		}
 		if (Loader.isModLoaded("bettercombatmod")) {
-			isRLCombatLoaded = isCorrectVersion(Loader.instance().getIndexedModList().get("bettercombatmod").getVersion(), 2, 2);
+			isRLCombatLoaded = rlcombatVersionChecker(Loader.instance().getIndexedModList().get("bettercombatmod").getVersion());
 		}
 		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
@@ -104,11 +104,21 @@ public class BetterSurvival {
 		ModCrafting.register();
 	}
 	
-	static boolean isCorrectVersion(String str, int from, int to) {
+	static boolean iafVersionChecker(String str) {
 		String[] arrOfStr = str.split("\\.");
         try {
             int i = Integer.parseInt(String.valueOf(arrOfStr[1]));
-            if(i >= from && i <= to) return true;
+            if(i >= 5 && i <= 8) return true;
+        }
+        catch(Exception ignored) { }
+        return false;
+    }
+	
+	static boolean rlcombatVersionChecker(String str) {
+		String[] arrOfStr = str.split("\\.");
+        try {
+            int i = Integer.parseInt(String.valueOf(arrOfStr[0]));
+            if(i == 2) return true;
         }
         catch(Exception ignored) { }
         return false;
