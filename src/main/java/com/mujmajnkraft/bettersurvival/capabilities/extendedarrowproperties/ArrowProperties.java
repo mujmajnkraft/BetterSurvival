@@ -123,6 +123,7 @@ public class ArrowProperties implements IArrowProperties{
 					entityitem.setNoPickupDelay();
                     entityitem.setOwner(shooter.getName());
 				}
+				arrow.pickupStatus = PickupStatus.CREATIVE_ONLY; // Prevents duplication when the arrow isn't destroyed on hit
 			}
 		}
 		
