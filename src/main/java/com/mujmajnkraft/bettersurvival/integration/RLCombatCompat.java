@@ -2,7 +2,7 @@ package com.mujmajnkraft.bettersurvival.integration;
 
 import bettercombat.mod.network.PacketHandler;
 import bettercombat.mod.network.PacketMainhandAttack;
-import bettercombat.mod.util.InFHandler;
+import bettercombat.mod.util.inf.InFHandler;
 import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.RayTraceResult;
