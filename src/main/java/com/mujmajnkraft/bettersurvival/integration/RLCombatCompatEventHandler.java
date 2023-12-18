@@ -31,8 +31,7 @@ public class RLCombatCompatEventHandler {
             ItemStack stack = player.getHeldItem(event.getOffhand() ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
             if(stack.getItem() instanceof ItemCustomWeapon) {
                 if(BetterSurvival.isIafLoaded) {
-                    Item.ToolMaterial mat = ((ItemCustomWeapon)stack.getItem()).getMaterial();
-                    event.setDamageModifier(event.getDamageModifier() + InFCompat.getMaterialModifier(mat, (EntityLivingBase)event.getTarget(), player));
+                    event.setDamageModifier(event.getDamageModifier() + InFCompat.getMaterialModifier(stack, (EntityLivingBase)event.getTarget(), player));
                 }
             }
         }

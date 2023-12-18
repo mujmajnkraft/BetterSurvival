@@ -9,6 +9,7 @@ import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.integration.InFLightningForkCompat;
 import com.mujmajnkraft.bettersurvival.items.ItemBattleAxe;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
@@ -63,6 +64,11 @@ public class ModItems {
 		if(BetterSurvival.isIafLoaded) {
 			materials.remove(ModItems.SILVER);
 			materials.addAll(Arrays.asList(InFCompat.SILVER, InFCompat.DRAGON_BONE, InFCompat.DRAGON_BONE_FLAMED, InFCompat.DRAGON_BONE_ICED, InFCompat.JUNGLE_CHITIN, InFCompat.DESERT_CHITIN));
+			if(BetterSurvival.isIafLightningForkLoaded) {
+				materials.remove(ModItems.COPPER);
+				materials.add(InFLightningForkCompat.COPPER);
+				materials.add(InFLightningForkCompat.DRAGON_BONE_LIGHTNING);
+			}
 		}
 
 		crossbow.setRegistryName(Reference.MOD_ID, "itemcrossbow");

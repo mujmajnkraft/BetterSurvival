@@ -69,7 +69,7 @@ public class EntityFlyingSpear extends EntityArrow {
 			if(entity instanceof EntityLivingBase && !entity.getIsInvulnerable() && flag) {
 				if(!(entity instanceof EntityEnderman) && this.getSpear().getItem() instanceof ItemSpear) {
 					float matModifier = 0;
-					if(BetterSurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(((ItemSpear) this.getSpear().getItem()).getMaterial(), (EntityLivingBase)entity, null, false);
+					if(BetterSurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(getSpear(), (EntityLivingBase)entity, null, false);
 					this.setDamage(this.getDamage() + matModifier);
 				}
 			}
@@ -90,7 +90,7 @@ public class EntityFlyingSpear extends EntityArrow {
 	protected void arrowHit(EntityLivingBase living) {
 		if(!living.world.isRemote && this.getSpear().getItem() instanceof ItemSpear) {
 			if(BetterSurvival.isIafLoaded) {
-				InFCompat.getMaterialModifier(((ItemSpear) this.getSpear().getItem()).getMaterial(), living, null, true);
+				InFCompat.getMaterialModifier(getSpear(), living, null, true);
 			}
 			if(this.pickupStatus == PickupStatus.ALLOWED) {
 				if(((ItemSpear)this.getSpear().getItem()).breakChance() < this.rand.nextFloat()) {

@@ -278,8 +278,7 @@ public class CommonEventHandler {
 			}
 			if(player.getHeldItemMainhand().getItem() instanceof ItemCustomWeapon) {
 				if(BetterSurvival.isIafLoaded) {
-					Item.ToolMaterial mat = ((ItemCustomWeapon)player.getHeldItemMainhand().getItem()).getMaterial();
-					event.setAmount(event.getAmount() + InFCompat.getMaterialModifier(mat, target, player));
+					event.setAmount(event.getAmount() + InFCompat.getMaterialModifier(player.getHeldItemMainhand(), target, player));
 				}
 			}
 		}

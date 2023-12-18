@@ -311,7 +311,7 @@ public class ForgeConfigHandler {
         @Config.RequiresMcRestart
         public Double[] copperStats = new Double[]{1d, 160d, 5.0d, 1.0d, 5d};
         
-        @Config.Comment("Set stats of copper material (harvest level, durability, efficiency, damage, enchantability)")
+        @Config.Comment("Set stats of bronze material (harvest level, durability, efficiency, damage, enchantability)")
         @Config.Name("Brone stats")
         @Config.RequiresMcRestart
         public Double[] bronzeStats = new Double[]{2d, 200d, 6.0d, 1.8d, 14d};
