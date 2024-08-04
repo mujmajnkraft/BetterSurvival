@@ -9,6 +9,7 @@ import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.integration.InFLightningForkCompat;
 import com.mujmajnkraft.bettersurvival.items.ItemBattleAxe;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
@@ -51,9 +52,11 @@ public class ModItems {
 		if(BetterSurvival.isIafLoaded) {
 			if(Item.getByNameOrId("iceandfire:myrmex_desert_chitin") != null) {
 				InFCompat.DESERT_CHITIN.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_desert_chitin")));
+				InFCompat.DESERT_STINGER.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_desert_chitin")));
 			}
 			if(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin") != null) {
 				InFCompat.JUNGLE_CHITIN.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin")));
+				InFCompat.JUNGLE_STINGER.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin")));
 			}
 		}
 	}
@@ -62,7 +65,12 @@ public class ModItems {
 	public void registerItems(RegistryEvent.Register<Item> event) {
 		if(BetterSurvival.isIafLoaded) {
 			materials.remove(ModItems.SILVER);
-			materials.addAll(Arrays.asList(InFCompat.SILVER, InFCompat.DRAGON_BONE, InFCompat.DRAGON_BONE_FLAMED, InFCompat.DRAGON_BONE_ICED, InFCompat.JUNGLE_CHITIN, InFCompat.DESERT_CHITIN));
+			materials.addAll(Arrays.asList(InFCompat.SILVER, InFCompat.DRAGON_BONE, InFCompat.DRAGON_BONE_FLAMED, InFCompat.DRAGON_BONE_ICED, InFCompat.JUNGLE_CHITIN, InFCompat.JUNGLE_STINGER, InFCompat.DESERT_CHITIN, InFCompat.DESERT_STINGER));
+			if(BetterSurvival.isIafLightningForkLoaded) {
+				materials.remove(ModItems.COPPER);
+				materials.add(InFLightningForkCompat.COPPER);
+				materials.add(InFLightningForkCompat.DRAGON_BONE_LIGHTNING);
+			}
 		}
 
 		crossbow.setRegistryName(Reference.MOD_ID, "itemcrossbow");

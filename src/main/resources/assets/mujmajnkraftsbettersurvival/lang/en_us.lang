@@ -97,17 +97,35 @@ item.firedragonbonebattleaxe.name=Flamed Dragon Bone Battle Axe
 item.firedragonbonedagger.name=Flamed Dragon Bone Dagger
 item.firedragonbonenunchaku.name=Flamed Dragon Bone Nunchaku
 
+item.lightningdragonbonehammer.name=Shocked Dragon Bone Hammer
+item.lightningdragonbonespear.name=Shocked Dragon Bone Spear
+item.lightningdragonbonebattleaxe.name=Shocked Dragon Bone Battle Axe
+item.lightningdragonbonedagger.name=Shocked Dragon Bone Dagger
+item.lightningdragonbonenunchaku.name=Shocked Dragon Bone Nunchaku
+
 item.desertchitinhammer.name=Desert Myrmex Chitin Hammer
 item.desertchitinspear.name=Desert Myrmex Chitin Spear
 item.desertchitinbattleaxe.name=Desert Myrmex Chitin Battle Axe
 item.desertchitindagger.name=Desert Myrmex Chitin Dagger
 item.desertchitinnunchaku.name=Desert Myrmex Chitin Nunchaku
 
+item.desertstingerhammer.name=Desert Myrmex Stinger Hammer
+item.desertstingerspear.name=Desert Myrmex Stinger Spear
+item.desertstingerbattleaxe.name=Desert Myrmex Stinger Battle Axe
+item.desertstingerdagger.name=Desert Myrmex Stinger Dagger
+item.desertstingernunchaku.name=Desert Myrmex Stinger Nunchaku
+
 item.junglechitinhammer.name=Jungle Myrmex Chitin Hammer
 item.junglechitinspear.name=Jungle Myrmex Chitin Spear
 item.junglechitinbattleaxe.name=Jungle Myrmex Chitin Battle Axe
 item.junglechitindagger.name=Jungle Myrmex Chitin Dagger
 item.junglechitinnunchaku.name=Jungle Myrmex Chitin Nunchaku
+
+item.junglestingerhammer.name=Jungle Myrmex Stinger Hammer
+item.junglestingerspear.name=Jungle Myrmex Stinger Spear
+item.junglestingerbattleaxe.name=Jungle Myrmex Stinger Battle Axe
+item.junglestingerdagger.name=Jungle Myrmex Stinger Dagger
+item.junglestingernunchaku.name=Jungle Myrmex Stinger Nunchaku
 
 mujmajnkraftsbettersurvival.hammer.desc=Can stun enemies when hit, and can slam the ground with Right-Click
 mujmajnkraftsbettersurvival.dagger.desc=Deals large amounts of damage when attacking from behind

@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"IVI",
+		"ISI",
+		" S "
+	],
+	"key": {
+		"V": {
+			"item": "iceandfire:myrmex_stinger"
+		},
+		"I": {
+			"item": "iceandfire:myrmex_desert_chitin"
+		},
+		"S": {
+			"item": "iceandfire:witherbone"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemdesertstingerbattleaxe"
+	},
+	"conditions":[
+		{
+  			"type": "mujmajnkraftsbettersurvival:mod_loaded",
+  			"mod_id": "iceandfire"
+		}
+	]
+}

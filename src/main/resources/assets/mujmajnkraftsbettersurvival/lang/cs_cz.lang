@@ -103,11 +103,23 @@ item.desertchitinbattleaxe.name=Válečná Sekera z Pouštního Chitinu
 item.desertchitindagger.name=Dýka z Pouštního Chitinu
 item.desertchitinnunchaku.name=Nunčaky z Pouštního Chitinu
 
+item.desertstingerhammer.name=Kladivo z Pouštního Žihadla
+item.desertstingerspear.name=Kopí z Pouštního Žihadla
+item.desertstingerbattleaxe.name=Válečná Sekera z Pouštního Žihadla
+item.desertstingerdagger.name=Dýka z Pouštního Žihadla
+item.desertstingernunchaku.name=Nunčaky z Pouštního Žihadla
+
 item.junglechitinhammer.name=Kladivo z Pralesního Chitinu
 item.junglechitinspear.name=Kopí z Pralesního Chitinu
 item.junglechitinbattleaxe.name=Válečná Sekera z Pralesního Chitinu
 item.junglechitindagger.name=Dýka z Pralesního Chitinu
 item.junglechitinnunchaku.name=Nunčaky z Pralesního Chitinu
+
+item.junglestingerhammer.name=Kladivo z Pralesního Chitinu
+item.junglestingerspear.name=Kopí z Pralesního Chitinu
+item.junglestingerbattleaxe.name=Válečná Sekera z Pralesního Chitinu
+item.junglestingerdagger.name=Dýka z Pralesního Chitinu
+item.junglestingernunchaku.name=Nunčaky z Pralesního Chitinu
 
 mujmajnkraftsbettersurvival.hammer.desc=Dokáže omráčit nepřátele a udeřit do země při kliknutí pravým tlačítkem myši
 mujmajnkraftsbettersurvival.dagger.desc=Způsobí velké poškození pokud zasáhnete protivníka zezadu

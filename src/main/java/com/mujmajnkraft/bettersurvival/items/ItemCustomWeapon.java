@@ -7,6 +7,7 @@ import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.integration.InFLightningForkCompat;
 import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
@@ -107,6 +108,12 @@ public class ItemCustomWeapon extends Item {
 				String s = net.minecraft.client.resources.I18n.format("myrmextools.hurt");
 				tooltip.add(TextFormatting.GREEN + s);
 			}
+			else if(this.material == InFCompat.JUNGLE_STINGER || this.material == InFCompat.DESERT_STINGER) {
+				String s = net.minecraft.client.resources.I18n.format("myrmextools.hurt");
+				tooltip.add(TextFormatting.GREEN + s);
+				s = net.minecraft.client.resources.I18n.format("myrmextools.poison");
+				tooltip.add(TextFormatting.DARK_GREEN + s);
+			}
 			else if(this.material == InFCompat.DRAGON_BONE_ICED) {
 				String s = net.minecraft.client.resources.I18n.format("dragon_sword_ice.hurt1");
 				tooltip.add(TextFormatting.GREEN + s);
@@ -117,6 +124,12 @@ public class ItemCustomWeapon extends Item {
 				String s = net.minecraft.client.resources.I18n.format("dragon_sword_fire.hurt1");
 				tooltip.add(TextFormatting.GREEN + s);
 				s = net.minecraft.client.resources.I18n.format("dragon_sword_fire.hurt2");
+				tooltip.add(TextFormatting.RED + s);
+			}
+			else if(BetterSurvival.isIafLightningForkLoaded && this.material == InFLightningForkCompat.DRAGON_BONE_LIGHTNING) {
+				String s = net.minecraft.client.resources.I18n.format("dragon_sword_lightning.hurt1");
+				tooltip.add(TextFormatting.GREEN + s);
+				s = net.minecraft.client.resources.I18n.format("dragon_sword_lightning.hurt2");
 				tooltip.add(TextFormatting.RED + s);
 			}
 		}
