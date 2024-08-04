@@ -1,0 +1,26 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"  V",
+		" S ",
+		"S  "
+	],
+	"key": {
+		"V": {
+			"item": "iceandfire:myrmex_stinger"
+		},
+		"S": {
+			"item": "iceandfire:witherbone"
+		}
+	},
+	"result": {
+		"item": "mujmajnkraftsbettersurvival:itemdesertstingerspear",
+		"count": 4
+	},
+	"conditions":[
+		{
+  			"type": "mujmajnkraftsbettersurvival:mod_loaded",
+  			"mod_id": "iceandfire"
+		}
+	]
+}

@@ -26,8 +26,23 @@ public abstract class InFCompat {
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEfficiency(),
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getAttackDamage(),
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEnchantability());
+    public static final Item.ToolMaterial JUNGLE_STINGER = EnumHelper.addToolMaterial(
+            "JungleStinger",
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getHarvestLevel(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getMaxUses(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEfficiency(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getAttackDamage(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEnchantability());
     public static final Item.ToolMaterial DESERT_CHITIN = EnumHelper.addToolMaterial(
             "DesertChitin",
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getHarvestLevel(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getMaxUses(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEfficiency(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getAttackDamage(),
+            com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEnchantability());
+
+    public static final Item.ToolMaterial DESERT_STINGER = EnumHelper.addToolMaterial(
+            "DesertStinger",
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getHarvestLevel(),
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getMaxUses(),
             com.github.alexthe666.iceandfire.core.ModItems.myrmexChitin.getEfficiency(),

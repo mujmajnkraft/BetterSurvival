@@ -55,13 +55,21 @@ item.desertchitinspear.name=Lance en Chitine du Myrmex du Désert
 item.desertchitinbattleaxe.name=Hache de Combat en Chitine du Myrmex du Désert
 item.desertchitindagger.name=Dague en Chitine du Myrmex du Désert
 item.desertchitinnunchaku.name=Nunjaku en Chitine du Myrmex du Désert
+item.desertstingerhammer.name=Marteau en Aguijón du Myrmex du Désert
+item.desertstingerspear.name=Lance en Aguijón du Myrmex du Désert
+item.desertstingerbattleaxe.name=Hache de Combat en Aguijón du Myrmex du Désert
+item.desertstingerdagger.name=Dague en Aguijón du Myrmex du Désert
+item.desertstingernunchaku.name=Nunjaku en Aguijón du Myrmex du Désert
 item.junglechitinhammer.name=Marteau en Chitine du Myrmex de la Jungle
 item.junglechitinspear.name=Lance en Chitine du Myrmex de la Jungle
 item.junglechitinbattleaxe.name=Hache de Combat en Chitine du Myrmex de la Jungle
 item.junglechitindagger.name=Dague en Chitine du Myrmex de la Jungle
 item.junglechitinnunchaku.name=Nunjaku en Chitine du Myrmex de la Jungle
-
-mujmajnkraftsbettersurvival.chitintools.hurt=+4 dêgats au non-arthropodes
+item.junglestingerhammer.name=Marteau en Aguijón du Myrmex de la Jungle
+item.junglestingerspear.name=Lance en Aguijón du Myrmex de la Jungle
+item.junglestingerbattleaxe.name=Hache de Combat en Aguijón du Myrmex de la Jungle
+item.junglestingerdagger.name=Dague en Aguijón du Myrmex de la Jungle
+item.junglestingernunchaku.name=Nunjaku en Aguijón du Myrmex de la Jungle
 
 enchantment.mujmajnkraftsbettersurvival.vampirism=Vampirisme
 enchantment.mujmajnkraftsbettersurvival.agility=Agilité

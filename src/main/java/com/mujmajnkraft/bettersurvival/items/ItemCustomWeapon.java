@@ -108,6 +108,12 @@ public class ItemCustomWeapon extends Item {
 				String s = net.minecraft.client.resources.I18n.format("myrmextools.hurt");
 				tooltip.add(TextFormatting.GREEN + s);
 			}
+			else if(this.material == InFCompat.JUNGLE_STINGER || this.material == InFCompat.DESERT_STINGER) {
+				String s = net.minecraft.client.resources.I18n.format("myrmextools.hurt");
+				tooltip.add(TextFormatting.GREEN + s);
+				s = net.minecraft.client.resources.I18n.format("myrmextools.poison");
+				tooltip.add(TextFormatting.DARK_GREEN + s);
+			}
 			else if(this.material == InFCompat.DRAGON_BONE_ICED) {
 				String s = net.minecraft.client.resources.I18n.format("dragon_sword_ice.hurt1");
 				tooltip.add(TextFormatting.GREEN + s);

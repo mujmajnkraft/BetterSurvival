@@ -37,6 +37,15 @@ public abstract class InFLightningForkCompat {
                 return 4.0F;
             }
         }
+        else if (mat == InFCompat.DESERT_STINGER || mat == InFCompat.JUNGLE_STINGER) {
+            target.addPotionEffect(new PotionEffect(MobEffects.POISON, 200, 2));
+            if(target.getCreatureAttribute() != EnumCreatureAttribute.ARTHROPOD) {
+                return 4.0F;
+            }
+            if(InFCompat.isDeathworm(target)) {
+                return 4.0F;
+            }
+        }
         else if(mat == InFCompat.DRAGON_BONE_ICED) {
             if(effect) {
                 IEntityEffectCapability capability = InFCapabilities.getEntityEffectCapability(target);
