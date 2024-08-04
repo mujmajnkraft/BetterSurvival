@@ -1,9 +1,8 @@
 package com.mujmajnkraft.bettersurvival.integration;
 
-import com.github.alexthe666.iceandfire.entity.FrozenEntityProperties;
-import com.github.alexthe666.iceandfire.entity.StoneEntityProperties;
+import com.github.alexthe666.iceandfire.api.IEntityEffectCapability;
+import com.github.alexthe666.iceandfire.api.InFCapabilities;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomWeapon;
-import net.ilexiconn.llibrary.server.entity.EntityPropertiesHandler;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,8 +44,8 @@ public abstract class InFMainCompat {
         }
         else if(mat == InFCompat.DRAGON_BONE_ICED) {
             if(effect) {
-                FrozenEntityProperties frozenProps = EntityPropertiesHandler.INSTANCE.getProperties(target, FrozenEntityProperties.class);
-                frozenProps.setFrozenFor(200);
+                IEntityEffectCapability capability = InFCapabilities.getEntityEffectCapability(target);
+                capability.setFrozen(200);
                 target.addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 100, 2));
                 target.addPotionEffect(new PotionEffect(MobEffects.MINING_FATIGUE, 100, 2));
                 if(player != null) target.knockBack(target, 1F, player.posX - target.posX, player.posZ - target.posZ);
@@ -68,7 +67,7 @@ public abstract class InFMainCompat {
     }
 
     public static boolean isStoned(EntityLivingBase entity) {
-        StoneEntityProperties properties = (StoneEntityProperties) EntityPropertiesHandler.INSTANCE.getProperties(entity, StoneEntityProperties.class);
-        return (properties != null && properties.isStone);
+        IEntityEffectCapability capability = InFCapabilities.getEntityEffectCapability(entity);
+        return capability.isStoned();
     }
 }
