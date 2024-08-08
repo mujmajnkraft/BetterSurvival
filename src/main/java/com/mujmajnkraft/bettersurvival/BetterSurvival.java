@@ -74,7 +74,6 @@ public class BetterSurvival {
 		SpearsIn.Register();
 
 		config = new File(event.getModConfigurationDirectory() + File.separator + Reference.MOD_ID);
-		config.mkdirs();
 
 		ModPotions.init();
 
