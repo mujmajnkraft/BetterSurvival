@@ -10,11 +10,8 @@ import net.minecraft.init.MobEffects;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-
 import javax.annotation.Nullable;
-
 public abstract class InFMainCompat {
-
     public static float getMaterialModifier(ItemStack stack, EntityLivingBase target, @Nullable EntityPlayer player, boolean effect) {
         if(!(stack.getItem() instanceof ItemCustomWeapon)) {
             return 0.0F;
