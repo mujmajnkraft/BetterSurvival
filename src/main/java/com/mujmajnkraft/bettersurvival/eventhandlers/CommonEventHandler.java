@@ -111,14 +111,19 @@ public class CommonEventHandler {
 		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.multishot, event.getBow()) !=0)
 			EnchantmentMultishot.shootMoreArrows(event.getEntity().getEntityWorld(), event.getEntityPlayer(), event.getBow(), event.getCharge());
 	}
-	
+
+	boolean isTunneling;
+
 	@SubscribeEvent(priority=EventPriority.LOW)
 	public void onBlockBreak(BreakEvent event)
 	{
 		//Resolves tunneling enchantment, don't recursively tunnel
-		if(event.getPlayer().getHeldItemMainhand().hasTagCompound() && event.getPlayer().getHeldItemMainhand().getTagCompound().getBoolean("tunnelCooldown")) return;
-		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.tunneling, event.getPlayer().getHeldItemMainhand()) !=0)
+		if(isTunneling) return;
+		if(EnchantmentHelper.getEnchantmentLevel(ModEnchantments.tunneling, event.getPlayer().getHeldItemMainhand()) !=0) {
+			isTunneling = true;
 			EnchantmentTunneling.mineManyBlocks(event.getPlayer(), event.getState(), event.getPos());
+			isTunneling = false;
+		}
 	}
 	
 	@SubscribeEvent(priority=EventPriority.HIGH)
