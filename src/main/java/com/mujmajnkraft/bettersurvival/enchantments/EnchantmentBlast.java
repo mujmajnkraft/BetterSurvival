@@ -60,7 +60,7 @@ public class EnchantmentBlast extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ForgeConfigHandler.enchantments.bashTreasure;
+    	return ForgeConfigHandler.enchantments.blastTreasure;
     }
 	
 	public boolean isAllowedOnBooks()
