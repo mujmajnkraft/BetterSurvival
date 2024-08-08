@@ -43,7 +43,7 @@ public class EnchantmentBlockPower extends Enchantment {
     
     public boolean isTreasureEnchantment()
     {
-    	return ForgeConfigHandler.enchantments.blastTreasure;
+    	return ForgeConfigHandler.enchantments.blockingPowerTreasure;
     }
     
     public boolean canApplyAtEnchantingTable(ItemStack stack)
