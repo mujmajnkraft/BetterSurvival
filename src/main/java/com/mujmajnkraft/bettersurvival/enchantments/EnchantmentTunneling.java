@@ -47,9 +47,6 @@ public class EnchantmentTunneling extends Enchantment {
 				default     : dir = 0; break;
 			}
 			if(dir != 0) {
-				//if(!stack.hasTagCompound()) stack.setTagCompound(new NBTTagCompound());
-				//stack.getTagCompound().setBoolean("tunnelCooldown", true);
-
 				for(int x = (int) -l; x < l + 1; x++) {
 					if((dir !=1 && dir !=2) || x==0) {
 						for(int y = (int) -l; y < l + 1; y++) {
@@ -68,7 +65,6 @@ public class EnchantmentTunneling extends Enchantment {
 						}
 					}
 				}
-				//stack.getTagCompound().setBoolean("tunnelCooldown", false);
 			}
 		}
 	}
