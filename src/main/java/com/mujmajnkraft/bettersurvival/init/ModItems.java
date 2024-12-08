@@ -10,6 +10,7 @@ import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.Reference;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.integration.InFLightningForkCompat;
+import com.mujmajnkraft.bettersurvival.integration.InFRotnForkCompat;
 import com.mujmajnkraft.bettersurvival.items.ItemBattleAxe;
 import com.mujmajnkraft.bettersurvival.items.ItemCrossbow;
 import com.mujmajnkraft.bettersurvival.items.ItemCustomShield;
@@ -27,7 +28,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ModItems {
-	
+
 	public static ToolMaterial COPPER = EnumHelper.addToolMaterial("Copper", ForgeConfigHandler.materials.copperStats[0].intValue(), ForgeConfigHandler.materials.copperStats[1].intValue(), ForgeConfigHandler.materials.copperStats[2].floatValue(), ForgeConfigHandler.materials.copperStats[3].floatValue(), ForgeConfigHandler.materials.copperStats[4].intValue());
 	public static ToolMaterial BRONZE = EnumHelper.addToolMaterial("Bronze", ForgeConfigHandler.materials.bronzeStats[0].intValue(), ForgeConfigHandler.materials.bronzeStats[1].intValue(), ForgeConfigHandler.materials.bronzeStats[2].floatValue(), ForgeConfigHandler.materials.bronzeStats[3].floatValue(), ForgeConfigHandler.materials.bronzeStats[4].intValue());
 	public static ToolMaterial INVAR = EnumHelper.addToolMaterial("Invar", ForgeConfigHandler.materials.invarStats[0].intValue(), ForgeConfigHandler.materials.invarStats[1].intValue(), ForgeConfigHandler.materials.invarStats[2].floatValue(), ForgeConfigHandler.materials.invarStats[3].floatValue(), ForgeConfigHandler.materials.invarStats[4].intValue());
@@ -38,16 +39,16 @@ public class ModItems {
 	public static ToolMaterial SIGNALUM = EnumHelper.addToolMaterial("Signalum", ForgeConfigHandler.materials.signalumStats[0].intValue(), ForgeConfigHandler.materials.signalumStats[1].intValue(), ForgeConfigHandler.materials.signalumStats[2].floatValue(), ForgeConfigHandler.materials.signalumStats[3].floatValue(), ForgeConfigHandler.materials.signalumStats[4].intValue());
 	public static ToolMaterial LUMIUM = EnumHelper.addToolMaterial("Lumium", ForgeConfigHandler.materials.lumiumStats[0].intValue(), ForgeConfigHandler.materials.lumiumStats[1].intValue(), ForgeConfigHandler.materials.lumiumStats[2].floatValue(), ForgeConfigHandler.materials.lumiumStats[3].floatValue(), ForgeConfigHandler.materials.lumiumStats[4].intValue());
 	public static ToolMaterial ENDERIUM = EnumHelper.addToolMaterial("Enderium", ForgeConfigHandler.materials.enderiumStats[0].intValue(), ForgeConfigHandler.materials.enderiumStats[1].intValue(), ForgeConfigHandler.materials.enderiumStats[2].floatValue(), ForgeConfigHandler.materials.enderiumStats[3].floatValue(), ForgeConfigHandler.materials.enderiumStats[4].intValue());
-	
+
 	public static final Item crossbow = new ItemCrossbow();
 	public static final Item smallshield = new ItemCustomShield(0.5F, 1);
 	public static final Item bigshield = new ItemCustomShield(0.8F, 3);
-	
+
 	private static List<ToolMaterial> materials = new ArrayList<ToolMaterial>(EnumSet.of(COPPER, BRONZE, INVAR, SILVER, ELECTRUM, ALUMINIUM, STEEL, SIGNALUM, LUMIUM, ENDERIUM,
 									ToolMaterial.WOOD, ToolMaterial.STONE, ToolMaterial.IRON, ToolMaterial.GOLD, ToolMaterial.DIAMOND));
 
 	private static List<Item> items = new ArrayList<Item>();
-		
+
 	public static void setRepairMaterials() {
 		if(BetterSurvival.isIafLoaded) {
 			if(Item.getByNameOrId("iceandfire:myrmex_desert_chitin") != null) {
@@ -59,8 +60,18 @@ public class ModItems {
 				InFCompat.JUNGLE_STINGER.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin")));
 			}
 		}
+        if(BetterSurvival.isIafRotnLoaded){
+            if(Item.getByNameOrId("iceandfire:myrmex_desert_chitin") != null) {
+                InFRotnForkCompat.DESERT_CHITIN.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_desert_chitin")));
+                InFRotnForkCompat.DESERT_STINGER.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_desert_chitin")));
+            }
+            if(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin") != null) {
+                InFRotnForkCompat.JUNGLE_CHITIN.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin")));
+                InFRotnForkCompat.JUNGLE_STINGER.setRepairItem(new ItemStack(Item.getByNameOrId("iceandfire:myrmex_jungle_chitin")));
+            }
+        }
 	}
-	
+
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event) {
 		if(BetterSurvival.isIafLoaded) {
@@ -72,7 +83,11 @@ public class ModItems {
 				materials.add(InFLightningForkCompat.DRAGON_BONE_LIGHTNING);
 			}
 		}
-
+		if(BetterSurvival.isIafRotnLoaded) {
+            materials.remove(ModItems.SILVER);
+            materials.remove(ModItems.COPPER);
+            materials.addAll(Arrays.asList(InFRotnForkCompat.COPPER, InFRotnForkCompat.DRAGON_BONE_LIGHTNING,InFRotnForkCompat.SILVER, InFRotnForkCompat.DRAGON_BONE, InFRotnForkCompat.DRAGON_BONE_FLAMED, InFRotnForkCompat.DRAGON_BONE_ICED, InFRotnForkCompat.JUNGLE_CHITIN, InFRotnForkCompat.JUNGLE_STINGER, InFRotnForkCompat.DESERT_CHITIN, InFRotnForkCompat.DESERT_STINGER));
+		}
 		crossbow.setRegistryName(Reference.MOD_ID, "itemcrossbow");
 		crossbow.setTranslationKey("crossbow");
 		items.add(crossbow);
@@ -93,11 +108,11 @@ public class ModItems {
 
 		event.getRegistry().registerAll(items.toArray(new Item[0]));
 	}
-	
+
 	public static void registerRenders() {
 		for(Item item : items) registerRender(item);
 	}
-	
+
 	private static void registerRender(Item item) {
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

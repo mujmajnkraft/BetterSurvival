@@ -1,6 +1,7 @@
 package com.mujmajnkraft.bettersurvival;
 
 import java.io.File;
+import java.util.Objects;
 
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.ArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.NunchakuCombo;
@@ -45,8 +46,9 @@ public class BetterSurvival {
 	public static File config;
 
 	public static Logger LOG = LogManager.getLogger("bettersurvival");
-	
+
 	public static boolean isIafLoaded;
+	public static boolean isIafRotnLoaded;
 	public static boolean isIafLightningForkLoaded;
 	public static boolean isRLCombatLoaded;
 	public static boolean isSMELoaded;
@@ -59,9 +61,15 @@ public class BetterSurvival {
 	public static void preInit(FMLPreInitializationEvent event)
 	{
 		if (Loader.isModLoaded("iceandfire")) {
+			String iafName = Loader.instance().getIndexedModList().get("iceandfire").getName();
 			String iafVersion = Loader.instance().getIndexedModList().get("iceandfire").getVersion();
-			isIafLoaded = iafVersionChecker(iafVersion);
-			isIafLightningForkLoaded = iafLightningForkVersionChecker(iafVersion);
+
+			if(iafRotnForkNameChecker(iafName)) {
+				isIafRotnLoaded = iafRotnForkNameChecker(iafName);
+			}else {
+				isIafLoaded = iafVersionChecker(iafVersion);
+				isIafLightningForkLoaded = iafLightningForkVersionChecker(iafVersion);
+			}
 		}
 		if (Loader.isModLoaded("bettercombatmod")) {
 			isRLCombatLoaded = rlcombatVersionChecker(Loader.instance().getIndexedModList().get("bettercombatmod").getVersion());
@@ -125,6 +133,10 @@ public class BetterSurvival {
 		}
 		catch(Exception ignored) { }
 		return false;
+	}
+
+	static boolean iafRotnForkNameChecker(String str) {
+		return Objects.equals(str, "Ice and Fire: RotN Edition");
 	}
 
 	static boolean rlcombatVersionChecker(String str) {

@@ -6,6 +6,7 @@ import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.extendedarrowproperties.IArrowProperties;
 import com.mujmajnkraft.bettersurvival.capabilities.nunchakucombo.INunchakuCombo;
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
+import com.mujmajnkraft.bettersurvival.integration.InFRotnForkCompat;
 import com.mujmajnkraft.bettersurvival.items.*;
 import net.minecraft.block.BlockCauldron;
 import net.minecraft.block.state.IBlockState;
@@ -284,6 +285,9 @@ public class CommonEventHandler {
 			if(player.getHeldItemMainhand().getItem() instanceof ItemCustomWeapon) {
 				if(BetterSurvival.isIafLoaded) {
 					event.setAmount(event.getAmount() + InFCompat.getMaterialModifier(player.getHeldItemMainhand(), target, player));
+				}
+				if(BetterSurvival.isIafRotnLoaded) {
+					event.setAmount(event.getAmount() + InFRotnForkCompat.getMaterialModifier(player.getHeldItemMainhand(), target, player));
 				}
 			}
 		}

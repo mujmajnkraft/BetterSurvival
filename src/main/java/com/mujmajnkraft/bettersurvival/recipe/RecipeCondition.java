@@ -15,7 +15,7 @@ public class RecipeCondition implements IConditionFactory{
 	@Override
 	public BooleanSupplier parse(JsonContext context, JsonObject json) {
 		String modID = JsonUtils.getString(json, "mod_id");
-		if (modID.matches("iceandfire")) return () -> BetterSurvival.isIafLoaded; //Added an extra check to prevent errors with an unsupported IaF version
+		if (modID.matches("iceandfire")) return () -> BetterSurvival.isIafLoaded || BetterSurvival.isIafRotnLoaded; //Added an extra check to prevent errors with an unsupported IaF version
 		boolean isModLoaded = Loader.isModLoaded(modID) && ForgeConfigHandler.materials.moddedMaterials;
 		return () -> isModLoaded;
 	}

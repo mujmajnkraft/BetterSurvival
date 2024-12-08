@@ -33,6 +33,9 @@ public class RLCombatCompatEventHandler {
                 if(BetterSurvival.isIafLoaded) {
                     event.setDamageModifier(event.getDamageModifier() + InFCompat.getMaterialModifier(stack, (EntityLivingBase)event.getTarget(), player));
                 }
+                if(BetterSurvival.isIafRotnLoaded) {
+                    event.setDamageModifier(event.getDamageModifier() + InFRotnForkCompat.getMaterialModifier(stack, (EntityLivingBase)event.getTarget(), player));
+                }
             }
         }
     }

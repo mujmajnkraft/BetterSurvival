@@ -5,6 +5,7 @@ import com.mujmajnkraft.bettersurvival.BetterSurvival;
 import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.ISpearsIn;
 import com.mujmajnkraft.bettersurvival.capabilities.spearsinentity.SpearsInProvider;
+import com.mujmajnkraft.bettersurvival.integration.InFRotnForkCompat;
 import com.mujmajnkraft.bettersurvival.items.ItemSpear;
 
 import net.minecraft.entity.Entity;
@@ -70,6 +71,7 @@ public class EntityFlyingSpear extends EntityArrow {
 				if(!(entity instanceof EntityEnderman) && this.getSpear().getItem() instanceof ItemSpear) {
 					float matModifier = 0;
 					if(BetterSurvival.isIafLoaded) matModifier = InFCompat.getMaterialModifier(getSpear(), (EntityLivingBase)entity, null, false);
+					if(BetterSurvival.isIafRotnLoaded) matModifier = InFRotnForkCompat.getMaterialModifier(getSpear(), (EntityLivingBase)entity, null, false);
 					this.setDamage(this.getDamage() + matModifier);
 				}
 			}
@@ -83,6 +85,7 @@ public class EntityFlyingSpear extends EntityArrow {
 		Entity entity = super.findEntityOnPath(start, end);
 		if(entity == this.getShooter() && this.ticksExisted <= 10) return null;//Don't hit self if moving forward
 		if(entity instanceof EntityLivingBase && BetterSurvival.isIafLoaded && InFCompat.isStoned((EntityLivingBase)entity)) return null;//Don't target stoned entities, causes bugs/dupes
+		if(entity instanceof EntityLivingBase && BetterSurvival.isIafRotnLoaded && InFRotnForkCompat.isStoned((EntityLivingBase)entity)) return null;//Don't target stoned entities, causes bugs/dupes
 		return entity;
 	}
 
@@ -91,6 +94,9 @@ public class EntityFlyingSpear extends EntityArrow {
 		if(!living.world.isRemote && this.getSpear().getItem() instanceof ItemSpear) {
 			if(BetterSurvival.isIafLoaded) {
 				InFCompat.getMaterialModifier(getSpear(), living, null, true);
+			}
+			if(BetterSurvival.isIafRotnLoaded) {
+				InFRotnForkCompat.getMaterialModifier(getSpear(), living, null, true);
 			}
 			if(this.pickupStatus == PickupStatus.ALLOWED) {
 				if(((ItemSpear)this.getSpear().getItem()).breakChance() < this.rand.nextFloat()) {

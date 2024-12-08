@@ -10,7 +10,7 @@ import net.minecraft.util.math.RayTraceResult;
 public abstract class RLCombatCompat {
 
     public static void attackEntityFromClient(RayTraceResult mov, EntityPlayer player) {
-        if(BetterSurvival.isIafLoaded && InFHandler.isMultipart(mov.entityHit)) {
+        if((BetterSurvival.isIafLoaded || BetterSurvival.isIafRotnLoaded) && InFHandler.isMultipart(mov.entityHit)) {
             mov.entityHit = InFHandler.getMultipartParent(mov.entityHit);
         }
 
