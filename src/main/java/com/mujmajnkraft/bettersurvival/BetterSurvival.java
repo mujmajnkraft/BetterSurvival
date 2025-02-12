@@ -49,7 +49,6 @@ public class BetterSurvival {
 	public static boolean isIafLoaded;
 	public static boolean isIafLightningForkLoaded;
 	public static boolean isRLCombatLoaded;
-	public static boolean isSMELoaded;
 	public static boolean isInspirationsLoaded;
 
 	@SidedProxy(clientSide = Reference.CLIENT_PROXY_CLASS, serverSide = Reference.SERVER_PROXY_CLASS)
@@ -66,7 +65,6 @@ public class BetterSurvival {
 		if (Loader.isModLoaded("bettercombatmod")) {
 			isRLCombatLoaded = rlcombatVersionChecker(Loader.instance().getIndexedModList().get("bettercombatmod").getVersion());
 		}
-		isSMELoaded = Loader.isModLoaded("somanyenchantments");
 		isInspirationsLoaded = Loader.isModLoaded("inspirations") && InspirationsCauldronCompat.inspirationsExtendedCauldron();
 
 		ArrowProperties.Register();

@@ -8,7 +8,6 @@ import com.mujmajnkraft.bettersurvival.integration.InFCompat;
 
 import com.mujmajnkraft.bettersurvival.config.ForgeConfigHandler;
 import com.mujmajnkraft.bettersurvival.integration.InFLightningForkCompat;
-import com.mujmajnkraft.bettersurvival.integration.SoManyEnchantmentsCompat;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
@@ -159,8 +158,7 @@ public class ItemCustomWeapon extends Item {
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment)
     {
-		if(!(enchantment instanceof EnchantmentSweepingEdge) && (enchantment.type == EnumEnchantmentType.WEAPON ||
-				(BetterSurvival.isSMELoaded && SoManyEnchantmentsCompat.isWeaponSMEEnchant(enchantment.type))))
+		if(!(enchantment instanceof EnchantmentSweepingEdge) && (enchantment.type == EnumEnchantmentType.WEAPON))
 		{
 			return true;
 		}
